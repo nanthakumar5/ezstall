@@ -30,7 +30,9 @@ class Event extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('e.id', $requestdata['id']);
-		if(isset($requestdata['status'])) 				$query->whereIn('e.status', $requestdata['status']);
+		if(isset($requestdata['status'])) 				$query->where('e.status', $requestdata['status']);
+		if(isset($requestdata['upcoming'])) 				$query->where('e.start_date>=', $requestdata['upcoming']);
+		if(isset($requestdata['past'])) 				$query->where('e.end_date<', $requestdata['past']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
@@ -60,11 +62,13 @@ class Event extends BaseModel
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
 		else $query->groupBy('e.id');
 		
+		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby']);
+
 		if($type=='count'){
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-			
+			//echo $this->db->getLAstquery(); die();
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
 		}

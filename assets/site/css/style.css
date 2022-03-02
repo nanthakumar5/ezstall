@@ -1,20 +1,7 @@
-
-
-Skip to content
-Using IT Flex Solutions Mail with screen readers
-Conversations
-0.16 GB of 15 GB used
-Program Policies
-Powered by Google
-Last account activity: 3 hours ago
-Details
-
-
-
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 * {
+  margin: 0 auto;
   font-family: "Montserrat";
   color: #000;
 }
@@ -24,15 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-/*::-webkit-scrollbar {
-  display: none;
-}*/
-
 /*Top navbar Styles start*/
-
-nav Link {
-  color: #fff;
-}
 
 .logo {
   height: 35px;
@@ -81,11 +60,6 @@ a.ml-0.nav-link {
 
 /*Signin page styles start*/
 
-p.errorMsg {
-  color: #e10000;
-  margin-bottom: 0 !important;
-}
-
 .wrapper {
   display: inline-flex;
   height: 100px;
@@ -94,7 +68,7 @@ p.errorMsg {
   border-radius: 5px;
 }
 
-.wrapper .option {
+.wrapper .option{
   background: #fff;
   height: 100%;
   width: 100%;
@@ -107,14 +81,14 @@ p.errorMsg {
   border: 2px solid lightgrey;
   transition: all 0.3s ease;
 }
-.wrapper .option .dot {
+.wrapper .option .dot{
   height: 20px;
   width: 20px;
   background: #d9d9d9;
   border-radius: 50%;
   position: relative;
 }
-.wrapper .option .dot::before {
+.wrapper .option .dot::before{
   position: absolute;
   content: "";
   top: 4px;
@@ -127,32 +101,32 @@ p.errorMsg {
   transform: scale(1.5);
   transition: all 0.3s ease;
 }
-input[type="radio"] {
+input[type="radio"]{
   display: none;
 }
-.option-2 {
+.option-2{
   margin-left: 1rem;
 }
 #option-1:checked:checked ~ .option-1,
-#option-2:checked:checked ~ .option-2 {
+#option-2:checked:checked ~ .option-2{
   border-color: #e10000;
   background: #e10000;
 }
 #option-1:checked:checked ~ .option-1 .dot,
-#option-2:checked:checked ~ .option-2 .dot {
+#option-2:checked:checked ~ .option-2 .dot{
   background: #fff;
 }
 #option-1:checked:checked ~ .option-1 .dot::before,
-#option-2:checked:checked ~ .option-2 .dot::before {
+#option-2:checked:checked ~ .option-2 .dot::before{
   opacity: 1;
   transform: scale(1);
 }
-.wrapper .option span {
+.wrapper .option span{
   font-size: 16px;
   color: #808080;
 }
 #option-1:checked:checked ~ .option-1 span,
-#option-2:checked:checked ~ .option-2 span {
+#option-2:checked:checked ~ .option-2 span{
   color: #fff;
 }
 
@@ -160,7 +134,7 @@ h1.topPad {
   margin: 5rem 0 0 0 !important;
 }
 
-.signUpMessage {
+.signUpMessage{
   margin-top: 1rem !important;
   color: rgb(34 34 34);
   background-color: #ededed;
@@ -306,7 +280,9 @@ span.signInContent {
   width: 50%;
   margin-top: 1rem;
 }*/
-
+.signInFormPanel {
+    text-align: center;
+}
 /*Signin page styles end*/
 
 /*Events page style start*/
@@ -374,7 +350,7 @@ svg.eventSearch {
 
 .home-banner {
   height: 840px;
-  background: rgba(0, 0, 0, 0.9) url("../src/images/home-background.jpg");
+  background: rgba(0, 0, 0, 0.9) url("../img/bannerbg.jpg");
   background-size: cover;
   background-blend-mode: darken;
   width: 100%;
@@ -463,8 +439,17 @@ span.iconProperty svg {
   margin: 30px auto;
   max-width: 1200px;
   padding-bottom: 300px;
+  overflow: hidden;
 }
-
+.carousel-item {
+  border-radius: 5px;
+}
+.d-block.w-100 {
+  height: 580px;
+  width: 1200px;
+  object-fit: cover;
+  border-radius: 1vw;
+}
 .sliderImg {
   height: 580px;
   width: 1200px;
@@ -526,7 +511,7 @@ a.carousel-control-next {
 
 /*Common Styles Start*/
 
-.padTop {
+.padTop{
   padding: 3rem 0;
 }
 
@@ -625,20 +610,28 @@ p.commonContent {
 
 /*Event Tab Styles Start*/
 
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+.nav-link  {
   text-transform: none !important;
-  font-size: 24px !important;
+  font-size: 21px !important;
   letter-spacing: 0 !important;
   font-family: "Montserrat" !important;
-  padding: 12px 45px 0 0 !important;
+  padding: 0px 45px 0 0 !important;
+  color: gray;
 }
 
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+.nav-link.active {
   color: #000 !important;
   font-weight: 600;
   letter-spacing: 0 !important;
+  border: 0px !important;
+  background-color: transparent;
 }
-
+.nav-tabs {
+  border-bottom: 0px !important;
+}
+li.nav-item {
+  margin: 0px;
+}
 .css-1aquho2-MuiTabs-indicator {
   background-color: transparent !important;
 }
@@ -657,6 +650,7 @@ p.commonContent {
   font-size: 16px;
   font-weight: 600;
   margin-right: 0;
+  float: right;
 }
 
 .allEventsLink svg {
@@ -797,12 +791,13 @@ p.commonContent {
 .footerabovePanel {
   display: flex;
   justify-content: space-between;
-  max-width: 1350px;
+  max-width: 100%;
+  margin: 0px;
   padding: 7% 5.5rem;
   height: 640px;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("../src/images/footeraboveImage.png");
+  background-image: url("../img/footeraboveImage.png");
 }
 
 .horseOwners {
@@ -848,43 +843,6 @@ p.commonContent {
 
 /*Footer Above Style End*/
 
-/*Thank you Page style start*/
-
-.TLogin {
-  background-color: #e00000;
-  border: none;
-  font-weight: 500;
-  font-size: 18px;
-  color: #fff;
-  height: 50px;
-  width: 200px;
-  border-radius: 7px;
-}
-
-.TLogin:hover {
-  background-color: #000;
-  transition: all 0.3s ease-in;
-}
-
-.ptb {
-  padding: 5rem 0;
-}
-
-.ptb h1 {
-  font-weight: 700;
-  padding: 0.5rem 0;
-}
-
-.ptb h5 {
-  padding: 0 0 1rem 0;
-}
-
-.checkImage {
-  height: 150px;
-}
-
-/*Thank you Page style end*/
-
 /*Footer style start*/
 
 .footerPanel {
@@ -907,7 +865,7 @@ p.commonContent {
 }
 
 input.subscriptionInput {
-  width: 600px;
+  width: 450px;
   height: 50px;
   border: none;
   border-radius: 7px;
@@ -1028,6 +986,13 @@ input.subscriptionInput:focus {
   margin-bottom: 0;
 }
 
+.copyRight p span {
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding: 4vh 0;
+}
 .socialIcons svg {
   fill: #fff;
   border-radius: 50vw;
@@ -1050,236 +1015,17 @@ input.subscriptionInput:focus {
 
 /*Footer style end*/
 
-/*Event details page style start*/
-
-.backofLink {
-  text-decoration: none;
-  color: #666666;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-a:hover {
-  color: #e00000 !important;
-}
-
-svg.backofIcon {
-  font-size: 20px;
-  fill: #666666;
-}
-
-.backofPanel {
-  padding: 2rem 0;
-}
-
-.forHover:hover svg.backofIcon {
-  fill: #e00000;
-}
-
-.eventViewPanel {
-  padding: 2rem;
-  border: 1px solid #e4e4e4;
-  margin-top: 2rem;
-  border-radius: 7px;
-}
-
-.checkoutDue {
-  padding: 2rem;
-  border: 1px solid #e4e4e4;
-  margin-top: 2rem;
-  border-radius: 7px;
-  height: 250px;
-}
-
-.br-7 {
-  border-radius: 7px;
-}
-
-.eventviewImage {
-  width: 340px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 7px;
-}
-
-.more-info {
-  margin: 2rem 0;
-}
-
-h4.eventTitle {
-  font-weight: 600;
-}
-
-.h-25px {
-  height: 25px !important;
-}
-
-.h-20px {
-  height: 20px !important;
-}
-
-.dFlexsnone {
-  display: flex;
-  margin-left: -11px;
-}
-
-.svgEventInfo {
-  height: 100%;
-  width: auto !important;
-}
-
-p.eventInfoContent {
-  margin-left: 10px;
-  color: #333333;
-}
-
-a.dstallMap {
-  font-weight: 600;
-  color: #e00000;
-}
-
-.font-w-600 {
-  font-weight: 600;
-}
-
-button.checkoutBtn {
-  border: none;
-  background-color: #000;
-  color: #fff;
-  height: 50px;
-  width: 100%;
-  font-weight: 500;
-  border-radius: 7px;
-}
-
-.bt-1 {
-  border-top: 1px solid #e4e4e4;
-}
-
-.py-twoRem {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.mleft-2 {
-  margin-left: 3rem;
-}
-
-.downloadEFlyer {
-  width: 250px;
-  height: 40px;
-  border-radius: 7px;
-  border: none;
-  background-color: #000;
-  color: #fff;
-  font-weight: 500;
-}
-
-.downloadEFlyer:hover {
-  background-color: #e00000;
-  transition: all 0.3s ease;
-}
-
-.downloadEFlyer img {
-  padding-right: 5px;
-}
-
-svg.svgRedFS {
-  fill: #e00000;
-  stroke: #e00000;
-  font-size: 23px;
-}
-
-svg.svgRedS {
-  stroke: #e00000;
-  font-size: 23px;
-}
-
-.EDBookstalls {
-  width: 840px;
-  border: 1px solid #e4e4e4;
-  padding: 2rem;
-  border-radius: 7px;
-  margin-top: 1.2rem;
-}
-
-.EDBtitle {
-  font-weight: 600;
-}
-
-.EDBinput {
-  width: 240px;
-  height: 50px;
-  border: 1px solid #e4e4e4;
-  border-radius: 7px;
-  margin: 0 0.6rem;
-  padding: 0 1rem;
-}
-
-.row.mTop-sm {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.statusOccupied {
-  height: 25px;
-  width: 25px;
-  border-radius: 7px;
-  background-color: #e10000;
-}
-
-.statusReserved {
-  height: 25px;
-  width: 25px;
-  border-radius: 7px;
-  background-color: #ff9f25;
-}
-
-.statusAvailable {
-  height: 25px;
-  width: 25px;
-  border-radius: 7px;
-  background-color: #159715;
-}
-
-.cStyle {
-  height: 20px;
-  width: 20px;
-}
-
-/*Event details page style end*/
-
-/*Addevent page style start*/
-
-.addEvent {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem;
-}
-
-.eventInput {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem;
-}
-
-.eventInput label {
-  margin: 0;
-  font-weight: 600;
-}
-
-/*Addevent page style end*/
-
 /*Media Query Section Start*/
 @media (max-width: 767px) {
-  .wrapper {
+
+  .wrapper{
     width: 20rem;
   }
   .displayFlex {
     flex-wrap: wrap;
   }
 
-  .signUpMessage {
+  .signUpMessage{
     width: 20rem;
   }
 
@@ -1481,7 +1227,8 @@ svg.svgRedS {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .wrapper {
+
+  .wrapper{
     width: 100%;
   }
   .signInLeft {
@@ -1489,7 +1236,7 @@ svg.svgRedS {
     padding: 1.5rem;
   }
 
-  .signUpMessage {
+  .signUpMessage{
     width: 100%;
   }
 
@@ -1685,8 +1432,70 @@ svg.svgRedS {
   .navbar-expand-lg .navbar-nav .ml-2rem {
     padding-right: 2rem !important;
     padding-left: 0.5rem;
+    font-size: 16px !important;
   }
 }
 /*Media Query Section End*/
-index.css
-Displaying index.css.
+/*Event.js Start*/
+
+.ucimg img {
+  width: 120px;
+  height: 80px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.leftdata span{
+  margin-right: 5px;
+  display: inline-block;
+  margin-left: 5px;
+}
+.leftdata h5 {
+  text-transform: capitalize;
+} 
+/*Event.js End*/
+
+/*still start*/
+.btn-secondary{
+   color:  #fff;
+   background-color: #e00000;
+   border: 1px solid #e00000;
+   border-radius: 100%; 
+   vertical-align: middle;
+    margin-top: 10px;
+}
+.btn-secondary * {
+    color:  #fff;
+}
+.btn-secondary:hover {
+    color: #e00000;
+    background-color: #fff;
+    border-color: #e00000;
+}
+
+.btn-secondary *:hover {
+    color:  #e00000;
+}
+
+.stallform .col:first-child {
+    padding-left: 1rem !important;
+}
+
+.stallform .col {
+    flex: 1 0 0%;
+    padding: 0px;
+}
+
+.stallform .col input {
+    border-right: 0px;
+    height: 60px;
+    border-radius: 0px !important;
+    border-bottom-color: #efefef;
+}
+.stallform .col:first-child  input {
+    border-left: 0px;
+}
+
+/*still End*/
+.navbar-nav a {
+  font-size: 16px !important;
+}
