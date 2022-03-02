@@ -7,7 +7,9 @@
     <link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
   </head>
   <body>
-  	<section class="home-banner">
+    <?php $uri = service('uri');
+      $segment1 = $uri->getSegment(1); ?>
+  	<section <?php if($segment1==''){ ?>class="home-banner" <?php } ?> >
       <div class="top-nav">
           <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
               <div class="container-lg m-1rem-sm"><a href="#home" class="navbar-brand">
@@ -23,17 +25,15 @@
                           <a href="#/contact" data-rr-ui-event-key="#/contact" class="ml-2rem nav-link">Contact Us</a>
                         </div>
                         <div class="navbar-nav">
-                            <a href="../ezstall_bootstrap/signin.html" data-rr-ui-event-key="/SignIn" class="ml-0 nav-link">
+                            <a href="<?php echo base_url()?>/login" data-rr-ui-event-key="/SignIn" class="ml-0 nav-link">
                                 <img src="<?php echo base_url()?>/assets/site/img/profile.svg" class="profileIcon" alt="Profile Icon">Sign In /</a>
-                                <a href="../ezstall_bootstrap/signup.html" data-rr-ui-event-key="/SignUp" class="ml-0 nav-link">Sign Up</a>
+                                <a href="<?php echo base_url()?>/register" data-rr-ui-event-key="/SignUp" class="ml-0 nav-link">Sign Up</a>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div>
             <?php 	
-            $uri = service('uri');
-			$segment1 = $uri->getSegment(1);
 			if($segment1==''){ ?>
 					<div class="bannerItems">
                       <div class="infoPanel"><span class="infoSection"><span class="iconProperty"><input type="text" placeholder="Location"><img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon"></span><span class="iconProperty"><input type="text" placeholder="Check-In"><img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon"></span><span class="iconProperty"><input type="text" placeholder="Check-Out"><img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon"></span><input type="text" placeholder="No.of stalls"><span class="searchResult"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z"></path></svg></span></span>
