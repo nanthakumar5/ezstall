@@ -39,8 +39,9 @@ $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');
 
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index');
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index');
+$routes->post('existemailvalidation', 'Site\Register\Index::checkemail');
 $routes->match(['get','post'], 'event', 'Site\Event\Index::index');
-$routes->match(['get','post'], 'event/action', 'Site\Event\Index::action');
+$routes->match(['get','post'], 'event/action', 'Site\Event\Index::action'); 
 
 
 

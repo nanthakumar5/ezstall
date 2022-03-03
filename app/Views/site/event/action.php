@@ -1,4 +1,4 @@
-<?= $this->extend("site/common/layout/layout2") ?>
+<?= $this->extend("site/common/layout/layout1") ?>
 
 <?php $this->section('content') ?>
 	<?php
@@ -14,7 +14,7 @@
 		$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
 		$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
 		$image      			= isset($result['image']) ? $result['image'] : '';
-		$image 				    = filedata($image, base_url().'/assets/uploads/event/');
+		//$image 				    = filedata($image, base_url().'/assets/uploads/event/');
 		$status 				= isset($result['status']) ? $result['status'] : '';
 		$eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
 		$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
@@ -25,6 +25,16 @@
 		$barnstallvalue        =  (isset($barnstallvalue[0]['barnid_stallid']) && $barnstallvalue[0]['barnid_stallid']!="@-@") ? 
 		                           array_filter($barnstallvalue) : [];
 		$stallvalue            =  array();
+
+		$file   = $image;
+		$file   = filedata($file, base_url().'/assets/site/img/', ['no_images']);
+		//echo '<pre>'; print_r($file); die();
+		if($file[0]!=''){
+		$mediafile  = base_url().'/assets/site/img/'.$file[0];
+
+		}else{
+		$mediafile = $file[1];
+		}
 		
 		if(isset($barnstallvalue[0]['barnid_stallid']) && $barnstallvalue[0]['barnid_stallid']!="@-@"){
 			foreach($barnstallvalue as $stall){
@@ -55,9 +65,9 @@
 	</section>
 	
 	<section class="content">
-		<div class="page-action">
+		<div class="page-action" align="right">
 			<a href="<?php echo getAdminUrl(); ?>/event" class="btn btn-primary">Back</a>
-		</div>
+		</div><br>
 		<div class="card">
 			<div class="card-header">
 				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
@@ -66,101 +76,101 @@
 				<form method="post" id="form" action="<?php echo base_url(); ?>/event/action" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Name</label>								
+									<label><b>Name</b></label>								
 									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Event Description</label>
+									<label><b>Event Description</b></label>
 									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Location</label>								
+									<label><b>Location</b></label>								
 									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Mobile</label>								
+									<label><b>Mobile</b></label>								
 									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Start Date</label>	
+									<label><b>Start Date</b></label>	
 									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>End Date</label>	
+									<label><b>End Date</b></label>	
 									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Start Time</label>	
+									<label><b>Start Time</b></label>	
 									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>End Time</label>	
+									<label><b>End Time</b></label>	
 									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Stalls Price</label>								
+									<label><b>Stalls Price</b></label>								
 									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>RV Spots Price</label>								
+									<label><b>RV Spots Price</b></label>								
 									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Upload Event Image</label>			
+									<label><b>Event Image</b></label>			
 									<div>
-										<a href="<?php echo $image[1];?>" target="_blank">
-											<img src="<?php echo $image[1];?>" class="image_source" width="100">
+										<a href="<?php echo $mediafile; ?>" target="_blank">
+											<img src="<?php echo $mediafile; ?>" class="image_source" width="100">
 										</a>
 									</div>
-									<input type="file" class="image_file">
+									<input type="file" id="file" name="file" class="image_file">
 									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $file[0];?>">
 								</div>
 							</div>							
-							<div class="col-md-12">
+							<!-- <div class="col-md-12">
 								<div class="form-group">
 									<label>Status</label>								
 									
 								</div>
-							</div>
-							<div class="col-md-12">
+							</div> -->
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Upload Event Flyer</label>			
+									<label><b>Event Flyer</b></label>			
 									<div>
 										<a href="<?php echo $eventflyer[1];?>" target="_blank">
 											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
 										</a>
 									</div>
-									<input type="file" class="eventflyer_file">
+									<input type="file" id="" name="" class="eventflyer_file">
 									<span class="eventflyer_msg messagenotify"></span>
 									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Upload Stall Map (optional)</label>			
+									<label>Stall Map (optional)</label>			
 									<div>
 										<a href="<?php echo $stallmap[1];?>" target="_blank">
 											<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
@@ -171,12 +181,14 @@
 									<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
 								</div>
 							</div>	
-							<div class="col-md-12 barn_wrapper">
+							<div class="col-md-6 barn_wrapper"><br>
 								<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
 								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 							</div>
 							<input type="hidden" id="current_barn_id" name="current_barn_id">
-                            <div class="col-md-12 main_wrapper"></div>							
+							<div class="col-md-6"></div>
+                            <div class="col-md-6 main_wrapper"></div>	
+                            <br>						
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-primary" value="Submit">
@@ -200,11 +212,9 @@
 		var stallIndex       = '0';
 		
 		$(function(){
-			dateformat('#start_date, #end_date');
+			//dateformat('#start_date, #end_date');
             fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
-			fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
-			fileupload([".stallmap_file"], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
-						
+			
 			validation(
 				'#form',
 				{

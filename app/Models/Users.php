@@ -8,7 +8,6 @@ class Users extends BaseModel
 {	
 	public function getUsers($type, $querydata=[], $requestdata=[], $extras=[])
     {  
-        //print_r($requestdata);die;
     	$select 			= [];
 		
 		if(in_array('users', $querydata)){
@@ -60,13 +59,10 @@ class Users extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-			//echo $this->db->getLastQuery();die;
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
 		}
-		//print_r($result);die;
-	
 		return $result;
     }
 	

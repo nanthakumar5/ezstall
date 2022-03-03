@@ -16,24 +16,28 @@ class Index extends BaseController
     public function index()
     { 
 		if ($this->request->getMethod()=='post')
-        { 
-            $post = $this->request->getPost(); 
+        {  
+            $post = $this->request->getPost();  
             $result = $this->users->action($post); 
 			
-			if($result){ //echo "if";die;
+			if($result){ 
 				$this->session->setFlashdata('success', 'Registration is successfully.'); 
-				//return redirect()->to('/login'); 
 				return redirect()->to(base_url().'/login'); 
-			}else{ echo "else";die;
+			}else{ 
 				$this->session->setFlashdata('danger', 'Try Later.');
 				return redirect()->to(base_url().'/register'); 
 			}
-       
        
         }
     return view('site/register/index');
     }
     public function checkemail(){
-        echo "fa";
+       	$email = $this->request->getPost('email');
+		$result = $this->users->getUsers('count', ['users'], ['email' => $email]);
+		if($result>0){
+			echo 'false';
+		}else{
+			echo 'true';
+		}
     }
 }

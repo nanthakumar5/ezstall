@@ -4,13 +4,13 @@ namespace App\Controllers\Site\Event;
 
 use App\Controllers\BaseController;
 
-//use App\Models\Users;
+use App\Models\Event;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		//$this->users = new Users();	
+		$this->event = new Event();	
 	}
     
     public function index()
@@ -31,9 +31,7 @@ class Index extends BaseController
 				return redirect()->to(getAdminUrl().'/event'); 
 			}
         } 
-        else{
-            print_r($this->request->getPost());
-        }
+        
 		return view('site/event/action');
 	}	
 }

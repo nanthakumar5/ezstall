@@ -1499,3 +1499,8 @@ input.subscriptionInput:focus {
 .navbar-nav a {
   font-size: 16px !important;
 }
+
+p.error_class_1{
+  color: red;
+  font-size: 12px;
+}
