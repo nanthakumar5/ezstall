@@ -48,7 +48,7 @@ class Index extends BaseController
 									'location' => ucfirst($row['location']), 
 									'mobile' => $row['mobile'],	
 									'action' => '<div class="add_button ml-10">
-                                            <a href="'.base_url().'/editEvent/'.$row['id'].'" class="btn_1"><i class="fa fa-pencil" title="edit" aria-hidden="true"></i></a>
+                                            <a href="'.base_url().'/editEvent/'.$row['id'].'" class="btn_1">Edit <i class="fa fa-pencil" title="Edit Event" aria-hidden="true"></i></a>
                                         </div>'
 								 ];
 			}
