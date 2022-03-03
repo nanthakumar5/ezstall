@@ -111,28 +111,28 @@ function formsubmit(action, data){
 /** Ajax **/
 
 function ajax(url, data, extras=[]){
-
-	var options = {};
-	options['url'] 			= 	url;
-	options['type'] 		=	(extras['type']) ? extras['type'] : 'post';
-	options['data'] 		=	data;
-	options['dataType'] 	=	(extras['datatype']) ? extras['datatype'] : 'json';
-
-	if(extras['contenttype']) 	options['contentType'] 	=	false;
-	if(extras['processdata']) 	options['processData'] 	=	false;
-	if(extras['asynchronous']) 	options['async'] 		=	false;
-	if(extras['beforesend'])	options['beforeSend'] 	=	extras['beforesend'];
-	if(extras['complete']) 		options['complete'] 	=	extras['complete'];
-
-	if(extras['success']){
- 		options['success'] 		=	extras['success'];
-	}else if(extras['method']){
-		options['success'] 		=	function(data){ 
-										extras['method'](data);
-									}
-	}	
-
-	$.ajax(options);
+    var options = {};
+    
+    options['url']          =   url;
+    options['type']         =   (extras['type']) ? extras['type'] : 'post';
+    options['data']         =   data;
+    options['dataType']     =   (extras['datatype']) ? extras['datatype'] : 'json';
+    
+    if(extras['contenttype'])   options['contentType']  =   false;
+    if(extras['processdata'])   options['processData']  =   false;
+    if(extras['asynchronous'])  options['async']        =   false;
+    if(extras['beforesend'])    options['beforeSend']   =   extras['beforesend'];
+    if(extras['complete'])      options['complete']     =   extras['complete'];
+    
+    if(extras['success']){
+        options['success']      =   extras['success'];
+    }else if(extras['method']){
+        options['success']      =   function(data){ 
+                                        extras['method'](data);
+                                    }
+    }   
+    
+    $.ajax(options);
 }
 
 
@@ -216,30 +216,25 @@ function multiplefileappend(name, value, src){
 }
 
 
-function fileupload(data1=[], data2=[]){
+function fileupload(data1=[], data2=[], path){
 	var url 			= baseurl()+'ajax/fileupload';
 	var path			= baseurl()+'assets/uploads/temp/';
 	var relativepath	= './assets/uploads/temp/';
 	var pdfimg			= baseurl()+'assets/images/pdf.png';
 	
 	var selector 		= data1[0];
-	var extension 		= data1[1] ? data1[1] : ['jpg','jpeg','png','gif','tiff','tif','pdf'];
+	var extension 		= data1[1] ? data1[1] : ['jpg','jpeg','png','gif','tiff','tif'];
 	
 	$(document).on('change', selector, function(){
 		var name 		= $(this).val();
 		var ext 		= name.split('.').pop().toLowerCase();
 		
 		if($.inArray(ext, extension) !== -1){
-			if(data2.length){
-				var filemessage = (data2[2]) ? data2[2] : '';
-                if(filemessage!=""){			  
-					$(filemessage).html('Please wait till preview your image uploaded here..!!');
-				}
-			}
-			var formdata 	= new FormData();
-			formdata.append("file", $(selector)[0].files[0]);
-			formdata.append("path", relativepath);
-			formdata.append("type", extension.join('|'));
+            var formdata    = new FormData();
+            formdata.append("file", $(selector)[0].files[0]);
+            formdata.append("path", relativepath);
+            formdata.append("type", extension.join('|'));
+            formdata.append("name", name);
 			
 			ajax(url, formdata, { contenttype : 1, processdata : 1, method : fileappend});
 		}else{
@@ -249,34 +244,31 @@ function fileupload(data1=[], data2=[]){
 	})
 	
 	function fileappend(data){
-		if(data.success && data2.length){			
-			var file 		= data.success;
-			var fileinput	= (data2[0]) ? data2[0] : '';
-			var filesource	= (data2[1]) ? data2[1] : '';
-			var filemessage = (data2[2]) ? data2[2] : ''; 
-			
-			var ext = file.split('.').pop().toLowerCase();
-			
-			if(ext=='jpg' || ext=='jpeg' || ext=='png' || ext=='tif' || ext=='tiff'){
-				var filesrc = path+'/'+file;
-			}else if(ext=='pdf'){
-				var filesrc = pdfimg;
-			}
-			
-			if(fileinput!=''){
-				$(fileinput).val(file);
-			}
-			
-			if(filesource!='' && filesrc){
-				$(filesource).attr('src', filesrc);
-				$(filesource).parent().attr('href', filesrc);
-			}
-			if(filemessage!=""){
-				window.setTimeout(function(){ $(filemessage).html(''); }, 2500); 
-			}
-		}
-		$(selector).val('');
-	}
+        if(data.success && data2.length){           
+            var file        = data.success;
+            var fileinput   = (data2[0]) ? data2[0] : '';
+            var filesource  = (data2[1]) ? data2[1] : '';
+            
+            var ext = file.split('.').pop().toLowerCase();
+            
+            if(ext=='jpg' || ext=='jpeg' || ext=='png' || ext=='tif' || ext=='tiff'){
+                var filesrc = path+'/'+file;
+            }else if(ext=='pdf'){
+                var filesrc = pdfimg;
+            }
+            
+            if(fileinput!=''){
+                $(fileinput).val(file);
+            }
+            
+            if(filesource!='' && filesrc){
+                $(filesource).attr('src', filesrc);
+                $(filesource).parent().attr('href', filesrc);
+            }
+        }
+        
+        $(selector).val('');
+    }
 }
 
 /** Tinymce Editor **/

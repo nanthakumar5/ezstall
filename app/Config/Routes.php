@@ -41,11 +41,12 @@ $routes->match(['get','post'], 'login', 'Site\Login\Index::index');
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index');
 $routes->post('existemailvalidation', 'Site\Register\Index::checkemail');
 $routes->match(['get','post'], 'event', 'Site\Event\Index::index');
-$routes->match(['get','post'], 'event/action', 'Site\Event\Index::action'); 
+$routes->match(['get','post'], 'addEvent', 'Site\Event\Index::action'); 
+$routes->get('editEvent/(:num)', 'Site\Event\Index::action/$1');
+$routes->match(['get','post'], 'events', 'Site\Event\Index::index');
+$routes->post('DTevents', 'Site\Event\Index::DTevents');
 
-
-
-$routes->post('ajax/fileupload', 'Common\Ajax::fileupload', ['filter' => 'adminauthentication2']);
+$routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
 $routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){

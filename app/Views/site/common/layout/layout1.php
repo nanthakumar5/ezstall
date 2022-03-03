@@ -17,8 +17,8 @@
                   <button aria-controls="responsive-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
                   <div class="navbar-collapse collapse" id="responsive-navbar-nav">
                       <div class="me-auto ml-auto navbar-nav">
-                          <a href="<?php echo base_url() ?>" data-rr-ui-event-key="/" class="ml-2rem nav-link">Home</a>
-                          <a href="#/Events" data-rr-ui-event-key="/Events" class="ml-2rem nav-link">Events</a>
+                          <a href="<?php echo base_url() ?>" class="ml-2rem nav-link">Home</a>
+                          <a href="<?php echo base_url() ?>/events" class="ml-2rem nav-link">Events</a>
                           <a href="../ezstall_bootstrap/stall.html" data-rr-ui-event-key="#/stall" class="ml-2rem nav-link active">Stall</a>
                           <a href="#/faq" data-rr-ui-event-key="#/faq" class="ml-2rem nav-link">FAQ</a>
                           <a href="#/about" data-rr-ui-event-key="#/about" class="ml-2rem nav-link">About</a>

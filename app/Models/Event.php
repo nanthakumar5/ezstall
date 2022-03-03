@@ -38,8 +38,8 @@ class Event extends BaseModel
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
-			if(isset($requestdata['page']) && $requestdata['page']=='adminevent'){
-				$column = ['e.id', 'e.location', 'e.mobile'];
+			if(isset($requestdata['page']) && $requestdata['page']=='events'){
+				$column = ['e.name', 'e.image', 'e.start_date', 'e.location', 'e.mobile', 'e.id'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
@@ -50,7 +50,7 @@ class Event extends BaseModel
 				$page = $requestdata['page'];
 				
 				$query->groupStart();
-					if($page=='adminevent'){				
+					if($page=='events'){				
 						$query->like('e.name', $searchvalue);
 						$query->orLike('e.location', $searchvalue);
 						$query->orLike('e.mobile', $searchvalue);
@@ -62,7 +62,7 @@ class Event extends BaseModel
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
 		else $query->groupBy('e.id');
 		
-		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby']);
+		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
 
 		if($type=='count'){
 			$result = $query->countAllResults();
@@ -77,7 +77,7 @@ class Event extends BaseModel
     }
 	
 	public function action($data)
-	{
+	{ 	
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
@@ -117,6 +117,7 @@ class Event extends BaseModel
 			filemove($data['stallmap'], './assets/uploads/stallmap');		
 		}
 		
+		$request['status'] = '1';
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;
 			$request['updated_by'] 	= $userid;						
@@ -151,34 +152,34 @@ class Event extends BaseModel
 				   $barninsertid = $barn['id'];
 				}	
 				
-				if(isset($data['stall']) && count($data['stall']) > 0){
-        			$stallidcolumn = array_filter(array_column($data['stall'], 'id'));
+				if(isset($barns['stall']) && count($barns['stall']) > 0){ 
+					
+        			$stallidcolumn = array_filter(array_column($barns['stall'], 'id'));
         			if(count($stallidcolumn)){
         				$this->db->table('stall')->whereNotIn('id', $stallidcolumn)->update(['status' => '0'], ['barn_id' => $barninsertid]);
         			}
-        			foreach($data['stall'] as $stalls){
+        			foreach($barns['stall'] as $stalls){
         				
-        				$stall['id']         = isset($stalls['id']) ? $stalls['id'] : '' ;
-        				$stall['barn_id']    = $stalls['barn_id'];
-        				$stall['name']       = $stalls['name'];
-        				$stall['price']      = $stalls['price'];
-        				$stall['status']     = $stalls['status'];
-        				$stall['created_at'] = $datetime;
-        				$stall['created_by'] = $userid;
-        				$stall['updated_at'] = $datetime;
-        				$stall['updated_by'] = $userid;
+        				$stalls['id']         = isset($stalls['id']) ? $stalls['id'] : '' ;
+        				$stalls['barn_id']    = $barninsertid;
+        				$stalls['name']       = $stalls['name'];
+        				$stalls['price']      = $stalls['price'];
+        				$stalls['status']     = $stalls['status'];
+        				$stalls['created_at'] = $datetime;
+        				$stalls['created_by'] = $userid;
+        				$stalls['updated_at'] = $datetime;
+        				$stalls['updated_by'] = $userid;
         				
-        				if($stall['id']==''){
-        					$this->db->table('stall')->insert($stall);
+        				
+        				if($stalls['id']==''){
+        					$this->db->table('stall')->insert($stalls);
         				}else {
-        				   $this->db->table('stall')->update($stall, ['id' => $stall['id']]);
+        				   $this->db->table('stall')->update($stalls, ['id' => $stalls['id']]);
         				}	
         			}
-        		}
+        		}else{  }
 			}
 		}
-		
-		
 		
 		if(isset($eventinsertid) && $this->db->transStatus() === FALSE){
 			$this->db->transRollback();
