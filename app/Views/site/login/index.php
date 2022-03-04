@@ -10,10 +10,10 @@
         <h1 class="topPad">Let's Sign In</h1><p>Enter details to signin</p>
         <form class="signInForm" d="form" method="post" action="">
             <span>
-                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="">
+                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="" autocomplete="off" >
             </span>
             <span>
-                <input type="password" class="signInPassword" placeholder="Enter password" name="password" value="">
+                <input type="password" class="signInPassword" placeholder="Enter password" name="password" value="" autocomplete="off">
             </span>
             <button type="submit" class="signInSubmitBtn">Sign In</button>
             <p>Don't have an account ?

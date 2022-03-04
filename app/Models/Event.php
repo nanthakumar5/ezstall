@@ -118,6 +118,7 @@ class Event extends BaseModel
 		}
 		
 		$request['status'] = '1';
+		
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;
 			$request['updated_by'] 	= $userid;						
@@ -133,8 +134,7 @@ class Event extends BaseModel
 				$eventinsertid = $actionid;
 			}
 		}
-		
-		
+		 
 		if(isset($data['barn']) && count($data['barn']) > 0){
 
 			foreach($data['barn'] as $barns){

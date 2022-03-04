@@ -20,9 +20,10 @@ class Index extends BaseController
 			$password = $this->request->getPost('password');
 			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['3']]);
 			if($result){
-				if($result['status']=='1'){
-					$this->session->set('sitesession',['userid' => $result['id']]);
-					return redirect()->to('/event/action'); 
+				if($result['status']=='1'){ 
+					$this->session->set('sitesession',['userid' => $result['id'],'username' => $result['name']]);
+					
+					return redirect()->to(base_url().'/myaccount/events'); 
 				}elseif($result['status']=='0'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
 					return redirect()->to('/login'); 

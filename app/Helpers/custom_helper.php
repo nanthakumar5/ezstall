@@ -5,7 +5,8 @@ function getUserDetails($id='')
 	if ($id!='') {
 		$userid = $id;
 	} else {
-		$userid = session()->get('sitesession');
+		$userdata = session()->get('sitesession');
+		$userid = $userdata['userid'];
 	}
 
 	if (isset($userid)) {

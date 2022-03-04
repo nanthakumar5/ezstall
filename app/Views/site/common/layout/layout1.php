@@ -24,11 +24,22 @@
                           <a href="#/about" data-rr-ui-event-key="#/about" class="ml-2rem nav-link">About</a>
                           <a href="#/contact" data-rr-ui-event-key="#/contact" class="ml-2rem nav-link">Contact Us</a>
                         </div>
+                        <?php 
+                        $sitesession  = session()->get('sitesession');
+                        
+                        if(!isset($sitesession['userid'])){ ?>
                         <div class="navbar-nav">
                             <a href="<?php echo base_url()?>/login" data-rr-ui-event-key="/SignIn" class="ml-0 nav-link">
                                 <img src="<?php echo base_url()?>/assets/site/img/profile.svg" class="profileIcon" alt="Profile Icon">Sign In /</a>
                                 <a href="<?php echo base_url()?>/register" data-rr-ui-event-key="/SignUp" class="ml-0 nav-link">Sign Up</a>
-                            </div>
+                        </div>
+                      <?php }else{ 
+                        $username  = $sitesession['username']; ?>
+                         <div class="navbar-nav">
+                          <a href="javascript:;" class="ml-2rem nav-link">
+                            Hi <?php echo ucfirst($username);?></a>/<a href="<?php echo base_url();?>/logout">Logout</a>
+                        </div>
+                      <?php } ?>
                         </div>
                     </div>
                 </nav>

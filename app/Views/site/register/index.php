@@ -25,7 +25,7 @@
                 <input type="text" class="signInText" placeholder="Enter username" name="name" value="">
             </span>
             <span>
-                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="">
+                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="" autocomplete="off" >
             </span>
             <span>
                 <input type="password" class="signInPassword" placeholder="Create password" name="password" value="">
@@ -50,7 +50,7 @@
                         required  : true,
                         email     : true,
                         remote            :   {
-                                    url   :   "<?php echo base_url().'/existemailvalidation'; ?>",
+                                    url   :   "<?php echo base_url().'/validation/emailvalidation'; ?>",
                                     type  :   "post",
                                     async :   false,
                                     data:{ 

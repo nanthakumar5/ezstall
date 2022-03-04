@@ -39,12 +39,15 @@ $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');
 
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index');
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index');
-$routes->post('existemailvalidation', 'Site\Register\Index::checkemail');
-$routes->match(['get','post'], 'event', 'Site\Event\Index::index');
-$routes->match(['get','post'], 'addEvent', 'Site\Event\Index::action'); 
-$routes->get('editEvent/(:num)', 'Site\Event\Index::action/$1');
-$routes->match(['get','post'], 'events', 'Site\Event\Index::index');
-$routes->post('DTevents', 'Site\Event\Index::DTevents');
+
+$routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
+    $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
+     $routes->post('DTevents', 'Site\Myaccount\Event\Index::DTevents');
+    $routes->match(['get','post'], 'addevent', 'Site\Myaccount\Event\Index::action'); 
+    $routes->get('editevent/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+});
+
+$routes->get('logout', 'Site\Myaccount\Event\Index::logout');
 
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 

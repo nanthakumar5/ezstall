@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Controllers\Site\Event;
+namespace App\Controllers\Site\Myaccount\Event;
 
 use App\Controllers\BaseController;
 use App\Models\Event;
@@ -21,7 +21,7 @@ class Index extends BaseController
     { 	
     	$data['events'] = $this->event->getEvent('all', ['event'],['status'=>'1'], ['orderby' => 'start_date', 'sort'=>'ASC']);
     	
-        return view('site/event/index', $data);
+        return view('site/myaccount/event/index', $data);
     }
 
     public function DTevents()
@@ -48,7 +48,7 @@ class Index extends BaseController
 									'location' => ucfirst($row['location']), 
 									'mobile' => $row['mobile'],	
 									'action' => '<div class="add_button ml-10">
-                                            <a href="'.base_url().'/editEvent/'.$row['id'].'" class="btn_1">Edit <i class="fa fa-pencil" title="Edit Event" aria-hidden="true"></i></a>
+                                            <a href="'.base_url().'/myaccount/editevent/'.$row['id'].'" class="btn_1"> Edit <i class="fa fa-pencil" title="Edit Event" aria-hidden="true"></i></a>
                                         </div>'
 								 ];
 			}
@@ -66,9 +66,9 @@ class Index extends BaseController
 
     public function action()
 	{    
-		$id = $this->uri->getSegment(2);
+		$id = $this->uri->getSegment(3);
 		if(isset($id)){
-			$id = $this->uri->getSegment(2);
+			$id = $this->uri->getSegment(3);
 		}else{
 			$id = 0;
 		}
@@ -98,15 +98,21 @@ class Index extends BaseController
 			
 			if($result){
 				$this->session->setFlashdata('success', 'New Event saved successfully.');
-				return redirect()->to(base_url().'/events'); 
+				return redirect()->to(base_url().'/myaccount/events'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later.');
-				return redirect()->to(getAdminUrl().'/events'); 
+				return redirect()->to(base_url().'/myaccount/events'); 
 			}
         } 
         else{
             
         }
-		return view('site/event/action', $data);
+		return view('site/myaccount/event/action', $data);
 	}	
+
+	public function logout(){
+		$this->session->destroy();
+		return redirect('/','refresh');
+	}
+
 }
