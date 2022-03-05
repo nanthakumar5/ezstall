@@ -13,6 +13,19 @@ class Index extends BaseController
     
     public function index()
     { 	
+		if ($this->request->getMethod()=='post')
+        {
+            $result = $this->event->delete($this->request->getPost());
+			
+			if($result){
+				$this->session->setFlashdata('success', 'Event deleted successfully.');
+				return redirect()->to(base_url().'/myaccount/events'); 
+			}else{
+				$this->session->setFlashdata('danger', 'Try Later');
+				return redirect()->to(base_url().'/myaccount/events'); 
+			}
+        }
+		
 		$userid = getSiteUserID();
 		
     	$pager = service('pager'); 
@@ -32,13 +45,14 @@ class Index extends BaseController
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=>'1', 'start' => $offset, 'length' => $perpage, 'userid' => $userid]);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
+		$data['userid'] = $userid;
 		
 		return view('site/myaccount/event/index', $data);
     }
 
     public function action($id='')
 	{    
-		$data = [];
+		$userid = getSiteUserID();
 		
 		if($id!=''){
 			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'userid' => $userid]);
@@ -51,7 +65,6 @@ class Index extends BaseController
 		}
 		
 		if ($this->request->getMethod()=='post'){
-			echo '<pre>';print_r($this->request->getPost());die;
             $result = $this->event->action($this->request->getPost());
 			
 			if($result){
@@ -63,6 +76,7 @@ class Index extends BaseController
 			}
         } 
 		
+		$data['userid'] = $userid;
 		return view('site/myaccount/event/action', $data);
 	}
 }

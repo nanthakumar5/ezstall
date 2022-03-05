@@ -29,24 +29,28 @@ function getUserID($id)
 
 function getAdminUserID($id='')
 {
+	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;
 	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
 	return getUserID($id);
 }
 
 function getSiteUserID($id='')
 {
+	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;	
 	$id = ($id=='') ? session()->get('sitesession')['userid'] : $id;
 	return getUserID($id);
 }
 
 function getAdminUserDetails($id='')
 {
+	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;	
 	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
 	return getUserDetails($id);
 }
 
 function getSiteUserDetails($id='')
 {
+	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;	
 	$id = ($id=='') ? session()->get('sitesession')['userid'] : $id;
 	return getUserDetails($id);
 }

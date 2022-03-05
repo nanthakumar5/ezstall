@@ -45,10 +45,10 @@ $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
-    $routes->get('events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+    $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
 });
 
-$routes->get('logout', 'Site\Myaccount\Event\Index::logout');
+$routes->get('logout', 'Site\Logout\Index::index');
 
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 

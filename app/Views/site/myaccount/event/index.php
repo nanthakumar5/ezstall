@@ -29,10 +29,27 @@
 							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
 						</span>
 						<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>">Edit</a>
+						<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="delete">Delete</a>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
 		<?php echo $pager; ?>
 	</section>
+<?php $this->endSection(); ?>
+
+<?php $this->section('js') ?>
+	<script>
+		var userid = '<?php echo $userid; ?>';
+		
+    	$(document).on('click','.delete',function(){
+            var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
+            var data   = '\
+            	<input type="hidden" value="'+$(this).data('id')+'" name="id">\
+            	<input type="hidden" value="'+userid+'" name="userid">\
+				<input type="hidden" value="0" name="status">\
+            ';
+          	sweetalert2(action,data);
+        });	
+	</script>
 <?php $this->endSection(); ?>

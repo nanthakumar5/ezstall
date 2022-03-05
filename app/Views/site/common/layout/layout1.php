@@ -9,6 +9,7 @@
 	<head>
 		<title>EZSTALL</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.min.css"  />		
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
 	</head>
@@ -16,8 +17,8 @@
 		<section <?php if($segment1==''){ echo 'class="home-banner"'; } ?> >
 			<div class="top-nav">
 				<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-					<div class="container-lg m-1rem-sm"><a href="#home" class="navbar-brand">
-						<img src="<?php echo base_url()?>/assets/site/img/logo.png" class="logo" alt="Logo"></a>
+					<div class="container-lg m-1rem-sm">
+						<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo base_url()?>/assets/site/img/logo.png" class="logo" alt="Logo"></a>
 						<button aria-controls="responsive-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
 						<div class="navbar-collapse collapse" id="responsive-navbar-nav">
 							<div class="me-auto ml-auto navbar-nav">
@@ -220,8 +221,8 @@
 		
 		<script src="<?php echo base_url();?>/assets/plugins/jquery/jquery.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/bootstrap.bundle.min.js"></script>
-		<script src="<?php echo base_url();?>/assets/js/adminlte.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<?php $this->renderSection('js') ?>
 	</body>

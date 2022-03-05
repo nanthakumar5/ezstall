@@ -21,10 +21,7 @@
 		$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 		
-		$barnstallvalue        =  (isset($barnstallvalue[0]['barnid_stallid']) && $barnstallvalue[0]['barnid_stallid']!="@-@") ? 
-		                           array_filter($barnstallvalue) : [];
-		$stallvalue            =  array();
-
+		$barn        =  isset($result['barn']) ? $result['barn'] : [];
 		$file   = $image;
 		$file 				    = filedata($image, base_url().'/assets/uploads/event/');
 		// $file   = filedata($file, base_url().'/assets/site/img/', ['no_images']);
@@ -72,7 +69,7 @@
 				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
 			</div>
 			<div class="card-body">
-				<form method="post" id="form" action="<?php echo base_url(); ?>/myaccount/addevent" autocomplete="off">
+				<form method="post" id="form" action="" autocomplete="off">
 					<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
 					<div class="col-md-12">
 						<div class="row">
@@ -182,6 +179,7 @@
 							<div id="barnwrapper"></div>
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+								<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 								<input type="submit" class="btn btn-danger" value="Submit">
 								<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 							</div>
@@ -197,8 +195,7 @@
 	<script>
 	
 	    var eventId    	     = '<?php echo $id; ?>';
-		var barnStallvalue   = $.parseJSON('<?php echo addslashes(json_encode($barnstallvalue)); ?>');
-		var Stallvalue       = $.parseJSON('<?php echo addslashes(json_encode($stallvalue)); ?>');
+		var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
 		
@@ -242,38 +239,35 @@
 				}
 			);
 			
-			$(barnStallvalue).each(function(i, v){
-				var barnparams = v['barnid_stallid'].split('^');
-				$(barnparams).each(function(i, v){
-					var databarn=v.split('@-@');
-					barndata(databarn);
-					stalldata(barnIndex, values=[])
+			if(barn.length > 0){
+				$(barn).each(function(i, v){
+					barndata(v);
+				console.log(v);
 				});
-			});
+			}
 		});
         
 		$('.barnbtn').click(function(){
 			barndata();
 		});
 		
-		function barndata(values=[]){
-			
-			var barnId   = (values[0] ? values[0] : '');
-			var barnName = (values[1] ? values[1] : '');
-			
+		function barndata(result=[]){
+			var barnId   	= result['id'] ? result['id'] : '';
+			var barnName 	= result['name'] ? result['name'] : '';
+			var stall		= result['stall'] ? result['stall'] : [];
+				
 			var data='\
 			<div class="card barnspace">\
 				<div class="card-header">\
 					<h3 class="card-title">Barn</h3>\
 					<div class="card-tools">\
-					    <a href="javascript:void(0);" data-eventid="'+eventId+'" title="Add Stall for Barn#'+barnId+'" data-stallcount="1" data-barnIndex="'+barnIndex+'" data-barnid="'+barnId+'" id="barn_wrap_'+barnId+'" class="btn btn-info stallbtn">Add stall</a>\
-						<a href="javascript:void(0);" data-barnid='+barnIndex+' class="btn btn-danger barnremovebtn">Remove</a>\
+					    <a href="javascript:void(0);" data-barnIndex="'+barnIndex+'" class="btn btn-info stallbtn">Add stall</a>\
+						<a href="javascript:void(0);" class="btn btn-danger barnremovebtn">Remove</a>\
 					</div>\
 				</div>\
 				<div class="card-body">\
 					<div class="row">\
 						<input type="hidden" name="barn['+barnIndex+'][id]" value="'+barnId+'">\
-						<input type="hidden" name="barn['+barnIndex+'][event_id]" value="'+eventId+'">\
 						<div class="col-md-12">\
 							<div class="form-group">\
 								<label>Barn Name</label>\
@@ -291,6 +285,13 @@
 			$('.barnvalidation').valid();
 			
 			$(document).find('#barn'+barnIndex+'name').rules("add", {required: true, messages: {required: "Barn Name field is required."}});
+			
+			if(stall.length > 0){
+				$(stall).each(function(i, v){
+					stalldata(barnIndex, v)
+				});
+			}
+			
 			++barnIndex;
 		}
 		
@@ -298,12 +299,12 @@
 			stalldata($(this).attr('data-barnIndex'));
 		});
 		
-		function stalldata(barnIndex, values=[])
+		function stalldata(barnIndex, result=[])
 		{
-			var stallId      = (values[0] ? values[0] : '');
-			var stallName    = (values[2] ? values[2] : ''); 
-			var stallPrice   = (values[3] ? values[3] : '');
-			var stallStatus  = (values[4] ? values[4] : '');
+			var stallId      = result['id'] ? result['id'] : '';
+			var stallName    = result['name'] ? result['name'] : '';
+			var stallPrice   = result['price'] ? result['price'] : '';
+			var stallStatus  = result['status'] ? result['status'] : '';
 
 			var data='\
 			<div class="card stallsection">\
