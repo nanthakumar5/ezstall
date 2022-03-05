@@ -175,6 +175,7 @@
 <?php $this->section('js') ?>
 	<script>
 	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
+	    var statuslist		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
 		
@@ -287,6 +288,12 @@
 			var stallPrice   = result['price'] ? result['price'] : '';
 			var stallStatus  = result['status'] ? result['status'] : '';
 
+			var statusdata = '';
+			$.each(statuslist, function(i, v){
+				var selected = stallStatus==i ? 'selected' : '';
+				statusdata += '<option value="'+i+'" '+selected+'>'+v+'</option>';
+			})
+			
 			var data='\
 			<div class="card stallsection">\
 				<div class="card-header">\
@@ -312,11 +319,8 @@
 						</div>\
 						<div class="col-md-12">\
 							<div class="form-group">\
-								<label>Status</label>\	<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">\
-								<option value="">Select Status</option>\
-								<option value="1">Enable</option>\
-								<option value="2">Disable</option>\
-								</select>\
+								<label>Status</label>\
+								<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\
 							</div>\
 						</div>\
 					</div>\

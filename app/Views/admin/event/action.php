@@ -3,6 +3,7 @@
 <?php $this->section('content') ?>
 	<?php
 		$id 					= isset($result['id']) ? $result['id'] : '';
+		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$name 					= isset($result['name']) ? $result['name'] : '';
 		$description 		    = isset($result['description']) ? $result['description'] : '';
 		$location 				= isset($result['location']) ? $result['location'] : '';
@@ -52,6 +53,12 @@
 				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/event/action" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>User</label>								
+									<?php echo form_dropdown('userid', getUsersList(), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
+								</div>
+							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Name</label>								
@@ -128,7 +135,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Status</label>								
-									<?php echo form_dropdown('status', ['' => 'Select Status']+$eventstatus, $status, ['id' => 'status', 'class' => 'form-control']); ?>
+									<?php echo form_dropdown('status', ['' => 'Select Status']+$statuslist, $status, ['id' => 'status', 'class' => 'form-control']); ?>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -162,7 +169,7 @@
 								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 							</div>
 							<input type="hidden" id="current_barn_id" name="current_barn_id">
-                            <div class="col-md-12 barnwrapper"></div>							
+                            <div class="col-md-12" id="barnwrapper"></div>							
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-primary" value="Submit">
@@ -179,6 +186,7 @@
 <?php $this->section('js') ?>
 	<script>
 	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
+	    var statuslist		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
 		
@@ -291,6 +299,12 @@
 			var stallPrice   = result['price'] ? result['price'] : '';
 			var stallStatus  = result['status'] ? result['status'] : '';
 
+			var statusdata = '';
+			$.each(statuslist, function(i, v){
+				var selected = stallStatus==i ? 'selected' : '';
+				statusdata += '<option value="'+i+'" '+selected+'>'+v+'</option>';
+			})
+			
 			var data='\
 			<div class="card stallsection">\
 				<div class="card-header">\
@@ -316,11 +330,8 @@
 						</div>\
 						<div class="col-md-12">\
 							<div class="form-group">\
-								<label>Status</label>\	<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">\
-								<option value="">Select Status</option>\
-								<option value="1">Enable</option>\
-								<option value="2">Disable</option>\
-								</select>\
+								<label>Status</label>\
+								<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\
 							</div>\
 						</div>\
 					</div>\

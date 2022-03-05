@@ -105,7 +105,6 @@ function createDirectory($path)
 	}
 }
 
-
 function send_mail($to,$subject,$message)
 {
 	$email = \Config\Services::email();
@@ -130,3 +129,12 @@ function send_mail($to,$subject,$message)
     }
 
 } 
+
+function getUsersList()
+{	
+	$locations 	= 	new \App\Models\Users;;	
+	$result		= 	$locations->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2','5']]);
+	
+	if(count($result) > 0) return ['' => 'Select User']+array_column($result, 'name', 'id');
+	else return [];	
+}

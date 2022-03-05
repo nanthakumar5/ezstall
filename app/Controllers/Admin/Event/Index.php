@@ -94,8 +94,7 @@ class Index extends BaseController
 			}
         }
 		
-		$data['eventstatus'] = $this->config->status1;
-		$data['stallstatus'] = $this->config->status1;
+		$data['statuslist'] = $this->config->status1;
 		
 		return view('admin/event/action', $data);
 	}	
