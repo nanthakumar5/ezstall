@@ -1,4 +1,4 @@
-<?php $this->extend('site/common/layout/layout1') ?>
+<?php $this->extend('site/common/layout/layout2') ?>
 
 <?php $this->section('content') ?>
 <div class="container-fluid">

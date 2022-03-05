@@ -39,6 +39,8 @@ $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');
 
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index');
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index');
+$routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
+$routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
 
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');

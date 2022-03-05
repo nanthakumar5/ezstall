@@ -15,23 +15,14 @@ class Event extends BaseModel
 			$select[] 	= 	implode(',', $data);
 		}
 		
-		if(in_array('barnstall', $querydata)){
-		    $select[]	= 	'GROUP_CONCAT( CONCAT_WS( "@-@", COALESCE(b.id, ""), COALESCE(b.name, ""), 
-							( SELECT GROUP_CONCAT(concat_ws("@@", COALESCE(s.id, ""), COALESCE(s.name, ""), COALESCE(s.price, ""), COALESCE(s.status, ""))) FROM stall s 
-							WHERE s.barn_id = b.id ) ) SEPARATOR "^" ) 
-							AS barnid_stallid';	
-		}
-			
 		$query = $this->db->table('event e');
 		
-		if(in_array('barnstall', $querydata)) 	$query->join('barn b', 'b.event_id=e.id', 'left');
-				
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('e.id', $requestdata['id']);
 		if(isset($requestdata['status'])) 				$query->where('e.status', $requestdata['status']);
-		if(isset($requestdata['upcoming'])) 				$query->where('e.start_date>=', $requestdata['upcoming']);
+		if(isset($requestdata['upcoming'])) 			$query->where('e.start_date>=', $requestdata['upcoming']);
 		if(isset($requestdata['past'])) 				$query->where('e.end_date<', $requestdata['past']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
@@ -68,9 +59,24 @@ class Event extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-			//echo $this->db->getLAstquery(); die();
+			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
+			
+			if($type=='row' && in_array('barn', $querydata)){
+				$eventdata = $result;
+				$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
+				$result['barn'] = $barndatas;
+				
+				if(in_array('stall', $querydata)){
+					if(count($barndatas) > 0){
+						foreach($barndatas as $barnkey => $barndata){
+							$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
+							$result['barn'][$barnkey]['stall'] = $stalldata;
+						}
+					}
+				}
+			}
 		}
 	
 		return $result;
