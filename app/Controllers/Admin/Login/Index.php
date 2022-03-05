@@ -20,19 +20,16 @@ class Index extends BaseController
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
 			
-			$result = $this->users->getUsers('row', ['users'], ['email' => $email, 'status' => ['1']]);
+			$result = $this->users->getUsers('row', ['users'], ['email' => $email, 'type' => ['1']]);
 			
 			if($result){
 				if($result['status']=='1'){
-					$this->session->set('adminsession',['userid' => $result['id']]);
+					$this->session->set('adminsession', ['userid' => $result['id']]);
 					return redirect()->to(getAdminUrl().'/users'); 
 				}elseif($result['status']=='0'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
 					return redirect()->to(getAdminUrl()); 
-				}elseif($result['status']=='2'){
-					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
-					return redirect()->to(getAdminUrl()); 
-				} else {
+				}else {
 					$this->session->setFlashdata('danger', 'Invalid Credentials');
 					return redirect()->to(getAdminUrl()); 
 				}

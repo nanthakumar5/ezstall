@@ -19,36 +19,17 @@
 		$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
 		$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 		$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
+		$barn        			=  isset($result['barn']) ? $result['barn'] : [];
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 		
-		$barn        =  isset($result['barn']) ? $result['barn'] : [];
-		$file   = $image;
+		$file   				= $image;
 		$file 				    = filedata($image, base_url().'/assets/uploads/event/');
-		// $file   = filedata($file, base_url().'/assets/site/img/', ['no_images']);
-		if($file[0]!=''){
-		$mediafile  = base_url().'/assets/uploads/event/'.$file[0];
-
-		}else{
-		$mediafile = $file[1];
-		}
 		
-		if($eventflyer[0]!=''){
-		$eventflyerfile  = base_url().'/assets/uploads/eventflyer/'.$eventflyer[0];
-
-		}else{
-		$eventflyerfile = $file[1];
-		}
-
-		if(isset($barnstallvalue[0]['barnid_stallid']) && $barnstallvalue[0]['barnid_stallid']!="@-@"){
-			foreach($barnstallvalue as $stall){
-				$value=explode('^',$stall['barnid_stallid']);
-				foreach($value as $stallarray){
-					$variable=explode('@-@',$stallarray);
-					$stallmainarray=isset($variable[2]) ? explode(',',$variable[2]) : '';
-					$stallvalue[$variable[0]]=$stallmainarray;
-				}
-			}
-		}
+		if($file[0]!='') $mediafile  = base_url().'/assets/uploads/event/'.$file[0];
+		else $mediafile = $file[1];
+		
+		if($eventflyer[0]!='')$eventflyerfile  = base_url().'/assets/uploads/eventflyer/'.$eventflyer[0];
+		else $eventflyerfile = $file[1];
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -200,7 +181,7 @@
 		var stallIndex       = '0';
 		
 		$(function(){
-			//dateformat('#start_date, #end_date');
+			dateformat('#start_date, #end_date');
             fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 			fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
 			fileupload([".stallmap_file"], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
@@ -242,7 +223,6 @@
 			if(barn.length > 0){
 				$(barn).each(function(i, v){
 					barndata(v);
-				console.log(v);
 				});
 			}
 		});
@@ -358,7 +338,6 @@
 		$(document).on('click', '.stallremovebtn', function(){
 			$(this).parent().parent().parent().remove();
 		})
-			
 	</script>
 <?php $this->endSection(); ?>
 

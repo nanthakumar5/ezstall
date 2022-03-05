@@ -104,3 +104,29 @@ function createDirectory($path)
 		}
 	}
 }
+
+
+function send_mail($to,$subject,$message)
+{
+	$email = \Config\Services::email();
+
+	$config['protocol'] = 'sendmail';
+	$config['mailPath'] = '/usr/sbin/sendmail';
+	$config['charset']  = 'iso-8859-1';
+	$config['wordWrap'] = true;
+
+	$email->initialize($config);
+
+	$email->setFrom('developer@itflexsolutions.com', 'Ezstall');
+	$email->setTo($to);
+	$email->setSubject($subject);
+	$email->setMessage($message);
+
+    if($email->send()){
+        return "sent";
+    }else{
+        $email->printDebugger();
+        return "not sent";
+    }
+
+} 

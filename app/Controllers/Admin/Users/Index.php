@@ -17,7 +17,10 @@ class Index extends BaseController
 	{		
 		if ($this->request->getMethod()=='post')
         {
-            $result = $this->users->delete($this->request->getPost());
+			$requestdata = $this->request->getPost();
+			$requestdata['userid'] = getAdminUserID();
+			
+            $result = $this->users->delete($requestdata);
 			
 			if($result){
 				$this->session->setFlashdata('success', 'User deleted successfully.');
@@ -34,8 +37,8 @@ class Index extends BaseController
 	public function DTusers()
 	{
 		$post 			= $this->request->getPost();
-		$totalcount 	= $this->users->getUsers('count', ['users'], ['status' => ['1', '2']]+$post);
-		$results 		= $this->users->getUsers('all', ['users'], ['status' => ['1','2']]+$post);
+		$totalcount 	= $this->users->getUsers('count', ['users'], ['status' => ['1', '2'], 'type' => ['2','3','4','5']]+$post);
+		$results 		= $this->users->getUsers('all', ['users'], ['status' => ['1','2'], 'type' => ['2','3','4','5']]+$post);
 		
 		$totalrecord 	= [];
 				
@@ -82,7 +85,10 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post')
         {
-            $result = $this->users->action($this->request->getPost());
+			$requestdata = $this->request->getPost();
+			$requestdata['userid'] = getAdminUserID();
+			
+            $result = $this->users->action($requestdata);
 			
 			if($result){
 				$this->session->setFlashdata('success', 'Users saved successfully.');

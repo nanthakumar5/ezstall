@@ -39,6 +39,7 @@ $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');
 
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index', ['filter' => 'siteauthentication1']);
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filter' => 'siteauthentication1']);
+$routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
 

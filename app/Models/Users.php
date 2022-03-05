@@ -71,8 +71,7 @@ class Users extends BaseModel
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
-		$userid				= '';
-		
+		$userid				= (isset($data['userid'])) ? $data['userid'] : '';		
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
 		if(isset($data['name']) && $data['name']!='')      					$request['name'] 				= $data['name'];
@@ -112,7 +111,7 @@ class Users extends BaseModel
 		$this->db->transStart();
 		
 		$datetime		= date('Y-m-d H:i:s');
-		$userid			= '';
+		$userid			= (isset($data['userid'])) ? $data['userid'] : '';
 		$id 			= $data['id'];
 		
 		$users 			= $this->db->table('users')->update(['updated_at' => $datetime, 'updated_by' => $userid, 'status' => '0'], ['id' => $id]);

@@ -6,17 +6,11 @@ use App\Controllers\BaseController;
 
 use App\Models\Event;
 
-use App\Models\Barn;
-
-use App\Models\Stall;
-
 class Index extends BaseController
 {
 	public function __construct()
 	{  
 		$this->event  = new Event();
-		$this->barn  = new Barn();
-		$this->stall  = new Stall();
     }
 	
 	public function index()

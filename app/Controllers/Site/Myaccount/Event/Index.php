@@ -41,8 +41,8 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 		
-		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=>'1', 'userid' => $userid]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=>'1', 'start' => $offset, 'length' => $perpage, 'userid' => $userid]);
+		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid]);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid]);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
@@ -55,7 +55,7 @@ class Index extends BaseController
 		$userid = getSiteUserID();
 		
 		if($id!=''){
-			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'userid' => $userid]);
+			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid]);
 			if($result){
 				$data['result'] = $result;
 			}else{

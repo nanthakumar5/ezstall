@@ -27,8 +27,8 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 		
-		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=>'1']);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=>'1', 'start' => $offset, 'length' => $perpage]);
+		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		
