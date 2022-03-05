@@ -72,7 +72,7 @@ class Index extends BaseController
 	public function action($id='')
 	{
 		if($id!=''){
-			$result = $this->event->getEvent('row', ['event'], ['id' => $id, 'status' => ['1', '2']]);
+			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2']]);
 			if($result){
 				$data['result'] = $result;
 			}else{
@@ -94,32 +94,23 @@ class Index extends BaseController
 			}
         }
 		
-		if($id!=''){
-			$barnstallvalue = $this->event->getEvent('all', ['event','barnstall'], ['id' => $id ,'status' => ['1','2']]);
-			if(isset($barnstallvalue)){
-				$data['barnstallvalue'] = $barnstallvalue;
-			}
-		}
-			
 		$data['eventstatus'] = $this->config->status1;
 		$data['stallstatus'] = $this->config->status1;
 		
 		return view('admin/event/action', $data);
 	}	
 	
-	public function view($id=''){
-		
-		if($id!=''){
-			$barnvalue = $this->event->getEvent('all', ['event','barnstall'], ['id' => $id ,'status' => ['1','2']]);
-			if(isset($barnvalue) && isset($barnvalue[0]['barnid_stallid'])){
-				$data['barnvalue'] = $barnvalue;
-			} else {
-				$result = $this->event->getBarnStall('all', ['event'], ['id' => $id,'status' => ['1','2']]);
-				$data['barnvalue'] = $result;
-			}
+	public function view($id)
+	{
+		$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2']]);
+		if($result){
+			$data['result'] = $result;
+		}else{
+			$this->session->setFlashdata('danger', 'No Record Found.');
+			return redirect()->to(getAdminUrl().'/event'); 
 		}
-		$data['stallstatus'] = $this->config->status1;
 		
+		$data['stallstatus'] = $this->config->status1;
 		return view('admin/event/view', $data);
 	}
 }

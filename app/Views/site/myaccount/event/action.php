@@ -19,7 +19,7 @@
 		$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
 		$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 		$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
-		$barn        			=  isset($result['barn']) ? $result['barn'] : [];
+		$barn        			= isset($result['barn']) ? $result['barn'] : [];
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 		
 		$file   				= $image;
@@ -174,9 +174,7 @@
 
 <?php $this->section('js') ?>
 	<script>
-	
-	    var eventId    	     = '<?php echo $id; ?>';
-		var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
+	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
 		
@@ -216,6 +214,9 @@
 					},
 					status        : {  
 					    required	: 	true
+					},
+					barnvalidation : {
+						required 	: true
 					}
 				}
 			);

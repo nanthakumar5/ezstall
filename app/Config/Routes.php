@@ -71,8 +71,6 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'event/action', 'Admin\Event\Index::action');
     $routes->get('event/action/(:num)', 'Admin\Event\Index::action/$1');
     $routes->post('event/DTevent', 'Admin\Event\Index::DTevent');
-
-    $routes->match(['get', 'post'], 'event/view', 'Admin\Event\Index::view');
     $routes->get('event/view/(:num)', 'Admin\Event\Index::view/$1');
   
 	// Settings
