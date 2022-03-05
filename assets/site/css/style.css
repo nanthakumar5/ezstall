@@ -38,6 +38,7 @@ a.navbar-brand {
 span.searchResult svg {
   fill: white;
   font-size: 20px;
+  margin: 12px;
 }
 
 .ml-auto {
@@ -383,8 +384,8 @@ button.ucEventBtn.closeBtn {
 }
 
 .searchResult {
-  height: 45px;
-  width: 45px;
+  /*height: 45px;
+  width: 45px;*/
   display: flex;
   align-items: center;
   background-color: #e00000;
@@ -2266,6 +2267,16 @@ a.btn-custom-black {
     place-content: end;
     gap: 10px;
     text-align: center;
+}
+
+p.error_class_1 {
+    color: #e00000;
+    text-align: left;
+    font-size: 13px;
+}
+
+.homeEventsPanel .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  background-color: transparent;
 }
 
 /*05-03-2022 styles end here*/

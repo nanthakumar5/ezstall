@@ -17,7 +17,7 @@
 	<body>
 		<section <?php if($segment1==''){ echo 'class="home-banner"'; } ?> >
 			<div class="top-nav">
-				<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+				<nav class="navbar navbar-expand-lg <?php if($segment1!=''){ echo 'bg-dark'; } ?> navbar-dark">
 					<div class="container-lg m-1rem-sm">
 						<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo base_url()?>/assets/site/img/logo.png" class="logo" alt="Logo"></a>
 						<button aria-controls="responsive-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
@@ -32,13 +32,13 @@
 							</div>
 							<?php if($userdetail){ ?>
 								<div class="navbar-nav">
-									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/events'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>/
+									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/events'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>
 								</div>
 							<?php }else{ ?>
 								<div class="navbar-nav">
 									<a href="<?php echo base_url()?>/login" class="ml-0 nav-link">
 										<img src="<?php echo base_url()?>/assets/site/img/profile.svg" class="profileIcon" alt="Profile Icon">Sign In
-									</a> /
+									</a> <span class="text-white px-2"> /</span>
 									<a href="<?php echo base_url()?>/register" class="ml-0 nav-link">Sign Up</a>
 								</div>
 							<?php } ?>

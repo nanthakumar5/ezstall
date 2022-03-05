@@ -36,14 +36,14 @@
 
 	<section class="homeEventsPanel">
       	<div class="wi-1200">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <ul class="nav nav-tabs align-items-center" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Upcoming Events</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Past Events</button>
             </li>
-            <a href="#" class="allEventsLink">View All Events <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+            <a href="<?php echo base_url().'/events'; ?>" class="allEventsLink">View All Events <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
       
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -60,7 +60,7 @@
                 				<p><?php echo $event_on;?>. <?php echo ucfirst($row['location']);?></p>
                 				<h5><?php echo ucfirst($row['name']);?></h5>
                 			</span>
-                			<div class="wi-50-2">
+                			<div class="wi-50-2 justify-content-between">
                 				<span class="m-left">
                 					<p><img class="eventFirstIcon" src="<?php echo base_url();?>/assets/site/img/horseShoe.svg">Stalls</p>
                 					<h6>from $<?php echo $row['stalls_price'];?> / night</h6>
