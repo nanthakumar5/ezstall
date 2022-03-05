@@ -27,7 +27,7 @@ class Index extends BaseController
 						return redirect()->to(base_url().'/login'); 
 					}else{
 						$this->session->set('sitesession', ['userid' => $result['id']]);
-						return redirect()->to(base_url().'/myaccount/events'); 
+						return redirect()->to(base_url().'/myaccount/dashboard'); 
 					}
 				}elseif($result['status']=='0'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');

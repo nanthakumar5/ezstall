@@ -133,7 +133,7 @@ function send_mail($to,$subject,$message)
 function getUsersList()
 {	
 	$locations 	= 	new \App\Models\Users;;	
-	$result		= 	$locations->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2','5']]);
+	$result		= 	$locations->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2']]);
 	
 	if(count($result) > 0) return ['' => 'Select User']+array_column($result, 'name', 'id');
 	else return [];	
