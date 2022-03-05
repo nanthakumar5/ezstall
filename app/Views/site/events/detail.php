@@ -3,9 +3,9 @@
 <section class="maxWidth">
 	<div class="pageInfo">
 	  <span class="marFive">
-		<a href="/">Home /</a>
-		<a href="/Events"> Checkout /</a>
-		<a href="/Events"> Nemo enim ipsam voluptatem quia</a>
+		<a href="<?php echo base_url(); ?>">Home /</a>
+		<a href="<?php echo base_url().'/events'; ?>"> Events /</a>
+		<a href="javascript:void(0);"><?php echo $detail['name'] ?></a>
 	  </span>
 	</div>
 

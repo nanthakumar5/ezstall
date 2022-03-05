@@ -2279,4 +2279,8 @@ p.error_class_1 {
   background-color: transparent;
 }
 
+.bg-dark{
+  background-color: #000 !important;
+}
+
 /*05-03-2022 styles end here*/
