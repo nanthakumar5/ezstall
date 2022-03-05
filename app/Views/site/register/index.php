@@ -29,9 +29,10 @@
             </span>
             <span>
                 <input type="password" class="signInPassword" placeholder="Create password" name="password">
+				<input type="hidden" value="1" name="status">
             </span>
-                <button class="signInSubmitBtn" type="submit">Sign Up</button><p>Already have an account ?
-                <a href="<?php echo base_url()?>/login" class="signUpLink"> Sign In</a></p>
+			<button class="signInSubmitBtn" type="submit">Sign Up</button><p>Already have an account ?
+			<a href="<?php echo base_url()?>/login" class="signUpLink"> Sign In</a></p>
         </form>
     </div>
 </div>

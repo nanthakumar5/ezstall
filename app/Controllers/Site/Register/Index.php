@@ -46,7 +46,7 @@ class Index extends BaseController
 		$decryptid = (int) filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
 		$post['actionid'] = $decryptid;
-		$post['email_status'] = 1;
+		$post['email_status'] = '1';
 
 		$updateaction = $this->users->action($post);
 		
