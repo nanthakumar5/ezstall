@@ -1,6 +1,5 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-
 	<div class="wi-1200">
 		<div class="displayFlex">
 			<div class="flexOneLeft beforeRound">
@@ -18,26 +17,25 @@
 			</div>
 		</div>
 
-	<div class="displayFlex flexReverse">
-		<div class="flexOneRight">
-		<h1 class="commonTitle">Who We Are</h1>
-			<p class="commonContent">
-			Sed ut perspits unde onis iste naus error sit vuatem accantium
-			doloeque lauantium, totam rem aperiam, eaqe ipsa que ab illo
-			intore veitatis et quasi architecto beatae vitae dicta sunt
-			explicabo.
-			</p>
-			<button class="greyButton">Read More</button>
+		<div class="displayFlex flexReverse">
+			<div class="flexOneRight">
+			<h1 class="commonTitle">Who We Are</h1>
+				<p class="commonContent">
+				Sed ut perspits unde onis iste naus error sit vuatem accantium
+				doloeque lauantium, totam rem aperiam, eaqe ipsa que ab illo
+				intore veitatis et quasi architecto beatae vitae dicta sunt
+				explicabo.
+				</p>
+				<button class="greyButton">Read More</button>
+			</div>
+			<div class="flexOneLeft afterRound">
+				<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/Who.png" />
+			</div>
 		</div>
-		<div class="flexOneLeft afterRound">
-			<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/Who.png" />
-		</div>
-	</div>
 	</div>
 
 	<section class="homeEventsPanel">
       	<div class="wi-1200">
-          <!-- Tabs navs -->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Upcoming Events</button>

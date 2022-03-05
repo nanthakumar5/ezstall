@@ -18,24 +18,27 @@ class Index extends BaseController
         {
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
-			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['3', '4']]);
+			
+			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['2', '5']]);
 			if($result){
 				if($result['status']=='1'){ 
-					$this->session->set('sitesession', ['userid' => $result['id']]);
-					return redirect()->to(base_url().'/myaccount/events'); 
+					if($result['email_status']=='0'){
+						$this->session->setFlashdata('danger', 'Email is still not verified.');
+						return redirect()->to(base_url().'/login'); 
+					}else{
+						$this->session->set('sitesession', ['userid' => $result['id']]);
+						return redirect()->to(base_url().'/myaccount/events'); 
+					}
 				}elseif($result['status']=='0'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
-					return redirect()->to('/login'); 
-				}elseif($result['status']=='2'){
-					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
-					return redirect()->to('/login'); 
+					return redirect()->to(base_url().'/login'); 
 				} else {
 					$this->session->setFlashdata('danger', 'Invalid Credentials');
-					return redirect()->to('/login'); 
+					return redirect()->to(base_url().'/login'); 
 				}
 			}else{
 				$this->session->setFlashdata('danger', 'Invalid Credentials');
-				return redirect()->to('/login'); 
+				return redirect()->to(base_url().'/login'); 
 			}
         }
 		

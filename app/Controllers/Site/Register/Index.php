@@ -21,7 +21,7 @@ class Index extends BaseController
             $result = $this->users->action($post); 
 			
 			if($result){ 
-				$this->session->setFlashdata('success', 'Registration is successfully.'); 
+				$this->session->setFlashdata('success', 'Registered successfully. Check mail for verification.'); 
 				return redirect()->to(base_url().'/login'); 
 			}else{ 
 				$this->session->setFlashdata('danger', 'Try Later.');
@@ -29,15 +29,7 @@ class Index extends BaseController
 			}
        
         }
-    return view('site/register/index');
-    }
-    public function checkemail(){
-       	$email = $this->request->getPost('email');
-		$result = $this->users->getUsers('count', ['users'], ['email' => $email]);
-		if($result>0){
-			echo 'false';
-		}else{
-			echo 'true';
-		}
+		
+		return view('site/register/index');
     }
 }

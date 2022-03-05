@@ -1,6 +1,6 @@
 <?php $this->extend('site/common/layout/layout1') ?>
-<?php $this->section('content') ?>
 
+<?php $this->section('content') ?>
 <section class="signInFlex">
 <div class="signInLeft">
     <img class="signInImage" src="<?php echo base_url()?>/assets/site/img/signin_img.jpg" alt="Horse Image">
@@ -8,12 +8,12 @@
 <div class="signInRight">
     <div class="signInFormPanel">
         <h1 class="topPad">Let's Sign In</h1><p>Enter details to signin</p>
-        <form class="signInForm" d="form" method="post" action="">
+        <form class="signInForm" d="form" method="post" action="" autocomplete="off">
             <span>
-                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="" autocomplete="off" >
+                <input type="email" class="signInEmail" placeholder="Enter email" name="email">
             </span>
             <span>
-                <input type="password" class="signInPassword" placeholder="Enter password" name="password" value="" autocomplete="off">
+                <input type="password" class="signInPassword" placeholder="Enter password" name="password">
             </span>
             <button type="submit" class="signInSubmitBtn">Sign In</button>
             <p>Don't have an account ?
@@ -23,8 +23,8 @@
     </div>
 </div>
 </section>
-
 <?php $this->endSection(); ?>
+
 <?php $this->section('js') ?>
 	<script>
 		$(function(){

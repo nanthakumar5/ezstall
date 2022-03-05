@@ -8,7 +8,7 @@
 <div class="signInRight">
     <div class="signInFormPanel">
         <h1>Let's Sign Up</h1><p>Enter details to sign up</p>
-        <form class="signInForm" method="post" action="" id="form">
+        <form class="signInForm" method="post" action="" id="form" autocomplete="off">
             <div class="wrapper">
                 <input type="radio" name="type" id="option-1" value="3" checked="">
                 <input type="radio" name="type" id="option-2" value="5">
@@ -22,13 +22,13 @@
                 </label>
             </div>
             <span>
-                <input type="text" class="signInText" placeholder="Enter username" name="name" value="">
+                <input type="text" class="signInText" placeholder="Enter username" name="name">
             </span>
             <span>
-                <input type="email" class="signInEmail" placeholder="Enter email" name="email" value="" autocomplete="off" >
+                <input type="email" class="signInEmail" placeholder="Enter email" name="email">
             </span>
             <span>
-                <input type="password" class="signInPassword" placeholder="Create password" name="password" value="">
+                <input type="password" class="signInPassword" placeholder="Create password" name="password">
             </span>
                 <button class="signInSubmitBtn" type="submit">Sign Up</button><p>Already have an account ?
                 <a href="<?php echo base_url()?>/login" class="signUpLink"> Sign In</a></p>
@@ -49,18 +49,16 @@
                     email       : {
                         required  : true,
                         email     : true,
-                        remote            :   {
-                                    url   :   "<?php echo base_url().'/validation/emailvalidation'; ?>",
-                                    type  :   "post",
-                                    async :   false,
-                                    data:{ 
-                                            email: function(){ return $(".signInEmail").val();}
-                                       }
-                            }
+                        remote    : {
+										url   :   "<?php echo base_url().'/validation/emailvalidation'; ?>",
+										type  :   "post",
+										async :   false,
+									}
       
                     },
                     password    : {
-                        required  : true
+                        required  : true,
+						minlength : 6
                     }
                 },
                 {   

@@ -71,18 +71,17 @@ class Users extends BaseModel
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
-		$userid				= getUserID();
+		$userid				= '';
 		
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
-		if(isset($data['name']) && $data['name']!='')      		$request['name'] 				= $data['name'];
-		if(isset($data['email']) && $data['email']!='') 	 	$request['email'] 				= $data['email'];
-		if(isset($data['password']) && $data['password']!='')	$request['password'] 			= md5($data['password']);
-		if(isset($data['type']) && $data['type']!='') 	  		$request['type'] 				= $data['type'];
-		if(isset($data['status']) && $data['status']!='') 	  	$request['status'] 				= $data['status'];
-		if(isset($data['email_status']) && $data['email_status']!='') 	  	$request['email_status'] = $data['email_status'];
+		if(isset($data['name']) && $data['name']!='')      					$request['name'] 				= $data['name'];
+		if(isset($data['email']) && $data['email']!='') 	 				$request['email'] 				= $data['email'];
+		if(isset($data['password']) && $data['password']!='')				$request['password'] 			= md5($data['password']);
+		if(isset($data['type']) && $data['type']!='') 	  					$request['type'] 				= $data['type'];
+		if(isset($data['status']) && $data['status']!='') 	  				$request['status'] 				= $data['status'];
+		if(isset($data['email_status']) && $data['email_status']!='') 	  	$request['email_status'] 		= $data['email_status'];
 
-		
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;
 			$request['updated_by'] 	= $userid;						
@@ -113,7 +112,7 @@ class Users extends BaseModel
 		$this->db->transStart();
 		
 		$datetime		= date('Y-m-d H:i:s');
-		$userid			= getUserID();
+		$userid			= '';
 		$id 			= $data['id'];
 		
 		$users 			= $this->db->table('users')->update(['updated_at' => $datetime, 'updated_by' => $userid, 'status' => '0'], ['id' => $id]);
