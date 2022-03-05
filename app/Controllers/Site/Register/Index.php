@@ -23,7 +23,6 @@ class Index extends BaseController
 			if($result){ 
 				$encrypter = \Config\Services::encrypter();
 				$encryptid = base64_encode($encrypter->encrypt($result));
-				$encryptid = $encrypter->encrypt($result);
 				$verificationurl= base_url()."/verification/".$encryptid;
 				$email_subject = "Ezstall Registration";
 				$email_message = "Hi ".$post['name'].","." \n\n Thank you for Registering in Ezstall.
