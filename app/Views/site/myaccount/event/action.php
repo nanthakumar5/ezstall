@@ -14,6 +14,7 @@
 		$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
 		$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
 		$image      			= isset($result['image']) ? $result['image'] : '';
+		$image 				    = filedata($image, base_url().'/assets/uploads/event/');
 		$status 				= isset($result['status']) ? $result['status'] : '';
 		$eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
 		$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
@@ -21,15 +22,6 @@
 		$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 		$barn        			= isset($result['barn']) ? $result['barn'] : [];
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
-		
-		$file   				= $image;
-		$file 				    = filedata($image, base_url().'/assets/uploads/event/');
-		
-		if($file[0]!='') $mediafile  = base_url().'/assets/uploads/event/'.$file[0];
-		else $mediafile = $file[1];
-		
-		if($eventflyer[0]!='')$eventflyerfile  = base_url().'/assets/uploads/eventflyer/'.$eventflyer[0];
-		else $eventflyerfile = $file[1];
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -118,13 +110,13 @@
 								<div class="form-group">
 									<label><b>Event Image</b></label>			
 									<div>
-										<a href="<?php echo $mediafile; ?>" target="_blank">
-											<img src="<?php echo $mediafile; ?>" class="image_source" width="100">
+										<a href="<?php echo $image[1];?>" target="_blank">
+											<img src="<?php echo $image[1];?>" class="image_source" width="100">
 										</a>
 									</div>
 									<input type="file" id="file" name="file" class="image_file">
 									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $file[0];?>">
+									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 								</div>
 							</div>							
 							<div class="col-md-6">

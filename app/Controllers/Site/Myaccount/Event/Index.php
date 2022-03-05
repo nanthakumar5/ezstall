@@ -77,6 +77,7 @@ class Index extends BaseController
         } 
 		
 		$data['userid'] = $userid;
+		$data['statuslist'] = $this->config->status1;
 		return view('site/myaccount/event/action', $data);
 	}
 }

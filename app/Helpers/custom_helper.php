@@ -124,7 +124,7 @@ function send_mail($to,$subject,$message)
     if($email->send()){
         return "sent";
     }else{
-        $email->printDebugger();
+        print_r($email->printDebugger());exit;
         return "not sent";
     }
 
