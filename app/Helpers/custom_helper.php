@@ -1,29 +1,22 @@
 <?php
+function getAdminUrl()
+{
+	return base_url().'/administrator';
+}
 
-function getUserDetails($id='')
+function getUserDetails($id)
 {	
-	if ($id!='') {
-		$userid = $id;
-	} else {
-		$userdata = session()->get('sitesession');
-		$userid = $userdata['userid'];
-	}
+	$users 	= new \App\Models\Users;
+	$result = $users->getUsers('row', ['users'], ['id' => $id]);
 
-	if (isset($userid)) {
-		$users 	= new \App\Models\Users;
-		$result = $users->getUsers('row', ['users'], ['id' => $userid]);
-
-		if ($result) {
-			return $result;
-		} else {
-			return false;
-		}
+	if ($result) {
+		return $result;
 	} else {
 		return false;
 	}
 }
 
-function getUserID($id='')
+function getUserID($id)
 {
 	$userDetails = getUserDetails($id);
 
@@ -34,9 +27,28 @@ function getUserID($id='')
 	}
 }
 
-function getAdminUrl()
+function getAdminUserID($id='')
 {
-	return base_url().'/administrator';
+	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
+	return getUserID($id);
+}
+
+function getSiteUserID($id='')
+{
+	$id = ($id=='') ? session()->get('sitesession')['userid'] : $id;
+	return getUserID($id);
+}
+
+function getAdminUserDetails($id='')
+{
+	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
+	return getUserDetails($id);
+}
+
+function getSiteUserDetails($id='')
+{
+	$id = ($id=='') ? session()->get('sitesession')['userid'] : $id;
+	return getUserDetails($id);
 }
 
 function dateformat($date, $type='')

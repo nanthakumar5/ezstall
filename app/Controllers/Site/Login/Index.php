@@ -18,11 +18,10 @@ class Index extends BaseController
         {
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
-			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['3']]);
+			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['3', '4']]);
 			if($result){
 				if($result['status']=='1'){ 
-					$this->session->set('sitesession',['userid' => $result['id'],'username' => $result['name']]);
-					
+					$this->session->set('sitesession', ['userid' => $result['id']]);
 					return redirect()->to(base_url().'/myaccount/events'); 
 				}elseif($result['status']=='0'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');

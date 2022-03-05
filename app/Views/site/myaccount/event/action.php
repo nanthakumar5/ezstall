@@ -1,7 +1,7 @@
-<?= $this->extend("site/common/layout/layout1") ?>
+<?php $this->extend("site/common/layout/layout1") ?>
 
 <?php $this->section('content') ?>
-	<?php //echo '<pre>'; print_r($result); die();
+	<?php
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$name 					= isset($result['name']) ? $result['name'] : '';
 		$description 		    = isset($result['description']) ? $result['description'] : '';
@@ -59,13 +59,6 @@
 				<div class="col-sm-6">
 					<h1>Events</h1>
 				</div>
-				<!-- <div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-						<li class="breadcrumb-item"><a href="<?php //echo getAdminUrl(); ?>/event">Events</a></li>
-						<li class="breadcrumb-item active"><?php //echo $pageaction; ?> Event</li>
-					</ol>
-				</div> -->
 			</div>
 		</div>
 	</section>
@@ -156,12 +149,6 @@
 									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $file[0];?>">
 								</div>
 							</div>							
-							<!-- <div class="col-md-12">
-								<div class="form-group">
-									<label>Status</label>								
-									
-								</div>
-							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
 									<label><b>Event Flyer</b></label>			
@@ -191,81 +178,8 @@
 							<div class="col-md-6 barn_wrapper"><br>
 								<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
 								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
-							</div>
-							<input type="hidden" id="current_barn_id" name="current_barn_id">
-							<div class="col-md-6"></div>
-                            <div class="col-md-6 main_wrapper">
-                            	<!--Barn part-->
-                            	<?php $i=0; foreach($barnList as $res1){ 
-                            		$barn_id = $res1['id'];
-                            		?>
-                            	<div class="card barnspace">                
-        <div class="card-header">                   
-            <h3 class="card-title">Barn</h3>                    
-                <div class="card-tools">                        
-                    <a href="javascript:void(0);" data-eventid="41" title="Add Stall for Barn#" data-stallcount="1" data-barnindex="0" data-barnid="" id="barn_wrap_" class="btn btn-info stallbtn">Add stall</a>                       
-                    <a href="javascript:void(0);" data-barnid="0" class="btn btn-danger barnremovebtn">Remove</a>                   
-                </div>              
-        </div>              
-        <div class="card-body">                 
-            <div class="row">                       
-                <input type="hidden" name="barn[<?php echo $i;?>][id]" value="<?php echo $barn_id;?>">                       
-                <input type="hidden" name="barn[<?php echo $i;?>][event_id]" value="<?php echo $id;?>">                       
-                <div class="col-md-12">                         
-                    <div class="form-group">                         
-                        <label>Barn Name</label>                                
-                        <input type="text" id="barn0name" name="barn[<?php echo $i;?>][name]" class="form-control" placeholder="Enter Barn Name" value="<?php echo $res1['name']; ?>">            
-                    </div>                      
-                </div>
-                <?php $j=0;
-                foreach($stallList[$barn_id] as $col){
-                	//echo '<pre>'; print_r($col); die();
-                ?>                      
-            <div class="col-md-12 barn_wrapper_0">          
-                <div class="card stallsection">             
-                    <div class="card-header">                   
-                        <h3 class="card-title">Stall</h3>                   
-                        <div class="card-tools">                        
-                            <a href="javascript:void(0);" class="btn btn-danger stallremovebtn">Remove</a>                  
-                        </div>              
-                    </div>              
-                    <div class="card-body">                 
-                        <div class="row">                       
-                            <input type="hidden" name="barn[<?php echo $i;?>][stall][<?php echo $j;?>][id]" value="<?php echo $col['id'];?>">                     
-                            <div class="col-md-12">                         
-                                <div class="form-group">                                
-                                    <label>Stall Name</label>                               
-                                    <input type="text" id="stall0name" name="barn[<?php echo $i;?>][stall][<?php echo $j;?>][name]" class="form-control" placeholder="Enter Stall Name" value="<?php echo $col['name'];?>">                         
-                                </div>                      
-                            </div>                      
-                            <div class="col-md-12">                         
-                                <div class="form-group">                                
-                                    <label>Stall Price</label>                              
-                                    <input type="text" id="stall0price" name="barn[<?php echo $i;?>][stall][<?php echo $j;?>][price]" class="form-control" placeholder="Enter Stall price" value="<?php echo $col['price'];?>">                          
-                                </div>                      
-                            </div>                      
-                            <div class="col-md-12">                         
-                                <div class="form-group">                                
-                                    <label>Status</label>   
-                                        <select name="barn[<?php echo $i;?>][stall][<?php echo $j;?>][status]" id="stall0status" class="form-control">                                
-                                            <option value="">Select Status </option>                   
-                                            <option <?php if($col['status']=='1'){ echo 'selected';}?> value="1"> Enable </option>                     
-                                            <option <?php if($col['status']=='2'){ echo 'selected';}?> value="2"> Disable </option>
-                                        </select>                           
-                                </div>                      
-                            </div>                  
-                        </div>             
-                    </div>          
-                </div>          
-            </div>      
-            <?php $j++; } ?>            
-        </div>             
-    </div>          
-</div>
-					    	<?php $i++; } ?>
-                            	<!--Barn part-->
-                            </div>	
-                            <br>						
+							</div>	
+							<div id="barnwrapper"></div>
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-danger" value="Submit">
@@ -372,7 +286,7 @@
 			</div>\
 			';
 			
-			$('.main_wrapper').append(data);
+			$('#barnwrapper').append(data);
 			$('.barnvalidation').val('1');
 			$('.barnvalidation').valid();
 			

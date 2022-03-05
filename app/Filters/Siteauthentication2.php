@@ -10,12 +10,12 @@ class Siteauthentication2 implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-		$sitesession 	= session()->get('sitesession');
+		$sitesession = session()->get('sitesession');
 		
 		if(isset($sitesession['userid'])){
 			$users 	= new \App\Models\Users;
+			$result = $users->getUsers('row', ['users'], ['id' => $sitesession['userid'], 'status' => ['1']]);		
 			
-			$result = $users->getUsers('row', ['users'], ['id' => $sitesession['userid']]);				
 			if(!$result){
 				return redirect()->to('/login');
 			}

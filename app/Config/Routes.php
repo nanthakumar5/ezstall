@@ -37,16 +37,15 @@ $routes->setAutoRoute(true);
 
 $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');	
 
-$routes->match(['get','post'], 'login', 'Site\Login\Index::index');
-$routes->match(['get','post'], 'register', 'Site\Register\Index::index');
+$routes->match(['get','post'], 'login', 'Site\Login\Index::index', ['filter' => 'siteauthentication1']);
+$routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filter' => 'siteauthentication1']);
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
 
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
-     $routes->post('DTevents', 'Site\Myaccount\Event\Index::DTevents');
-    $routes->match(['get','post'], 'addevent', 'Site\Myaccount\Event\Index::action'); 
-    $routes->get('editevent/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+    $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
+    $routes->get('events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
 });
 
 $routes->get('logout', 'Site\Myaccount\Event\Index::logout');

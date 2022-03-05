@@ -14,7 +14,7 @@ class Siteauthentication1 implements FilterInterface
 
 		if(isset($sitesession['userid'])){
 			$users 	= new \App\Models\Users;
-			$result = $users->getUsers('row', ['users'], ['id' => $sitesession['userid']]);
+			$result = $users->getUsers('row', ['users'], ['id' => $sitesession['userid'], 'status' => ['1']]);
 				
 			if($result){
 				return redirect()->to('/');

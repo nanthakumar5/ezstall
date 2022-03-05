@@ -22,6 +22,7 @@ class Event extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('e.id', $requestdata['id']);
 		if(isset($requestdata['status'])) 				$query->where('e.status', $requestdata['status']);
+		if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);
 		if(isset($requestdata['upcoming'])) 			$query->where('e.start_date>=', $requestdata['upcoming']);
 		if(isset($requestdata['past'])) 				$query->where('e.end_date<', $requestdata['past']);
 		

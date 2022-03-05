@@ -1,67 +1,38 @@
-<?php $this->extend('site/common/layout/layout2') ?>
+<?php $this->extend('site/common/layout/layout1') ?>
 
 <?php $this->section('content') ?>
-<div class="container-fluid">
-	<div class="cont-sec">
-		<div class="inner-section row" >
-			
-			<div class="col-sm-12 col-md-9 col-lg-9 right-conten-section my-5">
-				<div class="page-action" align="right">
-					<a href="<?php echo base_url(); ?>/myaccount/addevent" class="btn btn-danger">Add</a>
-				</div>
-				<form method="post" id="form" action="<?php echo base_url(); ?>/myaccount/event/action" autocomplete="off">
-					<div class="col-md-12">
-						<h1>Event List</h1>
-
-						<div class="table-responsive">
-							<table class="table table-hover datatables" >
-	                        	<thead>
-		                            <tr>
-		                                <th scope="col" align="justify">Event Name</th>
-		                                <th scope="col" >Image</th>
-		                                <th scope="col" align="justify">Event on</th>
-		                                <th scope="col" align="justify">Location</th>
-		                                <th scope="col" align="justify">Mobile</th>
-		                                <th scope="col" align="justify">Action</th>
-		                            </tr>
-	                        	</thead>
-	                        	
-				            </table>
+	<section class="maxWidth marFiveRes eventPagePanel">
+		<a href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+		 <?php foreach ($list as $data) {  ?>
+			<div class="ucEventInfo">
+				<div class="EventFlex">
+					<span class="wi-50">
+						<div class="EventFlex leftdata">
+							<span class="wi-30">
+								<span class="ucimg">
+									<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
+								</span>
+							</span>
+							<span class="wi-70">
+								<p class="topdate"> <?php echo $data['start_date']; ?> - <?php echo $data['end_date']; ?> -  <?php echo $data['location']; ?></p>
+								<a href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
+							</span>
 						</div>
+					</span>
+					<div class="wi-50-2">
+						<span class="m-left">
+							<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
+							<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
+						</span>
+						<span class="m-left">
+							<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
+						</span>
+						<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>">Edit</a>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
-	</div>
-</div>
+		<?php } ?>
+		<?php echo $pager; ?>
+	</section>
 <?php $this->endSection(); ?>
-<?php $this->section('js') ?>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">)
-
-
-<link href="<?php echo base_url(); ?>/assets/plugins/datatables-1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="<?php echo base_url(); ?>/assets/plugins/datatables-1.10.25/css/responsive.dataTables.min.css" rel="stylesheet" />
-<script src="<?php echo base_url(); ?>/assets/plugins/datatables-1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>/assets/plugins/datatables-1.10.25/js/dataTables.responsive.min.js"></script>
-<script>
-		$(function(){
-			var options = {
-				url 		: 	'<?php echo base_url()."/myaccount/DTevents"; ?>',
-				data		:	{ 'page' : 'events' },
-				columns 	: 	[
-									{ 'data' : 'name' },
-									{ 'data' : 'image' },
-									{ 'data' : 'event_on' },
-									{ 'data' : 'location' },
-									{ 'data' : 'mobile'},
-									{ 'data' : 'action' }
-								],
-				columndefs	:	[{ 'targets' : 4, 'sortable' : false }]
-			};
-			ajaxdatatables('.datatables', options);
-
-		});
-
-		
-</script>
-<?php echo $this->endSection() ?>
