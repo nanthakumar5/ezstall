@@ -32,7 +32,7 @@
 							</div>
 							<?php if($userdetail){ ?>
 								<div class="navbar-nav">
-									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/events'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>
+									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/dashboard'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>
 								</div>
 							<?php }else{ ?>
 								<div class="navbar-nav">
