@@ -10,8 +10,8 @@
         <h1>Let's Sign Up</h1><p>Enter details to sign up</p>
         <form class="signInForm" method="post" action="" id="form" autocomplete="off">
             <div class="wrapper">
-                <input type="radio" name="type" id="option-1" value="3" checked="">
-                <input type="radio" name="type" id="option-2" value="5">
+                <input type="radio" name="type" id="option-1" value="5" checked="">
+                <input type="radio" name="type" id="option-2" value="2">
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
                     <span>Horse Owner</span>
