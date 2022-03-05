@@ -114,7 +114,7 @@ function send_mail($to,$subject,$message)
 	$config['charset']  = 'iso-8859-1';
 	$config['wordWrap'] = true;
 
-	$email->initialize($config);
+	//$email->initialize($config);
 
 	$email->setFrom('developer@itflexsolutions.com', 'Ezstall');
 	$email->setTo($to);
