@@ -23,20 +23,15 @@
 		$barn        			= isset($result['barn']) ? $result['barn'] : [];
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
-	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Events</h1>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 	
 	<section class="content">
-		<div class="page-action" align="right">
+		<div class="d-flex justify-content-between align-items-center flex-wrap">
+		<div align="left"><h3>Events</h3></div>
+		<div class="page-action mb-4" align="right">
 			<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 		</div>
+	</div>
 		<div class="card">
 			<div class="card-header">
 				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
@@ -46,69 +41,69 @@
 					<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
 					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Name</b></label>								
+									<label>Name</label>								
 									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Event Description</b></label>
-									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><b>Location</b></label>								
+									<label>Location</label>								
 									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Mobile</b></label>								
+									<label>Mobile</label>								
 									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Start Date</b></label>	
+									<label>Start Date</label>	
 									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>End Date</b></label>	
+									<label>End Date</label>	
 									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Start Time</b></label>	
+									<label>Start Time</label>	
 									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>End Time</b></label>	
+									<label>End Time</label>	
 									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Stalls Price</b></label>								
+									<label>Stalls Price</label>								
 									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>RV Spots Price</b></label>								
+									<label>RV Spots Price</label>								
 									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Event Image</b></label>			
+									<label>Event Description</label>
+									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
+								</div>
+							</div>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Event Image</label>			
 									<div>
 										<a href="<?php echo $image[1];?>" target="_blank">
 											<img src="<?php echo $image[1];?>" class="image_source" width="100">
@@ -119,9 +114,9 @@
 									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 								</div>
 							</div>							
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
-									<label><b>Event Flyer</b></label>			
+									<label>Event Flyer</label>			
 									<div>
 										<a href="<?php echo $eventflyer[1];?>" target="_blank">
 											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
@@ -132,7 +127,7 @@
 									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<div class="form-group">
 									<label>Stall Map (optional)</label>			
 									<div>
@@ -150,7 +145,7 @@
 								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 							</div>	
 							<div id="barnwrapper"></div>
-							<div class="col-md-12">
+							<div class="col-md-12 mt-4">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 								<input type="submit" class="btn btn-danger" value="Submit">
@@ -231,7 +226,7 @@
 			var stall		= result['stall'] ? result['stall'] : [];
 				
 			var data='\
-			<div class="card barnspace">\
+			<div class="card barnspace mt-4">\
 				<div class="card-header">\
 					<h3 class="card-title">Barn</h3>\
 					<div class="card-tools">\
@@ -242,7 +237,7 @@
 				<div class="card-body">\
 					<div class="row">\
 						<input type="hidden" name="barn['+barnIndex+'][id]" value="'+barnId+'">\
-						<div class="col-md-12">\
+						<div class="col-md-12 mb-4">\
 							<div class="form-group">\
 								<label>Barn Name</label>\
 								<input type="text" id="barn'+barnIndex+'name" name="barn['+barnIndex+'][name]" class="form-control" placeholder="Enter Barn Name" value="'+barnName+'">\
@@ -287,7 +282,7 @@
 			})
 			
 			var data='\
-			<div class="card stallsection">\
+			<div class="card stallsection mt-4">\
 				<div class="card-header">\
 					<h3 class="card-title">Stall</h3>\
 					<div class="card-tools">\
@@ -297,19 +292,19 @@
 				<div class="card-body">\
 					<div class="row">\
 						<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
-						<div class="col-md-12">\
+						<div class="col-md-12 my-2">\
 							<div class="form-group">\
 								<label>Stall Name</label>\
 								<input type="text" id="stall'+stallIndex+'name" name="barn['+barnIndex+'][stall]['+stallIndex+'][name]" class="form-control" placeholder="Enter Stall Name" value="'+stallName+'">\
 							</div>\
 						</div>\
-						<div class="col-md-12">\
+						<div class="col-md-12 my-2">\
 							<div class="form-group">\
 								<label>Stall Price</label>\
 								<input type="text" id="stall'+stallIndex+'price" name="barn['+barnIndex+'][stall]['+stallIndex+'][price]" class="form-control" placeholder="Enter Stall price" value="'+stallPrice+'">\
 							</div>\
 						</div>\
-						<div class="col-md-12">\
+						<div class="col-md-12 my-2">\
 							<div class="form-group">\
 								<label>Status</label>\
 								<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\

@@ -35,11 +35,11 @@
 								</span>
 								<span class="wi-70">
 									<p class="topdate"> <?php echo $data['start_date']; ?> - <?php echo $data['end_date']; ?> -  <?php echo $data['location']; ?></p>
-									<a href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
+									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
 								</span>
 							</div>
 						</span>
-						<div class="wi-50-2">
+						<div class="wi-50-2 justify-content-between">
 							<span class="m-left">
 								<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
 								<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>

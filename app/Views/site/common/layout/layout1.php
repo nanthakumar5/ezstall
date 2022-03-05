@@ -32,7 +32,7 @@
 							</div>
 							<?php if($userdetail){ ?>
 								<div class="navbar-nav">
-									<a href="<?php echo base_url().'/myaccount/events'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>/
+									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/events'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>/
 								</div>
 							<?php }else{ ?>
 								<div class="navbar-nav">
@@ -48,7 +48,29 @@
 			</div>
 			<?php if($segment1==''){ ?>
 				<div class="bannerItems">
-					<div class="infoPanel"><span class="infoSection"><span class="iconProperty"><input type="text" placeholder="Location"><img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon"></span><span class="iconProperty"><input type="text" placeholder="Check-In"><img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon"></span><span class="iconProperty"><input type="text" placeholder="Check-Out"><img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon"></span><input type="text" placeholder="No.of stalls"><span class="searchResult"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z"></path></svg></span></span></div>
+					<div class="infoPanel">
+						<span class="mx-auto infoSection">
+							<span class="iconProperty">
+								<input type="text" placeholder="Location">
+								<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
+							</span>
+							<span class="iconProperty">
+								<input type="text" placeholder="Check-In">
+								<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon">
+							</span>
+							<span class="iconProperty">
+								<input type="text" placeholder="Check-Out">
+								<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon">
+							</span>
+							<input type="text" placeholder="No.of stalls">
+							<span class="searchResult">
+								<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z">
+									</path>
+								</svg>
+							</span>
+						</span>
+					</div>
 					<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-indicators">
 							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

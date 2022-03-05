@@ -1,7 +1,9 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
 <div class="navbar-header">
   <button type="button" id="sidebarCollapse" class="btn btn-info side-navbar-btn"><i class="side-nav-i bi bi-list"></i></button>
 </div>
-<nav id="sidebar-nav">
+<nav id="sidebar-nav" class="ml-5">
 	<ul class="list-unstyled components">
 		<li class="side-nav-active">
 			<a href="<?php echo base_url();?>/dashboard" class="side-nav-a" data-toggle="collapse" aria-expanded="false">
