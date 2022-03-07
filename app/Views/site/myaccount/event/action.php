@@ -144,6 +144,7 @@
 								<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
 								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 							</div>	
+							
 							<div id="barnwrapper"></div>
 							<div class="col-md-12 mt-4">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
@@ -156,13 +157,59 @@
 				</form>
 			</div>
 		</div>
-	</section>
+
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">stall</h4>
+           <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+			<div class="col-md-12 my-2">
+				<div class="form-group">
+					<label>Stall Name</label>
+					<input type="text" id="stall_name" name="stall_name" class="form-control" placeholder="Enter Stall Name" value="">
+				</div>
+			</div>
+			<div class="col-md-12 my-2">
+				<div class="form-group">
+					<label>Stall Price</label>
+					<input type="text" id="stall_price" name="stall_price" class="form-control" placeholder="Enter Stall Name" value="">
+				</div>
+			</div>
+			<div class="col-md-12 my-2">
+				<div class="form-group">
+					<label>Status</label>
+					<select class="form-control" id="stall_staus" name="stall_staus"><option value="1">Enable</option><option value="0">Desable</option></select>
+				</div>
+			</div>
+			<div class="col-md-12 my-2">
+				<div class="form-group">
+					<label>Total Number of Columns</label>
+					<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" value="">
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+        	<inpu type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
+        	<button type="submit"class="btn btn-info bulkstallbtn" data-bs-dismiss="modal">Submit</button>
+          	<button type="button"class="btn btn-info " data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+	
+ 
+
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
 	<script>
 	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
-	    var statuslist		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
+	    var statuslist		 = $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
 		
@@ -208,7 +255,8 @@
 					}
 				}
 			);
-			
+
+
 			if(barn.length > 0){
 				$(barn).each(function(i, v){
 					barndata(v);
@@ -219,8 +267,8 @@
 		$('.barnbtn').click(function(){
 			barndata();
 		});
-		
-		function barndata(result=[]){
+
+		function barndata(result=[]){ 
 			var barnId   	= result['id'] ? result['id'] : '';
 			var barnName 	= result['name'] ? result['name'] : '';
 			var stall		= result['stall'] ? result['stall'] : [];
@@ -231,6 +279,7 @@
 					<h3 class="card-title">Barn</h3>\
 					<div class="card-tools">\
 					    <a href="javascript:void(0);" data-barnIndex="'+barnIndex+'" class="btn btn-info stallbtn">Add stall</a>\
+					    <button type="button" class="btn btn-info " data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add bulk stall</button>\
 						<a href="javascript:void(0);" class="btn btn-danger barnremovebtn">Remove</a>\
 					</div>\
 				</div>\
@@ -260,16 +309,29 @@
 					stalldata(barnIndex, v)
 				});
 			}
-			
+			 
 			++barnIndex;
 		}
 		
-		$(document).on('click', '.stallbtn', function(){
+		$(document).on('click', '.stallbtn', function(){ 
 			stalldata($(this).attr('data-barnIndex'));
 		});
 		
+		$('.bulkstallbtn').click(function(){
+			var name          = $('#stall_name').val();
+			var price         = $('#stall_price').val();
+			var status        = $('#stall_staus').val();
+			var stallcount    = $('#stall').val();
+			var barnIndex     = $('#barnIndexValue').val(); 
+
+			for(var i=0; i<stallcount; i++){
+				stalldata(barnIndex, {name:name,price:price,status:status});
+			}
+		});
+		
+
 		function stalldata(barnIndex, result=[])
-		{
+		{  
 			var stallId      = result['id'] ? result['id'] : '';
 			var stallName    = result['name'] ? result['name'] : '';
 			var stallPrice   = result['price'] ? result['price'] : '';
@@ -280,7 +342,7 @@
 				var selected = stallStatus==i ? 'selected' : '';
 				statusdata += '<option value="'+i+'" '+selected+'>'+v+'</option>';
 			})
-			
+
 			var data='\
 			<div class="card stallsection mt-4">\
 				<div class="card-header">\
@@ -315,7 +377,8 @@
 			</div>\
 			';
 			
-			$(document).find('.barn_wrapper_'+barnIndex).append(data);
+			//alert(barnIndex);
+			$(document).find('.barn_wrapper_'+barnIndex).append(data); 
 			
 			$(document).find('#stall'+stallIndex+'name').rules("add", {required: true, messages: {required: "Stall Name field is required."}});
 			$(document).find('#stall'+stallIndex+'price').rules("add", {required: true, messages: {required: "Stall Price field is required."}});
@@ -330,6 +393,10 @@
 		$(document).on('click', '.stallremovebtn', function(){
 			$(this).parent().parent().parent().remove();
 		})
+
+		$(document).on('click','#addbulkstallbtn', function () {
+	        $('#barnIndexValue').val($(this).attr('data-barnIndex'));
+	    });
 	</script>
 <?php $this->endSection(); ?>
 
