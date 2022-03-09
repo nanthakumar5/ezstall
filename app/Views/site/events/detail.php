@@ -106,6 +106,7 @@
 				<?php 
 					$tabbtn = '';
 					$tabcontent = '';
+					$checkid = 1;
 					foreach ($detail['barn'] as $barnkey => $barndata) {
 						$barnid = $barndata['id'];
 						$barnname = $barndata['name'];
@@ -114,15 +115,18 @@
 					
 						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
 											<ul class="list-group">';
-						foreach($barndata['stall'] as $stalldata){
+						foreach($barndata['stall'] as $stalldata){ 
 								$tabcontent .= 	'<li class="list-group-item">
-													<input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+												<input type="hidden" id="stall" data-barn="'.$barndata['id'].'" data-stall="'.$stalldata['id'].'">
+													<input class="form-check-input countdata'.$checkid.' me-1"  name=checkbox[] type="checkbox" value="" onchange="countChecked('.$checkid.')" aria-label="...">
+													
 													'.$stalldata['name'].'
 													<span class="red-box"></span>
 												</li>';
 						}
 						
 						$tabcontent .= '</ul></div>';
+						$checkid++;
 					}
 				?>
 				<div class="barn-nav mt-4">
@@ -148,7 +152,9 @@
 			<div class="border rounded pt-4 ps-3 pe-3 mb-5">
 		   <div class="row mb-2">
 			<div class="col-8 ">
-				   4 Stalls x 4 Nights
+				<span id="countstalldata">
+				   4 Stalls </span> x 
+				   <span> 4 Nights </span>
 			   </div>
 			   <div class="col-4">
 					$120.00
@@ -175,5 +181,17 @@
 		</div>
 	</div>
 </section>
-
 <?php $this->endSection() ?>
+<?php $this->section('js') ?>
+<script>
+    function countChecked(id) { 
+    	var stallclass = '.countdata'+id;
+    	var checked = $(stallclass+":checked" ).length;
+    	$("#countstalldata").html(checked);
+	}
+
+	$("input").on("click", function() {
+	    countChecked();
+	});
+</script>
+<?php echo $this->endSection() ?>

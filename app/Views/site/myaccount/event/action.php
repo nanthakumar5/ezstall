@@ -2,6 +2,7 @@
 
 <?php $this->section('content') ?>
 	<?php
+	
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$name 					= isset($result['name']) ? $result['name'] : '';
 		$description 		    = isset($result['description']) ? $result['description'] : '';
@@ -27,13 +28,13 @@
 	
 	<section class="content">
 		<div class="d-flex justify-content-between align-items-center flex-wrap">
-		<div align="left"><h3>Events</h3></div>
-		<div class="page-action mb-4" align="right">
+		<div align="left" class="m-0"><h3>Events</h3></div>
+		<div class="page-action mb-4 m-0" align="right">
 			<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 		</div>
 	</div>
 		<div class="card">
-			<div class="card-header">
+			<div class="card-header w-100">
 				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
 			</div>
 			<div class="card-body">
@@ -184,6 +185,19 @@
 					<select class="form-control" id="stall_staus" name="stall_staus"><option value="1">Enable</option><option value="0">Desable</option></select>
 				</div>
 			</div>
+			<div class="col-md-6 my-2">
+			    <div class="form-group">
+					<label>Stall Image</label>			
+						<div>
+							<a href="<?php echo $stallmap[1];?>" target="_blank">
+							    <img src="<?php echo $stallmap[1];?>" class="stall_source" width="100">
+							</a>
+						</div>
+						<input type="file" class="stall_file">
+						<span class="stall_msg"></span>
+						<input type="hidden" id="stallimage" name="stallmap" class="stall_input" value="<?php echo $stallmap[0];?>">
+				</div>
+			</div>	
 			<div class="col-md-12 my-2">
 				<div class="form-group">
 					<label>Total Number of Columns</label>
@@ -208,7 +222,7 @@
 
 <?php $this->section('js') ?>
 	<script>
-	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>');
+	    var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
 	    var statuslist		 = $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	    var barnIndex        = '0';
 		var stallIndex       = '0';
@@ -218,6 +232,7 @@
             fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 			fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
 			fileupload([".stallmap_file"], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
+			fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 			validation(
 				'#form',
@@ -322,21 +337,23 @@
 			var price         = $('#stall_price').val();
 			var status        = $('#stall_staus').val();
 			var stallcount    = $('#stall').val();
-			var barnIndex     = $('#barnIndexValue').val(); 
+			var barnIndex     = $('#barnIndexValue').val();
+			var image         = $('#stallimage').val();
+			for(var i=0; i<stallcount; i++){ 
+				stalldata(barnIndex, {name:name,price:price,status:status,image:image});
 
-			for(var i=0; i<stallcount; i++){
-				stalldata(barnIndex, {name:name,price:price,status:status});
 			}
 		});
 		
-
 		function stalldata(barnIndex, result=[])
 		{  
-			var stallId      = result['id'] ? result['id'] : '';
-			var stallName    = result['name'] ? result['name'] : '';
-			var stallPrice   = result['price'] ? result['price'] : '';
-			var stallStatus  = result['status'] ? result['status'] : '';
-
+			var stallId       = result['id'] ? result['id'] : '';
+			var stallName     = result['name'] ? result['name'] : '';
+			var stallPrice    = result['price'] ? result['price'] : '';
+			var stallStatus   = result['status'] ? result['status'] : '';
+			var stallImage    = result['image'] ? result['image'] : '';
+			var stallimages   = result['id'] ? '<?php echo base_url()?>/assets/uploads/stall/'+stallImage : '<?php echo base_url()?>/assets/uploads/temp/'+stallImage;
+			
 			var statusdata = '';
 			$.each(statuslist, function(i, v){
 				var selected = stallStatus==i ? 'selected' : '';
@@ -372,12 +389,25 @@
 								<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\
 							</div>\
 						</div>\
+						<div class="col-md-6 my-2">\
+							<div class="form-group">\
+								<label>Stall Image</label>\<div>\
+									<a href="'+stallimages+'" target="_blank">\
+										<img src="'+stallimages+'"  class="stall_image_source'+stallIndex+'" width="100">\
+									</a>\
+								</div>\
+								<input type="file" class="stall_image_file'+stallIndex+'" >\
+								<span class="stall_image_msg'+stallIndex+'"></span>\
+								<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallimages+'">\
+							</div>\
+						</div>\
 					</div>\
 				</div>\
 			</div>\
 			';
+
+			fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex,".stall_image_msg"+stallIndex]);
 			
-			//alert(barnIndex);
 			$(document).find('.barn_wrapper_'+barnIndex).append(data); 
 			
 			$(document).find('#stall'+stallIndex+'name').rules("add", {required: true, messages: {required: "Stall Name field is required."}});
@@ -397,6 +427,7 @@
 		$(document).on('click','#addbulkstallbtn', function () {
 	        $('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	    });
+
 	</script>
 <?php $this->endSection(); ?>
 
