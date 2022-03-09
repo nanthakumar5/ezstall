@@ -35,35 +35,32 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->match(['get', 'post'], '/', 'Site\Home\Index::index');	
+// Ajax
+$routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 
+// Validation
+$routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');
+
+$routes->match(['get', 'post'], '/', 'Site\Home\Index::index');	
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index', ['filter' => 'siteauthentication1']);
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filter' => 'siteauthentication1']);
 $routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
-
 $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
-
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index');
-
+$routes->get('logout', 'Site\Logout\Index::index');
 
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
+	$routes->match(['get','post'], 'dashboard', 'Site\Myaccount\Dashboard\Index::index');
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
-	$routes->match(['get','post'], 'dashboard', 'Site\Myaccount\Dashboard\Index::index');
-
 });
 
-$routes->get('logout', 'Site\Logout\Index::index');
-
-$routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
-
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
-$routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){
-    
+$routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
 	$routes->get('logout', 'Admin\Logout\Index::index');
 	
 	// Users
@@ -83,12 +80,8 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');
 });
 
-// Validation
-$routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');
-
 //Api route
-$routes->group('api', ['filter' => 'apiauthentication'], function($routes){
-    
+$routes->group('api', ['filter' => 'apiauthentication'], function($routes){    
     $routes->post('verification/(:any)', 'Api\Register\Index::verification/$1');
     
     //Register table api

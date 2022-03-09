@@ -38,7 +38,6 @@ class Index extends BaseController
 	public function detail($id)
     {
 		$data['detail'] = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		//echo '<pre>';print_r($data['detail']);die;
         return view('site/events/detail',$data);
     }
 }

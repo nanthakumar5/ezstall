@@ -27,22 +27,16 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 		$stallcount = $this->stall->getStall('count', ['stall'], $searchdata+['status'=> ['1']]);
-
-    	//$data['stalllist'] = $this->stall->getStall('all', ['stall'],['status'=>'1']);
-
-    	$stalls = $this->stall->getStall('all', ['stall'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
+    	$stalls 	= $this->stall->getStall('all', ['stall'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
         $data['stalllist'] = $stalls;
         $data['pager'] = $pager->makeLinks($page, $perpage, $stallcount);
+		
     	return view('site/stall/index',$data);
-
     }
+	
     public function detail($id)
     {
-
     	$data['detail'] = $this->stall->getStall('row', ['stall'],['id' => $id]);
     	return view('site/stall/detail',$data);
-
     }
-	
-	
 }

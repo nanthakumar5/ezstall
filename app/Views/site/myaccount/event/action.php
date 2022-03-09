@@ -1,219 +1,218 @@
 <?php $this->extend("site/common/layout/layout1") ?>
 
 <?php $this->section('content') ?>
-	<?php
+<?php
+	$id 					= isset($result['id']) ? $result['id'] : '';
+	$name 					= isset($result['name']) ? $result['name'] : '';
+	$description 		    = isset($result['description']) ? $result['description'] : '';
+	$location 				= isset($result['location']) ? $result['location'] : '';
+	$mobile 				= isset($result['mobile']) ? $result['mobile'] : '';
+	$start_date 		    = isset($result['start_date']) ? dateformat($result['start_date']) : '';
+	$end_date 				= isset($result['end_date']) ? dateformat($result['end_date']) : '';
+	$start_time 			= isset($result['start_time']) ? $result['start_time'] : '';
+	$end_time 			    = isset($result['end_time']) ? $result['end_time'] : '';
+	$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
+	$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
+	$image      			= isset($result['image']) ? $result['image'] : '';
+	$image 				    = filedata($image, base_url().'/assets/uploads/event/');
+	$status 				= isset($result['status']) ? $result['status'] : '';
+	$eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
+	$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
+	$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
+	$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
+	$bulkstallimage			= filedata('', '');
+	$barn        			= isset($result['barn']) ? $result['barn'] : [];
+	$pageaction 			= $id=='' ? 'Add' : 'Update';
+?>
 	
-		$id 					= isset($result['id']) ? $result['id'] : '';
-		$name 					= isset($result['name']) ? $result['name'] : '';
-		$description 		    = isset($result['description']) ? $result['description'] : '';
-		$location 				= isset($result['location']) ? $result['location'] : '';
-		$mobile 				= isset($result['mobile']) ? $result['mobile'] : '';
-		$start_date 		    = isset($result['start_date']) ? dateformat($result['start_date']) : '';
-		$end_date 				= isset($result['end_date']) ? dateformat($result['end_date']) : '';
-		$start_time 			= isset($result['start_time']) ? $result['start_time'] : '';
-		$end_time 			    = isset($result['end_time']) ? $result['end_time'] : '';
-		$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
-		$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
-		$image      			= isset($result['image']) ? $result['image'] : '';
-		$image 				    = filedata($image, base_url().'/assets/uploads/event/');
-		$status 				= isset($result['status']) ? $result['status'] : '';
-		$eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
-		$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
-		$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
-		$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
-		$barn        			= isset($result['barn']) ? $result['barn'] : [];
-		$pageaction 			= $id=='' ? 'Add' : 'Update';
-	?>
 	
-	
-	<section class="content">
-		<div class="d-flex justify-content-between align-items-center flex-wrap">
+<section class="content">
+	<div class="d-flex justify-content-between align-items-center flex-wrap">
 		<div align="left" class="m-0"><h3>Events</h3></div>
 		<div class="page-action mb-4 m-0" align="right">
 			<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 		</div>
 	</div>
-		<div class="card">
-			<div class="card-header w-100">
-				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
-			</div>
-			<div class="card-body">
-				<form method="post" id="form" action="" autocomplete="off">
-					<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Name</label>								
-									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
-								</div>
+	<div class="card">
+		<div class="card-header w-100">
+			<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
+		</div>
+		<div class="card-body">
+			<form method="post" id="form" action="" autocomplete="off">
+				<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Name</label>								
+								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Location</label>								
-									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Location</label>								
+								<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Mobile</label>								
-									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Mobile</label>								
+								<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Start Date</label>	
-									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Start Date</label>	
+								<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>End Date</label>	
-									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>End Date</label>	
+								<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Start Time</label>	
-									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Start Time</label>	
+								<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>End Time</label>	
-									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>End Time</label>	
+								<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Stalls Price</label>								
-									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Stalls Price</label>								
+								<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>RV Spots Price</label>								
-									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>RV Spots Price</label>								
+								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Event Description</label>
-									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Event Description</label>
+								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Event Image</label>			
-									<div>
-										<a href="<?php echo $image[1];?>" target="_blank">
-											<img src="<?php echo $image[1];?>" class="image_source" width="100">
-										</a>
-									</div>
-									<input type="file" id="file" name="file" class="image_file">
-									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Event Image</label>			
+								<div>
+									<a href="<?php echo $image[1];?>" target="_blank">
+										<img src="<?php echo $image[1];?>" class="image_source" width="100">
+									</a>
 								</div>
-							</div>							
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Event Flyer</label>			
-									<div>
-										<a href="<?php echo $eventflyer[1];?>" target="_blank">
-											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
-										</a>
-									</div>
-									<input type="file" id="" name="" class="eventflyer_file">
-									<span class="eventflyer_msg messagenotify"></span>
-									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
-								</div>
+								<input type="file" id="file" name="file" class="image_file">
+								<span class="image_msg messagenotify"></span>
+								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Stall Map (optional)</label>			
-									<div>
-										<a href="<?php echo $stallmap[1];?>" target="_blank">
-											<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="stallmap_file">
-									<span class="stallmap_msg messagenotify"></span>
-									<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+						</div>							
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Event Flyer</label>			
+								<div>
+									<a href="<?php echo $eventflyer[1];?>" target="_blank">
+										<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
+									</a>
 								</div>
-							</div>	
-							<div class="col-md-6 barn_wrapper"><br>
-								<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
-								<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
-							</div>	
-							
-							<div id="barnwrapper"></div>
-							<div class="col-md-12 mt-4">
-								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
-								<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-								<input type="submit" class="btn btn-danger" value="Submit">
-								<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
+								<input type="file" id="" name="" class="eventflyer_file">
+								<span class="eventflyer_msg messagenotify"></span>
+								<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
 							</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Stall Map (optional)</label>			
+								<div>
+									<a href="<?php echo $stallmap[1];?>" target="_blank">
+										<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
+									</a>
+								</div>
+								<input type="file" class="stallmap_file">
+								<span class="stallmap_msg messagenotify"></span>
+								<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+							</div>
+						</div>	
+						<div class="col-md-6 barn_wrapper"><br>
+							<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
+							<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
+						</div>	
+						
+						<div id="barnwrapper"></div>
+						<div class="col-md-12 mt-4">
+							<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+							<input type="hidden" name="userid" value="<?php echo $userid; ?>">
+							<input type="submit" class="btn btn-danger" value="Submit">
+							<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 						</div>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
+	</div>
 
 	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">stall</h4>
-           <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-			<div class="col-md-12 my-2">
-				<div class="form-group">
-					<label>Stall Name</label>
-					<input type="text" id="stall_name" name="stall_name" class="form-control" placeholder="Enter Stall Name" value="">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Stall</h4>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
 				</div>
-			</div>
-			<div class="col-md-12 my-2">
-				<div class="form-group">
-					<label>Stall Price</label>
-					<input type="text" id="stall_price" name="stall_price" class="form-control" placeholder="Enter Stall Name" value="">
-				</div>
-			</div>
-			<div class="col-md-12 my-2">
-				<div class="form-group">
-					<label>Status</label>
-					<select class="form-control" id="stall_staus" name="stall_staus"><option value="1">Enable</option><option value="0">Desable</option></select>
-				</div>
-			</div>
-			<div class="col-md-6 my-2">
-			    <div class="form-group">
-					<label>Stall Image</label>			
-						<div>
-							<a href="<?php echo $stallmap[1];?>" target="_blank">
-							    <img src="<?php echo $stallmap[1];?>" class="stall_source" width="100">
-							</a>
+				<div class="modal-body">
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Stall Name</label>
+							<input type="text" id="stall_name" class="form-control" placeholder="Enter Stall Name">
 						</div>
-						<input type="file" class="stall_file">
-						<span class="stall_msg"></span>
-						<input type="hidden" id="stallimage" name="stallmap" class="stall_input" value="<?php echo $stallmap[0];?>">
+					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Stall Price</label>
+							<input type="text" id="stall_price" class="form-control" placeholder="Enter Stall Name">
+						</div>
+					</div>
+					<div class="col-md-6 my-2">
+						<div class="form-group">
+							<label>Stall Image</label>			
+							<div>
+								<a href="<?php echo $bulkstallimage[1];?>" target="_blank">
+									<img src="<?php echo $bulkstallimage[1];?>" class="stall_source" width="100">
+								</a>
+							</div>
+							<input type="file" class="stall_file">
+							<span class="stall_msg"></span>
+							<input type="hidden" id="stall_image" class="stall_input" value="<?php echo $bulkstallimage[0];?>">
+						</div>
+					</div>	
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Status</label>
+							<?php echo form_dropdown('bulkstallstatus', $statuslist, '1', ['id' => 'stall_status', 'class' => 'form-control']); ?>
+						</div>
+					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Total Number of Columns</label>
+							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" required>
+						</div>
+					</div>
 				</div>
-			</div>	
-			<div class="col-md-12 my-2">
-				<div class="form-group">
-					<label>Total Number of Columns</label>
-					<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" value="">
+				<div class="modal-footer">
+					<inpu type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
+					<button type="button"class="btn btn-info bulkstallbtn">Submit</button>
+					<button type="button"class="btn btn-info " data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
-        </div>
-        <div class="modal-footer">
-        	<inpu type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
-        	<button type="submit"class="btn btn-info bulkstallbtn" data-bs-dismiss="modal">Submit</button>
-          	<button type="button"class="btn btn-info " data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+		</div>
+	</div>
 </section>
 	
  
@@ -332,27 +331,48 @@
 			stalldata($(this).attr('data-barnIndex'));
 		});
 		
+		$('#myModal').on('shown.bs.modal', function (e) {
+			$('#stall_name, #stall_price, #stall_image, #stall_file').val('');
+			$('#stall_status').val('1');
+			$('#stall_source').attr('src', '<?php echo base_url()?>/assets/images/upload.png');
+			$('#stall_source').parent().attr('href', '<?php echo base_url()?>/assets/images/upload.png');
+		})
+		
 		$('.bulkstallbtn').click(function(){
+			if($('#stall').val()==''){
+				$('#stall').focus();
+				return false;
+			}
+			
 			var name          = $('#stall_name').val();
 			var price         = $('#stall_price').val();
-			var status        = $('#stall_staus').val();
+			var status        = $('#stall_status').val();
+			var image         = $('#stall_image').val();
 			var stallcount    = $('#stall').val();
 			var barnIndex     = $('#barnIndexValue').val();
-			var image         = $('#stallimage').val();
+			
 			for(var i=0; i<stallcount; i++){ 
-				stalldata(barnIndex, {name:name,price:price,status:status,image:image});
-
+				stalldata(barnIndex, {name:name,price:price,status:status,bulkimage:image});
 			}
+			
+			$('#myModal').modal('hide');
 		});
 		
 		function stalldata(barnIndex, result=[])
 		{  
-			var stallId       = result['id'] ? result['id'] : '';
-			var stallName     = result['name'] ? result['name'] : '';
-			var stallPrice    = result['price'] ? result['price'] : '';
-			var stallStatus   = result['status'] ? result['status'] : '';
-			var stallImage    = result['image'] ? result['image'] : '';
-			var stallimages   = result['id'] ? '<?php echo base_url()?>/assets/uploads/stall/'+stallImage : '<?php echo base_url()?>/assets/uploads/temp/'+stallImage;
+			var stallId       		= result['id'] ? result['id'] : '';
+			var stallName     		= result['name'] ? result['name'] : '';
+			var stallPrice    		= result['price'] ? result['price'] : '';
+			var stallStatus   		= result['status'] ? result['status'] : '';
+			var stallImage    		= result['image'] ? result['image'] : '';
+			var stallBulkImage    	= result['bulkimage'] ? result['bulkimage'] : '';
+			if(stallImage!='' && stallBulkImage==''){
+				var stallImages   	= '<?php echo base_url()?>/assets/uploads/stall/'+stallImage;
+			}else if(stallBulkImage!=''){
+				var stallImages   	= '<?php echo base_url()?>/assets/uploads/temp/'+stallBulkImage;
+			}else{
+				var stallImages   	= '<?php echo base_url()?>/assets/images/upload.png';
+			}
 			
 			var statusdata = '';
 			$.each(statuslist, function(i, v){
@@ -383,32 +403,33 @@
 								<input type="text" id="stall'+stallIndex+'price" name="barn['+barnIndex+'][stall]['+stallIndex+'][price]" class="form-control" placeholder="Enter Stall price" value="'+stallPrice+'">\
 							</div>\
 						</div>\
+						<div class="col-md-6 my-2">\
+							<div class="form-group">\
+								<label>Stall Image</label>\
+								<div>\
+									<a href="'+stallImages+'" target="_blank">\
+										<img src="'+stallImages+'"  class="stall_image_source'+stallIndex+'" width="100">\
+									</a>\
+								</div>\
+								<input type="file" class="stall_image_file'+stallIndex+'" >\
+								<span class="stall_image_msg'+stallIndex+'"></span>\
+								<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallImage+'">\
+							</div>\
+						</div>\
 						<div class="col-md-12 my-2">\
 							<div class="form-group">\
 								<label>Status</label>\
 								<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\
 							</div>\
 						</div>\
-						<div class="col-md-6 my-2">\
-							<div class="form-group">\
-								<label>Stall Image</label>\<div>\
-									<a href="'+stallimages+'" target="_blank">\
-										<img src="'+stallimages+'"  class="stall_image_source'+stallIndex+'" width="100">\
-									</a>\
-								</div>\
-								<input type="file" class="stall_image_file'+stallIndex+'" >\
-								<span class="stall_image_msg'+stallIndex+'"></span>\
-								<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallimages+'">\
-							</div>\
-						</div>\
 					</div>\
 				</div>\
 			</div>\
 			';
-
-			fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex,".stall_image_msg"+stallIndex]);
 			
 			$(document).find('.barn_wrapper_'+barnIndex).append(data); 
+			
+			fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex,".stall_image_msg"+stallIndex]);
 			
 			$(document).find('#stall'+stallIndex+'name').rules("add", {required: true, messages: {required: "Stall Name field is required."}});
 			$(document).find('#stall'+stallIndex+'price').rules("add", {required: true, messages: {required: "Stall Price field is required."}});

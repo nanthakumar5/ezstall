@@ -37,12 +37,10 @@ class Stall extends BaseModel
 						
 			if(isset($requestdata['page'])){ 
 				$page = $requestdata['page'];
-				//print_r($page);die;
 				$query->groupStart();
 					if($page=='stalls'){ 		
 						$query->like('s.name', $searchvalue);
 						$query->orLike('s.price', $searchvalue);
-						//$query->orLike('e.mobile', $searchvalue);
 					}
 				$query->groupEnd();
 			}			
