@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
+
 	</head>
 	<body>
 		<section <?php if($segment1==''){ echo 'class="home-banner"'; } ?> >
@@ -25,7 +26,7 @@
 							<div class="me-auto ml-auto navbar-nav">
 								<a href="<?php echo base_url() ?>" class="ml-2rem nav-link">Home</a>
 								<a href="<?php echo base_url() ?>/events" class="ml-2rem nav-link">Events</a>
-								<a href="../ezstall_bootstrap/stall.html" data-rr-ui-event-key="#/stall" class="ml-2rem nav-link active">Stall</a>
+								<a href="<?php echo base_url() ?>/stalls" class="ml-2rem nav-link active">Stall</a>
 								<a href="#/faq" data-rr-ui-event-key="#/faq" class="ml-2rem nav-link">FAQ</a>
 								<a href="#/about" data-rr-ui-event-key="#/about" class="ml-2rem nav-link">About</a>
 								<a href="#/contact" data-rr-ui-event-key="#/contact" class="ml-2rem nav-link">Contact Us</a>
@@ -97,7 +98,7 @@
 		</section>
         <?php echo $this->include('site/common/notification/notification1') ?>
 		<?php if($segment1=='myaccount'){ ?>
-			<div class="side-nav-wrapper">
+			<div class="side-nav-wrapper maxWidth marFive">
 				 <?php echo $this->include('site/common/sidebar/sidebar1') ?>
 				<div id="content" class="mb-5">
 					<?php $this->renderSection('content'); ?>
