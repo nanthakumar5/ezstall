@@ -168,6 +168,11 @@ class Event extends BaseModel
         				$stall['name']       = $stalldata['name'];
         				$stall['price']      = $stalldata['price'];
         				$stall['status']     = $stalldata['status'];
+
+        				if(isset($stalldata['image']) && $stalldata['image']!=''){
+				 			$stall['image'] = $stalldata['image'];		
+							filemove($stalldata['image'], './assets/uploads/stall');		
+						}
         				
         				if($stallid==''){
         					$this->db->table('stall')->insert($stall);
