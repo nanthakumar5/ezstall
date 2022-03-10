@@ -57,6 +57,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+    $routes->match(['get','post'], 'subscription', 'Site\Myaccount\Subscription\Index::index');
 });
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	

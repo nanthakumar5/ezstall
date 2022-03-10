@@ -192,6 +192,7 @@
 		<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/bootstrap.bundle.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<?php $this->renderSection('js') ?>
 	</body>
