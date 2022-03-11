@@ -4,7 +4,6 @@ use App\Models\BaseModel;
 
 class Stripe extends BaseModel
 {	
-
     function addCustomer($payer_name, $payer_email, $token)
     {        
         $secretkey = $this->config->stripesecretkey;
@@ -26,6 +25,30 @@ class Stripe extends BaseModel
             die;
         }
     }
+   public function singlepayment($token){
+
+      $secretkey = $this->config->stripesecretkey;
+      
+        \Stripe\Stripe::setApiKey($secretkey);
+    try
+        {
+            $stripe = \Stripe\Charge::create ([
+            "amount" => 50 * 100,
+            "currency" => 'usd',
+            "source" => $token,
+            "description" => "test single payment" 
+        ]);
+
+   $data = array('success' => true, 'data' => $stripe);
+        echo json_encode($data);
+    }
+    catch(Exception $e)
+      {
+        print_r($e->getMessage());
+        die;
+      }
+    }
+
 
     function createPlan($planName, $planPrice, $planInterval)
     {

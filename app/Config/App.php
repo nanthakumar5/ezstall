@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'https://itfhrm.com/ezstall/';
+    public $baseURL = 'http://localhost/ezstallnew/';
 
     /**
      * --------------------------------------------------------------------------

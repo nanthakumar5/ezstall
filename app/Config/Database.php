@@ -33,9 +33,9 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => 'itfhrmco_ezstall',
-        'password' => 'ezstall@123',
-        'database' => 'itfhrmco_ezstall',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'ezstallnew',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

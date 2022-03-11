@@ -42,7 +42,12 @@
 		<a class="side-nav-a" href="#">
 			<i class="side-nav-i bi bi-credit-card"></i>
 			Payments
-		</a>		
+		</a>
+
+		<a class="side-nav-a" href="#">
+			<i class="side-nav-i bi bi-credit-card"></i>
+			Package
+		</a>
 		<a class="side-nav-a" href="<?php echo base_url();?>/logout">
 			<i class="side-nav-i bi bi-power"></i>
 			Logout
