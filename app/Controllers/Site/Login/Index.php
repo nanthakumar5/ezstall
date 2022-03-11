@@ -19,7 +19,7 @@ class Index extends BaseController
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
 			
-			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['2', '5']]);
+			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['2', '3', '5']]);
 			if($result){
 				if($result['status']=='1'){ 
 					if($result['email_status']=='0'){
