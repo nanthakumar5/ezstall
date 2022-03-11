@@ -74,12 +74,13 @@ class Stripe extends BaseModel
 		$planName = $requestData['plan_name'];
 		$planPrice = $requestData['price'];
 		$planInterval = $requestData['plan_interval'];
+		$planIntervalCount = $requestData['plan_interval_count'];
 		
 		$customer = $this->addCustomer($payer_name, $payer_email, $token);
 	  
 		if ($customer)
 		{
-			$plan = $this->createPlan($planName, $planPrice, $planInterval);
+			$plan = $this->createPlan($planName, $planPrice, $planInterval, $planIntervalCount);
 
 			if ($plan)
 			{
