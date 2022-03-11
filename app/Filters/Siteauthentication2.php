@@ -10,14 +10,26 @@ class Siteauthentication2 implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-		$sitesession = session()->get('sitesession');
+		helper('custom');
 		
-		if(isset($sitesession['userid'])){
+		$userid = getSiteUserID();
+		$uri = service('uri');
+		$segment2 = $uri->getSegment(2);
+		$segment3 = $uri->getSegment(3);
+		
+		if($userid){
 			$users 	= new \App\Models\Users;
-			$result = $users->getUsers('row', ['users'], ['id' => $sitesession['userid'], 'status' => ['1']]);		
+			$result = $users->getUsers('row', ['users'], ['id' => $userid, 'status' => ['1']]);		
 			
 			if(!$result){
 				return redirect()->to('/login');
+			}else{
+				if($segment2=='events' && $result['type']=='5'){
+					return redirect()->to('/myaccount/dashboard');
+				}
+				if($segment2=='subscription' && $result['type']=='3'){
+					return redirect()->to('/myaccount/dashboard');
+				}
 			}
 		}else{
 			return redirect()->to('/login');

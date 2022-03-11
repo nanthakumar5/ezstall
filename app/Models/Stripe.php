@@ -4,6 +4,101 @@ use App\Models\BaseModel;
 
 class Stripe extends BaseModel
 {	
+	function stripepayment($requestData)
+	{
+		$token = $requestData['stripe_token'];
+		$payer_id = $requestData['payer_id'];
+		$payer_name = $requestData['payer_name'];
+		$payer_email = $requestData['payer_email'];
+		
+		$price = ($requestData['price'] * 100);
+        $currency = "inr";
+		
+		$secretkey = $this->config->stripesecretkey;
+        \Stripe\Stripe::setApiKey($secretkey);
+		
+		$customer = $this->addCustomer($payer_name, $payer_email, $token);
+	  
+		if ($customer)
+		{
+			$stripe = \Stripe\PaymentIntent::create([
+					"customer" => $customer->id,
+					"amount" => $price,
+					"currency" => $currency,
+					"description" => "",
+					"payment_method_types" => [ 
+						"card" 
+					] 
+			]);
+			
+			$stripe = $stripe->jsonSerialize();
+			
+			if($stripe){
+				$amount = ($price / 100);
+				$subscrID = $stripe['id'];
+				$custID = $stripe['customer'];
+				$status = $stripe['status'];
+				$created = date("Y-m-d H:i:s", $stripe['created']);
+				
+				$paymentData = array(
+					'payer_id' => $payer_id,
+					'payer_name' => $payer_name,
+					'payer_email' => $payer_email,
+					'amount' => $amount,
+					'currency' => $currency,
+					'payment_method' => 'stripe',
+					'stripe_subscription_id' => $subscrID,
+					'stripe_customer_id' => $custID,
+					'type' => '1',
+					'status' => $status,
+					'created' => $created
+				);
+
+				$this->db->table('payment')->insert($paymentData);
+				return $this->db->insertID();
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	function striperecurringpayment($requestData)
+	{
+		$token = $requestData['stripe_token'];
+		$payer_id = $requestData['payer_id'];
+		$payer_name = $requestData['payer_name'];
+		$payer_email = $requestData['payer_email'];
+		$plan_id = $requestData['plan_id'];
+		$planName = $requestData['plan_name'];
+		$planPrice = $requestData['price'];
+		$planInterval = $requestData['plan_interval'];
+		
+		$customer = $this->addCustomer($payer_name, $payer_email, $token);
+	  
+		if ($customer)
+		{
+			$plan = $this->createPlan($planName, $planPrice, $planInterval);
+
+			if ($plan)
+			{
+				$subscription = $this->createSubscription($customer->id, $plan->id, $plan_id, $payer_id, $payer_name, $payer_email);
+				if($subscription){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+		
+	}
     function addCustomer($payer_name, $payer_email, $token)
     {        
         $secretkey = $this->config->stripesecretkey;
@@ -25,32 +120,8 @@ class Stripe extends BaseModel
             die;
         }
     }
-   public function singlepayment($token){
 
-      $secretkey = $this->config->stripesecretkey;
-      
-        \Stripe\Stripe::setApiKey($secretkey);
-    try
-        {
-            $stripe = \Stripe\Charge::create ([
-            "amount" => 50 * 100,
-            "currency" => 'usd',
-            "source" => $token,
-            "description" => "test single payment" 
-        ]);
-
-   $data = array('success' => true, 'data' => $stripe);
-        echo json_encode($data);
-    }
-    catch(Exception $e)
-      {
-        print_r($e->getMessage());
-        die;
-      }
-    }
-
-
-    function createPlan($planName, $planPrice, $planInterval)
+    function createPlan($planName, $planPrice, $planInterval, $planIntervalCount)
     {
         $priceCents = ($planPrice * 100);
         $currency = "usd";
@@ -62,7 +133,7 @@ class Stripe extends BaseModel
                 "amount" 			=> $priceCents,
                 "currency" 			=> $currency,
                 "interval" 			=> $planInterval,
-                "interval_count"	=> 1
+                "interval_count"	=> $planIntervalCount
             ));
 
             return $plan;
@@ -74,16 +145,15 @@ class Stripe extends BaseModel
         }
     }
 
-    function createSubscription($customerID, $planID, $userID,$payer_name, $payer_email)
+    function createSubscription($customerID, $stripePlanID, $localPlanID, $payerID, $payerName, $payerEmail)
     {
         try
         {
-        	
             $subscription = \Stripe\Subscription::create(array(
                 "customer" => $customerID,
                 "items" => array(
                     array(
-                        "plan" => $planID
+                        "plan" => $stripePlanID
                     )
                 )
             ));
@@ -106,30 +176,32 @@ class Stripe extends BaseModel
 	                $current_period_end = date("Y-m-d H:i:s", $subscription['current_period_end']);
 	                $status = $subscription['status'];
 
-	                $subscripData = array(
-	                    'user_id' => $userID,
-	                    'payer_name' => $payer_name,
-	                    'payer_email' => $payer_email,
-	                    'plan_id'=> 1,
+	                $paymentData = array(
+	                    'payer_id' => $payerID,
+	                    'payer_name' => $payerName,
+	                    'payer_email' => $payerEmail,
+	                    'amount' => $planAmount,
+	                    'currency' => $planCurrency,
 	                    'payment_method' => 'stripe',
 	                    'stripe_subscription_id' => $subscrID,
 	                    'stripe_customer_id' => $custID,
 	                    'stripe_plan_id' => $planID,
-	                    'plan_amount' => $planAmount,
-	                    'plan_amount_currency' => $planCurrency,
+	                    'plan_id'=> $localPlanID,
 	                    'plan_interval' => $planInterval,
 	                    'plan_interval_count' => $planIntervalCount,
-	                    'created' => $created,
 	                    'plan_period_start' => $current_period_start,
 	                    'plan_period_end' => $current_period_end,
-	                    'status' => $status
+	                    'type' => '2',
+	                    'status' => $status,
+	                    'created' => $created
 	                );
 
-	                $this->db->table('subscription')->insert($subscripData);
+	                $this->db->table('payment')->insert($paymentData);
         			$subscription_id = $this->db->insertID();
        
 	                if ($subscription_id)
 	                {
+						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_end_date' => date("Y-m-d", strtotime($current_period_end))]);
 	                    return $subscription_id;
 	                }
 			        else
@@ -138,6 +210,10 @@ class Stripe extends BaseModel
 			        }
 
 	            }
+				else
+				{
+					return false;
+				}
 	        }
 	        else
 	        {

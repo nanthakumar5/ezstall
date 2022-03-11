@@ -1,8 +1,16 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 
 <?php $this->section('content') ?>
+<?php
+	$checksubscription = checkSubscription();
+	$checksubscriptiontype = $checksubscription['type'];
+	$checksubscriptionproducer = $checksubscription['producer'];
+?>
 <section class="maxWidth eventPagePanel mt-2">
 	<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+	<?php if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
+		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
+	<?php } ?>
 	<?php if(count($list) > 0){ ?>
 		<?php foreach ($list as $data) {  ?>
 			<div class="ucEventInfo mt-4">
@@ -45,17 +53,28 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
-<script>
-	var userid = '<?php echo $userid; ?>';
+	<?php echo $stripe; ?>
+	<script>
+		var userid = '<?php echo $userid; ?>';
 
-	$(document).on('click','.delete',function(){
-		var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
-		var data   = '\
-		<input type="hidden" value="'+$(this).data('id')+'" name="id">\
-		<input type="hidden" value="'+userid+'" name="userid">\
-		<input type="hidden" value="0" name="status">\
-		';
-		sweetalert2(action,data);
-	});	
-</script>
+		$(document).on('click','.delete',function(){
+			var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
+			var data   = '\
+			<input type="hidden" value="'+$(this).data('id')+'" name="id">\
+			<input type="hidden" value="'+userid+'" name="userid">\
+			<input type="hidden" value="0" name="status">\
+			';
+			sweetalert2(action,data);
+		});	
+		
+		$('#stripeFormModal').on('shown.bs.modal', function () {
+			$('.stripeextra').remove();
+			
+			var data = 	'<div class="stripeextra">\
+							<input type="hidden" value="300" name="price">\
+						</div>';
+						
+			$('.stripepaybutton').append(data);
+		})
+	</script>
 <?php $this->endSection(); ?>

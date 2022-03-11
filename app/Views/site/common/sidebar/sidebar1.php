@@ -43,7 +43,12 @@
 			<i class="side-nav-i bi bi-credit-card"></i>
 			Payments
 		</a>
-
+		<?php if($role!='3'){ ?>
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/subscription">
+				<i class="side-nav-i bi bi-credit-card"></i>
+				Subscription
+			</a>
+		<?php } ?>
 		<a class="side-nav-a" href="#">
 			<i class="side-nav-i bi bi-credit-card"></i>
 			Package

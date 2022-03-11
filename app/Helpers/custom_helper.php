@@ -55,6 +55,28 @@ function getSiteUserDetails($id='')
 	return getUserDetails($id);
 }
 
+function checkSubscription()
+{
+	$date = date('Y-m-d');
+	$userdetails = getSiteUserDetails();
+	$type = '0';
+	$facility = '0';
+	$producer = '0';
+	
+	if(isset($userdetails)){
+		$type = $userdetails['type'];
+		if($type=='2' && $date < $userdetails['subscription_end_date']){
+			$facility = '1';
+		}
+		
+		if($type=='3'){
+			$producer = $userdetails['subscription_count'];
+		}
+	}
+	
+	return ['type' => $type, 'facility' => $facility, 'producer' => $producer];
+}
+
 function dateformat($date, $type='')
 {
 	if ($type == '1') return date('d-m-Y H:i:s', strtotime($date));
@@ -132,8 +154,8 @@ function send_mail($to,$subject,$message)
 
 function getUsersList()
 {	
-	$locations 	= 	new \App\Models\Users;;	
-	$result		= 	$locations->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2']]);
+	$users 		= 	new \App\Models\Users;;	
+	$result		= 	$users->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2']]);
 	
 	if(count($result) > 0) return ['' => 'Select User']+array_column($result, 'name', 'id');
 	else return [];	

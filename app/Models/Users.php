@@ -74,12 +74,14 @@ class Users extends BaseModel
 		$userid				= (isset($data['userid'])) ? $data['userid'] : '';		
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
-		if(isset($data['name']) && $data['name']!='')      					$request['name'] 				= $data['name'];
-		if(isset($data['email']) && $data['email']!='') 	 				$request['email'] 				= $data['email'];
-		if(isset($data['password']) && $data['password']!='')				$request['password'] 			= md5($data['password']);
-		if(isset($data['type']) && $data['type']!='') 	  					$request['type'] 				= $data['type'];
-		if(isset($data['status']) && $data['status']!='') 	  				$request['status'] 				= $data['status'];
-		if(isset($data['email_status']) && $data['email_status']!='') 	  	$request['email_status'] 		= $data['email_status'];
+		if(isset($data['name']) && $data['name']!='')      								$request['name'] 					= $data['name'];
+		if(isset($data['email']) && $data['email']!='') 	 							$request['email'] 					= $data['email'];
+		if(isset($data['password']) && $data['password']!='')							$request['password'] 				= md5($data['password']);
+		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
+		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
+		if(isset($data['email_status']) && $data['email_status']!='') 	  				$request['email_status'] 			= $data['email_status'];
+		if(isset($data['subscriptionenddate']) && $data['subscriptionenddate']!='') 	$request['subscription_end_date'] 	= $data['subscriptionenddate'];
+		if(isset($data['subscriptioncount']) && $data['subscriptioncount']!='') 	  	$request['subscription_count'] 		= $data['subscriptioncount'];
 
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;

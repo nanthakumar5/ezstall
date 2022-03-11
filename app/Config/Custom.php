@@ -11,4 +11,6 @@ class Custom extends BaseConfig
 
 	public $stripepublishkey = "pk_test_51KP4cbSFHGSH4PJkqd00EEJHOmxlGF4eP3kAvIaLGqCspNVL8KqunYElZ0JbE4XE9FdJ253hbEX76Iv2JuakP2Eb00sceuljdR";
 	public $stripesecretkey = "sk_test_51KP4cbSFHGSH4PJkmlyJCZBMy4uOvrKuQ6GhV2pzXKHpwoMXIagjggu2Idk6tQRh6kIpzfQ9CwdYqesZr44GuDlZ00zvV2O2sJ";
+	
+	public $currencysymbol = "$";
 }
