@@ -12,6 +12,7 @@
             <div class="wrapper">
                 <input type="radio" name="type" id="option-1" value="5" checked="">
                 <input type="radio" name="type" id="option-2" value="2">
+                <input type="radio" name="type" id="option-3" value="3">
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
                     <span>Horse Owner</span>
@@ -19,6 +20,10 @@
                 <label for="option-2" class="option option-2">
                     <div class="dot"></div>
                     <span>Facility</span>
+                </label>
+                <label for="option-3" class="option option-3">
+                    <div class="dot"></div>
+                    <span>Producer</span>
                 </label>
             </div>
             <span>
