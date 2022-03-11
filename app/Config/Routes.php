@@ -50,6 +50,8 @@ $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail
 $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index');
+$routes->post('cart', 'Site\Event\CartController::index');
+
 $routes->get('logout', 'Site\Logout\Index::index');
 
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){

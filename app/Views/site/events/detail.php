@@ -93,20 +93,16 @@
 							<span class="num_btn"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">
-							<input type="text" placeholder="Check-In">
-							<img src="<?php echo base_url()?>/assets/site/img/calendar.png" class="iconPlace" alt="Calendar Icon">
+							<input type="date" name="startdate" id="startdate" class="checkdate"  placeholder="Check-In">
 						</span>
 						<span class="iconProperty">
-							<input type="text" placeholder="Check-Out">
-							<img src="<?php echo base_url()?>/assets/site/img/calendar.png" class="iconPlace" alt="Calendar Icon">
+							<input type="date" name="enddate" id="enddate" class="checkdate" placeholder="Check-Out">
 						</span>
 					</span>
 				</div>
-
 				<?php 
 					$tabbtn = '';
 					$tabcontent = '';
-					$checkid = 1;
 					foreach ($detail['barn'] as $barnkey => $barndata) {
 						$barnid = $barndata['id'];
 						$barnname = $barndata['name'];
@@ -117,18 +113,16 @@
 											<ul class="list-group">';
 						foreach($barndata['stall'] as $stalldata){ 
 								$tabcontent .= 	'<li class="list-group-item">
-												<input type="hidden" id="stall" data-barn="'.$barndata['id'].'" data-stall="'.$stalldata['id'].'">
-													<input class="form-check-input countdata'.$checkid.' me-1"  name=checkbox[] type="checkbox" value="" onchange="countChecked('.$checkid.')" aria-label="...">
+													<input class="form-check-input stallid'.$stalldata['id'].' me-1" value="'.$stalldata['id'].'" name=checkbox type="checkbox" aria-label="...">
 													
 													'.$stalldata['name'].'
 													<span class="red-box"></span>
 												</li>';
 						}
-						
 						$tabcontent .= '</ul></div>';
-						$checkid++;
 					}
 				?>
+			
 				<div class="barn-nav mt-4">
 					<nav>
 						<div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
@@ -153,8 +147,9 @@
 		   <div class="row mb-2">
 			<div class="col-8 ">
 				<span id="countstalldata">
-				   4 Stalls </span> x 
-				   <span> 4 Nights </span>
+				   4 Stalls 
+				</span> x 
+				   <span id="numberofdays"> 4 Nights </span>
 			   </div>
 			   <div class="col-4">
 					$120.00
@@ -176,7 +171,7 @@
 					$128.50
 			   </div>
 		   </div>
-		   <button class="ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</button> 
+		   <a href="<?php echo base_url()?>/checkout" class="ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</a> 
 		   </div>
 		</div>
 	</div>
@@ -184,14 +179,43 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
 <script>
-    function countChecked(id) { 
-    	var stallclass = '.countdata'+id;
-    	var checked = $(stallclass+":checked" ).length;
-    	$("#countstalldata").html(checked);
-	}
+	$(".form-check-input").click(function(){ 
+		if($(this).is(':checked')){
+			ajax({id : id, checked : 1});
+		}
+		else{
+			ajax({id : id, checked : 0});
+		}
+		var id= $(this).val();
+		cart(id);
+	});
 
-	$("input").on("click", function() {
-	    countChecked();
+	function cart(id){   
+        ajax(
+            '<?php echo base_url()."/cart"; ?>',
+                {id : id },
+            	{ success  : function(data){  }  }
+              
+        	);
+	}
+   
+	function getday(){
+		var startdate = $("#startdate").val(); 
+		var enddate   = $("#enddate").val();
+		var days      = daysdifference(startdate, enddate);  
+	}
+	function daysdifference(startdate, enddate){  
+	    var startDay      = new Date(startdate);  
+	    var endDay        = new Date(enddate); 
+	    var millisBetween = startDay.getTime() - endDay.getTime();
+	    var days          = millisBetween / (1000 * 3600 * 24);
+	    $("#numberofdays").html(Math.round(Math.abs(days)));  
+	}
+	$("#startdate").change(function(){
+		getday();
+	});
+	$("#enddate").change(function(){
+		getday();
 	});
 </script>
 <?php echo $this->endSection() ?>

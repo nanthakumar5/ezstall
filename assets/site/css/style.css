@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 * {
+  margin: 0 auto;
   font-family: "Montserrat";
   color: #000;
 }
@@ -38,7 +39,6 @@ a.navbar-brand {
 span.searchResult svg {
   fill: white;
   font-size: 20px;
-  margin: 12px;
 }
 
 .ml-auto {
@@ -104,20 +104,24 @@ a.ml-0.nav-link {
 input[type="radio"]{
   display: none;
 }
-.option-2{
+.option-2, .option-3{
   margin-left: 1rem;
 }
 #option-1:checked:checked ~ .option-1,
-#option-2:checked:checked ~ .option-2{
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3
+{
   border-color: #e10000;
   background: #e10000;
 }
 #option-1:checked:checked ~ .option-1 .dot,
-#option-2:checked:checked ~ .option-2 .dot{
+#option-2:checked:checked ~ .option-2 .dot,
+#option-3:checked:checked ~ .option-3 .dot{
   background: #fff;
 }
 #option-1:checked:checked ~ .option-1 .dot::before,
-#option-2:checked:checked ~ .option-2 .dot::before{
+#option-2:checked:checked ~ .option-2 .dot::before,
+#option-3:checked:checked ~ .option-3 .dot::before{
   opacity: 1;
   transform: scale(1);
 }
@@ -126,7 +130,8 @@ input[type="radio"]{
   color: #808080;
 }
 #option-1:checked:checked ~ .option-1 span,
-#option-2:checked:checked ~ .option-2 span{
+#option-2:checked:checked ~ .option-2 span,
+#option-3:checked:checked ~ .option-3 span{
   color: #fff;
 }
 
@@ -281,7 +286,7 @@ span.signInContent {
   margin-top: 1rem;
 }*/
 .signInFormPanel {
-  text-align: center;
+    text-align: center;
 }
 /*Signin page styles end*/
 
@@ -344,18 +349,18 @@ svg.eventSearch {
   margin-bottom: 5rem !important;
 }
 .wi-50-2 span.closeLeft p {
-  font-weight: normal;
+font-weight: normal;
 }
 button.ucEventBtn.closeBtn {
   background-color: #e0e0e0 !important;
   color: #b1b1b1;
   pointer-events: none;}
 
-  button.ucEventBtn.closeBtn:hover {
+button.ucEventBtn.closeBtn:hover {
     background-color: #e0e0e0;
     color: #b1b1b1;
     pointer-events: none;
-  }
+}
 /*Events page style end*/
 
 /*Home banner styles start*/
@@ -384,8 +389,8 @@ button.ucEventBtn.closeBtn {
 }
 
 .searchResult {
-  /*height: 45px;
-  width: 45px;*/
+  height: 45px;
+  width: 45px;
   display: flex;
   align-items: center;
   background-color: #e00000;
@@ -998,11 +1003,11 @@ input.subscriptionInput:focus {
 }
 
 .copyRight p span {
-  color: #fff;
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-  padding: 4vh 0;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding: 4vh 0;
 }
 .socialIcons svg {
   fill: #fff;
@@ -1235,6 +1240,15 @@ input.subscriptionInput:focus {
   .signInLeft {
     padding: 1.5rem 1.5rem 0 1.5rem;
   }
+
+  .checkout-payment .col-lg-12 input {
+    width: 100% !important;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.leftdata span {
+  width: 100%;
+}
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1446,6 +1460,11 @@ input.subscriptionInput:focus {
     font-size: 16px !important;
   }
 }
+@media (max-width: 992px) {
+.infoPanel.stallform.container-lg {
+  margin: 10px auto;
+}
+}
 /*Media Query Section End*/
 /*Event.js Start*/
 
@@ -1467,43 +1486,43 @@ input.subscriptionInput:focus {
 
 /*still start*/
 .btn-secondary{
- color:  #fff;
- background-color: #e00000;
- border: 1px solid #e00000;
- border-radius: 100%; 
- vertical-align: middle;
- margin-top: 10px;
+   color:  #fff;
+   background-color: #e00000;
+   border: 1px solid #e00000;
+   border-radius: 100%; 
+   vertical-align: middle;
+    margin-top: 10px;
 }
 .btn-secondary * {
-  color:  #fff;
+    color:  #fff;
 }
 .btn-secondary:hover {
-  color: #e00000;
-  background-color: #fff;
-  border-color: #e00000;
+    color: #e00000;
+    background-color: #fff;
+    border-color: #e00000;
 }
 
 .btn-secondary *:hover {
-  color:  #e00000;
+    color:  #e00000;
 }
 
 .stallform .col:first-child {
-  padding-left: 1rem !important;
+    padding-left: 1rem !important;
 }
 
 .stallform .col {
-  flex: 1 0 0%;
-  padding: 0px;
+    flex: 1 0 0%;
+    padding: 0px;
 }
 
 .stallform .col input {
-  border-right: 0px;
-  height: 60px;
-  border-radius: 0px !important;
-  border-bottom-color: #efefef;
+    border-right: 0px;
+    height: 60px;
+    border-radius: 0px !important;
+    border-bottom-color: #efefef;
 }
 .stallform .col:first-child  input {
-  border-left: 0px;
+    border-left: 0px;
 }
 
 /*still End*/
@@ -1537,17 +1556,17 @@ ul.edaddr img {
   margin-left: -26px;
 }
 .ucEventdetBtn{
-  background-color: #222;
-  border: none;
-  font-weight: 600;
-  color: #fff;
-  width: auto;
-  border-radius: 7px;
-  padding: 7px 20px 7px 0px;
-  vertical-align: top;
-}
-button.ucEventdetBtn:hover {
-  background: #e00000;
+background-color: #222;
+    border: none;
+    font-weight: 600;
+    color: #fff;
+    width: auto;
+    border-radius: 7px;
+    padding: 7px 20px 7px 0px;
+    vertical-align: top;
+  }
+  button.ucEventdetBtn:hover {
+    background: #e00000;
 }
 p.ucDAte {
   margin-left: 35px;
@@ -1615,7 +1634,7 @@ span.num_btn button {
   border-radius: 5px;
   padding: 14px;
   box-shadow: 1px 1px 5px -2px rgb(186 186 186);
-  transition: all 0.7s !important;
+    transition: all 0.7s !important;
 }
 .barn-nav .form-check-input:checked {
   background-color: #222 !important;
@@ -1855,7 +1874,7 @@ button.stalldetail-btn:hover {
   background-color: #222;
   transition: 2s;
 }
-.checkout-render input {
+.checkout-renter input {
   border: 1px solid #dfdfdf !important;
   padding: 11px;
   border-radius: 5px;
@@ -1869,7 +1888,7 @@ span.info-box {
   border-radius: 9px;
 }
 span.info-box p {
-  display: inline-block;
+  display: block;
   font-size: 14px;
   margin-bottom: 0px !important;
   color: #fff;
@@ -1879,12 +1898,68 @@ span.info-box p {
 }
 span.info-box img{
   float: left;
+    display: block;
+}
+.checkout-payment .checkout-payment-frist input {
+  border: 1px solid #dfdfdf !important;
+  padding: 11px;
+  border-radius: 5px;
+  width: 100%;
+}
+.checkout-payment input {
+  border: 1px solid #dfdfdf !important;
+  padding: 11px;
+  border-radius: 5px;
+}
+.checkout-special h2, .checkout-special p {
   display: inline-block;
+  margin-right: 5px;
+}
+.checkout-special b {
+  width: 100%;
+  display: block;
+  margin-top: 5px;
+}
+.checkout-special textarea {
+  border: 1px solid #dfdfdf !important;
+  padding: 11px;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 30px;
+}
+.checkout-reservation h2 {
+  margin-bottom: 30px;
+}
+
+.checkout-reservation b {
+  margin-bottom: 7px;
+  display: block;
+}
+.stallsum-head{
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+.checkout-complete-btn span span {
+  display: inline-block;
+  width: auto;
+}
+button.payment-btn {
+  background-color: #e00000;
+  border: transparent;
+  color: #fff;
+  display: block;
+  margin: 17px auto;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.checkout-complete-btn {
+  text-align: center;
+  margin-bottom: 100px;
 }
 /*stall end*/
-
-
-
 
 
 /* Side nav bar style start */
@@ -2199,88 +2274,3 @@ ul.CTAs .side-nav-a {
 }
 
 /* Side nav bar style end */
-
-
-
-/*05-03-2022 styles start from here*/
-
-ul.pagination {
-  width: max-content;
-  border-radius: 7px;
-}
-
-ul.pagination li {
-  padding: 7px 1rem;
-  margin: 0 5px;
-  cursor: pointer;
-  background-color: #f3f3f3;
-  border-radius: 5px;
-}
-
-ul.pagination li a span{
-  color: #000;
-}
-
-ul.pagination li:hover a span{
-  color: #fff;
-}
-
-ul.pagination li a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-  letter-spacing: 1px;
-
-}
-
-ul.pagination li:hover {
-    background-color: #000;
-}
-
-ul.pagination li:hover a {
-    color: #fff;
-}
-
-.ml-5{
-  margin-left: 5.5%;
-}
-
-a.btn-custom-black {
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 10px;
-    border-radius: 5px;
-}
-
-.edit a {
-    text-decoration: none;
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 5px;
-    background: #e00000;
-}
-
-.edit {
-    display: grid;
-    width: inherit;
-    place-content: end;
-    gap: 10px;
-    text-align: center;
-}
-
-p.error_class_1 {
-    color: #e00000;
-    text-align: left;
-    font-size: 13px;
-}
-
-.homeEventsPanel .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-  background-color: transparent;
-}
-
-.bg-dark{
-  background-color: #000 !important;
-}
-
-/*05-03-2022 styles end here*/
