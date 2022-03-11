@@ -23,7 +23,7 @@
                 </label>
                 <label for="option-3" class="option option-3">
                     <div class="dot"></div>
-                    <span>Producer</span>
+                    <span > Producer </span>
                 </label>
             </div>
             <span>
