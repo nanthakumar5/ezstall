@@ -83,7 +83,7 @@ class Index extends BaseController
 		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
 			return redirect()->to(base_url().'/myaccount/subscription'); 
-		}elseif($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){
+		}elseif($checksubscriptiontype=='3' && (($id=='' && $checksubscriptionproducer <= $eventcount) || ($id!='' && $checksubscriptionproducer < $eventcount))){
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
 			return redirect()->to(base_url().'/myaccount/events'); 
 		}
