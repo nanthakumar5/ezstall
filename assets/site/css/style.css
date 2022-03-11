@@ -2274,3 +2274,87 @@ ul.CTAs .side-nav-a {
 }
 
 /* Side nav bar style end */
+
+/*05-03-2022 styles start from here*/
+
+ul.pagination {
+  width: max-content;
+  border-radius: 7px;
+}
+
+ul.pagination li {
+  padding: 7px 1rem;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
+ul.pagination li a span{
+  color: #000;
+}
+
+ul.pagination li:hover a span{
+  color: #fff;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+}
+
+ul.pagination li:hover {
+    background-color: #000;
+}
+
+ul.pagination li:hover a {
+    color: #fff;
+}
+
+.ml-5{
+  margin-left: 5.5%;
+}
+
+a.btn-custom-black {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+.edit a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 15px;
+    width: 100%;
+    border-radius: 5px;
+    background: #e00000;
+}
+
+.edit {
+    display: grid;
+    width: inherit;
+    place-content: end;
+    gap: 10px;
+    text-align: center;
+}
+
+p.error_class_1 {
+    color: #e00000;
+    text-align: left;
+    font-size: 13px;
+}
+
+.homeEventsPanel .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  background-color: transparent;
+}
+
+.bg-dark{
+  background-color: #000 !important;
+}
+
+/*05-03-2022 styles end here*/
