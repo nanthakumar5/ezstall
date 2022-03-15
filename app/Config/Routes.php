@@ -36,7 +36,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 // Ajax
+
+
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
+$routes->post('searchevents', 'Site\Event\Index::searchevents');
 
 // Validation
 $routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');

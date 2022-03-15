@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.min.css"  />		
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
 
@@ -193,7 +194,9 @@
 		<script src="<?php echo base_url();?>/assets/site/js/bootstrap.bundle.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
+	    <script src="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
+
 		<?php $this->renderSection('js') ?>
 	</body>
 </html>

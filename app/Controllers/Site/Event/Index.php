@@ -9,6 +9,8 @@ class Index extends BaseController
 {
 	public function __construct()
 	{
+		$this->db = db_connect();
+
 		$this->event = new Event();
 	}
     
@@ -40,4 +42,16 @@ class Index extends BaseController
 		$data['detail'] = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
         return view('site/events/detail',$data);
     }
+
+ 	public function searchevents()
+	{
+		$requestData = $this->request->getPost(); 
+		$result = array();
+		
+		if (isset($requestData['search'])) {
+			$result = $this->event->getEvent('all', ['event'], ['status'=> ['1'], 'page' => 'events', 'search' => ['value' => $requestData['search']]]);
+		}
+
+		return $this->response->setJSON($result);
+	}
 }
