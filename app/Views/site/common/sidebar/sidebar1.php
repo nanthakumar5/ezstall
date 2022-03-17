@@ -17,7 +17,7 @@
 			</a>
 		</li>
 		<li>
-		  <a class="side-nav-a" href="#">
+		  <a class="side-nav-a" href="<?php echo base_url();?>/myaccount/account">
 			<i class="side-nav-i bi bi-person"></i>
 			Account Information
 		</a>
@@ -27,7 +27,7 @@
 				Add Event
 			</a>
 		<?php } ?>
-		<a class="side-nav-a" href="#">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookingdetails">
 			<i class="side-nav-i bi bi-person"></i>
 			Stall Manager
 		</a>
@@ -39,7 +39,7 @@
 			<i class="side-nav-i bi bi-calendar3"></i>
 			Past Month Activity
 		</a>
-		<a class="side-nav-a" href="#">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/paymentdetails">
 			<i class="side-nav-i bi bi-credit-card"></i>
 			Payments
 		</a>
