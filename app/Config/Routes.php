@@ -41,6 +41,7 @@ $routes->setAutoRoute(true);
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 $routes->post('searchevents', 'Site\Event\Index::searchevents');
 
+
 // Validation
 $routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');
 
@@ -53,6 +54,7 @@ $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail
 $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index');
+$routes->get('paymentsuccess', 'Site\Checkout\Index::success');
 $routes->post('cart', 'Site\Event\CartController::index');
 
 $routes->get('logout', 'Site\Logout\Index::index');
@@ -63,6 +65,10 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
     $routes->match(['get','post'], 'subscription', 'Site\Myaccount\Subscription\Index::index');
+    $routes->match(['get','post'], 'account','Site\Myaccount\AccountInfo\Index::index');
+    $routes->match(['get','post'], 'bookingdetails','Site\Myaccount\Reservation\Index::index');
+    $routes->match(['get','post'], 'paymentdetails','Site\Myaccount\PaymentInfo\Index::index');
+
 });
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
