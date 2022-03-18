@@ -19,7 +19,6 @@
 		</div>
 	</div>
 </section>
-
 <section class="container-lg">
 	<div class="row">
 		<div class="col-8">
@@ -36,7 +35,7 @@
 							<li class="mb-3 mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
 							<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
 							</svg> 
-								<?php echo $detail['location'] ?> <!-- - <a href="">Download Stall Map</a> -->
+								<?php echo $detail['location'] ?>
 							</li>
 							<li class="mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
 							<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
@@ -68,19 +67,20 @@
 				<div class="row row border-top pt-4 pb-4">
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> Start Date: </p>
-						<p class="ucDAte mb-0"><?php echo $detail['start_date'] ?></p>
+						<p class="ucDAte mb-0">
+							<?php  echo date("d-m-Y", strtotime($detail['start_date']));?></p>
 					</span>
 					<span class="col-3 border-end">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> End Date: </p>
-						<p class="ucDAte mb-0"><?php echo $detail['end_date'] ?></p>
+						<p class="ucDAte mb-0"><?php echo date("d-m-Y", strtotime($detail['end_date'])); ?></p>
 					</span>
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> Start Time: </p>
-						<p class="ucDAte mb-0"> after <?php echo $detail['start_time'] ?> am</p>
+						<p class="ucDAte mb-0"> after <?php echo $detail['start_time'] ?></p>
 					</span>
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> End Time:</p>
-						<p class="ucDAte mb-0">by <?php echo $detail['end_time'] ?> pm </p>
+						<p class="ucDAte mb-0">by <?php echo $detail['end_time'] ?></p>
 					</span>
 				</div> 
 			</div>
@@ -89,16 +89,17 @@
 				<div class="infoPanel form_check">
 					<span class="infoSection">
 						<span class="iconProperty">
-							<input type="text" placeholder="Number of Stalls">
-							<span class="num_btn"><button>+</button><br><button>-</button></span>
+							<input type="text" readonly id="stallcount"  value="" placeholder="Number of Stalls">
+							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">
-							<input type="date" name="startdate" id="startdate" class="checkdate"  placeholder="Check-In">
+							<input type="date" name="startdate" id="startdate" class="checkdate checkin" placeholder="Check-In">
 						</span>
 						<span class="iconProperty">
-							<input type="date" name="enddate" id="enddate" class="checkdate" placeholder="Check-Out">
+							<input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">
 						</span>
 					</span>
+					<input type="hidden" name="datecount" id="datecount">
 				</div>
 				<?php 
 					$tabbtn = '';
@@ -112,12 +113,11 @@
 						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
 											<ul class="list-group">';
 						foreach($barndata['stall'] as $stalldata){ 
-								$tabcontent .= 	'<li class="list-group-item">
-													<input class="form-check-input stallid'.$stalldata['id'].' me-1" value="'.$stalldata['id'].'" name=checkbox type="checkbox" aria-label="...">
-													
-													'.$stalldata['name'].'
-													<span class="red-box"></span>
-												</li>';
+							$tabcontent .= 	'<li class="list-group-item">
+							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox">
+							'.$stalldata['name'].'
+							<span class="green-box stallavailability" data-stallid="'.$stalldata['id'].'"></span>
+							</li>';
 						}
 						$tabcontent .= '</ul></div>';
 					}
@@ -142,80 +142,113 @@
 				</div>
 			</div> 
 		</div>
-		<div class="col-3">
-			<div class="border rounded pt-4 ps-3 pe-3 mb-5">
-		   <div class="row mb-2">
-			<div class="col-8 ">
-				<span id="countstalldata">
-				   4 Stalls 
-				</span> x 
-				   <span id="numberofdays"> 4 Nights </span>
-			   </div>
-			   <div class="col-4">
-					$120.00
-			   </div>
-		   </div> 
-		   <div class="row mb-2">
-			<div class="col-8 ">
-				   Transaction Fees
-			   </div>
-			   <div class="col-4">
-					$8.50
-			   </div>
-		   </div> 
-		   <div class="row mb-2 border-top mt-3 mb-3 pt-3">
-			<div class="col-8 fw-bold ">
-				   Total Due
-			   </div>
-			   <div class="col-4 fw-bold">
-					$128.50
-			   </div>
-		   </div>
-		   <a href="<?php echo base_url()?>/checkout" class="ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</a> 
-		   </div>
-		</div>
+		<div class="checkout col-3">
 	</div>
 </section>
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
-<script>
-	$(".form-check-input").click(function(){ 
-		if($(this).is(':checked')){
-			ajax({id : id, checked : 1});
-		}
-		else{
-			ajax({id : id, checked : 0});
-		}
-		var id= $(this).val();
-		cart(id);
+<script> 
+	 $(document).ready(function (){
+	 	cart();
 	});
 
-	function cart(id){   
-        ajax(
-            '<?php echo base_url()."/cart"; ?>',
-                {id : id },
-            	{ success  : function(data){  }  }
-              
-        	);
+	function checkdate(){
+		var startdate 	= $("#startdate").val(); 
+		var enddate   	= $("#enddate").val(); 
+		
+		if($(".form-check-input:checked").length > 0){			
+			if(startdate=='' || enddate==''){
+				if(startdate=='') $("#startdate").focus();
+				else if(enddate=='') $("#enddate").focus();
+
+				$(".form-check-input").prop('checked', false);
+				return false;
+			}
+
+			$(".checkin").attr('readonly', 'readonly');
+			$(".checkout").attr('readonly', 'readonly');
+		}else{
+			$(".checkin").removeAttr('readonly', 'readonly');
+			$(".checkout").removeAttr('readonly', 'readonly');
+		}
 	}
-   
-	function getday(){
-		var startdate = $("#startdate").val(); 
-		var enddate   = $("#enddate").val();
-		var days      = daysdifference(startdate, enddate);  
-	}
-	function daysdifference(startdate, enddate){  
-	    var startDay      = new Date(startdate);  
-	    var endDay        = new Date(enddate); 
-	    var millisBetween = startDay.getTime() - endDay.getTime();
-	    var days          = millisBetween / (1000 * 3600 * 24);
-	    $("#numberofdays").html(Math.round(Math.abs(days)));  
-	}
-	$("#startdate").change(function(){
-		getday();
+
+	$(".form-check-input").on("click", function() {
+		checkdate();
+
+		var startdate 	= $("#startdate").val(); 
+		var enddate   	= $("#enddate").val(); 
+		var stall_id	= $(this).val(); 
+		var event_id    = $(this).attr('data-eventid');
+		var stall_price = $(this).attr('data-price');
+
+		dateformat('#start_date, #end_date');
+
+		if($(this).is(':checked')){
+			cart({stall_id : stall_id, checked : 1, event_id : event_id, stall_price : stall_price,startdate : startdate, enddate : enddate});
+		}else{
+			cart({stall_id : stall_id, checked : 0}); 
+		}
 	});
-	$("#enddate").change(function(){
-		getday();
-	});
+
+	function cart(data={cart:1}){	 	
+	    ajax(
+		    '<?php echo base_url()."/cart"; ?>',
+	        data,
+	    	{ 
+	    		success  : function(result){
+	    			checkdate();
+
+	    			if(result){  
+	    				$("#startdate").val(result.check_in); 
+						$("#enddate").val(result.check_out); 
+
+		    			$('#stallcount').val(result.stall_id.length);  
+			      		$(result.stall_id).each(function(i,v){ 
+							$('.stallid[value='+v+']').prop('checked', true);
+							$('.stallavailability[data-stallid='+v+']').removeClass("green-box").addClass("yellow-box");
+						});
+
+						var total = (result.price+8.50);
+	        		    $('#stallcount').val(result.stall_id.length);
+	            		var result ='\
+	                        <div class="w-100">\
+	                            <div class="border rounded pt-4 ps-3 pe-3 mb-5">\
+	                                <div class="row mb-2">\
+	                                    <div class="col-8 ">\
+	                                        <span>'+result.stall_id.length+'</span> Stalls x \
+	                                        <span>'+result.interval+'</span> Nights \
+	                                    </div>\
+	                                    <div class="col-4">\
+	                                        $'+result.price+'\
+	                                    </div>\
+	                                </div>\
+	                                <div class="row mb-2">\
+	                                    <div class="col-8 ">\
+	                                       Transaction Fees\
+	                                    </div>\
+	                                    <div class="col-4">\
+	                                        $8.50\
+	                                    </div>\
+	                                </div>\
+	                                <div class="row mb-2 border-top mt-3 mb-3 pt-3">\
+	                                    <div class="col-8 fw-bold ">\
+	                                       Total Due\
+	                                    </div>\
+	                                    <div class="col-4 fw-bold">\
+	                                        $'+total+'\
+	                                    </div>\
+	                               </div>\
+	                               <a href="<?php echo base_url()?>/checkout" class="ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</a>\
+	                            </div>\
+	                        </div>\
+	                    ';
+
+	                    $('.checkout').empty().append(result);
+                    }
+		        }
+	        }
+		);
+	}
 </script>
 <?php echo $this->endSection() ?>

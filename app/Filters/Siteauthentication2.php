@@ -15,7 +15,6 @@ class Siteauthentication2 implements FilterInterface
 		$userid = getSiteUserID();
 		$uri = service('uri');
 		$segment2 = $uri->getSegment(2);
-		$segment3 = $uri->getSegment(3);
 		
 		if($userid){
 			$users 	= new \App\Models\Users;

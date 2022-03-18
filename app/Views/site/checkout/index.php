@@ -68,11 +68,11 @@
                   <input type="hidden" name="payer_id" value="<?php echo $userdetail['id']; ?>">
                   <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
                   <input type="hidden" name="payer_email" value="<?php echo $userdetail['email']; ?>" >
-                  <input type="hidden" name="checkin" value="<?php echo date('Y-m-d H:i:s');?>" >
-                  <input type="hidden" name="checkout" value="<?php echo date('Y-m-d H:i:s');?>" >
-                  <input type="hidden" name="price" value="50" >
-                  <input type="hidden" name="eventid" value="1">
-                  <input type="hidden" name="stallid" value="1">
+                  <input type="hidden" name="checkin" value="<?php echo $cartdetail['check_in']; ?>" >
+                  <input type="hidden" name="checkout" value="<?php echo $cartdetail['check_out']; ?>" >
+                  <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
+                  <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
+                  <input type="hidden" name="stallid" value="<?php echo implode(',', $cartdetail['stall_id']);?>">
 
                 <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
                   <h2 class="checkout-fw-6">Special Requests</h2>
@@ -87,17 +87,14 @@
                 <div class="row">
                   <div class="col-lg-6 mb-4">
                     <b>Event</b>
-                      <p>High Plains Junior Rodeo--February 22</p>
-                      <b>Location</b>
-                      <p>Curry County Events Center & Fairgrounds<br>
-                        1900 E Brady Ave<br>
-                        Clovis, NM 88101</p>
+                    <p><?php echo $eventdetail['name'];?></p>
+                    <b>Location</b>
+                    <p><?php echo $eventdetail['location'];?><br>
                   </div>
 
                   <div class="col-lg-6 mb-4">
                     <b>Venue</b>
-                    <p>Designed as a multi-function event facility, the Curry County Events Center is fully equipped to host rodeos, livestock sales, dog shows, concerts, circuses, trade shows, 
-                      conventions, sporting events & a vast array of other private & public events.</p>
+                    <p><?php echo $eventdetail['description'];?></p>
                   </div>
 
                 </div>
@@ -105,14 +102,14 @@
                   <h2 class="checkout-fw-6 stallsum-head">Stall Summary</h2>
                   <div class="col-lg-6 mb-4">
                     <b>Check In</b>
-                      <p class="mb-4">Thu, Feb 10, 2022 • After 8am</p>
-                      <b>Check Out</b>
-                      <p>Sat, Feb 12, 2022 • By 3pm</p>
+                    <p class="mb-4"><?php echo date('d-m-Y', strtotime($cartdetail['check_in'])) ?></p>
+                    <b>Check Out</b>
+                    <p><?php echo date('d-m-Y', strtotime($cartdetail['check_out'])) ?></p>
                   </div>
 
                   <div class="col-lg-6 mb-4">
                     <b>Number Of Stalls</b>
-                    <p>4 Stalls (4,6,10,12)</p>
+                    <p><?php echo count($cartdetail['stall_id']); ?> Stalls (<?php echo implode(',', $cartdetail['stall_id']);?>)</p>
                   </div>
                 </div>
             </div>
@@ -124,34 +121,39 @@
             </div>
         </form>
                 </div>
-                <div class="col-lg-3">
-                  <div class="border rounded pt-4 ps-3 pe-3 mb-5">
-                 <div class="row mb-2">
-                  <div class="col-lg-8 ">
-                         4 Stalls x 4 Nights
-                     </div>
-                     <div class="col-lg-4">
-                          $120.00
-                     </div>
-                 </div> 
-                 <div class="row mb-2">
-                  <div class="col-lg-8 ">
-                         Transaction Fees
-                     </div>
-                     <div class="col-lg-4">
-                          $8.50
-                     </div>
-                 </div> 
-                 <div class="row mb-2 border-top mt-3 mb-3 pt-3">
-                  <div class="col-lg-8 fw-bold ">
-                         Total Due
-                     </div>
-                     <div class="col-lg-4 fw-bold">
-                          $128.50
-                     </div>
-                 </div>
-                 </div>
-              </div>
+                  
+
+
+  <div class="col-lg-3">
+  <div class="border rounded pt-4 ps-3 pe-3 mb-5">
+  <div class="row mb-2">
+  <div class="col-lg-8 ">
+  <?php echo count($cartdetail['stall_id']); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
+  </div>
+  <div class="col-lg-4">
+  $<?php echo $cartdetail['price']; ?>
+  </div>
+  </div> 
+  <div class="row mb-2">
+  <div class="col-lg-8 ">
+  Transaction Fees
+  </div>
+  <div class="col-lg-4">
+  $8.50
+  </div>
+  </div> 
+  <div class="row mb-2 border-top mt-3 mb-3 pt-3">
+  <div class="col-lg-8 fw-bold ">
+  Total Due
+  </div>
+  <div class="col-lg-4 fw-bold">
+  $<?php echo $cartdetail['price']+8.50; ?>
+  </div>  
+  </div>
+  </div>
+  </div>
+
+
             </div>
             </section>
 

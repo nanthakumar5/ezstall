@@ -16,6 +16,7 @@ class Index extends BaseController
     
     public function lists()
     {
+
 		$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
@@ -33,14 +34,13 @@ class Index extends BaseController
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
-		
     	return view('site/events/list', $data);
     }
 	
 	public function detail($id)
-    {
+    { 
 		$data['detail'] = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-        return view('site/events/detail',$data);
+		return view('site/events/detail',$data);
     }
 
  	public function searchevents()

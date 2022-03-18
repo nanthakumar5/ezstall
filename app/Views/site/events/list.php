@@ -45,8 +45,10 @@
 										<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
 									</span>
 								</span>
-								<span class="wi-70">
-									<p class="topdate"> <?php echo $data['start_date']; ?> - <?php echo $data['end_date']; ?> -  <?php echo $data['location']; ?></p>
+								<span class="wi-70"> 
+									<p class="topdate"> <?php echo date("d-m-Y", strtotime($data['start_date'])); ?> - 
+										<?php echo date("d-m-Y", strtotime($data['end_date'])); ?> -  
+										<?php echo $data['location']; ?></p>
 									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
 								</span>
 							</div>
