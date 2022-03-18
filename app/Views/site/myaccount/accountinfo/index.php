@@ -1,6 +1,6 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-  <h3>Account Information</h3>
+  <h2 class="fw-bold mb-4">Account Information</h2>
   <form method="post" action="" id="accountinformtion" class="accountinformtion">
     <div class="mb-3">
       <label for="username" class="form-label" id="username-lbl" >Name</label>
@@ -15,7 +15,7 @@
       <input type="password" name="password" class="form-control"  id="userpassword" value="">
     </div>
     <input type="hidden" name="actionid" id="userid" value="<?php echo $userdetail['id']; ?>">
-    <button type="submit" class="btn btn-primary" id="updateinfo" >Update</button>
+    <button type="submit" class="account-btn" id="updateinfo" >Update</button>
   </form>
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>

@@ -2400,3 +2400,70 @@ a.ui-button:active,
 }
 
 /*15-03-2022 styles end here*/
+
+/*18-03-2022 styles start here*/
+
+.dashboard-box{
+  background-color: #fff;
+  margin-bottom: 2%;
+  padding: 1.6% 0;
+  border: 1px solid #e4e4e4;
+  border-radius: 7px;
+  }
+
+  .fw-600{
+    font-weight: 600
+  }
+
+  .dashboard-box:hover {
+    box-shadow: 0 8px 17px 0 rgb(0 0 0 / 10%);
+    transition: all 0.3s ease;
+}
+
+button.pay-btn {
+  border: none;
+  background: #e00000;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 10px 50px;
+  margin-top: 20px;
+}
+
+.account-btn{
+border: none;
+  background: #e00000;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 10px 50px;
+  margin-top: 20px;
+}
+
+button.account-btn:hover {
+    background: #000000;
+    transition: all .5s ease-in-out;
+}
+
+button.pay-btn:hover {
+    background: #000000;
+    transition: all .5s ease-in-out;
+}
+
+label.subscription_select_label:nth-child(3) {
+    color: #e00000;
+    font-weight: 800;
+    font-size: 25px;
+    content: ' ';
+    clear: right;
+    display: block;
+    text-align: center;
+}
+
+.col.payment-border {
+    border: 1px solid #e4e4e4;
+    border-radius: 7px;
+    padding: 30px;
+}
+
+/*18-03-2022 styles end here*/

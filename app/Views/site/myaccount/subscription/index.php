@@ -6,14 +6,14 @@
 	}
 	</style>
 
-	<div>
-		<div class="col-md-12">
+	<div class="col payment-border">
+		<div class="text-center">
 			<input type="radio" checked>
 			<label class="subscription_select_label"><?php echo $plan['name']; ?></label>
 			<label class="subscription_select_label"><?php echo $currencysymbol.$plan['price']; ?></label>
 		</div>
-		<div class="choose_subscription_btn">
-			<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now</button>
+		<div class="choose_subscription_btn text-center">
+			<button class="pay-btn"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now</button>
 		</div>
 	</div>
 <?php $this->endSection(); ?>
