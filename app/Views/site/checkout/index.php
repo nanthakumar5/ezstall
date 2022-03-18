@@ -65,12 +65,13 @@
                       </div>
                     </div>
                 </div> 
-                  <input type="hidden" name="payer_id" id="payer_id" value="<?php echo $userdetail['id']; ?>">
-                  <input type="hidden" name="payer_email" id="payer_email" value="<?php echo $userdetail['email']; ?>" >
-                  <input type="hidden" name="check_in" id="check_in" value="<?php echo date('Y-m-d H:i:s');?>" >
-                  <input type="hidden" name="check_out" id="check_out" value="<?php echo date('Y-m-d H:i:s');?>" >
-                  <input type="hidden" name="price" id="price" value="50" >
-                  <input type="hidden" name="stallid" id="stallid" value="1">
+                  <input type="hidden" name="payer_id" value="<?php echo $userdetail['id']; ?>">
+                  <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
+                  <input type="hidden" name="payer_email" value="<?php echo $userdetail['email']; ?>" >
+                  <input type="hidden" name="checkin" value="<?php echo date('Y-m-d H:i:s');?>" >
+                  <input type="hidden" name="checkout" value="<?php echo date('Y-m-d H:i:s');?>" >
+                  <input type="hidden" name="price" value="50" >
+                  <input type="hidden" name="stallid" value="1">
 
                 <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
                   <h2 class="checkout-fw-6">Special Requests</h2>

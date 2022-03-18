@@ -3,14 +3,14 @@
 namespace App\Controllers\Site\Checkout;
 
 use App\Controllers\BaseController;
-use App\Models\Checkout;
+use App\Models\Booking;
 use App\Models\Stripe;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->checkout = new Checkout();	
+		$this->booking = new Booking();	
 		$this->stripe = new Stripe();	
 	}
     
@@ -20,8 +20,9 @@ class Index extends BaseController
     	{  
             $requestData = $this->request->getPost();
             $paymentresult= $this->stripe->stripepayment($requestData);
-            $checkout = $this->checkout->action($requestData,$paymentresult);
-            if($checkout){
+            $requestData['paymentid']=$paymentresult;
+            $booking = $this->booking->action($requestData);
+            if($booking){
               return redirect()->to(base_url().'/paymentsuccess'); 
             }
          }

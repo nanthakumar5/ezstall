@@ -5,7 +5,7 @@ use App\Models\BaseModel;
 
 class Payments extends BaseModel
 {
-public function getPayment($type, $querydata=[], $requestdata=[], $extras=[])
+public function getPayments($type, $querydata=[], $requestdata=[], $extras=[])
     {  
     	$select 			= [];
 		
@@ -20,7 +20,11 @@ public function getPayment($type, $querydata=[], $requestdata=[], $extras=[])
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('p.id', $requestdata['id']);
-		if(isset($requestdata['userid'])) 				$query->where('p.user_id', $requestdata['userid']);
+		if(isset($requestdata['userid'])) 				$query->where('p.payer_id', $requestdata['userid']);
+		
+		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
+			$query->limit($requestdata['length'], $requestdata['start']);
+		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
 		else $query->groupBy('p.id');

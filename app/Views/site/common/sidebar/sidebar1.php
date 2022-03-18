@@ -4,7 +4,6 @@
 	$userdetail = getSiteUserDetails();
 	$role = $userdetail['type'];
 ?>
-
 <div class="navbar-header">
   <button type="button" id="sidebarCollapse" class="btn btn-info side-navbar-btn"><i class="side-nav-i bi bi-list"></i></button>
 </div>
@@ -21,17 +20,18 @@
 			<i class="side-nav-i bi bi-person"></i>
 			Account Information
 		</a>
+
 		<?php if($role!='5'){ ?>
-			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
-				<i class="side-nav-i bi bi-calendar2-event"></i>
-				Add Event
-			</a>
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
+			<i class="side-nav-i bi bi-calendar2-event"></i>
+			Add Event
+		</a>
 		<?php } ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookingdetails">
+		<a class="side-nav-a" href="#">
 			<i class="side-nav-i bi bi-person"></i>
 			Stall Manager
 		</a>
-		<a class="side-nav-a" href="#">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookingdetails">
 			<i class="side-nav-i bi bi-calendar2-week"></i>
 			Current Reservation
 		</a>
