@@ -71,6 +71,7 @@
                   <input type="hidden" name="checkin" value="<?php echo date('Y-m-d H:i:s');?>" >
                   <input type="hidden" name="checkout" value="<?php echo date('Y-m-d H:i:s');?>" >
                   <input type="hidden" name="price" value="50" >
+                  <input type="hidden" name="eventid" value="1">
                   <input type="hidden" name="stallid" value="1">
 
                 <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">

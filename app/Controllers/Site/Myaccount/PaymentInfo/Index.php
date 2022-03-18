@@ -24,6 +24,11 @@ class Index extends BaseController
 		$paymentcount = $this->payments->getPayments('count', ['payment']);
 		$data['payments'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
 	    $data['pager'] = $pager->makeLinks($page, $perpage, $paymentcount);
+		$data['paymentinterval'] = $this->config->paymentinterval;
+		$data['currencysymbol'] = $this->config->currencysymbol;
+		$data['paymenttype'] = $this->config->paymenttype;
+
+
 
     	return view('site/myaccount/paymentinfo/index',$data);
 
