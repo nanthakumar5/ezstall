@@ -53,9 +53,9 @@ $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
 $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
-$routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index');
+$routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filter' => 'siteauthentication2']);
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
-$routes->post('cart', 'Site\Event\CartController::index');
+$routes->match(['get','post'], 'cart', 'Site\Cart\Index::action');
 
 $routes->get('logout', 'Site\Logout\Index::index');
 
