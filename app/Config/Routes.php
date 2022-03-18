@@ -64,6 +64,9 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+    $routes->match(['get','post'], 'stallmanager', 'Site\Myaccount\Stallmanager\Index::index');
+    $routes->match(['get','post'], 'stallmanager/add', 'Site\Myaccount\Stallmanager\Index::action'); 
+    $routes->match(['get','post'], 'stallmanager/edit/(:num)', 'Site\Myaccount\Stallmanager\Index::action/$1');
     $routes->match(['get','post'], 'subscription', 'Site\Myaccount\Subscription\Index::index');
     $routes->match(['get','post'], 'account','Site\Myaccount\AccountInfo\Index::index');
     $routes->match(['get','post'], 'bookingdetails','Site\Myaccount\Reservation\Index::index');

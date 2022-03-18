@@ -25,6 +25,7 @@ class Users extends BaseModel
 		if(isset($requestdata['email']))         		$query->where('u.email', $requestdata['email']);	
 		if(isset($requestdata['password'])) 			$query->where('u.password', md5($requestdata['password']));
 		if(isset($requestdata['type'])) 				$query->whereIn('u.type', $requestdata['type']);
+		if(isset($requestdata['parentid'])) 			$query->where('u.parent_id', $requestdata['parentid']);
 		if(isset($requestdata['status'])) 				$query->whereIn('u.status', $requestdata['status']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
@@ -68,6 +69,7 @@ class Users extends BaseModel
 	
 	public function action($data)
 	{
+
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
@@ -82,6 +84,7 @@ class Users extends BaseModel
 		if(isset($data['email_status']) && $data['email_status']!='') 	  				$request['email_status'] 			= $data['email_status'];
 		if(isset($data['subscriptionenddate']) && $data['subscriptionenddate']!='') 	$request['subscription_end_date'] 	= $data['subscriptionenddate'];
 		if(isset($data['subscriptioncount']) && $data['subscriptioncount']!='') 	  	$request['subscription_count'] 		= $data['subscriptioncount'];
+		if(isset($data['parentid']) && $data['parentid']!='') 	  						$request['parent_id'] 		= $data['parentid'];
 
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;

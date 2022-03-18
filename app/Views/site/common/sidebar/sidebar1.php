@@ -27,7 +27,7 @@
 			Add Event
 		</a>
 		<?php } ?>
-		<a class="side-nav-a" href="#">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/stallmanager">
 			<i class="side-nav-i bi bi-person"></i>
 			Stall Manager
 		</a>
