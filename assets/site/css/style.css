@@ -2409,6 +2409,31 @@ a.ui-button:active,
 
 /*15-03-2022 styles end here*/
 
+/*09-03-2022 styles start here*/
+img.eventflyer_source, .stallmap_source, .image_source {
+  height: 73px;
+  width: auto;
+}
+.card-title.active{
+  background-color: lightgray;
+  transition: 1s;
+}
+.card-title{
+  background-color: transparent;
+  cursor: pointer;
+  transition: 1s;
+}
+.card-detail{
+  display: none;
+}
+.card-title span{
+float: right;
+margin-right: 20px;
+}
+
+
+/*09-03-2022 styles end here*/
+
 /*18-03-2022 styles start here*/
 
 .dashboard-box{
@@ -2475,3 +2500,57 @@ label.subscription_select_label:nth-child(3) {
 }
 
 /*18-03-2022 styles end here*/
+
+/*21-03-2022 styles starts from here*/
+
+.accordion-button:not(.collapsed) {
+    color: #e00000;
+    background-color: #fff2f2;
+    box-shadow:  none;
+}
+
+.accordion-button:focus{
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after{
+  filter: invert(12%) sepia(88%) saturate(5533%) hue-rotate(1deg) brightness(89%) contrast(118%);
+}
+
+.faq-c-link{
+  color: #e00000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+button.contact-submit {
+  border: none;
+  background-color: #e00000;
+  color: #fff;
+  border-radius: 7px;
+  padding: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+button.contact-submit:hover{
+  background-color: #000;
+  transition: all 0.8s ease;
+}
+
+.pr-2{
+  padding-right: 10px;
+}
+
+.font-w-600{
+  font-weight: 600;
+}
+
+.about-img{
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 2vh;
+}
+
+/*21-03-2022 styles end here*/

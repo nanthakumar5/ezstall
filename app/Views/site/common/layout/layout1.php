@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
+		<link href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
 
 	</head>
 	<body>

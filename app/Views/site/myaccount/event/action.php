@@ -280,6 +280,34 @@
         
 		$('.barnbtn').click(function(){
 			barndata();
+
+			$('.card-title.barntitle-style.active, .card-title.stalltitle-style.active').removeClass('active');
+
+				$('div#barnwrapper div:last-child .card-title.barntitle-style').click(function(){
+					//console.log("onclick title");
+				$('.card-detail.barndetail-style').css('display', 'none');
+				$('.card-title.barntitle-style').css('background-color', 'transparent');
+				$('.card-title.barntitle-style span').text('+');
+					if(!$(this).hasClass('active')){
+					
+					$('.card-detail.stalldetail-style').css('display', 'none');
+					// console.log("not active");
+					$(this).addClass('active');
+					$(this).next('.card-detail.barndetail-style').slideToggle(1000);
+					$(this).css('background-color', 'lightgray');
+					$(this).find('span').text('-');
+
+				} else
+				if($(this).hasClass('active')){
+					// console.log("active too");
+					$('.card-title.barntitle-style.active').removeClass('active');
+				$('.card-detail.barndetail-style').css('display', 'none');
+				$('.card-title.barntitle-style').css('background-color', 'transparent');
+				$('.card-title.barntitle-style span').text('+');
+					}   		 
+
+				});
+
 		});
 
 		function barndata(result=[]){ 
@@ -289,8 +317,9 @@
 				
 			var data='\
 			<div class="card barnspace mt-4">\
+			<h3 class="card-title barntitle-style ps-3 pt-2 pb-2 mb-0">Barn - '+barnName+' <span> + </span></h3>\
+			<div class="card-detail barndetail-style">\
 				<div class="card-header">\
-					<h3 class="card-title">Barn</h3>\
 					<div class="card-tools">\
 					    <a href="javascript:void(0);" data-barnIndex="'+barnIndex+'" class="btn btn-info stallbtn">Add stall</a>\
 					    <button type="button" class="btn btn-info " data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add bulk stall</button>\
@@ -308,6 +337,7 @@
 						</div>\
 			        	<div class="col-md-12 barn_wrapper_'+barnIndex+'"></div>\
 					</div>\
+				</div>\
 				</div>\
 			</div>\
 			';
@@ -329,6 +359,31 @@
 		
 		$(document).on('click', '.stallbtn', function(){ 
 			stalldata($(this).attr('data-barnIndex'));
+			$('.card-title.barntitle-style.active, .card-title.stalltitle-style.active').removeClass('active');
+			$('div#barnwrapper .card-body div.card:last-child .card-title.stalltitle-style').click(function(){
+					//console.log("onclick title");
+					$('.card-detail.stalldetail-style').css('display', 'none');
+				$('.card-title.stalltitle-style').css('background-color', 'transparent');
+				$('.card-title.stalltitle-style span').text('+');
+					if(!$(this).hasClass('active')){
+					
+					$('.card-detail.stalldetail-style').css('display', 'none');
+					// console.log("not active");
+					$(this).addClass('active');
+					$(this).next('.card-detail.stalldetail-style').slideToggle(1000);
+					$(this).css('background-color', 'lightgray');
+					$(this).find('span').text('-');
+
+				} else
+				if($(this).hasClass('active')){
+					// console.log("active too");
+					$('.card-title.stalltitle-style.active').removeClass('active');
+				$('.card-detail.stalldetail-style').css('display', 'none');
+				$('.card-title.stalltitle-style').css('background-color', 'transparent');
+				$('.card-title.stalltitle-style span').text('+');
+					}    		 
+
+				});
 		});
 		
 		$('#myModal').on('shown.bs.modal', function (e) {
@@ -382,6 +437,8 @@
 
 			var data='\
 			<div class="card stallsection mt-4">\
+			<h3 class="card-title stalltitle-style ps-3 pt-2 pb-2 mb-0">Stall - '+stallName+' <span> + </span></h3>\
+			<div class="card-detail stalldetail-style">\
 				<div class="card-header">\
 					<h3 class="card-title">Stall</h3>\
 					<div class="card-tools">\
@@ -425,6 +482,7 @@
 					</div>\
 				</div>\
 			</div>\
+			</div>\
 			';
 			
 			$(document).find('.barn_wrapper_'+barnIndex).append(data); 
@@ -438,16 +496,73 @@
 		}
 		
 		$(document).on('click', '.barnremovebtn', function(){
-		    $(this).parent().parent().parent().remove();
+		    $(this).parent().parent().parent().parent().remove();
 		});
 		
-		$(document).on('click', '.stallremovebtn', function(){
-			$(this).parent().parent().parent().remove();
+		$(document).on('click', '.stallremovebtn', function(){O
+			$(this).parent().parent().parent().parent().remove();
 		})
 
 		$(document).on('click','#addbulkstallbtn', function () {
 	        $('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	    });
+
+	    $(function(){
+				
+				$('.card-title.barntitle-style.active, .card-title.stalltitle-style.active').removeClass('active');
+
+				$('.card-title.barntitle-style').click(function(){
+					//console.log("onclick title");
+				$('.card-detail.barndetail-style').css('display', 'none');
+				$('.card-title.barntitle-style').css('background-color', 'transparent');
+				$('.card-title.barntitle-style span').text('+');
+					if(!$(this).hasClass('active')){
+					
+					$('.card-detail.stalldetail-style').css('display', 'none');
+					// console.log("not active");
+					$(this).addClass('active');
+					$(this).next('.card-detail.barndetail-style').slideToggle(1000);
+					$(this).css('background-color', 'lightgray');
+					$(this).find('span').text('-');
+
+				} else
+				if($(this).hasClass('active')){
+					// console.log("active too");
+					$('.card-title.barntitle-style.active').removeClass('active');
+				$('.card-detail.barndetail-style').css('display', 'none');
+				$('.card-title.barntitle-style').css('background-color', 'transparent');
+				$('.card-title.barntitle-style span').text('+');
+					}  		 
+
+				});
+
+				$('.card-title.stalltitle-style').click(function(){
+
+					//console.log("onclick title");
+					$('.card-detail.stalldetail-style').css('display', 'none');
+				$('.card-title.stalltitle-style').css('background-color', 'transparent');
+				$('.card-title.stalltitle-style span').text('+');
+					if(!$(this).hasClass('active')){
+					
+					$('.card-detail.stalldetail-style').css('display', 'none');
+					// console.log("not active");
+					$(this).addClass('active');
+					$(this).next('.card-detail.stalldetail-style').slideToggle(1000);
+					$(this).css('background-color', 'lightgray');
+					$(this).find('span').text('-');
+
+				} else
+				if($(this).hasClass('active')){
+					// console.log("active too");
+					$('.card-title.stalltitle-style.active').removeClass('active');
+				$('.card-detail.stalldetail-style').css('display', 'none');
+				$('.card-title.stalltitle-style').css('background-color', 'transparent');
+				$('.card-title.stalltitle-style span').text('+');
+					}   		 
+
+				});
+				
+			});
 
 	</script>
 <?php $this->endSection(); ?>
