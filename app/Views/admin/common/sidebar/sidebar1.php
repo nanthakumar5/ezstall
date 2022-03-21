@@ -11,6 +11,18 @@
 	</a>
 </li>
 <li class="nav-item">
+	<a href="<?php echo getAdminUrl().'/reservations'; ?>" class="nav-link">
+		<i class="nav-icon far fa-user"></i>
+		<p>Reservations</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a href="<?php echo getAdminUrl().'/payments'; ?>" class="nav-link">
+		<i class="nav-icon far fa-user"></i>
+		<p>Payments</p>
+	</a>
+</li>
+<li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/logout'; ?>" class="nav-link">
 		<i class="nav-icon fa fa-sign-out-alt"></i>
 		<p>Logout</p>

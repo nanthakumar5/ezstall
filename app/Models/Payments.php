@@ -5,7 +5,7 @@ use App\Models\BaseModel;
 
 class Payments extends BaseModel
 {
-public function getPayments($type, $querydata=[], $requestdata=[], $extras=[])
+	public function getPayments($type, $querydata=[], $requestdata=[], $extras=[])
     {  
     	$select 			= [];
 		
@@ -25,6 +25,26 @@ public function getPayments($type, $querydata=[], $requestdata=[], $extras=[])
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
+		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
+			if(isset($requestdata['page']) && $requestdata['page']=='adminpayments'){
+				$column = ['p.payer_name', 'p.payer_email'];
+				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
+			}
+		}
+		if(isset($requestdata['search']['value']) && $requestdata['search']['value']!=''){
+			$searchvalue = $requestdata['search']['value'];
+						
+			if(isset($requestdata['page'])){
+				$page = $requestdata['page'];
+				
+				$query->groupStart();
+					if($page=='adminpayments'){				
+						$query->like('p.payer_name', $searchvalue);
+						$query->orLike('p.payer_email', $searchvalue);
+					}
+				$query->groupEnd();
+			}			
+		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
 		else $query->groupBy('p.id');
@@ -41,6 +61,4 @@ public function getPayments($type, $querydata=[], $requestdata=[], $extras=[])
 	
 		return $result;
     }
-
-
 }

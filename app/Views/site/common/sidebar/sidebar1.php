@@ -35,7 +35,7 @@
 			<i class="side-nav-i bi bi-calendar2-week"></i>
 			Current Reservation
 		</a>
-		<a class="side-nav-a" href="#">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastmonthactivity">
 			<i class="side-nav-i bi bi-calendar3"></i>
 			Past Month Activity
 		</a>

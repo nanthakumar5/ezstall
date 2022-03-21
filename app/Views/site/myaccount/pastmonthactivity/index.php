@@ -1,8 +1,8 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-<h2 class="fw-bold mb-4">Current Reservation</h2>
+<h2 class="fw-bold mb-4">Past Month Activity</h2>
 <section class="maxWidth eventPagePanel">
-<?php foreach ($bookings as $data) { ?>
+<?php foreach ($bookings as $data) {?>
         <div class="dashboard-box">
             <div class="EventFlex">
                 <div class="EventFlex leftdata">

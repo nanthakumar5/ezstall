@@ -27,7 +27,6 @@ class Booking extends BaseModel
 		$query = $this->db->table('booking b');
 		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
 		if(in_array('users', $querydata)) $query->join('users u', 'u.id=b.user_id', 'left');
-
 		
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
@@ -37,6 +36,27 @@ class Booking extends BaseModel
 
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
+		}
+		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
+			if(isset($requestdata['page']) && $requestdata['page']=='adminreservations'){
+				$column = ['b.firstname', 'b.lastname','b.mobile'];
+				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
+			}
+		}
+		if(isset($requestdata['search']['value']) && $requestdata['search']['value']!=''){
+			$searchvalue = $requestdata['search']['value'];
+						
+			if(isset($requestdata['page'])){
+				$page = $requestdata['page'];
+				
+				$query->groupStart();
+					if($page=='adminreservations'){				
+						$query->like('b.firstname', $searchvalue);
+						$query->orLike('b.lastname', $searchvalue);
+						$query->orLike('b.mobile', $searchvalue);
+					}
+				$query->groupEnd();
+			}			
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);

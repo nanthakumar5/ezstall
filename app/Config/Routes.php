@@ -73,6 +73,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'subscription', 'Site\Myaccount\Subscription\Index::index');
     $routes->match(['get','post'], 'account','Site\Myaccount\AccountInfo\Index::index');
     $routes->match(['get','post'], 'bookingdetails','Site\Myaccount\Reservation\Index::index');
+    $routes->match(['get','post'], 'pastmonthactivity','Site\Myaccount\PastMonthActivity\Index::index');
     $routes->match(['get','post'], 'paymentdetails','Site\Myaccount\PaymentInfo\Index::index');
 
 });
@@ -94,8 +95,20 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->post('event/DTevent', 'Admin\Event\Index::DTevent');
     $routes->get('event/view/(:num)', 'Admin\Event\Index::view/$1');
   
+    //Payments
+    $routes->get('payments', 'Admin\Payments\Index::index');
+    $routes->post('payments/DTpayments', 'Admin\Payments\Index::DTpayments');
+    $routes->get('payments/view/(:num)', 'Admin\Payments\Index::view/$1');
+
+    //Reservations
+    $routes->get('reservations', 'Admin\Reservations\Index::index');
+    $routes->post('reservations/DTreservations', 'Admin\Reservations\Index::DTreservations');
+    $routes->get('reservations/view/(:num)', 'Admin\Reservations\Index::view/$1');
+
 	// Settings
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');
+
+
 });
 
 //Api route
