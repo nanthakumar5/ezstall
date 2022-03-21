@@ -16,9 +16,7 @@ class Stall extends BaseModel
 		}
 
 		$query = $this->db->table('stall s');  
-		if(in_array('event', $querydata)){
-		  	$query->select('e.id as eventid')->join('event e','e.id=s.event_id', 'LEFT');
-		}
+		if(in_array('event', $querydata))	$query->join('event e','e.id=s.event_id', 'LEFT');
 				
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
