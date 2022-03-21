@@ -94,6 +94,30 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('event/action/(:num)', 'Admin\Event\Index::action/$1');
     $routes->post('event/DTevent', 'Admin\Event\Index::DTevent');
     $routes->get('event/view/(:num)', 'Admin\Event\Index::view/$1');
+
+    
+    // CMS - About US
+    $routes->match(['get', 'post'], 'aboutus', 'Admin\Aboutus\Index::index');
+
+    // CMS - Faq
+    $routes->match(['get', 'post'], 'faq', 'Admin\Faq\Index::index');
+    $routes->match(['get', 'post'], 'faq/action', 'Admin\Faq\Index::action');
+    $routes->get('faq/action/(:num)', 'Admin\Faq\Index::action/$1');
+    $routes->post('faq/DTfaq', 'Admin\Faq\Index::DTfaq');
+
+    // CMS - Banner
+    $routes->match(['get', 'post'], 'banner', 'Admin\Banner\Index::index');
+    $routes->match(['get', 'post'], 'banner/action', 'Admin\Banner\Index::action');
+    $routes->get('banner/action/(:num)', 'Admin\Banner\Index::action/$1');
+    $routes->post('banner/DTbanner', 'Admin\Banner\Index::DTbanner');
+
+    // Plan
+    $routes->match(['get', 'post'], 'plan', 'Admin\Plan\Index::index');
+    $routes->match(['get', 'post'], 'plan/action', 'Admin\Plan\Index::action');
+    $routes->get('plan/action/(:num)', 'Admin\Plan\Index::action/$1');
+    $routes->post('plan/DTplan', 'Admin\Plan\Index::DTplan');
+    
+  
   
     //Payments
     $routes->get('payments', 'Admin\Payments\Index::index');
