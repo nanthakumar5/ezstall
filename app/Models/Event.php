@@ -7,7 +7,7 @@ use App\Models\BaseModel;
 class Event extends BaseModel
 {	
 	public function getEvent($type, $querydata=[], $requestdata=[], $extras=[])
-    {  //print_r($requestdata);die;
+    {
     	$select 			= [];
 		
 		if(in_array('event', $querydata)){
@@ -21,12 +21,12 @@ class Event extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('e.id', $requestdata['id']);
-		//if(isset($requestdata['location'])) 			$query->where('e.location', $requestdata['location']);
+		if(isset($requestdata['location'])) 			$query->where('e.location', $requestdata['location']);
 		if(isset($requestdata['status'])) 				$query->whereIn('e.status', $requestdata['status']);
 		if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', $requestdata['start_date']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
-		if(isset($requestdata['location'])) 			$query->like('e.location', $requestdata['location']);
+		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
@@ -166,8 +166,8 @@ class Event extends BaseModel
 					
         			foreach($barndata['stall'] as $stalldata){
         				$stallid        	 = $stalldata['id']!='' ? $stalldata['id'] : '';
-        				$stall['barn_id']    = $barninsertid;
         				$stall['event_id'] 	 = $eventinsertid;
+        				$stall['barn_id']    = $barninsertid;
         				$stall['name']       = $stalldata['name'];
         				$stall['price']      = $stalldata['price'];
         				$stall['status']     = $stalldata['status'];

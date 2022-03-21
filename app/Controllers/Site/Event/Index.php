@@ -9,14 +9,11 @@ class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->db = db_connect();
-
 		$this->event = new Event();
 	}
     
     public function lists()
     {
-
     	$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
@@ -30,7 +27,7 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
-		if($this->request->getGet('location'))   $searchdata['location']     = $this->request->getGet('location');
+		if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
 		if($this->request->getGet('start_date')) $searchdata['start_date']   = date("Y-m-d", strtotime($this->request->getGet('start_date')));
 		if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
     	

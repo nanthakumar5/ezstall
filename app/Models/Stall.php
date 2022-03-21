@@ -17,11 +17,7 @@ class Stall extends BaseModel
 
 		$query = $this->db->table('stall s');  
 		if(in_array('event', $querydata)){
-		  	$query->select('e.id,e.location,e.start_date,e.end_date')->join('event AS e','e.id=s.event_id', 'LEFT');
-
-		  	if(isset($requestdata['start_date'])) 	$query->where('e.start_date', $requestdata['start_date']);
-		  	if(isset($requestdata['end_date'])) 	$query->where('e.end_date', $requestdata['end_date']);
-		  	if(isset($requestdata['location'])) 	$query->like('e.location', $requestdata['location']);
+		  	$query->select('e.id as eventid')->join('event e','e.id=s.event_id', 'LEFT');
 		}
 				
 		if(isset($extras['select'])) 					$query->select($extras['select']);
@@ -29,8 +25,11 @@ class Stall extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('s.id', $requestdata['id']);
 		if(isset($requestdata['name'])) 				$query->where('s.name', $requestdata['name']);
-		if(isset($requestdata['barn_id'])) 			    $query->where('s.barn_id', $requestdata['barn_id']);
 		if(isset($requestdata['event_id'])) 			$query->where('s.event_id', $requestdata['event_id']);
+		if(isset($requestdata['barn_id'])) 			    $query->where('s.barn_id', $requestdata['barn_id']);
+		if(isset($requestdata['start_date'])) 			$query->where('e.start_date', $requestdata['start_date']);
+		if(isset($requestdata['end_date'])) 			$query->where('e.end_date', $requestdata['end_date']);
+		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
 
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
