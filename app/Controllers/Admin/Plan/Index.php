@@ -49,10 +49,10 @@ class Index extends BaseController
 							<a href="javascript:void(0);" data-id="'.$result['id'].'" class="delete">Delete</a>';
 				
 				$totalrecord[] = 	[
-										'name' 			=> 	$result['name'],
-										'price'           =>  $result['price'],
-										'interval'           =>  $result['interval'],
-										'interval_count'           =>  $result['interval_count'],
+										'name' 				=> 	$result['name'],
+										'price'           	=>  $result['price'],
+										'interval'          =>  $result['interval'],
+										'interval_count'    =>  $result['interval_count'],
 										'action'			=> 	'
 																	<div class="table-action">
 																		'.$action.'

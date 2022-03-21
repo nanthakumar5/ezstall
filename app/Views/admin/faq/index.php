@@ -55,8 +55,8 @@
             var action 	= 	'<?php echo getAdminUrl()."/faq"; ?>';
             var data   = '\
             	<input type="hidden" value="'+$(this).data('id')+'" name="id">\
-             <input type="hidden" value="0" name="status">\
-              ';
+				<input type="hidden" value="0" name="status">\
+            ';
           	sweetalert2(action,data);
         });	
 	</script>

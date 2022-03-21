@@ -17,11 +17,13 @@ class Index extends BaseController
 	{		
 		$data = [];
 
-			$result = $this->cms->getCms('row', ['cms'], ['status' => ['1'], 'type' => ['1']]);
-			if($result){
-				$data['result'] = $result;
-			}
-		
+		$result = $this->cms->getCms('row', ['cms'], ['id' => '1', 'status' => ['1'], 'type' => ['1']]);
+		if($result){
+			$data['result'] = $result;
+		}else{
+			$this->session->setFlashdata('danger', 'Try Later.');
+			return redirect()->to(getAdminUrl().'/'); 
+		}
 		
 		if ($this->request->getMethod()=='post')
         {

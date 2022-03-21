@@ -2,8 +2,6 @@
 
 <?php $this->section('content') ?>
 	<?php
-		$id 					= isset($result['id']) ? $result['id'] : '';
-		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$title 					= isset($result['title']) ? $result['title'] : '';
 		$content 		    	= isset($result['content']) ? $result['content'] : '';
 		$pageaction 			= 'Update';
@@ -49,7 +47,7 @@
 							</div>
                             <div class="col-md-12" id="barnwrapper"></div>							
 							<div class="col-md-12">
-								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+								<input type="hidden" name="actionid" value="1">
 								<input type="submit" class="btn btn-primary" value="Submit">
 							</div>
 						</div>

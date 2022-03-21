@@ -51,7 +51,7 @@ class Index extends BaseController
 				$totalrecord[] = 	[
 										'title' 			=> 	$result['title'],
 										'content'           =>  $result['content'],
-										'image'           =>  $result['image'],
+										'image'           	=>  $result['image'],
 										'action'			=> 	'
 																	<div class="table-action">
 																		'.$action.'
@@ -88,9 +88,9 @@ class Index extends BaseController
 		if ($this->request->getMethod()=='post')
         {
 			$requestdata = $this->request->getPost();
-			$requestdata['userid'] = getAdminUserID();
-			$requestdata['status'] = '1';
-			$requestdata['type'] = '3';
+			$requestdata['userid'] 	= getAdminUserID();
+			$requestdata['status'] 	= '1';
+			$requestdata['type']  	= '3';
 			
             $result = $this->cms->action($requestdata);
 			

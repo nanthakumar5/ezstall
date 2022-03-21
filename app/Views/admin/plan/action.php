@@ -5,9 +5,9 @@
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$name 					= isset($result['name']) ? $result['name'] : '';
-		$price 		    = isset($result['price']) ? $result['price'] : '';
-		$interval 		    = isset($result['interval']) ? $result['interval'] : '';
-		$interval_count 		    = isset($result['interval_count']) ? $result['interval_count'] : '';
+		$price 		    		= isset($result['price']) ? $result['price'] : '';
+		$interval 		    	= isset($result['interval']) ? $result['interval'] : '';
+		$interval_count 		= isset($result['interval_count']) ? $result['interval_count'] : '';
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
 	<section class="content-header">

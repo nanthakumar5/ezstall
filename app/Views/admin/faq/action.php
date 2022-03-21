@@ -5,7 +5,7 @@
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$title 					= isset($result['title']) ? $result['title'] : '';
-		$content 		    = isset($result['content']) ? $result['content'] : '';
+		$content 		    	= isset($result['content']) ? $result['content'] : '';
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
 	<section class="content-header">

@@ -40,7 +40,7 @@ class Cms extends BaseModel
 				$page = $requestdata['page'];
 				
 				$query->groupStart();
-					if($page=='adminusers'){				
+					if($page=='adminfaq'){				
 						$query->like('c.title', $searchvalue);
 						$query->orLike('c.content', $searchvalue);
 					}
@@ -72,13 +72,14 @@ class Cms extends BaseModel
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
 		if(isset($data['title']) && $data['title']!='')      							$request['title'] 					= $data['title'];
-		if(isset($data['content']) && $data['content']!='') 	 						$request['content'] 					= $data['content'];
+		if(isset($data['content']) && $data['content']!='') 	 						$request['content'] 				= $data['content'];
+		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
+		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
+		
 		if(isset($data['image']) && $data['image']!=''){
  			$request['image'] = $data['image'];		
 			filemove($data['image'], './assets/uploads/banner');		
 		}
-		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
-		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
 		
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;

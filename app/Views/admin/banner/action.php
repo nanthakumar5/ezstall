@@ -5,7 +5,7 @@
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$title 					= isset($result['title']) ? $result['title'] : '';
-		$content 		    = isset($result['content']) ? $result['content'] : '';
+		$content 		    	= isset($result['content']) ? $result['content'] : '';
 		$image      			= isset($result['image']) ? $result['image'] : '';
 		$image 				    = filedata($image, base_url().'/assets/uploads/banner/');
 		$pageaction 			= $id=='' ? 'Add' : 'Update';

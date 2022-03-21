@@ -87,9 +87,9 @@ class Index extends BaseController
 		if ($this->request->getMethod()=='post')
         {
 			$requestdata = $this->request->getPost();
-			$requestdata['userid'] = getAdminUserID();
-			$requestdata['status'] = '1';
-			$requestdata['type'] = '2';
+			$requestdata['userid'] 	= getAdminUserID();
+			$requestdata['status'] 	= '1';
+			$requestdata['type'] 	= '2';
 			
             $result = $this->cms->action($requestdata);
 			
