@@ -17,7 +17,7 @@ class Index extends BaseController
     public function lists()
     {
 
-		$pager = service('pager'); 
+    	$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
 		$offset = $page * $perpage;
@@ -29,10 +29,14 @@ class Index extends BaseController
 			$searchdata = [];
 			$data['search'] = '';
 		}
-		
+
+		if($this->request->getGet('location'))   $searchdata['location']     = $this->request->getGet('location');
+		if($this->request->getGet('start_date')) $searchdata['start_date']   = date("Y-m-d", strtotime($this->request->getGet('start_date')));
+		if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
+    	
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
-        $data['list'] = $event;
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]); 
+		$data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
     	return view('site/events/list', $data);
     }

@@ -50,29 +50,29 @@
 			</div>
 			<?php if($segment1==''){ ?>
 				<div class="bannerItems">
-					<div class="infoPanel">
-						<span class="mx-auto infoSection">
-							<span class="iconProperty">
-								<input type="text" placeholder="Location">
-								<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
+					<form method="get" autocomplete="off" action="<?php echo base_url();?>/events">
+						<div class="infoPanel">
+							<span class="mx-auto infoSection">
+								<span class="iconProperty">
+									<input type="text" name="location" placeholder="Location">
+									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
+								</span>
+								<span class="iconProperty">
+									<input type="text" name="start_date" id="start_date" placeholder="Check-In">
+								</span>
+								<span class="iconProperty">
+									<input type="text" name="end_date" id="end_date" placeholder="Check-Out">
+								</span>
+								<input type="text" placeholder="No.of stalls">
+								<span class="searchResult">
+									<button type="submit"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+										<path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z">
+										</path>
+									</svg></button>
+								</span>
 							</span>
-							<span class="iconProperty">
-								<input type="text" placeholder="Check-In">
-								<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon">
-							</span>
-							<span class="iconProperty">
-								<input type="text" placeholder="Check-Out">
-								<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calendar Icon">
-							</span>
-							<input type="text" placeholder="No.of stalls">
-							<span class="searchResult">
-								<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-									<path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z">
-									</path>
-								</svg>
-							</span>
-						</span>
-					</div>
+						</div>
+					</form>
 					<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-indicators">
 							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -94,7 +94,7 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>		
 			<?php } ?>
 		</section>
         <?php echo $this->include('site/common/notification/notification1') ?>
