@@ -2565,11 +2565,16 @@ a.view-res {
   font-weight: 500;
   transition: all 1s ease;
   margin-top: 10px;
+  font-size: 14px;
 }
 
 a.view-res:hover {
     border-radius: 50px;
     transition: all 1s ease;
+}
+
+.fs-7{
+  font-size: 14px;
 }
 
 /*21-03-2022 styles end here*/

@@ -6,29 +6,27 @@
     <div class="dashboard-box">
       <div class="EventFlex leftdata">
         <div class="wi-30 row w-100">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div>
-              <h6 class="mb-0 fw-600">Name</h6></td>
-              <p class="mb-0"><?php echo $data['firstname'].$data['lastname'];?></p></td>
-            </div>
-            <div class="my-2">
-              <h6 class="mb-0 fw-600">Booked Event</h6>
-              <p class="mb-0"><?php echo $data['eventname'];?> ( <?php echo implode(',', $data['stall']);?> )</p>
+              <p class="mb-0 text-sm fs-7 fw-600">Name</p></td>
+              <p class="mb-0 fs-7"><?php echo $data['firstname'].$data['lastname'];?></p></td>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div>
-              <h6 class="mb-0 fw-600">CheckIn</h6>
-              <p class="mb-0"><?php echo date("d-m-Y", strtotime($data['check_in']));?></p>
+              <p class="mb-0 fs-7 fw-600">Booked Event</p>
+              <p class="mb-0 fs-7"><?php echo $data['eventname'];?> ( <?php echo implode(',', $data['stall']);?> )</p>
             </div>
-            <div class="d-flex">
+          </div>
+          <div class="col-md-3">
+            <div>
+              <p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
+              <p class="mb-0 fs-7"><?php echo date("d-m-Y", strtotime($data['check_in']));?> - <?php echo date("d-m-Y", strtotime($data['check_out']));?></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="d-flex justify-content-end">
               <a href="#" class="view-res">View</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div>
-              <h6 class="mb-0 fw-600">CheckOut</h6>
-              <p class="mb-0"><?php echo date("d-m-Y", strtotime($data['check_out']));?></p>
             </div>
           </div>
         </div>
