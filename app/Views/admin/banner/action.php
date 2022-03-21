@@ -64,8 +64,7 @@
 									<span class="image_msg messagenotify"></span>
 									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 								</div>
-							</div>
-                            <div class="col-md-12" id="barnwrapper"></div>							
+							</div>						
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-primary" value="Submit">

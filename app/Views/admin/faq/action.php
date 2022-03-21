@@ -49,8 +49,7 @@
 									<label>Content</label>
 									<textarea class="form-control" id="content" name="content" placeholder="Enter Content" rows="3"><?php echo $content;?></textarea>
 								</div>
-							</div>
-                            <div class="col-md-12" id="barnwrapper"></div>							
+							</div>					
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-primary" value="Submit">

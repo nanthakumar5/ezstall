@@ -95,17 +95,16 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->post('event/DTevent', 'Admin\Event\Index::DTevent');
     $routes->get('event/view/(:num)', 'Admin\Event\Index::view/$1');
 
-    
-    // CMS - About US
+    // About US
     $routes->match(['get', 'post'], 'aboutus', 'Admin\Aboutus\Index::index');
 
-    // CMS - Faq
+    // Faq
     $routes->match(['get', 'post'], 'faq', 'Admin\Faq\Index::index');
     $routes->match(['get', 'post'], 'faq/action', 'Admin\Faq\Index::action');
     $routes->get('faq/action/(:num)', 'Admin\Faq\Index::action/$1');
     $routes->post('faq/DTfaq', 'Admin\Faq\Index::DTfaq');
 
-    // CMS - Banner
+    // Banner
     $routes->match(['get', 'post'], 'banner', 'Admin\Banner\Index::index');
     $routes->match(['get', 'post'], 'banner/action', 'Admin\Banner\Index::action');
     $routes->get('banner/action/(:num)', 'Admin\Banner\Index::action/$1');
@@ -117,8 +116,6 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('plan/action/(:num)', 'Admin\Plan\Index::action/$1');
     $routes->post('plan/DTplan', 'Admin\Plan\Index::DTplan');
     
-  
-  
     //Payments
     $routes->get('payments', 'Admin\Payments\Index::index');
     $routes->post('payments/DTpayments', 'Admin\Payments\Index::DTpayments');
@@ -131,8 +128,6 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
 
 	// Settings
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');
-
-
 });
 
 //Api route

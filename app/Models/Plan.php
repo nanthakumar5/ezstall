@@ -65,19 +65,16 @@ class Plan extends BaseModel
 
     public function action($data)
 	{
-		
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
 		$userid				= (isset($data['userid'])) ? $data['userid'] : '';		
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
-		if(isset($data['name']) && $data['name']!='')      							$request['name'] 					= $data['name'];
-		if(isset($data['price']) && $data['price']!='') 	 						$request['price'] 					= $data['price'];
-		if(isset($data['interval']) && $data['interval']!=''){
- 			$request['interval'] = $data['interval'];		
-		}
-		if(isset($data['interval_count']) && $data['interval_count']!='') 	  								$request['interval_count'] 					= $data['interval_count'];
+		if(isset($data['name']) && $data['name']!='')      								$request['name'] 					= $data['name'];
+		if(isset($data['price']) && $data['price']!='') 	 							$request['price'] 					= $data['price'];
+		if(isset($data['interval']) && $data['interval']!='')							$request['interval'] 				= $data['interval'];	
+		if(isset($data['interval_count']) && $data['interval_count']!='') 	  			$request['interval_count'] 			= $data['interval_count'];
 		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
 		
 		if(isset($request)){				

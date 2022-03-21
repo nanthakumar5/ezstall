@@ -4,7 +4,6 @@
 	<?php
 		$title 					= isset($result['title']) ? $result['title'] : '';
 		$content 		    	= isset($result['content']) ? $result['content'] : '';
-		$pageaction 			= 'Update';
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -15,8 +14,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo getAdminUrl(); ?>/aboutus">About Us</a></li>
-						<li class="breadcrumb-item active"><?php echo $pageaction; ?> About Us</li>
+						<li class="breadcrumb-item active">About Us</li>
 					</ol>
 				</div>
 			</div>
@@ -26,7 +24,7 @@
 	<section class="content">
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title"><?php echo $pageaction; ?> About Us</h3>
+				<h3 class="card-title">About Us</h3>
 			</div>
 			<div class="card-body">
 				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/aboutus" autocomplete="off">

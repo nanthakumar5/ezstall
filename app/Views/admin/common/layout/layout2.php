@@ -26,7 +26,7 @@
 		</nav>
 
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<a href="<?php echo base_url(); ?>" class="brand-link">
+			<a href="<?php echo getAdminUrl(); ?>" class="brand-link">
 				<span class="brand-text font-weight-light">Ezstall Management</span>
 			</a>
 			<div class="sidebar">
