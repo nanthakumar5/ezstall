@@ -28,9 +28,9 @@
 								<a href="<?php echo base_url() ?>" class="ml-2rem nav-link">Home</a>
 								<a href="<?php echo base_url() ?>/events" class="ml-2rem nav-link">Events</a>
 								<a href="<?php echo base_url() ?>/stalls" class="ml-2rem nav-link active">Stall</a>
-								<a href="#/faq" data-rr-ui-event-key="#/faq" class="ml-2rem nav-link">FAQ</a>
-								<a href="#/about" data-rr-ui-event-key="#/about" class="ml-2rem nav-link">About</a>
-								<a href="#/contact" data-rr-ui-event-key="#/contact" class="ml-2rem nav-link">Contact Us</a>
+								<a href="<?php echo base_url() ?>/faq" class="ml-2rem nav-link">FAQ</a>
+								<a href="<?php echo base_url() ?>/aboutus" class="ml-2rem nav-link">About</a>
+								<a href="<?php echo base_url() ?>/contactus" class="ml-2rem nav-link">Contact Us</a>
 							</div>
 							<?php if($userdetail){ ?>
 								<div class="navbar-nav">
