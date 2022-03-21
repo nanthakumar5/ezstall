@@ -28,7 +28,7 @@ class Cms extends BaseModel
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
-			if(isset($requestdata['page']) && $requestdata['page']=='adminfaq'){
+			if(isset($requestdata['page']) && ($requestdata['page']=='adminfaq' || $requestdata['page']=='adminbanner')){
 				$column = ['c.title', 'c.content'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
@@ -40,7 +40,7 @@ class Cms extends BaseModel
 				$page = $requestdata['page'];
 				
 				$query->groupStart();
-					if($page=='adminfaq'){				
+					if($page=='adminfaq' || $page=='adminbanner'){				
 						$query->like('c.title', $searchvalue);
 						$query->orLike('c.content', $searchvalue);
 					}

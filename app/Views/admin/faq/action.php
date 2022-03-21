@@ -41,13 +41,13 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Title</label>								
-									<input type="text" name="title" class="form-control" id="name" placeholder="Enter Title" value="<?php echo $title; ?>">
+									<input type="text" name="title" class="form-control" id="title" placeholder="Enter Title" value="<?php echo $title; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Content</label>
-									<textarea class="form-control" id="description" name="content" placeholder="Enter Content" rows="3"><?php echo $content;?></textarea>
+									<textarea class="form-control" id="content" name="content" placeholder="Enter Content" rows="3"><?php echo $content;?></textarea>
 								</div>
 							</div>
                             <div class="col-md-12" id="barnwrapper"></div>							

@@ -21,13 +21,14 @@ class Plan extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('p.id', $requestdata['id']);
+		if(isset($requestdata['status'])) 				$query->whereIn('p.status', $requestdata['status']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='plan'){
-				$column = ['p.name', 'p.price'];
+				$column = ['p.name', 'p.price', 'p.interval','p.interval_count'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
@@ -40,6 +41,8 @@ class Plan extends BaseModel
 					if($page=='plan'){ 		
 						$query->like('p.name', $searchvalue);
 						$query->orLike('p.price', $searchvalue);
+						$query->orLike('p.interval', $searchvalue);
+						$query->orLike('p.interval_count', $searchvalue);
 					}
 				$query->groupEnd();
 			}			
@@ -59,4 +62,65 @@ class Plan extends BaseModel
 	
 		return $result;
     }
+
+    public function action($data)
+	{
+		
+		$this->db->transStart();
+		
+		$datetime			= date('Y-m-d H:i:s');
+		$userid				= (isset($data['userid'])) ? $data['userid'] : '';		
+		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
+		
+		if(isset($data['name']) && $data['name']!='')      							$request['name'] 					= $data['name'];
+		if(isset($data['price']) && $data['price']!='') 	 						$request['price'] 					= $data['price'];
+		if(isset($data['interval']) && $data['interval']!=''){
+ 			$request['interval'] = $data['interval'];		
+		}
+		if(isset($data['interval_count']) && $data['interval_count']!='') 	  								$request['interval_count'] 					= $data['interval_count'];
+		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
+		
+		if(isset($request)){				
+			$request['updated_at'] 	= $datetime;
+			$request['updated_by'] 	= $userid;						
+			
+			if($actionid==''){
+				$request['created_at'] 		= 	$datetime;
+				$request['created_by'] 		= 	$userid;
+				
+				$this->db->table('plan')->insert($request);
+				$insertid = $this->db->insertID();
+			}else{
+				$this->db->table('plan')->update($request, ['id' => $actionid]);
+				$insertid = $actionid;
+			}
+		}
+		
+		if(isset($insertid) && $this->db->transStatus() === FALSE){
+			$this->db->transRollback();
+			return false;
+		}else{
+			$this->db->transCommit();
+			return $insertid;
+		}
+	}
+
+	public function delete($data)
+	{
+		$this->db->transStart();
+		
+		$datetime		= date('Y-m-d H:i:s');
+		$userid			= (isset($data['userid'])) ? $data['userid'] : '';
+		$id 			= $data['id'];
+		
+		$cms 			= $this->db->table('plan')->update(['updated_at' => $datetime, 'updated_by' => $userid, 'status' => '0'], ['id' => $id]);
+		
+		if($cms && $this->db->transStatus() === FALSE){
+			$this->db->transRollback();
+			return false;
+		}else{
+			$this->db->transCommit();
+			return true;
+		}
+	}
 }

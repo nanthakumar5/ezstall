@@ -4,13 +4,13 @@ namespace App\Controllers\Admin\Plan;
 
 use App\Controllers\BaseController;
 
-use App\Models\Plans;
+use App\Models\Plan;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{  
-		$this->plans  = new Plans();
+		$this->plans  = new Plan();
     }
 	
 	public function index()
@@ -37,8 +37,8 @@ class Index extends BaseController
 	public function DTplan()
 	{
 		$post 			= $this->request->getPost();
-		$totalcount 	= $this->plans->getPlans('count', ['plan'], ['status' => ['1']]+$post);
-		$results 		= $this->plans->getPlans('all', ['plan'], ['status' => ['1']]+$post);
+		$totalcount 	= $this->plans->getPlan('count', ['plan'], ['status' => ['1']]+$post);
+		$results 		= $this->plans->getPlan('all', ['plan'], ['status' => ['1']]+$post);
 		
 		$totalrecord 	= [];
 				
@@ -77,7 +77,7 @@ class Index extends BaseController
 		$data = [];
 
 		if($id!=''){
-			$result = $this->plans->getPlans('row', ['plan'], ['id' => $id, 'status' => ['1']]);
+			$result = $this->plans->getPlan('row', ['plan'], ['id' => $id, 'status' => ['1']]);
 			if($result){
 				$data['result'] = $result;
 			}else{

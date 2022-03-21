@@ -49,19 +49,19 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Price</label>								
-									<input type="text" name="price" class="form-control" id="name" placeholder="Enter Price" value="<?php echo $price; ?>">
+									<input type="text" name="price" class="form-control" id="price" placeholder="Enter Price" value="<?php echo $price; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Interval</label>								
-									<input type="text" name="interval" class="form-control" id="name" placeholder="Enter Interval" value="<?php echo $interval; ?>">
+									<input type="text" name="interval" class="form-control" id="interval" placeholder="Enter Interval" value="<?php echo $interval; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Interval Count</label>								
-									<input type="text" name="interval_count" class="form-control" id="name" placeholder="Enter Interval Count" value="<?php echo $interval_count; ?>">
+									<input type="text" name="interval_count" class="form-control" id="interval_count" placeholder="Enter Interval Count" value="<?php echo $interval_count; ?>">
 								</div>
 							</div>
 							

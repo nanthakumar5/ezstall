@@ -23,6 +23,41 @@
 	</a>
 </li>
 <li class="nav-item">
+	<a href="<?php echo getAdminUrl().'/plan'; ?>" class="nav-link">
+		<i class="nav-icon far fa-user"></i>
+		<p>Plans</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a href="#" class="nav-link">
+		<i class="nav-icon fas fa-book"></i>
+		<p>
+		CMS
+		<i class="fas fa-angle-left right"></i>
+		</p>
+	</a>
+		<ul class="nav nav-treeview" style="display: none;">
+			<li class="nav-item">
+				<a href="<?php echo getAdminUrl().'/faq'; ?>" class="nav-link">
+					<i class="far fa-circle nav-icon"></i>
+					<p>FAQ</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?php echo getAdminUrl().'/banner'; ?>" class="nav-link">
+					<i class="far fa-circle nav-icon"></i>
+					<p>Banner</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?php echo getAdminUrl().'/aboutus'; ?>" class="nav-link">
+					<i class="far fa-circle nav-icon"></i>
+					<p>About Us</p>
+				</a>
+			</li>
+		</ul>
+</li>
+<li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/logout'; ?>" class="nav-link">
 		<i class="nav-icon fa fa-sign-out-alt"></i>
 		<p>Logout</p>

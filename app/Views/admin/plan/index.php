@@ -42,7 +42,7 @@
 		$(function(){
 			var options = {	
 				url 		: 	'<?php echo getAdminUrl()."/plan/DTplan"; ?>',	
-				data		:	{ 'page' : 'adminplan' },				
+				data		:	{ 'page' : 'plan' },				
 				columns 	: 	[
     				                { 'data' : 'name' },
                     				{ 'data' : 'price' },
