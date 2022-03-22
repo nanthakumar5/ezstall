@@ -7,40 +7,31 @@
 			<a href="javascript:void(0);"> Aboutus</a>
 		</span>
 	</div>
-
 	<section>
 		<div class="my-5 maxWidth marFive">
 			<div class="row mx-auto">
 				<div class="p-0 col-md-6">
 					<p class="h2 fw-bold mb-4">Get In Touch</p>
-					<form>
+					<form method="post" action="" autocomplete="off">
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Enter Name</label>
-							<input
-							type="text"
-							class="form-control col-md-4 contact-input"
-							placeholder="Enter name"
-							/>
+							<input type="text" name="name" class="form-control col-md-4 contact-input" placeholder="Enter name"/>
 						</div>
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Enter Email</label>
-							<input
-							type="text"
-							class="form-control col-md-4 contact-input"
-							placeholder="Enter Email"
+							<input type="text" name="email" class="form-control col-md-4 contact-input" placeholder="Enter Email"/>
+						</div>
+						<div class="mb-4 col-md-8">
+							<label class="form-label">Enter Subject</label>
+							<input	type="text" name="subject" class="form-control col-md-4 contact-input" placeholder="Enter Subject"
 							/>
 						</div>
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Your Message</label>
-							<textarea
-							class="form-control col-md-4 contact-input"
-							placeholder="Enter message here"
-							></textarea>
+							<textarea name="message" class="form-control col-md-4 contact-input" placeholder="Enter message here"></textarea>
 						</div>
 						<div class="mb-4 col-md-8">
-							<button type="submit" class="contact-submit form-control">
-								Send
-							</button>
+							<button type="submit" class="contact-submit form-control">Send</button>
 						</div>
 					</form>
 				</div>

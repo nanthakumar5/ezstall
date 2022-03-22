@@ -20,7 +20,7 @@ class Cart extends BaseModel
 		if(isset($extras['select'])) 					        $query->select($extras['select']);
 		else											        $query->select(implode(',', $select));
 		
-		if(isset($requestdata['ip'])) 				            $query->where('c.ip', $requestdata['ip']);
+		if(isset($requestdata['userid'])) 				            $query->where('c.userid', $requestdata['userid']);
 		if(isset($requestdata['event_id'])) 				    $query->where('c.event_id', $requestdata['event_id']);
 		if(isset($requestdata['stall_id'])) 				    $query->where('c.stall_id', $requestdata['stall_id']);
 		
@@ -39,7 +39,7 @@ class Cart extends BaseModel
 	{    
 		$this->db->transStart();
 	
-		if(isset($data['ip'])&& $data['ip']!='') 	 	               $request['ip'] 			    = $data['ip'];
+		if(isset($data['userid'])&& $data['userid']!='') 	 	               $request['userid'] 			    = $data['userid'];
 		if(isset($data['stall_id'])&& $data['stall_id']!='')           $request['stall_id'] 	    = $data['stall_id'];
 		if(isset($data['event_id'])&& $data['event_id']!='')           $request['event_id'] 	    = $data['event_id'];
 		if(isset($data['stall_price'])&& $data['stall_price']!='')     $request['price'] 	        = $data['stall_price'];
@@ -66,7 +66,7 @@ class Cart extends BaseModel
 		$this->db->transStart();
 		
 		$request = [];
-		if(isset($data['ip']))            		 $request['ip'] 	    = $data['ip'];
+		if(isset($data['userid']))            	 $request['userid']     = $data['userid'];
 		if(isset($data['stall_id']))             $request['stall_id'] 	= $data['stall_id'];
 		
 		if(count($request)){

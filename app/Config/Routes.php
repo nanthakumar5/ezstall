@@ -50,7 +50,7 @@ $routes->match(['get','post'], 'login', 'Site\Login\Index::index', ['filter' => 
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filter' => 'siteauthentication1']);
 $routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
-$routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
+$routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1',['filter' => 'siteauthentication2']);
 $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
@@ -59,6 +59,7 @@ $routes->get('contactus', 'Site\Contactus\Index::index');
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filter' => 'siteauthentication2']);
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
 $routes->match(['get','post'], 'cart', 'Site\Cart\Index::action');
+$routes->match(['get','post'], 'contactus', 'Site\Contactus\Index::index');
 
 $routes->get('logout', 'Site\Logout\Index::index');
 
@@ -109,6 +110,10 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'banner/action', 'Admin\Banner\Index::action');
     $routes->get('banner/action/(:num)', 'Admin\Banner\Index::action/$1');
     $routes->post('banner/DTbanner', 'Admin\Banner\Index::DTbanner');
+
+     //Contactus
+    $routes->match(['get', 'post'], 'contactus', 'Admin\Contactus\Index::index');
+    $routes->match(['get', 'post'], 'contactus/DTcontactus', 'Admin\Contactus\Index::DTcontactus');
 
     // Plan
     $routes->match(['get', 'post'], 'plan', 'Admin\Plan\Index::index');

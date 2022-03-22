@@ -27,10 +27,12 @@ class Index extends BaseController
     	if ($this->request->getMethod()=='post')
     	{  
             $requestData = $this->request->getPost();
+            $userdetail         = getSiteUserDetails();
+            $userid             = $userdetail['id'];
             $paymentresult= $this->stripe->stripepayment($requestData);
             $requestData['paymentid']=$paymentresult;
             $booking = $this->booking->action($requestData);
-            $this->cart->delete(['ip' => $this->request->getIPAddress()]);
+            $this->cart->delete(['userid' => $userid]);
             
             if($booking){
               return redirect()->to(base_url().'/paymentsuccess'); 

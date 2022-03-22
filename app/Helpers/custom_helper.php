@@ -163,9 +163,10 @@ function getUsersList()
 
 function getCart(){ 
 	$request 		= service('request');
-    $ip 			= $request->getIPAddress();
+    $userdetail 	= getSiteUserDetails();
+	$userid 		= $userdetail['id'];
 	$cart 		    = new \App\Models\Cart;
-	$result         = $cart->getCart('all', ['cart'], ['ip' => $ip]);
+	$result         = $cart->getCart('all', ['cart'], ['userid' => $userid]);
 
 	if($result){
 		$event_id 		= array_unique(array_column($result, 'event_id'))[0];
