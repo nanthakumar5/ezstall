@@ -4,16 +4,18 @@ namespace App\Controllers\Site\Event;
 
 use App\Controllers\BaseController;
 use App\Models\Event;
+use App\Models\Booking;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->event = new Event();
+		$this->event   = new Event();
+		$this->booking = new Booking();
 	}
     
     public function lists()
-    {
+    {	
     	$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
@@ -39,8 +41,30 @@ class Index extends BaseController
     }
 	
 	public function detail($id)
-    { 
-		$data['detail'] = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+    {  
+    	$userid                        = getSiteUserID();
+		$checksubscription             = checkSubscription();
+		$checksubscriptiontype 		   = $checksubscription['type'];
+		$checksubscriptionfacility 	   = $checksubscription['facility'];
+		$checksubscriptionproducer     = $checksubscription['producer'];
+		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
+
+		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid]);
+
+		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
+			$this->session->setFlashdata('danger', 'Please subscribe the account.');
+			return redirect()->to(base_url().'/myaccount/subscription'); 
+		}elseif($checksubscriptiontype=='3' && (($id=='' && $checksubscriptionproducer <= $eventcount) || ($id!='' && $checksubscriptionproducer < $eventcount))){
+			$this->session->setFlashdata('danger', 'Please subscribe the account.');
+			return redirect()->to(base_url().'/myaccount/events'); 
+		}elseif($checksubscriptiontype=='4' && $checksubscriptionstallmanager!='4'){ 
+			$this->session->setFlashdata('danger', 'Please subscribe the account.');
+			return redirect()->to(base_url().'/myaccount/subscription'); 
+		}
+		if($id!=""){
+			$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+			$data['booking'] = $this->booking->getBooking('all', ['booking'],['id' => $id]);
+		}
 		return view('site/events/detail',$data);
     }
 

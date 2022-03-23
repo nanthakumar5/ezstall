@@ -62,6 +62,7 @@ function checkSubscription()
 	$type = '0';
 	$facility = '0';
 	$producer = '0';
+	$stallmanager = '0';
 	
 	if(isset($userdetails)){
 		$type = $userdetails['type'];
@@ -72,9 +73,13 @@ function checkSubscription()
 		if($type=='3'){
 			$producer = $userdetails['subscription_count'];
 		}
+
+		if($type=='4' && $date < $userdetails['subscription_end_date']){
+			$stallmanager = '4';
+		}
 	}
 	
-	return ['type' => $type, 'facility' => $facility, 'producer' => $producer];
+	return ['type' => $type, 'facility' => $facility, 'producer' => $producer, 'stallmanager' => $stallmanager,];
 }
 
 function dateformat($date, $type='')

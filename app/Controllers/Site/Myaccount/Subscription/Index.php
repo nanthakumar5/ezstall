@@ -34,6 +34,9 @@ class Index extends BaseController
 		}elseif($type=='5'){
 			$data['plan'] = $this->plan->getPlan('row', ['plan'], ['id' => '2']);
 		}
+		elseif($type=='4'){
+			$data['plan'] = $this->plan->getPlan('row', ['plan'], ['id' => '3']);
+		}
 		
     	$data['currencysymbol'] = $this->config->currencysymbol;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);

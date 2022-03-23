@@ -12,6 +12,11 @@
 }
 </style>
 <?php $this->section('content') ?>
+<?php
+	$checksubscription 				= checkSubscription();
+	$checksubscriptiontype 			= $checksubscription['type'];
+	$checksubscriptionstallmanager  = $checksubscription['stallmanager'];
+?>
 	<section class="maxWidth">
 		<div class="pageInfo">
 		  <span class="marFive">
@@ -62,7 +67,9 @@
 								<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
 								<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
 							</span>
-							<button class="ucEventBtn">Book Now</button>
+							<button class="ucEventBtn">
+								<a class="text-decoration-none text-white" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>">Book Now</a>
+							</button>
 						</div>
 					</div>
 				</div>

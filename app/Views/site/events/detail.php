@@ -112,11 +112,17 @@
 					
 						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
 											<ul class="list-group">';
-						foreach($barndata['stall'] as $stalldata){ 
+						foreach($barndata['stall'] as $stalldata){
+							foreach($booking as $bookingdata){
+								$stall_id  = explode(',',$bookingdata['stall_id']);
+								$boxcolor  = in_array($stalldata['id'],$stall_id) ? 'red-box' : 'green-box';
+								$readdate  = $boxcolor=='red-box' ? 'disabled' : 'enabled';
+							 }
+							
 							$tabcontent .= 	'<li class="list-group-item">
-							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox">
+							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$readdate.'>
 							'.$stalldata['name'].'
-							<span class="green-box stallavailability" data-stallid="'.$stalldata['id'].'"></span>
+							<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
 							</li>';
 						}
 						$tabcontent .= '</ul></div>';

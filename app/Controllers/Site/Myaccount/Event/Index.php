@@ -78,6 +78,8 @@ class Index extends BaseController
 		$checksubscriptiontype = $checksubscription['type'];
 		$checksubscriptionfacility = $checksubscription['facility'];
 		$checksubscriptionproducer = $checksubscription['producer'];
+		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
+
 		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid]);
 		
 		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
@@ -86,6 +88,9 @@ class Index extends BaseController
 		}elseif($checksubscriptiontype=='3' && (($id=='' && $checksubscriptionproducer <= $eventcount) || ($id!='' && $checksubscriptionproducer < $eventcount))){
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
 			return redirect()->to(base_url().'/myaccount/events'); 
+		}elseif($checksubscriptiontype=='4' && $checksubscriptionstallmanager!='4'){ 
+			$this->session->setFlashdata('danger', 'Please subscribe the account.');
+			return redirect()->to(base_url().'/myaccount/subscription'); 
 		}
 		
 		if($id!=''){

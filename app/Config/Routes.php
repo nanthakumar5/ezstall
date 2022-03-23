@@ -55,6 +55,7 @@ $routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
 $routes->get('faq', 'Site\Faq\Index::index');
+$routes->get('banner', 'Site\Banner\Index::index');
 $routes->get('contactus', 'Site\Contactus\Index::index');
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filter' => 'siteauthentication2']);
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
