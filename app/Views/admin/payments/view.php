@@ -58,11 +58,11 @@
 					</tr>
 					<tr>
 						<th>Plan Date</th>
-						<td><?php echo $plan_date;?></td>
+						<td><?php echo $plan_start;?></td>
 					</tr>
 					<tr>
 						<th>Plan End</th>
-						<td><?php echo $plan_date;?></td>
+						<td><?php echo $plan_end;?></td>
 					</tr>
 				  </tbody>
 				</table>

@@ -39,6 +39,11 @@
               <td class="py-2 fw-600">:</td>
               <td class="py-2 px-2"><p class="mb-0"> <?php echo $data['type']=='1'? $data['created'] : $data['plan_period_start'].'-'.$data['plan_period_end']; ?></p></td>
             </tr>
+             <tr>
+              <td class="py-2 px-2"><h6 class="mb-0 fw-600">
+                <a href="<?php echo base_url().'/myaccount/payments/view/'.$data['id']; ?>" class="view-res">View</a>
+              </h6></td>
+            </tr>
           </table>   
         </span>
       </div>

@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Site\Myaccount\PastMonthActivity;
+namespace App\Controllers\Site\Myaccount\PastActivity;
 
 use App\Controllers\BaseController;
 use App\Models\Booking;
@@ -26,7 +26,7 @@ class Index extends BaseController
 
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 
-    	return view('site/myaccount/pastmonthactivity/index',$data);
+    	return view('site/myaccount/pastactivity/index',$data);
 
     }
 }

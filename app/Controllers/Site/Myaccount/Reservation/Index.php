@@ -18,8 +18,7 @@ class Index extends BaseController
 		$perpage =  5; 
 		$offset = $page * $perpage;
 
-    	$userdetail = getSiteUserDetails();
-    	$userid=$userdetail['id'];
+    	$userid = getSiteUserID();
 
 		$bookingcount = $this->booking->getBooking('count', ['booking'], ['userid' => $userid]);
 		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event','stall'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
@@ -29,4 +28,21 @@ class Index extends BaseController
     	return view('site/myaccount/reservation/index',$data);
 
     }
+
+
+	public function view($id)
+	{
+    	$userid = getSiteUserID();
+
+		$result = $this->booking->getBooking('row', ['booking', 'event','stall'], ['id' => $id,'userid' => $userid]);
+
+		if($result){
+			$data['result'] = $result;
+		}else{
+			$this->session->setFlashdata('danger', 'No Record Found.');
+			return redirect()->to(base_url().'/myaccount/bookings'); 
+		}
+
+		return view('site/myaccount/reservation/view', $data);
+	}	
 }

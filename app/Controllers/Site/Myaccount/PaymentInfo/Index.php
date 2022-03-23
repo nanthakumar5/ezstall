@@ -18,8 +18,7 @@ class Index extends BaseController
 		$perpage =  5; 
 		$offset = $page * $perpage;
 
-    	$userdetail = getSiteUserDetails();
-        $userid=$userdetail['id'];
+    	$userid = getSiteUserID();
 
 		$paymentcount = $this->payments->getPayments('count', ['payment']);
 		$data['payments'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
@@ -28,9 +27,22 @@ class Index extends BaseController
 		$data['currencysymbol'] = $this->config->currencysymbol;
 		$data['paymenttype'] = $this->config->paymenttype;
 
-
-
     	return view('site/myaccount/paymentinfo/index',$data);
 
     }
+
+		public function view($id)
+	{
+    	$userid = getSiteUserID();
+		$result = $this->payments->getPayments('row', ['payment'], ['id' => $id]);
+
+		if($result){
+			$data['result'] = $result;
+		}else{
+			$this->session->setFlashdata('danger', 'No Record Found.');
+			return redirect()->to(base_url().'/myaccount/payments'); 
+		}
+		
+		return view('site/myaccount/paymentinfo/view', $data);
+	}	
 }

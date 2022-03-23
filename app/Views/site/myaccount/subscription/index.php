@@ -6,6 +6,8 @@
 	}
 	</style>
 
+<?php if($userdetail['subscription_id']=='' || $userdetail['subscription_id']=0){ ?>
+
 	<div class="col payment-border">
 		<div class="text-center">
 			<input type="radio" checked>
@@ -16,6 +18,18 @@
 			<button class="pay-btn"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now</button>
 		</div>
 	</div>
+
+<?php } else{ ?>
+
+	<div class="col payment-border">
+		<div>
+			<h6>Your subscription was activated.
+			Your next subscription payment will be due by <?php echo date("d-m-Y", strtotime($userdetail['subscription_end_date']));?></h6>
+		</div>
+	</div>
+
+<?php } ?>
+
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 	<?php echo $stripe; ?>

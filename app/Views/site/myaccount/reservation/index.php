@@ -26,7 +26,7 @@
           </div>
           <div class="col-md-3">
             <div class="d-flex justify-content-end">
-              <a href="#" class="view-res">View</a>
+             <a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="view-res">View</a>
             </div>
           </div>
         </div>

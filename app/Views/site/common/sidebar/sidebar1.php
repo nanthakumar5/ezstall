@@ -33,15 +33,15 @@
 			Stall Manager
 		</a>
 		<?php } ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookingdetails">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookings">
 			<i class="side-nav-i bi bi-calendar2-week"></i>
 			Current Reservation
 		</a>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastmonthactivity">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastactivity">
 			<i class="side-nav-i bi bi-calendar3"></i>
 			Past Month Activity
 		</a>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/paymentdetails">
+		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/payments">
 			<i class="side-nav-i bi bi-credit-card"></i>
 			Payments
 		</a>
@@ -51,10 +51,6 @@
 				Subscription
 			</a>
 		<?php } ?>
-		<a class="side-nav-a" href="#">
-			<i class="side-nav-i bi bi-credit-card"></i>
-			Package
-		</a>
 		<a class="side-nav-a" href="<?php echo base_url();?>/logout">
 			<i class="side-nav-i bi bi-power"></i>
 			Logout

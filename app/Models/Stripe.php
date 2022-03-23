@@ -6,6 +6,7 @@ class Stripe extends BaseModel
 {	
 	function stripepayment($requestData)
 	{
+		
 		$token = $requestData['stripe_token'];
 		$payer_id = $requestData['payer_id'];
 		$payer_name = $requestData['payer_name'];
@@ -202,7 +203,9 @@ class Stripe extends BaseModel
        
 	                if ($subscription_id)
 	                {
-						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_end_date' => date("Y-m-d", strtotime($current_period_end))]);
+						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_id' => $subscription_id,
+							'subscription_end_date' => date("Y-m-d", strtotime($current_period_end))]);
+						
 	                    return $subscription_id;
 	                }
 			        else
