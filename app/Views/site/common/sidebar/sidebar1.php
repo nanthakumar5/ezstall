@@ -16,45 +16,56 @@
 			</a>
 		</li>
 		<li>
-		  <a class="side-nav-a" href="<?php echo base_url();?>/myaccount/account">
-			<i class="side-nav-i bi bi-person"></i>
-			Account Information
-		</a>
-
-		<?php if($role!='5'){ ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
-			<i class="side-nav-i bi bi-calendar2-event"></i>
-			Add Event
-		</a>
-		<?php } ?>
-		<?php if($role!='4'){ ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/stallmanager">
-			<i class="side-nav-i bi bi-person"></i>
-			Stall Manager
-		</a>
-		<?php } ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookings">
-			<i class="side-nav-i bi bi-calendar2-week"></i>
-			Current Reservation
-		</a>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastactivity">
-			<i class="side-nav-i bi bi-calendar3"></i>
-			Past Month Activity
-		</a>
-		<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/payments">
-			<i class="side-nav-i bi bi-credit-card"></i>
-			Payments
-		</a>
-		<?php if($role!='3'){ ?>
-			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/subscription">
-				<i class="side-nav-i bi bi-credit-card"></i>
-				Subscription
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/account">
+				<i class="side-nav-i bi bi-person"></i>
+				Account Information
 			</a>
+		</li>
+		<?php if($role=='2' || $role=='3'){ ?>
+			<li>
+				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
+					<i class="side-nav-i bi bi-calendar2-event"></i>
+					Add Event
+				</a>
+			</li>
+			<li>
+				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/stallmanager">
+					<i class="side-nav-i bi bi-person"></i>
+					Stall Manager
+				</a>
+			</li>
 		<?php } ?>
-		<a class="side-nav-a" href="<?php echo base_url();?>/logout">
-			<i class="side-nav-i bi bi-power"></i>
-			Logout
-		</a>
+		<li>
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookings">
+				<i class="side-nav-i bi bi-calendar2-week"></i>
+				Current Reservation
+			</a>
+		</li>
+		<li>
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastactivity">
+				<i class="side-nav-i bi bi-calendar3"></i>
+				Past Month Activity
+			</a>
+		</li>
+		<li>
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/payments">
+				<i class="side-nav-i bi bi-credit-card"></i>
+				Payments
+			</a>
+		</li>
+		<?php if($role=='2' || $role=='5'){ ?>
+			<li>
+				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/subscription">
+					<i class="side-nav-i bi bi-credit-card"></i>
+					Packages
+				</a>
+			</li>
+		<?php } ?>
+		<li>
+			<a class="side-nav-a" href="<?php echo base_url();?>/logout">
+				<i class="side-nav-i bi bi-power"></i>
+				Logout
+			</a>
 		</li>
 	</ul>
 </nav>

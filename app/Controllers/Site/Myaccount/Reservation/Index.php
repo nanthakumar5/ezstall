@@ -22,7 +22,6 @@ class Index extends BaseController
 
 		$bookingcount = $this->booking->getBooking('count', ['booking'], ['userid' => $userid]);
 		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event','stall'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
-
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 
     	return view('site/myaccount/reservation/index',$data);

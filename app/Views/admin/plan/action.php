@@ -8,6 +8,7 @@
 		$price 		    		= isset($result['price']) ? $result['price'] : '';
 		$interval 		    	= isset($result['interval']) ? $result['interval'] : '';
 		$interval_count 		= isset($result['interval_count']) ? $result['interval_count'] : '';
+		$type 					= isset($result['type']) ? $result['type'] : '';
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
 	<section class="content-header">
@@ -49,23 +50,27 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Price</label>								
-									<input type="text" name="price" class="form-control" id="price" placeholder="Enter Price" value="<?php echo $price; ?>">
+									<input type="number" name="price" class="form-control" id="price" placeholder="Enter Price" value="<?php echo $price; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Interval</label>								
-									<input type="text" name="interval" class="form-control" id="interval" placeholder="Enter Interval" value="<?php echo $interval; ?>">
+									<label>Interval</label>	
+									<?php echo form_dropdown('interval', $paymentinterval, $interval, ['class' => 'form-control']); ?>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Interval Count</label>								
-									<input type="text" name="interval_count" class="form-control" id="interval_count" placeholder="Enter Interval Count" value="<?php echo $interval_count; ?>">
+									<input type="number" name="interval_count" class="form-control" id="interval_count" placeholder="Enter Interval Count" value="<?php echo $interval_count; ?>">
 								</div>
 							</div>
-							
-                            <div class="col-md-12" id="barnwrapper"></div>							
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Type</label>	
+									<?php echo form_dropdown('type', $paymentuser, $type, ['class' => 'form-control']); ?>
+								</div>
+							</div>						
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 								<input type="submit" class="btn btn-primary" value="Submit">
@@ -90,11 +95,14 @@
 					},
 					price  : {	
 						required	: 	true
-					}
+					},
 					interval  : {	
 						required	: 	true
-					}
+					},
 					interval_count  : {	
+						required	: 	true
+					},
+					type  : {	
 						required	: 	true
 					}
 				}

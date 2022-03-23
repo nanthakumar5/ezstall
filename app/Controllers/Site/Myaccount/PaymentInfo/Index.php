@@ -31,10 +31,10 @@ class Index extends BaseController
 
     }
 
-		public function view($id)
+	public function view($id)
 	{
     	$userid = getSiteUserID();
-		$result = $this->payments->getPayments('row', ['payment'], ['id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment'], ['userid' => $userid, 'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;

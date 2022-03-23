@@ -23,10 +23,10 @@ class Siteauthentication2 implements FilterInterface
 			if(!$result){
 				return redirect()->to('/login');
 			}else{
-				if($segment2=='events' && $result['type']=='5'){
+				if($segment2=='events' && in_array($result['type'], ['5'])){
 					return redirect()->to('/myaccount/dashboard');
 				}
-				if($segment2=='subscription' && $result['type']=='3'){
+				if($segment2=='subscription' && in_array($result['type'], ['3', '4'])){
 					return redirect()->to('/myaccount/dashboard');
 				}
 			}

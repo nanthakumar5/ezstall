@@ -21,6 +21,7 @@ class Plan extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('p.id', $requestdata['id']);
+		if(isset($requestdata['type'])) 				$query->whereIn('p.type', $requestdata['type']);
 		if(isset($requestdata['status'])) 				$query->whereIn('p.status', $requestdata['status']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
@@ -75,6 +76,7 @@ class Plan extends BaseModel
 		if(isset($data['price']) && $data['price']!='') 	 							$request['price'] 					= $data['price'];
 		if(isset($data['interval']) && $data['interval']!='')							$request['interval'] 				= $data['interval'];	
 		if(isset($data['interval_count']) && $data['interval_count']!='') 	  			$request['interval_count'] 			= $data['interval_count'];
+		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
 		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
 		
 		if(isset($request)){				

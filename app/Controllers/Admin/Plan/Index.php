@@ -51,7 +51,7 @@ class Index extends BaseController
 				$totalrecord[] = 	[
 										'name' 				=> 	$result['name'],
 										'price'           	=>  $result['price'],
-										'interval'          =>  $result['interval'],
+										'interval'          =>  $this->config->paymentinterval[$result['interval']],
 										'interval_count'    =>  $result['interval_count'],
 										'action'			=> 	'
 																	<div class="table-action">
@@ -74,8 +74,6 @@ class Index extends BaseController
 	
 	public function action($id='')
 	{
-		$data = [];
-
 		if($id!=''){
 			$result = $this->plans->getPlan('row', ['plan'], ['id' => $id, 'status' => ['1']]);
 			if($result){
@@ -103,6 +101,9 @@ class Index extends BaseController
 			}
         }
 		
+		$data['paymentinterval'] = $this->config->paymentinterval;
+		$data['paymentuser'] = $this->config->paymentuser;
+
 		return view('admin/plan/action', $data);
 	}	
 }
