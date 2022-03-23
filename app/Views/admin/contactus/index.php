@@ -36,7 +36,6 @@
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 	<script>
-
 		$(function(){
 			var options = {	
 				url 		: 	'<?php echo getAdminUrl()."/contactus/DTcontactus"; ?>',	
@@ -51,8 +50,6 @@
 			
 			ajaxdatatables('.datatables', options);		
 		});
-
-
 	</script>
 <?php $this->endSection(); ?>
 

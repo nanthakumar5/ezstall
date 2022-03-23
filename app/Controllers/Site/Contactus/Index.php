@@ -16,8 +16,11 @@ class Index extends BaseController
     public function index()
     {  
     	if($this->request->getMethod()=='post'){
-    		$result = $this->contactus->action($this->request->getPost());
+    		$this->contactus->action($this->request->getPost());
+			$this->session->setFlashdata('success', 'You have successfully contacted.');
+			return redirect()->to(base_url().'/contactus'); 
     	}
+		
 		return view('site/contactus/index');
     }
 }

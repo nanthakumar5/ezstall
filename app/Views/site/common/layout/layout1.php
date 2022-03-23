@@ -82,12 +82,11 @@
 							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
 						</div>
 						<div class="carousel-inner">
-							<?php foreach($result as $banner){?>
-							<div class="carousel-item active" data-bs-interval="10000">
-								<img src="<?php echo base_url()?>/assets/uploads/banner/<?php echo $banner['image'];?>" class="d-block w-100" alt="...">
-								<div class="carousel-caption"><p class="sliderCaption">Welcome to EZStall</p><h1 class="sliderTitle">Find a stall for your horses</h1><button type="button" class="sliderButton btn btn-primary">Reserve your stall</button></div>
-								
-							</div>
+							<?php foreach($banners as $banner){?>
+								<div class="carousel-item active" data-bs-interval="10000">
+									<img src="<?php echo base_url()?>/assets/uploads/banner/<?php echo $banner['image'];?>" class="d-block w-100" alt="...">
+									<div class="carousel-caption"><p class="sliderCaption">Welcome to EZStall</p><h1 class="sliderTitle">Find a stall for your horses</h1><button type="button" class="sliderButton btn btn-primary">Reserve your stall</button></div>
+								</div>
 							<?php } ?>
 							
 						</div>

@@ -1,6 +1,6 @@
 <?= $this->extend("site/common/layout/layout1") ?>
 <style type="text/css">
-	.ui-menu img{
+.ui-menu img{
   width:40px;
   height:40px;
 }
@@ -12,16 +12,11 @@
 }
 </style>
 <?php $this->section('content') ?>
-<?php
-	$checksubscription 				= checkSubscription();
-	$checksubscriptiontype 			= $checksubscription['type'];
-	$checksubscriptionstallmanager  = $checksubscription['stallmanager'];
-?>
 	<section class="maxWidth">
 		<div class="pageInfo">
 		  <span class="marFive">
-			<a href="/">Home /</a>
-			<a href="/Events"> Events</a>
+			<a href="<?php echo base_url(); ?>">Home</a> /
+			<a href="javascript:void(0);"> Events</a>
 		  </span>
 		</div>
 

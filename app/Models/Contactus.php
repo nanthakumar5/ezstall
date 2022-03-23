@@ -62,9 +62,9 @@ class Contactus extends BaseModel
 		}
 		return $result;
     }
+	
     public function action($data)
 	{
-
 		$this->db->transStart();
 		
 		$datetime			= date('Y-m-d H:i:s');
@@ -81,10 +81,10 @@ class Contactus extends BaseModel
 			$request['status'] 		= '1';
 			$request['updated_at'] 	= $datetime;
 			$request['updated_by'] 	= $userid;
-			$request['created_at'] 	= 	$datetime;
-			$request['created_by'] 	= 	$userid;
+			$request['created_at'] 	= $datetime;
+			$request['created_by'] 	= $userid;
 				
-			$contactus = $this->db->table('contactus')->insert($request);
+			$this->db->table('contactus')->insert($request);
 			$contactusinsertid = $this->db->insertID();
 		}
 		

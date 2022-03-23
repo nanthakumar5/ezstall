@@ -13,7 +13,6 @@
                 <input type="radio" name="type" id="option-1" value="5" checked="">
                 <input type="radio" name="type" id="option-2" value="2">
                 <input type="radio" name="type" id="option-3" value="3">
-                <input type="radio" name="type" id="option-4" value="4">
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
                     <span>Horse Owner</span>
@@ -24,11 +23,7 @@
                 </label>
                 <label for="option-3" class="option option-3">
                     <div class="dot"></div>
-                    <span > Producer </span>
-                </label>
-                <label for="option-4" class="option option-4">
-                    <div class="dot"></div>
-                    <span > Stall Manager </span>
+                    <span>Producer</span>
                 </label>
             </div>
             <span>

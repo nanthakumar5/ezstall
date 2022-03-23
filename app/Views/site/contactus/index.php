@@ -3,8 +3,8 @@
 <section class="maxWidth">
 	<div class="pageInfo">
 		<span class="marFive">
-			<a href="/">Home /</a>
-			<a href="javascript:void(0);"> Aboutus</a>
+			<a href="<?php echo base_url(); ?>">Home /</a>
+			<a href="javascript:void(0);"> Contact Us</a>
 		</span>
 	</div>
 	<section>

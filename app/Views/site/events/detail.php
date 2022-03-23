@@ -8,7 +8,6 @@
 		<a href="javascript:void(0);"><?php echo $detail['name'] ?></a>
 	  </span>
 	</div>
-
 	<div class="marFive dFlexComBetween eventTP pb-3 pt-4">
 		<div class="pageInfo m-0 bg-transparent">
 			<span class="eventHead">
@@ -113,14 +112,15 @@
 						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
 											<ul class="list-group">';
 						foreach($barndata['stall'] as $stalldata){
-							foreach($booking as $bookingdata){
-								$stall_id  = explode(',',$bookingdata['stall_id']);
-								$boxcolor  = in_array($stalldata['id'],$stall_id) ? 'red-box' : 'green-box';
-								$readdate  = $boxcolor=='red-box' ? 'disabled' : 'enabled';
-							 }
+							$boxcolor  = 'green-box';
+							$checkboxstatus = '';
+							if(in_array($stalldata['id'], $occupied)){
+								$boxcolor  = 'red-box';
+								$checkboxstatus = 'disabled checked';
+							}
 							
 							$tabcontent .= 	'<li class="list-group-item">
-							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$readdate.'>
+							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$checkboxstatus.'>
 							'.$stalldata['name'].'
 							<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
 							</li>';
@@ -186,12 +186,12 @@
 		var enddate   	= $("#enddate").val(); 
 		var stall_id	= $(this).val(); 
 		var event_id    = $(this).attr('data-eventid');
-		var stall_price = $(this).attr('data-price');
+		var price 		= $(this).attr('data-price');
 
 		dateformat('#start_date, #end_date');
 
 		if($(this).is(':checked')){
-			cart({stall_id : stall_id, checked : 1, event_id : event_id, stall_price : stall_price,startdate : startdate, enddate : enddate});
+			cart({stall_id : stall_id, event_id : event_id, price : price, startdate : startdate, enddate : enddate, checked : 1});
 		}else{
 			cart({stall_id : stall_id, checked : 0}); 
 		}

@@ -61,10 +61,11 @@ class Index extends BaseController
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
 			return redirect()->to(base_url().'/myaccount/subscription'); 
 		}
-		if($id!=""){
-			$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-			$data['booking'] = $this->booking->getBooking('all', ['booking'],['id' => $id]);
-		}
+		
+		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
+		$data['occupied'] = explode(',', implode(',', array_column($booking, 'stall_id')));
+		
 		return view('site/events/detail',$data);
     }
 

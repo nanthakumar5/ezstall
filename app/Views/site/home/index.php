@@ -49,7 +49,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="MuiTabPanel-root css-13xfq8m-MuiTabPanel-root" role="tabpanel" aria-labelledby="mui-p-25453-T-1" id="mui-p-25453-P-1">
-                	<?php foreach($upcoming_events as $row){ 
+                	<?php foreach($upcomingevents as $row){ 
                 			$start_on = date("M d, Y", strtotime($row['start_date']));
                 			$end_on = date("M d, Y", strtotime($row['end_date']));
                 			$event_on = $start_on.' - '.$end_on;
@@ -80,7 +80,7 @@
           </div>  
           <div class="tab-pane" id="profile" role="profile-tab" aria-labelledby="profile-tab">
           	<div class="MuiTabPanel-root css-13xfq8m-MuiTabPanel-root" role="tabpanel" aria-labelledby="mui-p-25453-T-1" id="mui-p-25453-P-1">
-                	<?php foreach($past_events as $row){ 
+                	<?php foreach($pastevents as $row){ 
                 			$start_on = date("M d, Y", strtotime($row['start_date']));
                 			$end_on = date("M d, Y", strtotime($row['end_date']));
                 			$event_on = $start_on.' - '.$end_on;
@@ -166,5 +166,3 @@
 
 
 <?php $this->endSection(); ?>
-<?php $this->section('js') ?>
-<?php echo $this->endSection() ?>

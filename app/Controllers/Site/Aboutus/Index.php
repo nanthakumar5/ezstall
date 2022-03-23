@@ -14,7 +14,7 @@ class Index extends BaseController
     
     public function index()
     { 
-    	$result['data'] = $this->cms->getCms('row', ['cms'], ['id' => '1', 'status' => ['1'], 'type' => ['1']]);
-		return view('site/aboutus/index',$result);
+    	$data['result'] = $this->cms->getCms('row', ['cms'], ['id' => '1', 'status' => ['1'], 'type' => ['1']]);
+		return view('site/aboutus/index', $data);
     }
 }

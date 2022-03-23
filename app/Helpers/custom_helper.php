@@ -66,6 +66,7 @@ function checkSubscription()
 	
 	if(isset($userdetails)){
 		$type = $userdetails['type'];
+		
 		if($type=='2' && $date < $userdetails['subscription_end_date']){
 			$facility = '1';
 		}
@@ -75,11 +76,11 @@ function checkSubscription()
 		}
 
 		if($type=='4' && $date < $userdetails['subscription_end_date']){
-			$stallmanager = '4';
+			$stallmanager = '1';
 		}
 	}
 	
-	return ['type' => $type, 'facility' => $facility, 'producer' => $producer, 'stallmanager' => $stallmanager,];
+	return ['type' => $type, 'facility' => $facility, 'producer' => $producer, 'stallmanager' => $stallmanager];
 }
 
 function dateformat($date, $type='')
@@ -168,10 +169,9 @@ function getUsersList()
 
 function getCart(){ 
 	$request 		= service('request');
-    $userdetail 	= getSiteUserDetails();
-	$userid 		= $userdetail['id'];
+    $userid 		= getSiteID();
 	$cart 		    = new \App\Models\Cart;
-	$result         = $cart->getCart('all', ['cart'], ['userid' => $userid]);
+	$result         = $cart->getCart('all', ['cart'], ['user_id' => $userid]);
 
 	if($result){
 		$event_id 		= array_unique(array_column($result, 'event_id'))[0];

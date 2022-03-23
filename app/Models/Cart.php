@@ -20,7 +20,7 @@ class Cart extends BaseModel
 		if(isset($extras['select'])) 					        $query->select($extras['select']);
 		else											        $query->select(implode(',', $select));
 		
-		if(isset($requestdata['userid'])) 				            $query->where('c.userid', $requestdata['userid']);
+		if(isset($requestdata['user_id'])) 				        $query->where('c.user_id', $requestdata['user_id']);
 		if(isset($requestdata['event_id'])) 				    $query->where('c.event_id', $requestdata['event_id']);
 		if(isset($requestdata['stall_id'])) 				    $query->where('c.stall_id', $requestdata['stall_id']);
 		
@@ -39,12 +39,12 @@ class Cart extends BaseModel
 	{    
 		$this->db->transStart();
 	
-		if(isset($data['userid'])&& $data['userid']!='') 	 	               $request['userid'] 			    = $data['userid'];
-		if(isset($data['stall_id'])&& $data['stall_id']!='')           $request['stall_id'] 	    = $data['stall_id'];
-		if(isset($data['event_id'])&& $data['event_id']!='')           $request['event_id'] 	    = $data['event_id'];
-		if(isset($data['stall_price'])&& $data['stall_price']!='')     $request['price'] 	        = $data['stall_price'];
-		if(isset($data['startdate'])&& $data['startdate']!='')         $request['check_in'] 	    = $data['startdate'];
-		if(isset($data['enddate'])&& $data['enddate']!='')             $request['check_out'] 	    = $data['enddate'];
+		if(isset($data['user_id'])&& $data['user_id']!='') 	 	       	$request['user_id'] 		= $data['user_id'];
+		if(isset($data['stall_id'])&& $data['stall_id']!='')           	$request['stall_id'] 	    = $data['stall_id'];
+		if(isset($data['event_id'])&& $data['event_id']!='')           	$request['event_id'] 	    = $data['event_id'];
+		if(isset($data['price'])&& $data['price']!='')     				$request['price'] 	        = $data['price'];
+		if(isset($data['startdate'])&& $data['startdate']!='')         	$request['check_in'] 	    = $data['startdate'];
+		if(isset($data['enddate'])&& $data['enddate']!='')             	$request['check_out'] 	    = $data['enddate'];
 
 
 		if(isset($request)){ 
@@ -66,7 +66,7 @@ class Cart extends BaseModel
 		$this->db->transStart();
 		
 		$request = [];
-		if(isset($data['userid']))            	 $request['userid']     = $data['userid'];
+		if(isset($data['user_id']))            	 $request['user_id']    = $data['user_id'];
 		if(isset($data['stall_id']))             $request['stall_id'] 	= $data['stall_id'];
 		
 		if(count($request)){

@@ -15,11 +15,10 @@ class Index extends BaseController
     public function action(){ 
     	if($this->request->getMethod()=='post'){ 
     		$requestdata       	= $this->request->getPost(); 
-    		$userdetail 		= getSiteUserDetails();
-			$userid 			= $userdetail['id'];
+			$userid 			= getSiteUserID();
 
     		if(!isset($requestdata['cart'])){
-	    		$requestdata['userid'] = $userid;
+	    		$requestdata['user_id'] = $userid;
 	    		if($requestdata['checked']==1){ 
 	               	$result = $this->cart->action($requestdata);  
 	            }else{
