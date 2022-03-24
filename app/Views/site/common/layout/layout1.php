@@ -96,7 +96,7 @@
 		</section>
         <?php echo $this->include('site/common/notification/notification1') ?>
 		<?php if($segment1=='myaccount'){ ?>
-			<div class="side-nav-wrapper maxWidth marFive">
+			<div class="side-nav-wrapper maxWidth">
 				 <?php echo $this->include('site/common/sidebar/sidebar1') ?>
 				<div id="content" class="mb-5">
 					<?php $this->renderSection('content'); ?>

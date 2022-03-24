@@ -56,7 +56,7 @@
 		<?php if($role=='2' || $role=='5'){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/subscription">
-					<i class="side-nav-i bi bi-credit-card"></i>
+					<i class="side-nav-i bi bi-box"></i>
 					Packages
 				</a>
 			</li>

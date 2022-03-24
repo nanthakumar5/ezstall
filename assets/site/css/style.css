@@ -703,6 +703,7 @@ li.nav-item {
   padding: 1.6% 0;
   border: 1px solid #e4e4e4;
   border-radius: 2vh;
+  transition: all 1s ease;
 }
 
 .ucEventInfo:hover .ucEventBtn {
@@ -710,8 +711,8 @@ li.nav-item {
 }
 
 .ucEventInfo:hover {
-  box-shadow: 1px 1px 7px 1px rgba(186, 186, 186, 1);
-  transition: all 0.7s !important;
+  box-shadow: 0 8px 17px 0 rgb(0 0 0 / 10%);
+  transition: all 1s ease;
 }
 
 .ucEventBtn {
@@ -2204,6 +2205,10 @@ ul.CTAs .side-nav-a {
   color: #e00000;
 }
 
+#sidebar-nav ul li a:hover .bi-box::before{
+  color: #e00000;
+}
+
 #sidebar-nav ul li a:hover .bi-power::before{
   color: #e00000;
 }
@@ -2335,23 +2340,6 @@ a.btn-custom-black {
     text-decoration: none;
     padding: 10px 10px;
     border-radius: 5px;
-}
-
-.edit a {
-    text-decoration: none;
-    color: #fff;
-    padding: 5px 15px;
-    width: 100%;
-    border-radius: 5px;
-    background: #e00000;
-}
-
-.edit {
-    display: grid;
-    width: inherit;
-    place-content: end;
-    gap: 10px;
-    text-align: center;
 }
 
 p.error_class_1 {
@@ -2573,8 +2561,8 @@ a.view-res {
 }
 
 a.view-res:hover {
-    border-radius: 50px;
-    transition: all 1s ease;
+  border-radius: 50px;
+  transition: all 1s ease;
 }
 
 .fs-7{
@@ -2582,3 +2570,82 @@ a.view-res:hover {
 }
 
 /*21-03-2022 styles end here*/
+
+/*23-03-2022 styles starts here*/
+
+a.dash-edit {
+  text-decoration: none;
+  background: #171717;
+  color: #fff;
+  padding: 6px 25px;
+  border-radius: 4px;
+  transition: all 1s ease;
+  font-weight: 500;
+  float: left;
+}
+
+a.dash-trash {
+  text-decoration: none;
+  background: #e54a4a;
+  color: #fff;
+  padding: 6px 25px;
+  border-radius: 4px;
+  transition: all 1s ease;
+  font-weight: 500;
+  float: right;
+}
+
+a.dash-edit:hover {
+  border-radius: 50px;
+  transition: all 1s ease;
+}
+
+a.dash-trash:hover {
+  border-radius: 50px;
+  transition: all 1s ease;
+}
+
+.dash-trash i.far.fa-trash-alt{
+  color: #fff;
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.dash-edit i.far.fa-edit{
+  color: #fff;
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.stall-info-name{
+  font-weight: 700;
+}
+
+/*23-03-2022 styles end here*/
+
+
+/*24-03-2022 styles start here*/
+
+a.btn.back-btn {
+  color: #fff;
+  background: #171717;
+  transition: all 1s ease;
+}
+
+a.btn.back-btn:hover {
+  border-radius: 50px;
+  transition: all 1s ease;
+}
+
+.base-style{
+  transition: all .6s ease;
+}
+
+.base-style:hover {
+  background-color: #F7F7F7;
+  transition: all .6s ease;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+/*24-03-2022 styles end here*/

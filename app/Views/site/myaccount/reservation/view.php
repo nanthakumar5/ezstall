@@ -13,41 +13,71 @@
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
       $checkout           = date("d-m-Y", strtotime($checkout));
   ?>
-<a href="<?php echo base_url().'/myaccount/bookings';?>" class="btn btn-primary">Back</a>
-<h2 class="fw-bold mb-4">View Reservation</h2>
-<section class="maxWidth eventPagePanel">
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>First Name</th>
-        <td><?php echo $firstname;?></td>
-      </tr>
-      <tr>
-        <th>Last Name</th>
-        <td><?php echo $lastname;?></td>
-    </tr>
-    <tr>
-      <th>Mobile</th>
-      <td><?php echo $mobile;?></td>
-    </tr>
-    <tr>
-      <th>Event Name</th>
-      <td><?php echo $eventname;?></td>
-    </tr>
-    <tr>
-      <th>Stall Name</th>
-      <td><?php echo $stalls;?></td>
-    </tr>
-    <tr>
-      <th>Check In</th>
-      <td><?php echo $checkin;?></td>
-    </tr>
-    <tr>
-      <th>Check Out</th>
-      <td><?php echo $checkout;?></td>
-    </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col">
+    <h2 class="fw-bold mb-4">View Reservation</h2>
+  </div>
+  <div class="col" align="right">
+    <a href="<?php echo base_url().'/myaccount/bookings';?>" class="btn back-btn">Back</a>
+  </div>
+</div>
+<section class="maxWidp eventPagePanel">
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">First Name</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $firstname;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Last Name</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $lastname;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Mobile</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $mobile;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Event Name</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $eventname;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Stall Name</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $stalls;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Check In</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $checkin;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Check Out</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $checkout;?></p>
+    </div>
+  </div>
 </section>
 
 <?php $this->endSection(); ?>
