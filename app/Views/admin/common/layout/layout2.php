@@ -57,6 +57,7 @@
 	<script src="<?php echo base_url();?>/assets/plugins/datatables/js/dataTables.responsive.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/plugins/tinymce/tinymce.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/js/adminlte.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 	<?php $this->renderSection('js') ?>
