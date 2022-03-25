@@ -61,6 +61,8 @@ $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filte
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
 $routes->match(['get','post'], 'cart', 'Site\Cart\Index::action');
 $routes->match(['get','post'], 'contactus', 'Site\Contactus\Index::index');
+$routes->post('newsletter', 'Site\Home\Index::index');
+
 
 $routes->get('logout', 'Site\Logout\Index::index');
 
@@ -69,6 +71,9 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
+    $routes->get('events/view/(:num)', 'Site\Myaccount\Event\Index::view/$1');
+    $routes->get('events/export/(:num)', 'Site\Myaccount\Event\Index::export/$1');
+
     $routes->match(['get','post'], 'stallmanager', 'Site\Myaccount\Stallmanager\Index::index');
     $routes->match(['get','post'], 'stallmanager/add', 'Site\Myaccount\Stallmanager\Index::action'); 
     $routes->match(['get','post'], 'stallmanager/edit/(:num)', 'Site\Myaccount\Stallmanager\Index::action/$1');
@@ -136,6 +141,10 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('reservations', 'Admin\Reservations\Index::index');
     $routes->post('reservations/DTreservations', 'Admin\Reservations\Index::DTreservations');
     $routes->get('reservations/view/(:num)', 'Admin\Reservations\Index::view/$1');
+
+    //Newsletter
+    $routes->get('newsletter', 'Admin\Newsletter\Index::index');
+    $routes->post('newsletter/DTnewsletter', 'Admin\Newsletter\Index::DTnewsletter');
 
 	// Settings
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');

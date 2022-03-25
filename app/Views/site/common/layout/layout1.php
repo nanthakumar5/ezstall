@@ -108,10 +108,12 @@
 		<section class="footerPanel">
 			<div class="subscriptionPanel">
 				<h3 class="newsTitle">Newsletter Subscription</h3>
-				<div class="subscriptionArea">
-					<input class="subscriptionInput" type="email" placeholder="Email address" />
-					<button class="subscriptionBtn">Subscribe</button>
-				</div>
+				<form method="post" action="<?php echo base_url();?>/newsletter">
+					<div class="subscriptionArea">
+						<input class="subscriptionInput" type="email" name="email" placeholder="Email address" />
+						<button type="submit" class="subscriptionBtn">Subscribe</button>
+					</div>
+				</form>
 			</div>
 			<div class="footerBottom">
 				<div class="panel1">

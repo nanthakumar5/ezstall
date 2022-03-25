@@ -23,7 +23,7 @@
 								</span>
 							</span>
 							<span class="wi-70">
-								<p class="topdate"> <?php echo $data['start_date']; ?> - <?php echo $data['end_date']; ?> -  <?php echo $data['location']; ?></p>
+								<p class="topdate"> <?php echo date('d-m-Y', strtotime($data['start_date'])); ?> - <?php echo date('d-m-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
 								<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
 							</span>
 						</div>
@@ -38,6 +38,8 @@
 							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
 						</span>
 						<div class="edit">
+							<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>">Export</a>
+							<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>">View</a>
 							<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>">Edit</a>
 							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="delete">Delete</a>
 						</div>

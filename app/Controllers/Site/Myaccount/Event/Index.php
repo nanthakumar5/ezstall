@@ -5,6 +5,9 @@ use App\Controllers\BaseController;
 use App\Models\Users;
 use App\Models\Event;
 use App\Models\Stripe;
+use App\Models\Booking;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Index extends BaseController
 {
@@ -13,6 +16,8 @@ class Index extends BaseController
 		$this->event = new Event();
 		$this->users = new Users();
 		$this->stripe = new Stripe();
+		$this->booking = new Booking();
+		
 	}
     
     public function index()
@@ -119,4 +124,64 @@ class Index extends BaseController
 		$data['statuslist'] = $this->config->status1;
 		return view('site/myaccount/event/action', $data);
 	}
+	public function view($id)
+    {  
+		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
+		$occupied = explode(',', implode(',', array_column($booking, 'stall_id')));
+		
+		return view('site/myaccount/event/view',$data);
+    }
+    public function export($id)
+    {
+    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
+		$occupied 	= explode(',', implode(',', array_column($booking, 'stall_id')));
+
+		$spreadsheet = new Spreadsheet();
+		$sheet 		 = $spreadsheet->getActiveSheet();
+
+		$sheet->setCellValue('A1', 'Event Name');
+		$sheet->setCellValue('B1', 'Description');
+		$sheet->setCellValue('C1', 'Location');
+		$sheet->setCellValue('D1', 'Mobile');
+		$sheet->setCellValue('E1', 'start_date');
+		$sheet->setCellValue('F1', 'end_date');
+		$sheet->setCellValue('G1', 'start_time');
+		$sheet->setCellValue('H1', 'end_time');
+		$sheet->setCellValue('I1', 'stalls_price');
+		$sheet->setCellValue('J1', 'rvspots_price');
+
+     	$rows = 2;
+      $sheet->setCellValue('A' . $rows, $data['name']);
+      $sheet->setCellValue('B' . $rows, $data['description']);
+      $sheet->setCellValue('C' . $rows, $data['location']);
+      $sheet->setCellValue('D' . $rows, $data['mobile']);
+      $sheet->setCellValue('E' . $rows, $data['start_date']);
+      $sheet->setCellValue('F' . $rows, $data['end_date']);
+      $sheet->setCellValue('G' . $rows, $data['start_time']);
+      $sheet->setCellValue('H' . $rows, $data['end_time']);
+      $sheet->setCellValue('I' . $rows, $data['stalls_price']);
+      $sheet->setCellValue('J' . $rows, $data['rvspots_price']);
+        
+         $row = 4;
+         $col = 1;
+         foreach ($data['barn'] as $barn) {  
+				$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
+
+			foreach($barn['stall'] as $key=> $stall){   
+				$stallname = $stall['name'];
+				$status = in_array($stall['id'], $occupied)? 'Occupied' : 'Available'; 
+				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname. '- ' .$status);
+			}
+			$col++;
+		}
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="GeneratedFile.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+    }
 }
