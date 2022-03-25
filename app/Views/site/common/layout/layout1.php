@@ -108,9 +108,9 @@
 		<section class="footerPanel">
 			<div class="subscriptionPanel">
 				<h3 class="newsTitle">Newsletter Subscription</h3>
-				<form method="post" action="<?php echo base_url();?>/newsletter">
+				<form method="post" action="<?php echo base_url();?>/">
 					<div class="subscriptionArea">
-						<input class="subscriptionInput" type="email" name="email" placeholder="Email address" />
+						<input class="subscriptionInput" type="email" name="email" placeholder="Email address" required>
 						<button type="submit" class="subscriptionBtn">Subscribe</button>
 					</div>
 				</form>

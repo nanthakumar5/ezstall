@@ -29,7 +29,7 @@ class Index extends BaseController
 			foreach($results as $key => $result){
 				$totalrecord[] = 	[
 										'email'  	=>  $result['email'],
-										'date'  	=>  $result['date'],
+										'date'  	=>  date('d-m-Y', strtotime($result['date'])),
 									];
 			}
 		}

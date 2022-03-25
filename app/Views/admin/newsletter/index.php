@@ -24,7 +24,7 @@
 					<table class="table table-striped table-hover datatables">
 						<thead>
 							<th>Email</th>
-							<th>Newsletter Date</th>
+							<th>Date</th>
 						</thead>
 					</table>
 				</div>

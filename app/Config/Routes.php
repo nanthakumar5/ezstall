@@ -36,8 +36,6 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 // Ajax
-
-
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 $routes->post('searchevents', 'Site\Event\Index::searchevents');
 
@@ -61,8 +59,6 @@ $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filte
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
 $routes->match(['get','post'], 'cart', 'Site\Cart\Index::action');
 $routes->match(['get','post'], 'contactus', 'Site\Contactus\Index::index');
-$routes->post('newsletter', 'Site\Home\Index::index');
-
 
 $routes->get('logout', 'Site\Logout\Index::index');
 

@@ -17,7 +17,8 @@ class Newsletter extends BaseModel
 
 		$query = $this->db->table('newsletter n');  
 				
-		if(isset($extras['select'])) 				$query->select($extras['select']);else									  $query->select(implode(',', $select));
+		if(isset($extras['select'])) 		$query->select($extras['select']);
+		else								$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 		$query->where('n.id', $requestdata['id']);
 		
@@ -68,8 +69,7 @@ class Newsletter extends BaseModel
 		
 		if(isset($data['email']) && $data['email']!='')   $request['email'] 		= $data['email'];
 		if(isset($request)){
-			$request['date'] 	= $datetime;
-				//print_r($request);die;
+			$request['date'] = $datetime;
 			$this->db->table('newsletter')->insert($request);
 			$newsletterinsertid = $this->db->insertID();
 		}

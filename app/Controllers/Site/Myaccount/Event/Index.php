@@ -16,8 +16,7 @@ class Index extends BaseController
 		$this->event = new Event();
 		$this->users = new Users();
 		$this->stripe = new Stripe();
-		$this->booking = new Booking();
-		
+		$this->booking = new Booking();		
 	}
     
     public function index()
@@ -124,6 +123,7 @@ class Index extends BaseController
 		$data['statuslist'] = $this->config->status1;
 		return view('site/myaccount/event/action', $data);
 	}
+	
 	public function view($id)
     {  
 		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
@@ -132,6 +132,7 @@ class Index extends BaseController
 		
 		return view('site/myaccount/event/view',$data);
     }
+	
     public function export($id)
     {
     	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
@@ -153,16 +154,16 @@ class Index extends BaseController
 		$sheet->setCellValue('J1', 'rvspots_price');
 
      	$rows = 2;
-      $sheet->setCellValue('A' . $rows, $data['name']);
-      $sheet->setCellValue('B' . $rows, $data['description']);
-      $sheet->setCellValue('C' . $rows, $data['location']);
-      $sheet->setCellValue('D' . $rows, $data['mobile']);
-      $sheet->setCellValue('E' . $rows, $data['start_date']);
-      $sheet->setCellValue('F' . $rows, $data['end_date']);
-      $sheet->setCellValue('G' . $rows, $data['start_time']);
-      $sheet->setCellValue('H' . $rows, $data['end_time']);
-      $sheet->setCellValue('I' . $rows, $data['stalls_price']);
-      $sheet->setCellValue('J' . $rows, $data['rvspots_price']);
+		$sheet->setCellValue('A' . $rows, $data['name']);
+		$sheet->setCellValue('B' . $rows, $data['description']);
+		$sheet->setCellValue('C' . $rows, $data['location']);
+		$sheet->setCellValue('D' . $rows, $data['mobile']);
+		$sheet->setCellValue('E' . $rows, $data['start_date']);
+		$sheet->setCellValue('F' . $rows, $data['end_date']);
+		$sheet->setCellValue('G' . $rows, $data['start_time']);
+		$sheet->setCellValue('H' . $rows, $data['end_time']);
+		$sheet->setCellValue('I' . $rows, $data['stalls_price']);
+		$sheet->setCellValue('J' . $rows, $data['rvspots_price']);
         
          $row = 4;
          $col = 1;
