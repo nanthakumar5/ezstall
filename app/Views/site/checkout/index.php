@@ -1,5 +1,20 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
+<?php
+/*  $barnstallsname=[];
+foreach ($stalldetail as $stalls) {
+    $barnstallsname[] = ['barnname' => $stalls['barnname'], 'stallname' => $stalls['stallname']];
+}*/
+
+  $barnstall = $cartdetail['barnstall'];
+  $stallids  = [];
+  foreach ($barnstall as $bs) {
+    $stallids[] =  $bs['stall_id'];
+  }
+
+//$cardstalls =  json_encode($cartdetail['barnstall']);
+//exit;
+?>
               <section class="maxWidth">
                 <div class="pageInfo">
                   <span class="marFive">
@@ -72,7 +87,7 @@
                   <input type="hidden" name="checkout" value="<?php echo $cartdetail['check_out']; ?>" >
                   <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
                   <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
-                  <input type="hidden" name="stallid" value="<?php echo implode(',', $cartdetail['stall_id']);?>">
+                  <input type="hidden" name="barnid" value="<?php echo json_encode($cartdetail['barnstall']); ?>" >
 
                 <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
                   <h2 class="checkout-fw-6">Special Requests</h2>
@@ -109,7 +124,7 @@
 
                   <div class="col-lg-6 mb-4">
                     <b>Number Of Stalls</b>
-                    <p><?php echo count($cartdetail['stall_id']); ?> Stalls (<?php echo implode(',', $cartdetail['stall_id']);?>)</p>
+                    <p><?php echo count($stallids); ?> Stalls (<?php foreach ($stalldetail as $stalls) { echo $stalls['barnname'].'=> '.$stalls['stallname']; }?>)</p>
                   </div>
                 </div>
             </div>
@@ -128,7 +143,7 @@
   <div class="border rounded pt-4 ps-3 pe-3 mb-5">
   <div class="row mb-2">
   <div class="col-lg-8 ">
-  <?php echo count($cartdetail['stall_id']); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
+  <?php echo count($stallids); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
   </div>
   <div class="col-lg-4">
   $<?php echo $cartdetail['price']; ?>

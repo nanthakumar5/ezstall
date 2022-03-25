@@ -11,6 +11,7 @@
   white-space:nowrap;
 }
 </style>
+
 <?php $this->section('content') ?>
 	<section class="maxWidth">
 		<div class="pageInfo">
@@ -35,47 +36,79 @@
 		  </span>
 		</div>
 		<section class="maxWidth marFiveRes eventPagePanel">
-			 <?php foreach ($list as $data) {  ?>
-				<div class="ucEventInfo">
-					<div class="EventFlex">
-						<span class="wi-50">
-							<div class="EventFlex leftdata">
-								<span class="wi-30">
-									<span class="ucimg">
-										<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
-									</span>
+		 <?php foreach ($list as $data) {  
+			$startdate 		= date("d-m-Y", strtotime($data['start_date']));
+			$enddate 		= date("d-m-Y", strtotime($data['end_date']));
+            $currentdate 	= date("d-m-Y");
+            $planend        = $subscriptionData['subscriptionenddate'];
+
+			if(($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['id'] == $data['user_id'] && $userdetail['type'] == 2)){
+
+					$booknowBtn = "Book now";
+
+			}
+			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['id'] == $data['user_id'] && $userdetail['type'] == 3)) {
+
+					$booknowBtn = "Book now";
+
+			}
+			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['parent_id'] == $data['user_id'] && $userdetail['type'] == 4)) {
+
+					$booknowBtn = "Book now";
+
+			}
+			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['type'] == 5)) {
+
+					$booknowBtn = "Book now";
+
+			}
+			elseif (($enddate >= $currentdate && $userdetail['type'] == 5)) {
+
+					$booknowBtn = "Subscription Expired";
+
+			}
+			else{
+					$booknowBtn = "Closed";
+			}
+		?>
+			<div class="ucEventInfo">
+				<div class="EventFlex">
+					<span class="wi-50">
+						<div class="EventFlex leftdata">
+							<span class="wi-30">
+								<span class="ucimg">
+									<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
 								</span>
-								<span class="wi-70"> 
-									<p class="topdate"> <?php echo date("d-m-Y", strtotime($data['start_date'])); ?> - 
-										<?php echo date("d-m-Y", strtotime($data['end_date'])); ?> -  
-										<?php echo $data['location']; ?></p>
-									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
-								</span>
-							</div>
-						</span>
-						<div class="wi-50-2 justify-content-between">
-							<span class="m-left">
-								<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
-								<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
 							</span>
-							<span class="m-left">
-								<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-								<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
+							<span class="wi-70"> 
+								<p class="topdate"> <?php echo $startdate; ?> - 
+									<?php echo $enddate; ?> -  
+									<?php echo $data['location']; ?></p>
+								<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
 							</span>
-							<button class="ucEventBtn">
-								<a class="text-decoration-none text-white" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>">Book Now</a>
-							</button>
 						</div>
+					</span>
+					<div class="wi-50-2 justify-content-between">
+						<span class="m-left">
+							<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
+							<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
+						</span>
+						<span class="m-left">
+							<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
+						</span>
+						<button class="ucEventBtn">
+							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn;?></a>
+						</button>
 					</div>
 				</div>
-            <?php } ?>
-			<?php echo $pager; ?>
+			</div>
+        <?php } ?>
+		<?php echo $pager; ?>
 		</section>
 	</section>
 <?php $this->endSection(); ?>
-
 <?php $this->section('js') ?>
-
 <script>
 var baseurl = "<?php echo base_url(); ?>";
 
@@ -103,8 +136,17 @@ $(function() {
 	._renderItem = function( ul, item ) {
 	return $( "<li><div><img src='"+baseurl+'/assets/uploads/event/'+item.image+"' width='50' height='50'><span>"+item.name+"</span></div></li>" ).appendTo( ul );
 	};
+/*	var booknowBtnlink = $('#booknow_link').text();
+ 	booknowBtnlink = booknowBtnlink.replace(/[^A-Za-z]/g, '');
+
+		if(booknowBtnlink == 'Closed'){
+			$('#booknow_link').bind('click', false);
+		}
+		else{
+			$('#booknow_link').bind('click', true);
+		}*/
+
 });
 </script>
-
 <?php $this->endSection(); ?>
 

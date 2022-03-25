@@ -96,7 +96,9 @@ class Booking extends BaseModel
 
 	public function action($data)
 	{
-
+/*		echo "<pre>";
+		print_r($data);
+		exit;*/
 		$this->db->transStart();
 		$datetime = date('Y-m-d H:i:s');
 		
@@ -106,7 +108,6 @@ class Booking extends BaseModel
 		if(isset($data['checkin']) && $data['checkin']!='')                $request['check_in'] 	  = $data['checkin'];
 		if(isset($data['checkout']) && $data['checkout']!='')      	  	   $request['check_out'] 	  = $data['checkout'];
 		if(isset($data['eventid']) && $data['eventid']!='')      	       $request['event_id'] 	  = $data['eventid'];
-		if(isset($data['stallid']) && $data['stallid']!='')      	       $request['stall_id'] 	  = $data['stallid'];
 		if(isset($data['paymentid']) && $data['paymentid']!='')      	   $request['payment_id'] 	  = $data['paymentid'];
 		if(isset($data['userid']) && $data['userid']!='')      	           $request['user_id'] 	      = $data['userid'];
  		$request['status'] 	      = '1';
@@ -117,8 +118,21 @@ class Booking extends BaseModel
 			$request['created_at'] 	= $datetime;
 			$request['created_by'] 	= $data['userid'];
 
-			$booking = $this->db->table('booking')->insert($request);
+			$this->db->table('booking')->insert($request);
 			$insertid = $this->db->insertID();
+		}
+
+		if(isset($request['barnstall'])){				
+			$barnstall = json_decode($request['barnstall']);
+			foreach ($barnstall as $value){
+				$bookingdetails = array(
+					'barn_id' => $value['barn_id'],
+					'stall_id' => $value['stall_id'],
+					'status' => 1
+				);
+
+				$this->db->table('booking_details')->insert($bookingdetails);
+			}
 		}
 
 		if(isset($insertid) && $this->db->transStatus() === FALSE){

@@ -169,13 +169,18 @@ function getUsersList()
 
 function getCart(){ 
 	$request 		= service('request');
-    $userid 		= getSiteID();
+    $userid 		= getSiteUserID();
 	$cart 		    = new \App\Models\Cart;
 	$result         = $cart->getCart('all', ['cart'], ['user_id' => $userid]);
 
 	if($result){
+
+		$barnstall = [];
+		foreach ($result as $res) {
+			$barnstall[] = ['barn_id' => $res['barn_id'], 'stall_id' => $res['stall_id']];
+		}
+
 		$event_id 		= array_unique(array_column($result, 'event_id'))[0];
-		$stall_id       = array_column($result, 'stall_id'); 
 	    $check_in       = array_unique(array_column($result, 'check_in'))[0];
 	    $check_out      = array_unique(array_column($result, 'check_out'))[0];
 	    $start          = strtotime($check_in);
@@ -183,7 +188,7 @@ function getCart(){
 		$date           = ceil(abs($end - $start) / 86400);
 		$price          = array_sum(array_column($result, 'price')); 	
 
-		return ['event_id'=>$event_id,'price' => $price, 'interval' => $date, 'stall_id' =>$stall_id,'check_in' => $check_in,'check_out' => $check_out];	
+		return ['event_id'=>$event_id, 'barnstall'=>$barnstall, 'price' => $price, 'interval' => $date, 'check_in' => $check_in,'check_out' => $check_out];	
 	}else{
 		return false;
 	}

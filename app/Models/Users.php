@@ -14,8 +14,15 @@ class Users extends BaseModel
 			$data		= 	['u.*'];							
 			$select[] 	= 	implode(',', $data);
 		}
+
+		if(in_array('payment', $querydata)){
+			$data		= 	['p.plan_period_end subscriptionenddate'];							
+			$select[] 	= 	implode(',', $data);
+		}
 			
 		$query = $this->db->table('users u');
+		if(in_array('payment', $querydata)) $query->join('payment p', 'p.id =u.subscription_id' , 'left');
+
 				
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
@@ -27,6 +34,8 @@ class Users extends BaseModel
 		if(isset($requestdata['type'])) 				$query->whereIn('u.type', $requestdata['type']);
 		if(isset($requestdata['parentid'])) 			$query->where('u.parent_id', $requestdata['parentid']);
 		if(isset($requestdata['status'])) 				$query->whereIn('u.status', $requestdata['status']);
+		if(isset($requestdata['subscriptionid'])) 		$query->where('u.subscription_id', $requestdata['subscriptionid']);
+
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
@@ -60,6 +69,8 @@ class Users extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
+			//echo  $this->db->getlastQuery();
+			//die;
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();

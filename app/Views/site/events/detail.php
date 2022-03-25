@@ -120,7 +120,7 @@
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item">
-							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$checkboxstatus.'>
+							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" data-barnid="'.$stalldata['barn_id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$checkboxstatus.'>
 							'.$stalldata['name'].'
 							<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
 							</li>';
@@ -186,12 +186,13 @@
 		var enddate   	= $("#enddate").val(); 
 		var stall_id	= $(this).val(); 
 		var event_id    = $(this).attr('data-eventid');
+		var barn_id    = $(this).attr('data-barnid');
 		var price 		= $(this).attr('data-price');
 
 		dateformat('#start_date, #end_date');
 
 		if($(this).is(':checked')){
-			cart({stall_id : stall_id, event_id : event_id, price : price, startdate : startdate, enddate : enddate, checked : 1});
+			cart({stall_id : stall_id, event_id : event_id, barn_id : barn_id, price : price, startdate : startdate, enddate : enddate, checked : 1});
 		}else{
 			cart({stall_id : stall_id, checked : 0}); 
 		}
@@ -209,20 +210,20 @@
 	    				$("#startdate").val(result.check_in); 
 						$("#enddate").val(result.check_out); 
 
-		    			$('#stallcount').val(result.stall_id.length);  
-			      		$(result.stall_id).each(function(i,v){ 
-							$('.stallid[value='+v+']').prop('checked', true);
-							$('.stallavailability[data-stallid='+v+']').removeClass("green-box").addClass("yellow-box");
+		    			$('#stallcount').val(result.barnstall.length);  
+			      		$(result.barnstall).each(function(i,v){ 
+							$('.stallid[value='+v.stall_id+']').prop('checked', true);
+							$('.stallavailability[data-stallid='+v.stall_id+']').removeClass("green-box").addClass("yellow-box");
 						});
 
 						var total = (result.price+8.50);
-	        		    $('#stallcount').val(result.stall_id.length);
+	        		    $('#stallcount').val(result.barnstall.length);
 	            		var result ='\
 	                        <div class="w-100">\
 	                            <div class="border rounded pt-4 ps-3 pe-3 mb-5">\
 	                                <div class="row mb-2">\
 	                                    <div class="col-8 ">\
-	                                        <span>'+result.stall_id.length+'</span> Stalls x \
+	                                        <span>'+result.barnstall.length+'</span> Stalls x \
 	                                        <span>'+result.interval+'</span> Nights \
 	                                    </div>\
 	                                    <div class="col-4">\
