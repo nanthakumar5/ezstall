@@ -289,7 +289,7 @@ span.signInContent {
   margin-top: 1rem;
 }*/
 .signInFormPanel {
-    text-align: center;
+  text-align: center;
 }
 /*Signin page styles end*/
 
@@ -352,18 +352,18 @@ svg.eventSearch {
   margin-bottom: 5rem !important;
 }
 .wi-50-2 span.closeLeft p {
-font-weight: normal;
+  font-weight: normal;
 }
 button.ucEventBtn.closeBtn {
   background-color: #e0e0e0 !important;
   color: #b1b1b1;
   pointer-events: none;}
 
-button.ucEventBtn.closeBtn:hover {
+  button.ucEventBtn.closeBtn:hover {
     background-color: #e0e0e0;
     color: #b1b1b1;
     pointer-events: none;
-}
+  }
 /*Events page style end*/
 
 /*Home banner styles start*/
@@ -1015,11 +1015,11 @@ input.subscriptionInput:focus {
 }
 
 .copyRight p span {
-    color: #fff;
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-    padding: 4vh 0;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  padding: 4vh 0;
 }
 .socialIcons svg {
   fill: #fff;
@@ -1045,7 +1045,9 @@ input.subscriptionInput:focus {
 
 /*Media Query Section Start*/
 @media (max-width: 767px) {
-
+  .edit {
+    flex-direction: row !important;
+}
   .wrapper{
     width: 20rem;
   }
@@ -1257,10 +1259,10 @@ input.subscriptionInput:focus {
     width: 100% !important;
     display: inline-block;
     margin-bottom: 20px;
-}
-.leftdata span {
-  width: 100%;
-}
+  }
+  .leftdata span {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1473,9 +1475,9 @@ input.subscriptionInput:focus {
   }
 }
 @media (max-width: 992px) {
-.infoPanel.stallform.container-lg {
-  margin: 10px auto;
-}
+  .infoPanel.stallform.container-lg {
+    margin: 10px auto;
+  }
 }
 /*Media Query Section End*/
 /*Event.js Start*/
@@ -1498,43 +1500,43 @@ input.subscriptionInput:focus {
 
 /*still start*/
 .btn-secondary{
-   color:  #fff;
-   background-color: #e00000;
-   border: 1px solid #e00000;
-   border-radius: 100%; 
-   vertical-align: middle;
-    margin-top: 10px;
+ color:  #fff;
+ background-color: #e00000;
+ border: 1px solid #e00000;
+ border-radius: 100%; 
+ vertical-align: middle;
+ margin-top: 10px;
 }
 .btn-secondary * {
-    color:  #fff;
+  color:  #fff;
 }
 .btn-secondary:hover {
-    color: #e00000;
-    background-color: #fff;
-    border-color: #e00000;
+  color: #e00000;
+  background-color: #fff;
+  border-color: #e00000;
 }
 
 .btn-secondary *:hover {
-    color:  #e00000;
+  color:  #e00000;
 }
 
 .stallform .col:first-child {
-    padding-left: 1rem !important;
+  padding-left: 1rem !important;
 }
 
 .stallform .col {
-    flex: 1 0 0%;
-    padding: 0px;
+  flex: 1 0 0%;
+  padding: 0px;
 }
 
 .stallform .col input {
-    border-right: 0px;
-    height: 60px;
-    border-radius: 0px !important;
-    border-bottom-color: #efefef;
+  border-right: 0px;
+  height: 60px;
+  border-radius: 0px !important;
+  border-bottom-color: #efefef;
 }
 .stallform .col:first-child  input {
-    border-left: 0px;
+  border-left: 0px;
 }
 
 /*still End*/
@@ -1568,17 +1570,17 @@ ul.edaddr img {
   margin-left: -26px;
 }
 .ucEventdetBtn{
-background-color: #222;
-    border: none;
-    font-weight: 600;
-    color: #fff;
-    width: auto;
-    border-radius: 7px;
-    padding: 7px 20px 7px 0px;
-    vertical-align: top;
-  }
-  button.ucEventdetBtn:hover {
-    background: #e00000;
+  background-color: #222;
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  width: auto;
+  border-radius: 7px;
+  padding: 7px 20px 7px 0px;
+  vertical-align: top;
+}
+button.ucEventdetBtn:hover {
+  background: #e00000;
 }
 p.ucDAte {
   margin-left: 35px;
@@ -1646,7 +1648,7 @@ span.num_btn button {
   border-radius: 5px;
   padding: 14px;
   box-shadow: 1px 1px 5px -2px rgb(186 186 186);
-    transition: all 0.7s !important;
+  transition: all 0.7s !important;
 }
 .barn-nav .form-check-input:checked {
   background-color: #222 !important;
@@ -1910,7 +1912,7 @@ span.info-box p {
 }
 span.info-box img{
   float: left;
-    display: block;
+  display: block;
 }
 .checkout-payment .checkout-payment-frist input {
   border: 1px solid #dfdfdf !important;
@@ -2008,8 +2010,8 @@ button.payment-btn {
 }
 
 #sidebar-nav {
-  min-width: 330px;
-  max-width: 330px;
+  min-width: 260px;
+  max-width: 400px;
   background: #fff;
   color: #000;
   transition: all 0.3s;
@@ -2072,31 +2074,25 @@ button.payment-btn {
   margin: 5rem 0;
   border: 1px solid #e4e4e4;
   border-radius: 7px;
-  padding: 1rem;
+  padding: 10px;
 }
 
 #sidebar-nav ul li a {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 16px;
   display: block;
   color: #595959;
   text-decoration: none;
 }
-#sidebar-nav ul li a:hover {
-  color: #E00000;
-  background: #fff;
-}
+
 #sidebar-nav ul li a i {
   margin-right: 10px;
 }
 
 #sidebar-nav ul li.side-nav-active > .side-nav-a, .side-nav-a[aria-expanded="true"] {
   color: #E00000;
-  background: #f7f7f7;
   text-decoration: none;
-  border-radius: 7px;
 }
-
 
 .side-nav-a[data-toggle="collapse"] {
   position: relative;
@@ -2213,6 +2209,22 @@ ul.CTAs .side-nav-a {
   color: #e00000;
 }
 
+li.side-nav-active{
+  height: 50px;
+  background-color: #f7f7f7;
+  align-items: center;
+  display: flex;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.side-nav-link{
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -2287,6 +2299,21 @@ ul.CTAs .side-nav-a {
   #sidebarCollapse span {
     display: none;
   }
+  li.side-nav-active{
+    height: 100px;
+  }
+  .side-nav-link{
+    height: 100px;
+    margin: 10px 0;
+  }
+
+  li.side-nav-active{
+    justify-content: center;
+  }
+
+  .side-nav-link{
+    justify-content: center;
+  }
 }
 
 /* Side nav bar style end */
@@ -2323,11 +2350,11 @@ ul.pagination li a {
 }
 
 ul.pagination li:hover {
-    background-color: #000;
+  background-color: #000;
 }
 
 ul.pagination li:hover a {
-    color: #fff;
+  color: #fff;
 }
 
 .ml-5{
@@ -2335,17 +2362,17 @@ ul.pagination li:hover a {
 }
 
 a.btn-custom-black {
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 10px;
-    border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 10px;
+  border-radius: 5px;
 }
 
 p.error_class_1 {
-    color: #e00000;
-    text-align: left;
-    font-size: 13px;
+  color: #e00000;
+  text-align: left;
+  font-size: 13px;
 }
 
 .homeEventsPanel .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
@@ -2396,7 +2423,7 @@ a.ui-button:active,
 
 .ui-menu .ui-menu-item-wrapper{
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 
 /*15-03-2022 styles end here*/
@@ -2419,8 +2446,8 @@ img.eventflyer_source, .stallmap_source, .image_source {
   display: none;
 }
 .card-title span{
-float: right;
-margin-right: 20px;
+  float: right;
+  margin-right: 20px;
 }
 
 
@@ -2436,16 +2463,16 @@ margin-right: 20px;
   border-radius: 7px;
   transition: all 1s ease;
   border-left: 4px solid #e00000;
-  }
+}
 
-  .fw-600{
-    font-weight: 600
-  }
+.fw-600{
+  font-weight: 600
+}
 
-  .dashboard-box:hover {
-    box-shadow: 0 8px 17px 0 rgb(0 0 0 / 10%);
-    transition: all 1s ease;
-    border-left: 4px solid #000;
+.dashboard-box:hover {
+  box-shadow: 0 8px 17px 0 rgb(0 0 0 / 10%);
+  transition: all 1s ease;
+  border-left: 4px solid #000;
 }
 
 button.pay-btn {
@@ -2459,7 +2486,7 @@ button.pay-btn {
 }
 
 .account-btn{
-border: none;
+  border: none;
   background: #e00000;
   color: #fff;
   font-weight: 500;
@@ -2469,29 +2496,29 @@ border: none;
 }
 
 button.account-btn:hover {
-    background: #000000;
-    transition: all .5s ease-in-out;
+  background: #000000;
+  transition: all .5s ease-in-out;
 }
 
 button.pay-btn:hover {
-    background: #000000;
-    transition: all .5s ease-in-out;
+  background: #000000;
+  transition: all .5s ease-in-out;
 }
 
 label.subscription_select_label:nth-child(3) {
-    color: #e00000;
-    font-weight: 800;
-    font-size: 25px;
-    content: ' ';
-    clear: right;
-    display: block;
-    text-align: center;
+  color: #e00000;
+  font-weight: 800;
+  font-size: 25px;
+  content: ' ';
+  clear: right;
+  display: block;
+  text-align: center;
 }
 
 .col.payment-border {
-    border: 1px solid #e4e4e4;
-    border-radius: 7px;
-    padding: 30px;
+  border: 1px solid #e4e4e4;
+  border-radius: 7px;
+  padding: 30px;
 }
 
 /*18-03-2022 styles end here*/
@@ -2499,9 +2526,9 @@ label.subscription_select_label:nth-child(3) {
 /*21-03-2022 styles starts from here*/
 
 .accordion-button:not(.collapsed) {
-    color: #e00000;
-    background-color: #fff2f2;
-    box-shadow:  none;
+  color: #e00000;
+  background-color: #fff2f2;
+  box-shadow:  none;
 }
 
 .accordion-button:focus{
@@ -2649,3 +2676,201 @@ a.btn.back-btn:hover {
 }
 
 /*24-03-2022 styles end here*/
+
+/* Dashboard welcome page style start */
+
+.welcome-content .row.mt-4.first .card {
+  border-bottom: 4px solid #e10000  !important;
+  border: none;
+  box-shadow: 0 0px 8px 0 rgb(0 0 0 / 6%);
+  border-radius: 10px;
+  transition: all 1s ease;
+}
+
+.welcome-content .row.mt-4.first .card:hover {
+  border-bottom: 4px solid #000000 !important;
+  transition: all 1s ease;
+}
+
+
+.welcome-content .row.mt-4.second .card {
+  border-bottom: 6px solid #595959 !important;
+  border: none;
+  box-shadow: 0 0px 8px 0 rgb(0 0 0 / 6%);
+  border-radius: 10px;
+  transition: all 1s ease;
+}
+
+.welcome-content .row.mt-4.second .card:hover {
+  border-bottom: 6px solid #e20505 !important;
+  transition: all 1s ease;
+}
+
+.row.mt-4.second h2,
+.row.mt-4.first h2 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.second p,
+.first p {
+  color: #595959;
+  font-size: 16px;
+}
+
+button.View {
+  color: #fff;
+  background-color: #6b6b6b;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 60px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+button.View:hover {
+  background-color: #e00000;
+  transition: all 0.3s ease;
+}
+
+.tablesec tr {
+  text-align: left;
+}
+
+.col-md-12.p-4.bg-white.shadow.rounded-sm h3 {
+  font-weight: 600;
+}
+.tablesec h3 {
+  font-weight: 600;
+}
+.tablesec .table-responsive.mt-3 {
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
+}
+
+.tablesec table td a {
+  font-size: 14px;
+  color: #e00000 !important;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.tablesec table td a:hover {
+  color: #000 !important;
+}
+
+.table > :not(:first-child) {
+  border: none !important;
+}
+
+.table > :not(caption) > * > * {
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.welcome-content .col-md-12.p-4.bg-white.rounded-sm {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 7px;
+  transition: all 1s ease;
+}
+
+.welcome-content .col-md-12.p-4.bg-white.rounded-sm:hover {
+  box-shadow: 0 8px 17px 0 rgb(0 0 0 / 10%);
+  transition: all 1s ease;
+  cursor: pointer;
+}
+
+.welcome-content h3 {
+  font-size: 30px;
+}
+
+.welcome-content p.c-5 {
+  font-weight: 500;
+  font-size: 16px;
+  color: #595959;
+}
+
+.table-responsive.mt-3 .table tr.table-active {
+  --bs-table-accent-bg: #f7f7f7;
+}
+
+.welcome-table th {
+  font-weight: 600;
+  padding: 12px 15px !important;
+  text-align: left;
+  font-size: 18px;
+}
+
+.welcome-content .tablesec .col-md-6 .table-responsive.mt-3 table tbody th,
+td {
+  padding: 10px 15px !important;
+}
+
+.welcome-user{
+  color: #e00000;
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+
+.welcome-user:first-letter{
+  text-transform: capitalize;
+}
+
+.dash-view{
+  color: #e00000;
+  font-weight: 600;
+}
+
+/* Dashboard welcome page style end */
+
+/*25-03-2022 styles end here*/
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+  color: #e00000;
+  border: none;
+}
+
+.edit {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  color: #fff !important;
+  font-weight: 500;
+  background-color: transparent !important;
+}
+
+.nav-link:focus, .nav-link:hover{
+  color: #e00000 !important;
+}
+
+.tab-link{
+  padding: 0 !important;
+  font-size: 20px !important;
+}
+
+.nav-link.tab-link {
+  font-weight: 500;
+}
+
+.btn-stall {
+  border: none;
+  background-color: #dc3545;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 7px;
+}
+
+.t-right{
+  text-align: right;
+}
+
+.dash-barn-style {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 7px;
+  padding: 20px 20px;
+}
+
+/*25-03-2022 styles end here*/
