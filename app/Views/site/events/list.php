@@ -13,12 +13,6 @@
 </style>
 
 <?php $this->section('content') ?>
-	<?php
-		$currentdate 	= date("Y-m-d");
-		$userid 		= isset($userdetail['id']) ? $userdetail['id'] : '';
-		$usertype 		= isset($userdetail['type']) ? $userdetail['type'] : '';
-		$userplanend 	= isset($userdetail['subscriptionenddate']) ? date('Y-m-d', strtotime($userdetail['subscriptionenddate'])) : '';
-	?>
 	<section class="maxWidth">
 		<div class="pageInfo">
 		  <span class="marFive">
@@ -44,25 +38,8 @@
 		<section class="maxWidth marFiveRes eventPagePanel">
 			<?php foreach ($list as $data) {  
 				$startdate 		= date("d-m-Y", strtotime($data['start_date']));
-				$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
 				$enddate 		= date("d-m-Y", strtotime($data['end_date']));
-				$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
-
-				if($currentdate >= $strstartdate && $currentdate <= $strenddate){
-					$booknowBtn = "Book Now";
-					
-					if(in_array($usertype, [2, 3, 4])){
-						if($userid == $data['user_id']){
-							$booknowBtn = "Book now";
-						}else{
-							$booknowBtn = "Booking Not Available";
-						}
-					}elseif($usertype==5 && $currentdate > $userplanend){
-						$booknowBtn = "Subscription Expired";
-					}
-				}else{
-					$booknowBtn = "Closed";
-				}
+				$booknowBtn 	= checkEvent($data);
 			?>
 			<div class="ucEventInfo">
 				<div class="EventFlex">

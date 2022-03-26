@@ -49,30 +49,26 @@ class Index extends BaseController
 	
 	public function detail($id)
     {  
-    	$userid                        = getSiteUserID();
-		$checksubscription             = checkSubscription();
-		$checksubscriptiontype 		   = $checksubscription['type'];
-		$checksubscriptionfacility 	   = $checksubscription['facility'];
-		$checksubscriptionproducer     = $checksubscription['producer'];
-		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
+    	$userid = getSiteUserID();
 
-		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid]);
-
-		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
-			$this->session->setFlashdata('danger', 'Please subscribe the account.');
-			return redirect()->to(base_url().'/myaccount/subscription'); 
-		}elseif($checksubscriptiontype=='3' && (($id=='' && $checksubscriptionproducer <= $eventcount) || ($id!='' && $checksubscriptionproducer < $eventcount))){
-			$this->session->setFlashdata('danger', 'Please subscribe the account.');
-			return redirect()->to(base_url().'/myaccount/events'); 
-		}elseif($checksubscriptiontype=='4' && $checksubscriptionstallmanager!='4'){ 
-			$this->session->setFlashdata('danger', 'Please subscribe the account.');
-			return redirect()->to(base_url().'/myaccount/subscription'); 
+		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$checkEvent = checkEvent($event);
+		if($checkEvent != 'Book Now'){
+			$this->session->setFlashdata('danger', 'You Cannot Access the Event.');
+			return redirect()->to(base_url().'/events'); 
 		}
-		
-		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$data['occupied'] = explode(',', implode(',', array_column($booking, 'stall_id')));
-		
+
+		$data['detail']  = $event;
+		$booking = $this->booking->getBooking('all', ['booking','barnstall'],['eventid' => $id]);
+
+		$occupied = [];
+		foreach ($booking as  $bookdata) {
+			$barnstall = $bookdata['barnstall'];
+			$occupied[] = implode(',', array_column($barnstall, 'stall_id'));
+		}
+
+		$data['occupied'] = explode(',', implode(',', $occupied));
+
 		return view('site/events/detail',$data);
     }
 

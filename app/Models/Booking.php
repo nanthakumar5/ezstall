@@ -9,6 +9,7 @@ class Booking extends BaseModel
     {  
     	$select 		= [];
 		
+
 		if(in_array('booking', $querydata)){
 			$data		= 	['b.*'];							
 			$select[] 	= 	implode(',', $data);
@@ -71,26 +72,36 @@ class Booking extends BaseModel
 			$query = $query->get();
 			if($type=='all'){
 				$result = $query->getResultArray();
-
-				if(in_array('stall', $querydata)){
+				
+				if(in_array('barnstall', $querydata)){
 					foreach ($result as $key => $booking) {
-						$stallid = explode(',', $booking['stall_id']);
-						$stalldata = $this->db->table('stall s')->whereIn('s.id', $stallid)->get()->getResultArray();
-						$result[$key]['stall'] = array_column($stalldata, 'name');
+						$bookingstall = $this->db->table('booking_details bd')
+										->join('barn b', 'b.id = bd.barn_id', 'left')
+										->join('stall s', 's.id  = bd.stall_id', 'left')
+										->select('bd.*, b.name barnname, s.name stallname')
+										->where('bd.booking_id', $booking['id'])
+										->get()
+										->getResultArray();
+						$result[$key]['barnstall'] = $bookingstall;
 					}
 				}
+				
 			}elseif($type=='row'){
 				$result = $query->getRowArray();
 				
-				if(in_array('stall', $querydata)){
-					$stallid = explode(',', $result['stall_id']);
-					$stalldata = $this->db->table('stall s')->whereIn('s.id', $stallid)->get()->getResultArray();
-					$result['stall'] = array_column($stalldata, 'name');
+			 	if(in_array('barnstall', $querydata)){
+					$bookingstall = $this->db->table('booking_details bd')
+									->join('barn b', 'b.id = bd.barn_id', 'left')
+									->join('stall s', 's.id  = bd.stall_id', 'left')
+									->select('bd.*, b.name barnname, s.name stallname')
+									->where('bd.booking_id', $result['id'])
+									->get()
+									->getResultArray();
+					$result['barnstall'] = $bookingstall;
 				}
 			}	
 
 		}
-	
 		return $result;
     }
 
@@ -123,9 +134,10 @@ class Booking extends BaseModel
 			$barnstall = json_decode($data['barnstall'], true);
 			foreach ($barnstall as $value){
 				$bookingdetails = array(
-					'barn_id' => $value['barn_id'],
-					'stall_id' => $value['stall_id'],
-					'status' => 1
+					'booking_id' => $insertid,
+					'barn_id' 	 => $value['barn_id'],
+					'stall_id' 	 => $value['stall_id'],
+					'status' 	 => 1
 				);
 
 				$this->db->table('booking_details')->insert($bookingdetails);

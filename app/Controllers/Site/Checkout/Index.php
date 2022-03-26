@@ -30,7 +30,7 @@ class Index extends BaseController
             $paymentresult= $this->stripe->stripepayment($requestData);
             $requestData['paymentid']=$paymentresult;
             $booking = $this->booking->action($requestData);
-            $this->cart->delete(['userid' => $userid]);
+            $this->cart->delete(['user_id' => $userid]);
             
             if($booking){
               return redirect()->to(base_url().'/paymentsuccess'); 

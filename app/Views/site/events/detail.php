@@ -194,6 +194,7 @@
 		if($(this).is(':checked')){
 			cart({stall_id : stall_id, event_id : event_id, barn_id : barn_id, price : price, startdate : startdate, enddate : enddate, checked : 1});
 		}else{
+			$('.stallavailability[data-stallid='+stall_id+']').removeClass("yellow-box").addClass("green-box");
 			cart({stall_id : stall_id, checked : 0}); 
 		}
 	});
