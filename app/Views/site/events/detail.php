@@ -1,5 +1,12 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
+<?php 
+	$getcart = getCart();
+	$cartevent = 0;
+	if($getcart && $getcart['event_id'] != $detail['id']){
+		$cartevent = 1;
+	}
+?>
 <section class="maxWidth">
 	<div class="pageInfo">
 	  <span class="marFive">
@@ -114,7 +121,10 @@
 						foreach($barndata['stall'] as $stalldata){
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
-							if(in_array($stalldata['id'], $occupied)){
+							
+							if($cartevent=='1'){
+								$checkboxstatus = 'disabled';
+							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
 								$checkboxstatus = 'disabled checked';
 							}
@@ -154,8 +164,14 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
 <script> 
-	 $(document).ready(function (){
-	 	cart();
+	var cartevent = '<?php echo $cartevent; ?>';
+	$(document).ready(function (){
+	 	if(cartevent == 0){
+	 		cart();
+	 	}else{
+	 		$("#startdate, #enddate").attr('disabled', 'disabled');
+	 	}
+	 	
 	});
 
 	function checkdate(){
