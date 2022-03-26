@@ -7,7 +7,7 @@ function getAdminUrl()
 function getUserDetails($id)
 {	
 	$users 	= new \App\Models\Users;
-	$result = $users->getUsers('row', ['users'], ['id' => $id]);
+	$result = $users->getUsers('row', ['users', 'payment'], ['id' => $id]);
 
 	if ($result) {
 		return $result;
@@ -171,24 +171,42 @@ function getCart(){
 	$request 		= service('request');
     $userid 		= getSiteUserID();
 	$cart 		    = new \App\Models\Cart;
-	$result         = $cart->getCart('all', ['cart'], ['user_id' => $userid]);
+	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], ['user_id' => $userid]);
 
 	if($result){
 
 		$barnstall = [];
 		foreach ($result as $res) {
-			$barnstall[] = ['barn_id' => $res['barn_id'], 'stall_id' => $res['stall_id']];
+			$barnstall[] = [
+				'barn_id' => $res['barn_id'], 
+				'barn_name' => $res['barnname'], 
+				'stall_id' => $res['stall_id'],
+				'stall_name' => $res['stallname'] 
+			];
 		}
 
-		$event_id 		= array_unique(array_column($result, 'event_id'))[0];
-	    $check_in       = array_unique(array_column($result, 'check_in'))[0];
-	    $check_out      = array_unique(array_column($result, 'check_out'))[0];
-	    $start          = strtotime($check_in);
-		$end            = strtotime($check_out);
-		$date           = ceil(abs($end - $start) / 86400);
-		$price          = array_sum(array_column($result, 'price')); 	
+		$event_id 				= array_unique(array_column($result, 'event_id'))[0];
+		$event_name 			= array_unique(array_column($result, 'eventname'))[0];
+		$event_location 		= array_unique(array_column($result, 'eventlocation'))[0];
+		$event_description 		= array_unique(array_column($result, 'eventdescription'))[0];
+	    $check_in       		= array_unique(array_column($result, 'check_in'))[0];
+	    $check_out      		= array_unique(array_column($result, 'check_out'))[0];
+	    $start          		= strtotime($check_in);
+		$end            		= strtotime($check_out);
+		$date           		= ceil(abs($end - $start) / 86400);
+		$price          		= array_sum(array_column($result, 'price')); 	
 
-		return ['event_id'=>$event_id, 'barnstall'=>$barnstall, 'price' => $price, 'interval' => $date, 'check_in' => $check_in,'check_out' => $check_out];	
+		return [
+			'event_id' => $event_id, 
+			'event_name' => $event_name, 
+			'event_location' => $event_location, 
+			'event_description' => $event_description, 
+			'barnstall'=> $barnstall, 
+			'price' => $price, 
+			'interval' => $date, 
+			'check_in' => $check_in,
+			'check_out' => $check_out
+		];	
 	}else{
 		return false;
 	}

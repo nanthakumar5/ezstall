@@ -34,9 +34,7 @@ class Users extends BaseModel
 		if(isset($requestdata['type'])) 				$query->whereIn('u.type', $requestdata['type']);
 		if(isset($requestdata['parentid'])) 			$query->where('u.parent_id', $requestdata['parentid']);
 		if(isset($requestdata['status'])) 				$query->whereIn('u.status', $requestdata['status']);
-		if(isset($requestdata['subscriptionid'])) 		$query->where('u.subscription_id', $requestdata['subscriptionid']);
 
-		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}

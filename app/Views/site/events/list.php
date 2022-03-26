@@ -13,6 +13,12 @@
 </style>
 
 <?php $this->section('content') ?>
+	<?php
+		$currentdate 	= date("Y-m-d");
+		$userid 		= isset($userdetail['id']) ? $userdetail['id'] : '';
+		$usertype 		= isset($userdetail['type']) ? $userdetail['type'] : '';
+		$userplanend 	= isset($userdetail['subscriptionenddate']) ? date('Y-m-d', strtotime($userdetail['subscriptionenddate'])) : '';
+	?>
 	<section class="maxWidth">
 		<div class="pageInfo">
 		  <span class="marFive">
@@ -36,41 +42,28 @@
 		  </span>
 		</div>
 		<section class="maxWidth marFiveRes eventPagePanel">
-		 <?php foreach ($list as $data) {  
-			$startdate 		= date("d-m-Y", strtotime($data['start_date']));
-			$enddate 		= date("d-m-Y", strtotime($data['end_date']));
-            $currentdate 	= date("d-m-Y");
-            $planend        = $subscriptionData['subscriptionenddate'];
+			<?php foreach ($list as $data) {  
+				$startdate 		= date("d-m-Y", strtotime($data['start_date']));
+				$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
+				$enddate 		= date("d-m-Y", strtotime($data['end_date']));
+				$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
 
-			if(($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['id'] == $data['user_id'] && $userdetail['type'] == 2)){
-
-					$booknowBtn = "Book now";
-
-			}
-			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['id'] == $data['user_id'] && $userdetail['type'] == 3)) {
-
-					$booknowBtn = "Book now";
-
-			}
-			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['parent_id'] == $data['user_id'] && $userdetail['type'] == 4)) {
-
-					$booknowBtn = "Book now";
-
-			}
-			elseif (($startdate >= $currentdate || $enddate >= $currentdate) && ($userdetail['type'] == 5)) {
-
-					$booknowBtn = "Book now";
-
-			}
-			elseif (($enddate >= $currentdate && $userdetail['type'] == 5)) {
-
-					$booknowBtn = "Subscription Expired";
-
-			}
-			else{
+				if($currentdate >= $strstartdate && $currentdate <= $strenddate){
+					$booknowBtn = "Book Now";
+					
+					if(in_array($usertype, [2, 3, 4])){
+						if($userid == $data['user_id']){
+							$booknowBtn = "Book now";
+						}else{
+							$booknowBtn = "Booking Not Available";
+						}
+					}elseif($usertype==5 && $currentdate > $userplanend){
+						$booknowBtn = "Subscription Expired";
+					}
+				}else{
 					$booknowBtn = "Closed";
-			}
-		?>
+				}
+			?>
 			<div class="ucEventInfo">
 				<div class="EventFlex">
 					<span class="wi-50">
@@ -136,16 +129,6 @@ $(function() {
 	._renderItem = function( ul, item ) {
 	return $( "<li><div><img src='"+baseurl+'/assets/uploads/event/'+item.image+"' width='50' height='50'><span>"+item.name+"</span></div></li>" ).appendTo( ul );
 	};
-/*	var booknowBtnlink = $('#booknow_link').text();
- 	booknowBtnlink = booknowBtnlink.replace(/[^A-Za-z]/g, '');
-
-		if(booknowBtnlink == 'Closed'){
-			$('#booknow_link').bind('click', false);
-		}
-		else{
-			$('#booknow_link').bind('click', true);
-		}*/
-
 });
 </script>
 <?php $this->endSection(); ?>

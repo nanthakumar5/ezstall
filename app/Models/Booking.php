@@ -96,9 +96,6 @@ class Booking extends BaseModel
 
 	public function action($data)
 	{
-/*		echo "<pre>";
-		print_r($data);
-		exit;*/
 		$this->db->transStart();
 		$datetime = date('Y-m-d H:i:s');
 		
@@ -122,8 +119,8 @@ class Booking extends BaseModel
 			$insertid = $this->db->insertID();
 		}
 
-		if(isset($request['barnstall'])){				
-			$barnstall = json_decode($request['barnstall']);
+		if(isset($data['barnstall'])){	
+			$barnstall = json_decode($data['barnstall'], true);
 			foreach ($barnstall as $value){
 				$bookingdetails = array(
 					'barn_id' => $value['barn_id'],

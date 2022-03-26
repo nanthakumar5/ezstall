@@ -1,20 +1,8 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-<?php
-/*  $barnstallsname=[];
-foreach ($stalldetail as $stalls) {
-    $barnstallsname[] = ['barnname' => $stalls['barnname'], 'stallname' => $stalls['stallname']];
-}*/
-
-  $barnstall = $cartdetail['barnstall'];
-  $stallids  = [];
-  foreach ($barnstall as $bs) {
-    $stallids[] =  $bs['stall_id'];
-  }
-
-//$cardstalls =  json_encode($cartdetail['barnstall']);
-//exit;
-?>
+	<?php
+		$barnstall = $cartdetail['barnstall'];
+	?>
               <section class="maxWidth">
                 <div class="pageInfo">
                   <span class="marFive">
@@ -44,15 +32,15 @@ foreach ($stalldetail as $stalls) {
                       <p>Changes to this information will be reflected on all of your existing reservations.</p>
                       <div class="row">
                         <div class="col-lg-6 mb-4">
-                          <input placeholder="First Name" name="firstname" autocomplete='off'>
+                          <input placeholder="First Name" name="firstname" autocomplete='off'  value="adasd">
                         </div>
                         <div class="col-lg-6 mb-4">
-                          <input type="text" placeholder="Last Name" name="lastname" autocomplete='off'>
+                          <input type="text" placeholder="Last Name" name="lastname" autocomplete='off'  value="xcvxcv">
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6  mb-4">
-                          <input placeholder="Mobile Number" name="mobile" autocomplete='off'>
+                          <input placeholder="Mobile Number" name="mobile" autocomplete='off'  value="123456789">
                         </div>
                         <div class="col-lg-6 mb-4">
                           <span class="info-box"><img src="<?php echo base_url()?>/assets/site/img/Chekout-info.png"><p>You may receive a text message with your stall assignment before your arrival.</p></span>
@@ -65,18 +53,18 @@ foreach ($stalldetail as $stalls) {
                     <p class="fw-bold">Card Details</p>
                     <div class="row checkout-payment-frist">
                       <div class="col-lg-6 mb-4">
-                         <input type='text' placeholder='Name on Card' name='payer_name' class='payer_name' autocomplete='off'>
+                         <input type='text' placeholder='Name on Card' name='payer_name' class='payer_name' autocomplete='off'  value="testt">
                       </div>
                       <div class="col-lg-6 mb-4">
-                        <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off'>
+                        <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off' value="4242 4242 4242 4242">
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-12  mb-4">
-                        <input type='text' class='card-expiry-month' placeholder='MM'  name='card_exp_month' autocomplete='off'>
-                        <input type='text' class='card-expiry-year' placeholder='YYYY'  name='card_exp_year' autocomplete='off'>
-                        <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'>
+                        <input type='text' class='card-expiry-month' placeholder='MM'  name='card_exp_month' autocomplete='off' value="12">
+                        <input type='text' class='card-expiry-year' placeholder='YYYY'  name='card_exp_year' autocomplete='off'  value="2022">
+                        <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'  value="123">
                       </div>
                     </div>
                 </div> 
@@ -87,7 +75,7 @@ foreach ($stalldetail as $stalls) {
                   <input type="hidden" name="checkout" value="<?php echo $cartdetail['check_out']; ?>" >
                   <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
                   <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
-                  <input type="hidden" name="barnid" value="<?php echo json_encode($cartdetail['barnstall']); ?>" >
+                  <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
 
                 <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
                   <h2 class="checkout-fw-6">Special Requests</h2>
@@ -102,14 +90,14 @@ foreach ($stalldetail as $stalls) {
                 <div class="row">
                   <div class="col-lg-6 mb-4">
                     <b>Event</b>
-                    <p><?php echo $eventdetail['name'];?></p>
+                    <p><?php echo $cartdetail['event_name'];?></p>
                     <b>Location</b>
-                    <p><?php echo $eventdetail['location'];?><br>
+                    <p><?php echo $cartdetail['event_location'];?><br>
                   </div>
 
                   <div class="col-lg-6 mb-4">
                     <b>Venue</b>
-                    <p><?php echo $eventdetail['description'];?></p>
+                    <p><?php echo $cartdetail['event_description'];?></p>
                   </div>
 
                 </div>
@@ -124,7 +112,13 @@ foreach ($stalldetail as $stalls) {
 
                   <div class="col-lg-6 mb-4">
                     <b>Number Of Stalls</b>
-                    <p><?php echo count($stallids); ?> Stalls (<?php foreach ($stalldetail as $stalls) { echo $stalls['barnname'].'=> '.$stalls['stallname']; }?>)</p>
+                    <p><?php echo count($barnstall); ?> Stalls 
+					<?php 
+						foreach ($barnstall as $data) { 
+							echo '<p>'.$data['barn_name'].'-'.$data['stall_name'].'</p>'; 
+						}
+					?>
+					</p>
                   </div>
                 </div>
             </div>
@@ -143,7 +137,7 @@ foreach ($stalldetail as $stalls) {
   <div class="border rounded pt-4 ps-3 pe-3 mb-5">
   <div class="row mb-2">
   <div class="col-lg-8 ">
-  <?php echo count($stallids); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
+  <?php echo count($barnstall); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
   </div>
   <div class="col-lg-4">
   $<?php echo $cartdetail['price']; ?>

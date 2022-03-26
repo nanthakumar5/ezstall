@@ -5,7 +5,6 @@ namespace App\Controllers\Site\Checkout;
 use App\Controllers\BaseController;
 use App\Models\Booking;
 use App\Models\Stripe;
-use App\Models\Event;
 use App\Models\Cart;
 
 class Index extends BaseController
@@ -14,7 +13,6 @@ class Index extends BaseController
 	{
 		$this->booking = new Booking();	
 		$this->stripe  = new Stripe();
-        $this->event   = new Event();	
         $this->cart    = new Cart();   
 	}
     
@@ -42,13 +40,7 @@ class Index extends BaseController
         $userdetail  = getSiteUserDetails();
         $cartdetail  = getCart();
  
-        $event_id    = $cartdetail['event_id'];
-        $eventdetail = $this->event->getEvent('row', ['event'], ['id' => $event_id]);
- 
-
-        $stalldetail = $this->cart->getCart('all', ['cart','event','barn','stall'], ['event_id' => $event_id]);
-
-        return view('site/checkout/index', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail, 'eventdetail'=>$eventdetail,'stalldetail' => $stalldetail]);
+        return view('site/checkout/index', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
     }
 
     public function success(){

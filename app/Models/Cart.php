@@ -16,7 +16,7 @@ class Cart extends BaseModel
 		}
 
 		if(in_array('event', $querydata)){
-			$data		= 	['e.name eventname'];							
+			$data		= 	['e.name eventname, e.location eventlocation, e.description eventdescription'];							
 			$select[] 	= 	implode(',', $data);
 		}
 		if(in_array('barn', $querydata)){
@@ -47,8 +47,7 @@ class Cart extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-						//echo  $this->db->getlastQuery();
-
+			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
 		}

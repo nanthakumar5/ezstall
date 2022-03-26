@@ -25,9 +25,6 @@ class Index extends BaseController
 		$offset = $page * $perpage;
 		$userdetail = getSiteUserDetails();
 
-		$userid = $userdetail['id'];
-		 $subscriptionid = $userdetail['subscription_id'];
-
 		if($this->request->getVar('q')!==null){
 			$searchdata = ['search' => ['value' => $this->request->getVar('q')], 'page' => 'events'];
 			$data['search'] = $this->request->getVar('q');
@@ -41,14 +38,12 @@ class Index extends BaseController
 		if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
     	
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'],'userid'=>$userid, 'start' => $offset, 'length' => $perpage]);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
 
-		$subscriptionData = $this->users->getUsers('row', ['users','payment'], ['id'=>$userid,'subscriptionid'=>$subscriptionid]); 
-		$data['list'] = $event;
 		$data['userdetail'] = $userdetail;
-		$data['subscriptionData'] = $subscriptionData;
-
+		$data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
+		
     	return view('site/events/list', $data);
     }
 	
