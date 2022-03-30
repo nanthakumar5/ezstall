@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?php echo base_url() ?>/assets/site/css/toas/toastr.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
 
@@ -114,6 +115,7 @@
 						<button type="submit" class="subscriptionBtn">Subscribe</button>
 					</div>
 				</form>
+				<?php  $newselettertoast = session()->getFlashdata('toastr');?>
 			</div>
 			<div class="footerBottom">
 				<div class="panel1">
@@ -194,9 +196,18 @@
 		<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+	    <script src="<?php echo base_url();?>/assets/site/js/toas/toastr.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<script>
 			dateformat('#search_start_date, #search_end_date');
+			var newselettertoast = '<?php echo $newselettertoast; ?>'; 
+			
+			if(newselettertoast=='1'){ 
+				toastr.success('Your Subscription Successfully.', {timeOut: 5000});
+			}else if(newselettertoast=='0'){
+				toastr.success('Email ID already Subscribed.', {timeOut: 5000});
+			}
+
 		</script>
 		<?php $this->renderSection('js') ?>
 	</body>

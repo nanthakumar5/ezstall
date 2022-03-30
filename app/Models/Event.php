@@ -7,7 +7,7 @@ use App\Models\BaseModel;
 class Event extends BaseModel
 {	
 	public function getEvent($type, $querydata=[], $requestdata=[], $extras=[])
-    {
+    {		
     	$select 			= [];
 		
 		if(in_array('event', $querydata)){
@@ -62,6 +62,7 @@ class Event extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get(); 
+			//echo $this->db->getLastQuery();
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
@@ -71,11 +72,29 @@ class Event extends BaseModel
 				$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
 				$result['barn'] = $barndatas;
 				
-				if(in_array('stall', $querydata)){
+				if(in_array('stall', $querydata)){ 
 					if(count($barndatas) > 0){
 						foreach($barndatas as $barnkey => $barndata){
 							$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
 							$result['barn'][$barnkey]['stall'] = $stalldata;
+						}
+					}
+				}
+			}
+			if($type=='all' && in_array('stallcount', $querydata)){
+				$eventdata['data'] = $result; 
+				foreach ($eventdata['data'] as $key => $event) { 
+					$eventid = $event['id'];
+					$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.event_id', $eventid )->get()->getResultArray();
+					$result[$key]['stall'] = $stalldata;
+				
+					if(in_array('bookingstall', $querydata)){ 
+						if(count($stalldata) > 0){
+							foreach($result[$key]['stall'] as $stallkey => $stalldata){ 
+								$bookingdata = $this->db->table('booking b')->where('b.status', '1')->where('b.stall_id', $stalldata['id'])->get()->getResultArray(); 
+								$result[$key]['stall'][$stallkey]['booking'] = $bookingdata;
+
+							}
 						}
 					}
 				}
