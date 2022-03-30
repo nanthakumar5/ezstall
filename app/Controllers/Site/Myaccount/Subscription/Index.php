@@ -3,6 +3,7 @@ namespace App\Controllers\Site\Myaccount\Subscription;
 use App\Controllers\BaseController;
 use App\Models\Stripe;
 use App\Models\Plan;
+use App\Models\Payments;
 
 class Index extends BaseController
 {
@@ -10,6 +11,8 @@ class Index extends BaseController
 	{	
         $this->stripe 	= new Stripe();
         $this->plan 	= new Plan();
+		$this->payments = new Payments();	
+
 	}
     
 	public function index()
@@ -28,9 +31,14 @@ class Index extends BaseController
         }
 		
 		$userdetail = getSiteUserDetails();
+		$userid = $userdetail['id'];
 		$type = $userdetail['type'];
-		
+		$subscriptionid = $userdetail['subscription_id'];
+
 		$data['plans'] = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
+		$data['subscriptions'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid, 'paymenttype' => 2,'subscriptionid' =>$subscriptionid]);
+		
+		$data['userdetail'] = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
 		return view('site/myaccount/subscription/index', $data);
