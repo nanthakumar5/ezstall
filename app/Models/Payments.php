@@ -13,9 +13,15 @@ class Payments extends BaseModel
 			$data		= 	['p.*'];							
 			$select[] 	= 	implode(',', $data);
 		}
+
+		if(in_array('users', $querydata)){
+			$data		= 	['u.name username','u.type usertype'];							
+			$select[] 	= 	implode(',', $data);
+		}
 		
 		$query = $this->db->table('payment p');
-		
+		if(in_array('users', $querydata)) $query->join('users u', 'u.id=p.payer_id', 'left');
+
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		

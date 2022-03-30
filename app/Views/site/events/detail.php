@@ -6,6 +6,11 @@
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
 	}
+	
+	$eventstartdate = date('d-m-Y', strtotime($detail['start_date']));
+    $beforestartdate = date( 'd-m-Y', strtotime($detail['start_date']. ' -1 day') );
+	$eventenddate = date('d-m-Y', strtotime($detail['end_date']));
+
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -99,14 +104,18 @@
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">
-							<input type="date" name="startdate" id="startdate" class="checkdate checkin" placeholder="Check-In">
-						</span>
+<!--  						<input type="date" name="startdate" id="startdate" class="checkdate checkin" placeholder="Check-In">
+ -->			
+ 					<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In" value="<?php echo $eventstartdate;?>" /> 						
+			</span>
 						<span class="iconProperty">
-							<input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">
-						</span>
+			<!-- <input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">--> 					<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out" value="<?php echo $eventenddate;?>"/>
+ 								
+ 							</span>
 					</span>
 					<input type="hidden" name="datecount" id="datecount">
 				</div>
+				
 				<?php 
 					$tabbtn = '';
 					$tabcontent = '';
@@ -164,14 +173,36 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
 <script> 
-	var cartevent = '<?php echo $cartevent; ?>';
+	var cartevent 		= '<?php echo $cartevent; ?>';
+	var eventstartdate  = '<?php echo $beforestartdate; ?>';
+	var eventenddate 	= '<?php echo $eventenddate; ?>';
+
 	$(document).ready(function (){
 	 	if(cartevent == 0){
 	 		cart();
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
 	 	}
-	 	
+		$( "#startdate" ).datepicker({
+			dateFormat 	: 'dd-mm-yy', 
+			minDate		: eventstartdate, 
+			changeMonth	: true,
+			changeYear	: true,
+			onClose: function( selectedDate ) {
+			$("#enddate").datepicker( "option", "dateFormat", "dd-mm-yy");
+			$("#enddate").datepicker( "option", "minDate", selectedDate );
+			}
+		});
+		$( "#enddate").datepicker({
+			dateFormat 	: 'dd-mm-yy', 
+			minDate		: eventenddate, 
+			changeMonth	: true,
+			changeYear	: true,
+			onClose: function( selectedDate ) {
+			$("#startdate").datepicker( "option", "dateFormat", "dd-mm-yy");
+			$("#startdate").datepicker( "option", "maxDate", selectedDate );
+			}
+		}); 
 	});
 
 	function checkdate(){

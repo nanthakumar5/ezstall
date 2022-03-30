@@ -21,7 +21,8 @@ class Index extends BaseController
     	$userid = getSiteUserID();
 
 		$paymentcount = $this->payments->getPayments('count', ['payment']);
-		$data['payments'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
+		$data['payments'] = $this->payments->getPayments('all', ['payment','users'], ['start' => $offset, 'length' => $perpage]);
+
 	    $data['pager'] = $pager->makeLinks($page, $perpage, $paymentcount);
 		$data['paymentinterval'] = $this->config->paymentinterval;
 		$data['currencysymbol'] = $this->config->currencysymbol;
@@ -34,7 +35,8 @@ class Index extends BaseController
 	public function view($id)
 	{
     	$userid = getSiteUserID();
-		$result = $this->payments->getPayments('row', ['payment'], ['userid' => $userid, 'id' => $id]);
+		//$result = $this->payments->getPayments('row', ['payment'], ['userid' => $userid, 'id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment','users'], [ 'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;

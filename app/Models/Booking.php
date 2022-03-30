@@ -21,13 +21,14 @@ class Booking extends BaseModel
 		}
 
 		if(in_array('users', $querydata)){
-			$data		= 	['u.name username'];							
+			$data		= 	['u.name username','u.type usertype'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
 		$query = $this->db->table('booking b');
 		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
 		if(in_array('users', $querydata)) $query->join('users u', 'u.id=b.user_id', 'left');
+
 		
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
@@ -77,7 +78,7 @@ class Booking extends BaseModel
 					foreach ($result as $key => $booking) {
 						$bookingstall = $this->db->table('booking_details bd')
 										->join('barn b', 'b.id = bd.barn_id', 'left')
-										->join('stall s', 's.id  = bd.stall_id', 'left')
+										->join('stall s','s.id  = bd.stall_id', 'left')
 										->select('bd.*, b.name barnname, s.name stallname')
 										->where('bd.booking_id', $booking['id'])
 										->get()

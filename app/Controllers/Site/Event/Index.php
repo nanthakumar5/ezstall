@@ -53,7 +53,7 @@ class Index extends BaseController
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$checkEvent = checkEvent($event);
-		if($checkEvent != 'Book Now'){
+		if($checkEvent != 'Book now'){
 			$this->session->setFlashdata('danger', 'You Cannot Access the Event.');
 			return redirect()->to(base_url().'/events'); 
 		}

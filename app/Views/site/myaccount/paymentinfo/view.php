@@ -1,16 +1,21 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-$id             = isset($result['id']) ? $result['id'] : '';
-$name           = isset($result['payer_name']) ? $result['payer_name'] : '';
-$email          = isset($result['payer_email']) ? $result['payer_email'] : '';
-$type           = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
-$amount         = isset($result['amount']) ? $result['amount'] : '';
-$plan_start     = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
-$plan_start     = date("d-m-Y", strtotime($plan_start));
-$plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
-$plan_end       = date("d-m-Y", strtotime($plan_end));
+      $id             = isset($result['id']) ? $result['id'] : '';
+      $username       = isset($result['username']) ? $result['username'] : '';
+      $nameoncard     = isset($result['payer_name']) ? $result['payer_name'] : '';
+      $email          = isset($result['payer_email']) ? $result['payer_email'] : '';
+      $type           = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
+      $amount         = isset($result['amount']) ? $result['amount'] : '';
+      $plan_start     = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
+      $plan_start     = date("d-m-Y", strtotime($plan_start));
+      $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
+      $plan_end       = date("d-m-Y", strtotime($plan_end));
 
+        if($result['usertype']      == 2) $usertype = 'Facility';
+        elseif($result['usertype']  == 3) $usertype = 'Producer';
+        elseif($result['usertype']  == 4) $usertype = 'Stall Manager';
+        elseif($result['usertype']  == 5) $usertype = 'Horse Owner'; 
 ?>
 <div class="row">
   <div class="col">
@@ -21,12 +26,28 @@ $plan_end       = date("d-m-Y", strtotime($plan_end));
   </div>
 </div>
 <section class="maxWidth eventPagePanel">
-  <div class="row col-md-10 base-style">
+    <div class="row col-md-10 base-style">
     <div class="col fw-600">
-      <p class="my-2">First Name</p>
+      <p class="my-2">Paid By</p>
     </div>
     <div class="col" align="left">
-      <p class="my-2"><?php echo $name;?></p>
+      <p class="my-2"><?php echo $usertype;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Name</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $username;?></p>
+    </div>
+  </div>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Name On Card</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $nameoncard;?></p>
     </div>
   </div>
   <div class="row col-md-10 base-style">
