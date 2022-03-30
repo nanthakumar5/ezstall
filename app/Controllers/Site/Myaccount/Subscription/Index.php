@@ -36,8 +36,8 @@ class Index extends BaseController
 		$subscriptionid = $userdetail['subscription_id'];
 
 		$data['plans'] = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
-		$data['subscriptions'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid, 'paymenttype' => 2,'subscriptionid' =>$subscriptionid]);
-		
+		$data['subscriptions'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid, 'paymenttype' => 2]);
+
 		$data['userdetail'] = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);

@@ -28,7 +28,6 @@ class Payments extends BaseModel
 		if(isset($requestdata['id'])) 					$query->where('p.id', $requestdata['id']);
 		if(isset($requestdata['userid'])) 				$query->where('p.payer_id', $requestdata['userid']);
 		if(isset($requestdata['paymenttype'])) 			$query->where('p.type', $requestdata['paymenttype']);
-		if(isset($requestdata['subscriptionid'])) 		$query->where('p.id', $requestdata['subscriptionid']);
 
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){

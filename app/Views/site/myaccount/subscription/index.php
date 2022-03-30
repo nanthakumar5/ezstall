@@ -7,11 +7,7 @@
 	</style>
 	<?php  	 $currentdate 	  	= date("Y-m-d"); 
 			 $subscriptiondate 	= date("Y-m-d", strtotime($userdetail['subscription_end_date']));
-			 $subscriptionid    = array_unique(array_column($subscriptions, 'id'))[0];
-			 $amount      		= array_unique(array_column($subscriptions, 'amount'))[0];
-				if($amount == 1000 ) $subscriptionplan = 'Yearly Subscription';
-				elseif($amount == 500 ) $subscriptionplan = 'Monthly Subscription';
-				elseif($amount == 100 ) $subscriptionplan =  'Dew'; ?>				
+			?>		
 
 	<?php if($userdetail['subscription_id'] == 'NULL' || $userdetail['subscription_id'] == 0){ 
 			 	foreach($plans as $plan){ ?>
@@ -34,7 +30,11 @@
 						</div>
 					</div>
 				<?php } 
-		} elseif($currentdate > $subscriptiondate &&  $userdetail['subscription_id'] == $subscriptionid) {?> 
+		} elseif($currentdate > $subscriptiondate ) {
+				$amount      		= array_unique(array_column($subscriptions, 'amount'))[0];
+				if($amount == 1000 ) $subscriptionplan = 'Yearly Subscription';
+				elseif($amount == 500 ) $subscriptionplan = 'Monthly Subscription';
+				elseif($amount == 100 ) $subscriptionplan =  'Dew';?> 
 					<div>
 						<h6><?php echo 'Your Subscription plan ended';?></h6>
 						<h6>Your Last Subscription Plan is : </h6>
