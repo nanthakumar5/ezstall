@@ -34,8 +34,13 @@ class Booking extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
-		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);
-		if(isset($requestdata['userid'])) 				$query->where('b.user_id', $requestdata['userid']);
+		if(isset($requestdata['userid'])){
+			$query->groupStart();
+				$query->whereIn('b.user_id', $requestdata['userid']);
+				$query->orWhereIn('e.user_id', $requestdata['userid']);
+			$query->groupEnd();
+		} 				
+
 
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);

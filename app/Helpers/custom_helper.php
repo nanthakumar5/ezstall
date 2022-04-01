@@ -60,6 +60,7 @@ function checkEvent($data)
 		$userdetail 	= getSiteUserDetails();
 		$currentdate 	= date("Y-m-d");
 		$userid 		= isset($userdetail['id']) ? $userdetail['id'] : '';
+		$parentid 		= isset($userdetail['parent_id']) ? $userdetail['parent_id'] : '';
 		$usertype 		= isset($userdetail['type']) ? $userdetail['type'] : '';
 		$userplanend 	= isset($userdetail['subscriptionenddate']) ? date('Y-m-d', strtotime($userdetail['subscriptionenddate'])) : '';
 		$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
@@ -67,9 +68,10 @@ function checkEvent($data)
 
 		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
 			$booknowBtn = "Book now";
-			
 			if(in_array($usertype, [2, 3, 4])){
 				if($userid == $data['user_id']){
+					$booknowBtn = "Book now";
+				}elseif($usertype == 4 && $parentid == $data['user_id']){
 					$booknowBtn = "Book now";
 				}else{
 					$booknowBtn = "Booking Not Available";
@@ -82,6 +84,13 @@ function checkEvent($data)
 		}
 
 		return $booknowBtn;
+}
+
+function getStallManagerIDS($parentid)
+{	
+	$users 		= new \App\Models\Users;;	
+	$result		= $users->getUsers('all', ['users'], ['parentid' => $parentid, 'status' => ['1']]);
+	return array_column($result, 'id');
 }
 
 function checkSubscription()

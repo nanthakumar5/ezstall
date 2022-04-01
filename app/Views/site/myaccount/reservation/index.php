@@ -3,13 +3,13 @@
 <?php $userid = getSiteUserID(); ?>
 
 <h2 class="fw-bold mb-4">Current Reservation</h2>
+<div class="d-flex flex-row-reverse bd-highlight"> 
+ <input type="text" placeholder="Search By Name" class="bookedby" id="bookedby" value="" />
+</div>
 <section class="maxWidth eventPagePanel">
-  <?php  foreach ($reservations as $data) { 
-            if($data['usertype']      == 2) $usertype = 'Facility';
-            elseif($data['usertype']  == 3) $usertype = 'Producer';
-            elseif($data['usertype']  == 4) $usertype = 'Stall Manager';
-            elseif($data['usertype']  == 5) $usertype = 'Horse Owner'; 
-        if($userid != $data['user_id'] || $data['usertype'] == 5){  ?>
+  <?php  
+    foreach ($bookings as $data) {           
+  ?>
             <div class="dashboard-box">
               <div class="EventFlex leftdata">
                 <div class="wi-30 row w-100">
@@ -40,7 +40,7 @@
                   <div class="col-md-3">
                     <div>
                       <p class="mb-0 fs-7 fw-600">Booked By</p>
-                      <p class="mb-0 fs-7"><?php echo $usertype; ?></p>
+                      <p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -52,8 +52,40 @@
               </div>
             </div>
         <?php } ?>
-        <?php } ?>
   </section>
 
 <?php echo $pager; ?>
+<?php $this->endSection(); ?>
+<?php $this->section('js') ?>
+<script>
+  var baseurl = "<?php echo base_url(); ?>";
+
+ $(document).ready(function() {
+     $("#bookedby").autocomplete({
+        source: function(request, response) {
+          ajax(baseurl+'/myaccount/searchbookeduser', {search: request.term}, {
+            success: function(result) {
+                    response(result);
+                }
+          });
+        },
+        html: true, 
+        select: function(event, ui) {
+          var name = ui.item.firstname+ui.item.lastname
+          $('#bookedby').val(name); 
+            window.location.href = baseurl+'/myaccount/bookings/view/'+ui.item.id;
+            return false;
+        },
+        focus: function(event, ui) {
+            $("#bookedby").val(name);
+            return false;
+        }
+    })
+      .autocomplete("instance")
+      ._renderItem = function( ul, item ) {
+        var name = item.firstname+item.lastname
+      return $( "<li><div>"+name+"</div></li>" ).appendTo( ul );
+      };
+});
+</script>
 <?php $this->endSection(); ?>

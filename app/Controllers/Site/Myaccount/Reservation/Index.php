@@ -3,11 +3,15 @@ namespace App\Controllers\Site\Myaccount\Reservation;
 
 use App\Controllers\BaseController;
 use App\Models\Booking;
+use App\Models\Event;
+use App\Models\Users;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
+		$this->users = new Users();	
+		$this->event = new Event();
 		$this->booking = new Booking();	
 	}
 
@@ -18,16 +22,16 @@ class Index extends BaseController
 		$perpage =  5; 
 		$offset = $page * $perpage;
 
-    	$userid = getSiteUserID();
+		$userid = getSiteUserID();
+		$allids = getStallManagerIDS($userid);
+		array_push($allids, $userid);
 
-		$bookingcount = $this->booking->getBooking('count', ['booking'], ['userid' => $userid]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event','stall'], ['userid' => $userid,'start' => $offset, 'length' => $perpage]);
-		$data['reservations'] = $this->booking->getBooking('all', ['booking', 'event','stall','barnstall','users'], ['start' => $offset, 'length' => $perpage]);
-
+		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall'], ['userid'=> $allids, 'start' => $offset, 'length' => $perpage]);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
+		$data['usertype'] = $this->config->usertype;
 
-    	return view('site/myaccount/reservation/index',$data);
-
+    	return view('site/myaccount/reservation/index', $data);
     }
 
 
@@ -47,4 +51,19 @@ class Index extends BaseController
 
 		return view('site/myaccount/reservation/view', $data);
 	}	
+
+		public function bookedUser()
+	{
+
+		$requestData = $this->request->getPost(); 
+		$result = array();
+
+		if (isset($requestData['search'])) {
+			$result = $this->booking->getBooking('all', ['booking', 'event','stall','barnstall','users'], ['status'=> ['1'], 'search' => ['value' => $requestData['search']]]);
+		}
+
+		$response['data'] = $result;
+
+		return $this->response->setJSON($result);
+	}
 }
