@@ -1045,6 +1045,12 @@ input.subscriptionInput:focus {
 
 /*Media Query Section Start*/
 @media (max-width: 767px) {
+  .checkout-final{
+    padding-left: 10px;
+  }
+  .event-checkout{
+    padding-right: 10px;
+  }
   .t-right {
   justify-content: space-between;
   display: flex;
@@ -1579,11 +1585,12 @@ ul.edaddr img {
   background-color: #222;
   border: none;
   font-weight: 600;
-  color: #fff;
+  color: #fff !important;
   width: auto;
   border-radius: 7px;
   padding: 7px 20px 7px 0px;
   vertical-align: top;
+  text-decoration: none;
 }
 button.ucEventdetBtn:hover {
   background: #e00000;
@@ -2691,12 +2698,25 @@ a.btn.back-btn:hover {
   border: none;
   box-shadow: 0 0px 8px 0 rgb(0 0 0 / 6%);
   border-radius: 10px;
+  transition: all 1s ease;
 }
+
+.welcome-content .row.mt-4.first .card:hover {
+  border-bottom: 4px solid #000000 !important;
+  transition: all 1s ease;
+}
+
 .welcome-content .row.mt-4.second .card {
   border-bottom: 6px solid #595959 !important;
   border: none;
   box-shadow: 0 0px 8px 0 rgb(0 0 0 / 6%);
   border-radius: 10px;
+  transition: all 1s ease;
+}
+
+.welcome-content .row.mt-4.second .card:hover {
+  border-bottom: 6px solid #e20505 !important;
+  transition: all 1s ease;
 }
 
 .row.mt-4.second h2,
@@ -2895,6 +2915,38 @@ td {
 
 .dash-stall-base:nth-child(even) {
   padding-top: 1rem;
+  background-color: #f5f5f552;
+  border-radius: 7px;
+}
+
+.event-checkout{
+  padding-right: 0;
+}
+
+.checkout-final{
+  padding-left: 0;
+}
+
+.register-success {
+  text-align: center;
+  margin: 5rem;
+}
+
+.register-success p {
+  color: green;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.img-reg-success{
+  height: 150px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.accordion-item{
+  border-top: 1px solid rgba(0,0,0,.125) !important;
 }
 
 

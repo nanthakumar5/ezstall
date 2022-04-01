@@ -159,6 +159,165 @@
 		</div>
 	</div>
 
+	<!-- Barn and stall Tabs start -->
+
+	<div class="container row mt-5 dash-barn-style">
+		<div class="row align-items-center mb-4 p-0">
+			<div class="col-md-2">
+				<p class="fs-2 fw-bold mb-0">Barn</p>
+			</div>
+			<div class="col-md-10 t-right p-0">
+				<button class="btn-stall">Add stall</button>
+				<button class="btn-stall">Add bulk stall</button>
+				<button class="btn-stall">Remove</button>
+			</div>
+		</div>
+		
+		<!-- Nav pills -->
+		<ul class="nav nav-pills flex-column col-md-3" role="tablist">
+			<li class="nav-item text-center mb-3">
+				<a class="nav-link tab-link active" data-bs-toggle="pill" href="#tab1">
+					Barn 1
+				</a>
+			</li>
+			<li class="nav-item text-center mb-3">
+				<a class="nav-link tab-link" data-bs-toggle="pill" href="#tab2">
+					Barn 2
+				</a>
+			</li>
+			<li class="nav-item text-center mb-3">
+				<a class="nav-link tab-link" data-bs-toggle="pill" href="#tab3">
+					Barn 3
+				</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content col-md-9">
+			<div id="tab1" class="container tab-pane active p-0 mb-3">
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+			</div>
+			<div id="tab2" class="container tab-pane fade p-0 mb-3">
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+			</div>
+			<div id="tab3" class="container tab-pane fade p-0 mb-3">
+				<div class="row mb-2 dash-stall-base">
+					<div class="col-md-7 mb-3">
+						<input type="text" name="stall_name" class="form-control" placeholder="Stall name">
+					</div>
+					<div class="col-md-2 mb-3">
+						<input type="text" name="stall_price" class="form-control" placeholder="Price">
+					</div>
+					<div class="col-md-2 mb-3">
+						<button class="dash-upload" title="Upload image here">Upload</button>
+					</div>
+					<div class="col-md-1 mb-3">
+						<a href="#" class="dash-stall-remove"><i class="fas fa-times text-white"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Barn and stall Tabs end -->
+
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
