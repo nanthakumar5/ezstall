@@ -11,7 +11,7 @@ class Booking extends BaseModel
 		
 
 		if(in_array('booking', $querydata)){
-			$data		= 	['b.*'];							
+			$data		= 	['b.*','DATE_FORMAT(b.created_at, "%M %Y") AS month'];							
 			$select[] 	= 	implode(',', $data);
 		}
 		
@@ -28,19 +28,25 @@ class Booking extends BaseModel
 		$query = $this->db->table('booking b');
 		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
 		if(in_array('users', $querydata)) $query->join('users u', 'u.id=b.user_id', 'left');
-
 		
+		if(in_array('payment',$querydata)){ 
+			$query->select('SUM(p.amount) as useramount,GROUP_CONCAT(p.id)')->join('payment p', 'p.id=b.payment_id', 'left');
+		}
+		if(in_array('booking_details',$querydata)){ 
+			$query->select('bd.stall_id as stallid')->join('booking_details bd', 'bd.booking_id=b.id', 'left');
+		}
+
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
-		if(isset($requestdata['userid'])){
+		if(isset($requestdata['userid'])) 				
+		{
 			$query->groupStart();
 				$query->whereIn('b.user_id', $requestdata['userid']);
 				$query->orWhereIn('e.user_id', $requestdata['userid']);
 			$query->groupEnd();
-		} 				
-
+		} 		
 
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
@@ -68,14 +74,14 @@ class Booking extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
-		else $query->groupBy('b.id');
+		else $query->groupBy('DATE_FORMAT(b.created_at, "%M %Y")');
 		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
 
 		if($type=='count'){
-			$result = $query->countAllResults();
+			$result = $query->countAllResults(); 
 		}else{
-			$query = $query->get();
+			$query = $query->get(); //echo $this->db->getLastQuery();
 			if($type=='all'){
 				$result = $query->getResultArray();
 				

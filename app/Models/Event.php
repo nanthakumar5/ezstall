@@ -16,7 +16,7 @@ class Event extends BaseModel
 		}
 		
 		$query = $this->db->table('event e');
-		
+
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
@@ -54,7 +54,7 @@ class Event extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
-		else $query->groupBy('e.id');
+		else $query->groupBy('e.id,');
 		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
 
@@ -62,7 +62,6 @@ class Event extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get(); 
-			//echo $this->db->getLastQuery();
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
@@ -87,13 +86,11 @@ class Event extends BaseModel
 					$eventid = $event['id'];
 					$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.event_id', $eventid )->get()->getResultArray();
 					$result[$key]['stall'] = $stalldata;
-				
 					if(in_array('bookingstall', $querydata)){ 
 						if(count($stalldata) > 0){
 							foreach($result[$key]['stall'] as $stallkey => $stalldata){ 
-								$bookingdata = $this->db->table('booking b')->where('b.status', '1')->where('b.stall_id', $stalldata['id'])->get()->getResultArray(); 
+								$bookingdata = $this->db->table('booking_details bd')->where('bd.status', '1')->where('bd.stall_id', $stalldata['id'])->get()->getResultArray(); 
 								$result[$key]['stall'][$stallkey]['booking'] = $bookingdata;
-
 							}
 						}
 					}

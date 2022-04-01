@@ -2951,3 +2951,46 @@ td {
 
 
 /*25-03-2022 styles end here*/
+
+/*01-04-2022 styles starts from here*/
+
+.upcoming {
+  display:none;
+  margin: 5px 0;
+  padding: 8px 0;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+#loadMore {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    transition: all 600ms ease-in-out;
+    -webkit-transition: all 600ms ease-in-out;
+    -moz-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;
+}
+#loadMore:hover {
+    color: #000;
+}
+.monthlyincome {
+  display:none;
+  margin: 5px 0;
+  padding: 8px 0;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+#loadincome {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    transition: all 600ms ease-in-out;
+    -webkit-transition: all 600ms ease-in-out;
+    -moz-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;
+}
+#loadincome:hover {
+    color: #000;
+}
+
+/*01-04-2022 styles end here*/

@@ -128,13 +128,13 @@ class Index extends BaseController
     {  
 		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$occupied = explode(',', implode(',', array_column($booking, 'stall_id')));
+		$data['occupied'] = explode(',', implode(',', array_column($booking, 'stall_id')));
 		
 		return view('site/myaccount/event/view',$data);
     }
 	
     public function export($id)
-    {
+    {	
     	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
 		$occupied 	= explode(',', implode(',', array_column($booking, 'stall_id')));
