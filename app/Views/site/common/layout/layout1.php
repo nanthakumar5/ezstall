@@ -61,9 +61,11 @@
 								</span>
 								<span class="iconProperty">
 									<input type="text" name="start_date" id="search_start_date" placeholder="Check-In">
+									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<span class="iconProperty">
 									<input type="text" name="end_date" id="search_end_date" placeholder="Check-Out">
+									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<input type="text" placeholder="No.of stalls">
 								<span class="searchResult">
