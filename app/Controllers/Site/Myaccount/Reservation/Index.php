@@ -3,15 +3,11 @@ namespace App\Controllers\Site\Myaccount\Reservation;
 
 use App\Controllers\BaseController;
 use App\Models\Booking;
-use App\Models\Event;
-use App\Models\Users;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->users = new Users();	
-		$this->event = new Event();
 		$this->booking = new Booking();	
 	}
 

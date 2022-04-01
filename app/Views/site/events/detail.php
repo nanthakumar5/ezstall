@@ -174,8 +174,9 @@
 <?php $this->section('js') ?>
 <script> 
 	var cartevent 		= '<?php echo $cartevent; ?>';
-	var eventstartdate  = '<?php echo $beforestartdate; ?>';
+	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
+	var startdate 		= '<?php echo date("mm/dd/yyyy", strtotime($detail['start_date'])) ;?>';
 
 	$(document).ready(function (){
 	 	if(cartevent == 0){
@@ -189,8 +190,8 @@
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-			$("#enddate").datepicker( "option", "dateFormat", "dd-mm-yy");
-			$("#enddate").datepicker( "option", "minDate", selectedDate );
+				$("#enddate").datepicker( "option", "dateFormat", "dd-mm-yy");
+				$("#enddate").datepicker( "option", "minDate", selectedDate );
 			}
 		});
 		$( "#enddate").datepicker({
@@ -199,8 +200,8 @@
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-			$("#startdate").datepicker( "option", "dateFormat", "dd-mm-yy");
-			$("#startdate").datepicker( "option", "maxDate", selectedDate );
+				$("#startdate").datepicker( "option", "dateFormat", "dd-mm-yy");
+				$("#startdate").datepicker( "option", "maxDate", selectedDate );
 			}
 		}); 
 	});
@@ -233,7 +234,7 @@
 		var enddate   	= $("#enddate").val(); 
 		var stall_id	= $(this).val(); 
 		var event_id    = $(this).attr('data-eventid');
-		var barn_id    = $(this).attr('data-barnid');
+		var barn_id    	= $(this).attr('data-barnid');
 		var price 		= $(this).attr('data-price');
 
 		dateformat('#start_date, #end_date');

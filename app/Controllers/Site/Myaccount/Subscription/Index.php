@@ -26,21 +26,20 @@ class Index extends BaseController
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later.');
 			}
-			
 			return redirect()->to(base_url().'/myaccount/dashboard'); 
         }
 		
-		$userdetail = getSiteUserDetails();
-		$userid = $userdetail['id'];
-		$type = $userdetail['type'];
+		$userdetail     = getSiteUserDetails();
+		$userid         = $userdetail['id'];
+		$type           = $userdetail['type'];
 		$subscriptionid = $userdetail['subscription_id'];
 
-		$data['plans'] = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
-		$data['subscriptions'] = $this->payments->getPayments('all', ['payment'], ['userid' => $userid, 'paymenttype' => 2]);
+		$data['plans']          = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
+		$data['subscriptions']  = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['userid' => [$userid], 'paymenttype' => 2]);
 
-		$data['userdetail'] = $userdetail;
+		$data['userdetail']     = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;
-    	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
+    	$data['stripe']         = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
 		return view('site/myaccount/subscription/index', $data);
 	}
 }

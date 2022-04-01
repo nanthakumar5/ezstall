@@ -2,9 +2,11 @@
 <?php $this->section('content') ?>
 <?php $userid = getSiteUserID(); ?>
 
+<div class="dFlexComBetween eventTP flex-wrap">
 <h2 class="fw-bold mb-4">Current Reservation</h2>
-<div class="d-flex flex-row-reverse bd-highlight"> 
- <input type="text" placeholder="Search By Name" class="bookedby" id="bookedby" value="" />
+<div class="flex-row-reverse bd-highlight"> 
+ <input type="text" placeholder="Search By Name" class="searchEvent bookedby" id="bookedby" value="" />
+</div>
 </div>
 <section class="maxWidth eventPagePanel">
   <?php  
@@ -12,8 +14,8 @@
   ?>
             <div class="dashboard-box">
               <div class="EventFlex leftdata">
-                <div class="wi-30 row w-100">
-                  <div class="col-md-3">
+                <div class="wi-30 row w-100 align-items-center">
+                  <div class="col-md-2">
                     <div>
                       <p class="mb-0 text-sm fs-7 fw-600">Name</p></td>
                       <p class="mb-0 fs-7"><?php echo $data['firstname'].$data['lastname'];?></p></td>
@@ -37,13 +39,13 @@
                       <p class="mb-0 fs-7"><?php echo date("d-m-Y", strtotime($data['check_in']));?> - <?php echo date("d-m-Y", strtotime($data['check_out']));?></p>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div>
                       <p class="mb-0 fs-7 fw-600">Booked By</p>
                       <p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="d-flex justify-content-end">
                      <a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="view-res">View</a>
                     </div>

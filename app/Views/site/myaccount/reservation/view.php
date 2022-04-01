@@ -13,10 +13,12 @@
       $checkout           = date("d-m-Y", strtotime($checkout));
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
 
+
         if($result['usertype']      == 2) $usertype = 'Facility';
         elseif($result['usertype']  == 3) $usertype = 'Producer';
         elseif($result['usertype']  == 4) $usertype = 'Stall Manager';
         elseif($result['usertype']  == 5) $usertype = 'Horse Owner'; 
+
   ?>
     <div class="row">
       <div class="col">
@@ -67,24 +69,15 @@
           <p class="my-2"><?php echo $eventname;?></p>
         </div>
       </div>
-      <?php foreach ($barnstalls as $barnstall) {?>
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
           <p class="my-2">Barn Name</p>
         </div>
         <div class="col" align="left">
-          <p class="my-2"><?php echo $barnstall['barnname'];?></p>
+          <?php foreach ($barnstalls as $barnstall) {
+              echo ' <p class="my-2">'.$barnstall['barnname'].'-'.$barnstall['stallname'].'</p>';  } ?>
         </div>
       </div>
-      <div class="row col-md-10 base-style">
-        <div class="col fw-600">
-          <p class="my-2">Stall Name</p>
-        </div>
-        <div class="col" align="left">
-          <p class="my-2"><?php echo $barnstall['stallname'];?></p>
-        </div>
-      </div>
-    <?php } ?>
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
           <p class="my-2">Check In</p>
