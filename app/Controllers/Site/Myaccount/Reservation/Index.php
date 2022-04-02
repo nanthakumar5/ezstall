@@ -17,13 +17,14 @@ class Index extends BaseController
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
 		$offset = $page * $perpage;
+		$date	= date('Y-m-d');
 
 		$userid = getSiteUserID();
 		$allids = getStallManagerIDS($userid);
 		array_push($allids, $userid);
 
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall'], ['userid'=> $allids, 'start' => $offset, 'length' => $perpage]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall'], ['userid'=> $allids,'start_date'=> $date, 'start' => $offset, 'length' => $perpage]);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 

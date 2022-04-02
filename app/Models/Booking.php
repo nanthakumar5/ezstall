@@ -45,7 +45,7 @@ class Booking extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
-		//if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);		
+		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', $requestdata['start_date']);
 		{
 			$query->groupStart();
 				$query->whereIn('b.user_id', $requestdata['userid']);
