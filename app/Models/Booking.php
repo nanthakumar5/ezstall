@@ -16,7 +16,7 @@ class Booking extends BaseModel
 		}
 		
 		if(in_array('event', $querydata)){
-			$data		= 	['e.name eventname'];							
+			$data		= 	['e.name eventname','GROUP_CONCAT(e.id) as eventid'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
@@ -25,22 +25,27 @@ class Booking extends BaseModel
 			$select[] 	= 	implode(',', $data);
 		}
 
-		$query = $this->db->table('booking b');
-		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
-		if(in_array('users', $querydata)) $query->join('users u', 'u.id=b.user_id', 'left');
-		
-		if(in_array('payment',$querydata)){ 
-			$query->select('SUM(p.amount) as useramount,GROUP_CONCAT(p.id)')->join('payment p', 'p.id=b.payment_id', 'left');
-		}
-		if(in_array('booking_details',$querydata)){ 
-			$query->select('bd.stall_id as stallid')->join('booking_details bd', 'bd.booking_id=b.id', 'left');
+		if(in_array('payment', $querydata)){
+			$data		= 	['SUM(p.amount) as paymentamount'];							
+			$select[] 	= 	implode(',', $data);
 		}
 
+		$query = $this->db->table('booking b');
+
+		if(in_array('event', $querydata)){
+			$query->join('event e', 'e.id=b.event_id', 'left');
+			if(isset($extras['groupBy'])) $query->groupBy('e.id');
+		} 
+
+		if(in_array('users', $querydata)) 	$query->join('users u', 'u.id=b.user_id', 'left');		
+		if(in_array('payment',$querydata))	$query->join('payment p', 'p.id=b.payment_id', 'left');
+		
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
-		if(isset($requestdata['userid'])) 				
+		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
+		//if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);		
 		{
 			$query->groupStart();
 				$query->whereIn('b.user_id', $requestdata['userid']);
@@ -81,7 +86,7 @@ class Booking extends BaseModel
 		if($type=='count'){
 			$result = $query->countAllResults(); 
 		}else{
-			$query = $query->get(); //echo $this->db->getLastQuery();
+			$query = $query->get(); //echo $this->db->getLastQuery(); die();
 			if($type=='all'){
 				$result = $query->getResultArray();
 				
@@ -97,7 +102,7 @@ class Booking extends BaseModel
 						$result[$key]['barnstall'] = $bookingstall;
 					}
 				}
-				
+
 			}elseif($type=='row'){
 				$result = $query->getRowArray();
 				
@@ -111,8 +116,7 @@ class Booking extends BaseModel
 									->getResultArray();
 					$result['barnstall'] = $bookingstall;
 				}
-			}	
-
+			}
 		}
 		return $result;
     }

@@ -110,7 +110,7 @@ function formsubmit(action, data){
 
 /** Ajax **/
 
-function ajax(url, data, extras=[]){
+function ajax(url, data, extras=[]){  
     var options = {};
     
     options['url']          =   url;
@@ -216,7 +216,7 @@ function multiplefileappend(name, value, src){
 }
 
 
-function fileupload(data1=[], data2=[], path){
+function fileupload(data1=[], data2=[], path){ 
 	var url 			= baseurl()+'ajax/fileupload';
 	var path			= baseurl()+'assets/uploads/temp/';
 	var relativepath	= './assets/uploads/temp/';
@@ -305,3 +305,10 @@ function dateformat(selector, extras=[]){
 		return false;
 	});
 }
+$(".navbar-toggler.collapsed").click(function() {
+    $(".navbar-collapse.collapse").slideToggle();
+});
+
+$('#sidebarCollapse').click(function() {
+    $('.navbar-header').toggleClass("show-sidebar");
+});

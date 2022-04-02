@@ -3537,3 +3537,129 @@ td {
 
 
 /* 1-4-2022 styles end here  */
+
+
+/* 2-4-2022 styles start here  */
+
+@media (max-width: 992px) {
+    .me-auto.ml-auto.navbar-nav+.navbar-nav {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+        padding: 5px !important;
+    }
+    div#responsive-navbar-nav {
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+    a.navbar-brand {
+        margin-bottom: 10px;
+    }
+    .contact-info .col-md-4 {
+        margin-bottom: 26px;
+    }
+    .contact-info .col-md-4:last-child {
+        margin-bottom: 0;
+    }
+    .navbar-header.show-sidebar+nav#sidebar-nav {
+        margin-left: 0 !important;
+        top: 150px;
+        position: absolute;
+        left: 20px;
+        margin-right: 20px;
+        background-color: #fff;
+        z-index: 9;
+    }
+    .navbar-header+nav#sidebar-nav {
+        background-color: transparent;
+        margin-left: 0 !important;
+        left: -220px;
+        position: absolute;
+        background-color: #fff;
+        margin-left: 0 !important;
+        top: 150px;
+    }
+    .navbar-header.show-sidebar+nav#sidebar-nav ul.list-unstyled.components {
+        margin: 0 !important;
+    }
+    .navbar-header+nav#sidebar-nav ul.list-unstyled.components {
+        margin: 0;
+    }
+    div#content {
+        margin-top: 50px !important;
+        padding: 20px !important;
+    }
+    .container.row.mt-5.dash-barn-style {
+        margin: 20px auto !important;
+    }
+    section.maxWidth.eventPagePanel .dashboard-box .EventFlex.leftdata.EventFlex.leftdata .wi-30.row.w-100.align-items-center div p {
+        display: inline-block;
+        width: 49%;
+    }
+    section.maxWidth.eventPagePanel .dashboard-box .col-md-2 .d-flex.justify-content-end a {
+        display: block;
+        margin: 10px auto 0;
+        position: relative;
+        left: 44px;
+    }
+    section.maxWidth.eventPagePanel .dashboard-box {
+        margin-bottom: 20px;
+    }
+    li.side-nav-active {
+        justify-content: flex-start;
+        height: auto;
+    }
+    #sidebar-nav ul li a i {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    #sidebar-nav ul li a {
+        padding: 10px;
+    }
+    #sidebar-nav ul li a p {
+        width: 71%;
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+    }
+}
+
+@media (min-width: 767px) and (max-width:1200px) {
+    .EventFlex span.wi-50 {
+        margin-right: 20px;
+    }
+    .searchResult {
+        width: 100% !important;
+        border-radius: 7px;
+        margin: 10px 0px;
+        background-color: #e00000;
+        cursor: pointer;
+        justify-content: center;
+        display: flex;
+    }
+}
+
+#sidebar-nav ul li a p {
+    /* width: 71%;   */
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.edit a {
+    background-color: #e00000;
+    height: auto;
+    width: max-content;
+    margin: 0 0 0 1.5vh;
+    font-weight: 500;
+    font-size: 18px;
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+}
+
+
+/* 2-4-2022 styles end here  */

@@ -12,59 +12,59 @@
 		<li class="side-nav-active">
 			<a href="<?php echo base_url();?>/myaccount/dashboard" class="side-nav-a" data-toggle="collapse" aria-expanded="false">
 				<i class="side-nav-i bi bi-speedometer"></i>
-				Dashboard
+				<p>Dashboard</p>
 			</a>
 		</li>
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/account">
 				<i class="side-nav-i bi bi-person"></i>
-				Account Information
+				<p>Account Information</p>
 			</a>
 		</li>
 		<?php if($role=='2' || $role=='3'){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
 					<i class="side-nav-i bi bi-calendar2-event"></i>
-					Add Event
+					<p>Add Event</p>
 				</a>
 			</li>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/stallmanager">
 					<i class="side-nav-i bi bi-person"></i>
-					Stall Manager
+					<p>Stall Manager</p>
 				</a>
 			</li>
 		<?php } ?>
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/bookings">
 				<i class="side-nav-i bi bi-calendar2-week"></i>
-				Current Reservation
+				<p>Current Reservation</p>
 			</a>
 		</li>
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastactivity">
 				<i class="side-nav-i bi bi-calendar3"></i>
-				Past Month Activity
+				<p>Past Month Activity</p>
 			</a>
 		</li>
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/payments">
 				<i class="side-nav-i bi bi-credit-card"></i>
-				Payments
+				<p>Payments</p>
 			</a>
 		</li>
 		<?php if($role=='2' || $role=='5'){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/subscription">
 					<i class="side-nav-i bi bi-box"></i>
-					Packages
+					<p>Packages</p>
 				</a>
 			</li>
 		<?php } ?>
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/logout">
 				<i class="side-nav-i bi bi-power"></i>
-				Logout
+				<p>Logout</p>
 			</a>
 		</li>
 	</ul>

@@ -20,7 +20,7 @@ $name = $userdetail['name'];
 							<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded mx-auto d-block" />
 						</div>
 						<div class="col-md-9">
-							<h2><?php echo $stallcount;?></h2>
+							<h2><?php echo $stallid;?></h2>
 							<p>Total no of. Stalls</p>
 						</div>
 					</div>
@@ -124,7 +124,7 @@ $name = $userdetail['name'];
 							<tr class="monthlyincome">
 								<td><?php echo $i ?></td>
 								<td><?php echo $income['month']?></td>
-								<td>$<?php echo $income['useramount'] ?></td>
+								<td>$<?php echo $income['paymentamount'] ?></td>
 								<td>
 									<button class="View">
 										<a href="<?php echo base_url();?>/myaccount/payments/view/<?php echo $income['payment_id']; ?>" >View</button><br>
