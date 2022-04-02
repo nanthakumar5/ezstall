@@ -3662,4 +3662,34 @@ td {
 }
 
 
+#ui-datepicker-div{
+    width: auto;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+    text-align: center;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: none;
+    background: #e10000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: none;
+    border-radius: 5px;
+}
+
+.ui-widget-header {
+    border: none;
+    padding: 8px !important; 
+    }
+
+    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+        background: #000 !important;
+        color: #fff;
+        padding: .2em !important;
+    }
 /* 2-4-2022 styles end here  */
