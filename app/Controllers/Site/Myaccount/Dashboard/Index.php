@@ -10,39 +10,26 @@ class Index extends BaseController
 	public function __construct()
 	{	
 		$this->event = new Event();
+		$this->booking = new Booking();
 	}
     
     public function index()
     { 	
      	$datetime			= date('Y-m-d H:i:s');
     	$userid 			= getSiteUserID();
-
-    	$prevmonth = date('D M Y', strtotime("last month"));
-    	$startdatestring=$datetime.'first day of last month';
-		$dt=date_create($startdatestring);
-		$paststartdate =  $dt->format('Y-m-d');
-		$enddatestring = $datetime.'last day of last month';
-		$dt=date_create($enddatestring);
-		$endstartdate = $dt->format('Y-m-d');
-    	$eventpast = $this->event->getEvent('all', ['event', 'stallcount','bookingstall'],['userid'=>$userid,'start_date' => $paststartdate,'end_date' => $endstartdate]);
-    	$price = [];
-      	$paststallcount = [];
-      	$totaleventpast = [];
-      		foreach ($eventpast as $eventkey => $event) { 
-      			$totaleventpast[] = $event['id'];
-      			foreach ($event['stall'] as $stallcount) { 
-					foreach ($stallcount['booking'] as $key => $booking) {
-						if($booking['stall_id']!=''){
-							$paststallcount[] = $booking['stall_id']; 
-							$price[] = $stallcount['price'];
-						}
-		      		}
-				}
-
+		
+    	$pastevent = $this->booking->getBooking('all', ['event','booking','booking_details','payment'],['userid'=>[$userid],'end_date' => $datetime]);
+      	$countpastevent = [];
+      	$countpaststall = [];
+      	$countpastamount = [];
+      		foreach ($pastevent as $eventkey => $event) {  
+      			$countpastevent[] = $event['id'];
+      			$countpaststall[] = $event['stallid'];
+      			$countpastamount[] = $event['useramount'];
 	      	}
 
     	$event['upcomingevents'] = $this->event->getEvent('all', ['event'],['userid'=>$userid,'start_date' => $datetime,'status' => ['1']]);
-
+      	
       	$events = $this->event->getEvent('all', ['event', 'stallcount','bookingstall'],['userid'=>$userid,'start_date' => $datetime]);
       	$bookingstall = [];
       	$currentstallcount = [];
@@ -55,14 +42,18 @@ class Index extends BaseController
 		      		}
 				}
 	      	}
-      	
+
+      	$event['monthlyincome'] = $this->booking->getBooking('all', ['event','booking','payment'],['userid'=>[$userid]]);
+
 
       	$event['stallcount'] 		= count($currentstallcount);
       	$event['bookingstall'] 		= count($bookingstall); 
-      	$event['paststallcount'] 	= count($paststallcount);
-      	$event['totaleventpast'] 	= count($totaleventpast);
-      	$event['paststallprice'] 	= array_sum($price);
+      	$event['countpaststall'] 	= count($countpaststall)?count($countpaststall): 0; 
+      	$event['pastevent'] 		= count($countpastevent);
+      	$event['countpastamount'] 	= array_sum($countpastamount);
+
       	$event['available'] 	= ($event['stallcount'] - $event['bookingstall']);
+      	
 		return view('site/myaccount/dashboard/index',$event);
 	}
 }
