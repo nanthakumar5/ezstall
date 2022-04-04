@@ -145,12 +145,18 @@
 							<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
 							<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 						</div>	
-						
+						<div class="col-md-6 barn_wrapper"><br>
+							<a href="javascript:void(0);" class="btn btn-info bulkbarnbtn mb-3">Add Bulk Barn</a>
+
+<!--  					 <button type="submit" name="bulkbarn"><a href="<?php //echo base_url().'/myaccount/events/add/addbulkbarn' ?>" class="btn btn-info bulkbarnbtn mb-3">Add Bulk Barn</a></button>
+ -->
+						</div>
+
 						<div id="barnwrapper"></div>
 						<div class="col-md-12 mt-4">
 							<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 							<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-							<input type="submit" class="btn btn-danger" value="Submit">
+							<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 							<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 						</div>
 					</div>
@@ -441,6 +447,10 @@
 			barndata();
 		});
 
+		$('.bulkbarnbtn').click(function(){
+			bulkbarndata();
+		});
+
 		function barndata(result=[]){ 
 			var barnId   	= result['id'] ? result['id'] : '';
 			var barnName 	= result['name'] ? result['name'] : '';
@@ -484,6 +494,20 @@
 			}
 			 
 			++barnIndex;
+		}
+
+		function bulkbarndata(result=[]){ 
+			var barnId   	= result['id'] ? result['id'] : '';
+			var barnName 	= result['name'] ? result['name'] : '';
+			var stall		= result['stall'] ? result['stall'] : [];
+			
+			var data='\
+			<div class="mb-3">\
+					<label for="bulkbarn" class="form-label">Choose your file:</label>\
+					<input class="form-control bulkbarn" type="file" id="bulkbarn">\
+			</div>';
+			$('#barnwrapper').append(data);
+
 		}
 		
 		$(document).on('click', '.stallbtn', function(){ 
@@ -607,7 +631,22 @@
 		$(document).on('click','#addbulkstallbtn', function () {
 	        $('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	    });
-
+		$(document).on('click','#eventSubmit', function () {
+			
+			if ($('#bulkbarn').get(0).files.length !== 0) {
+			    console.log("Files selected.");
+			$.ajax({
+	        type: "POST",
+	        url: "<?php echo base_url();?>/myaccount/events/add/import",
+	        success: function (res) {
+	            alert('saas');
+	        }
+    	});
+			}
+			else{
+			    console.log("No files selected.");
+			}
+	    });
 	</script>
 <?php $this->endSection(); ?>
 

@@ -185,4 +185,32 @@ class Index extends BaseController
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
     }
+
+    public function import()
+    {	
+ 		//echo "Importfile";
+
+      	$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+      	$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        if (!empty($sheetData)) {
+
+        	//echo "excell";
+
+            for ($i=1; $i<count($sheetData); $i++) {
+                $barnname 	= $sheetData[$i][0];
+                $stallname 	= $sheetData[$i][1];
+                $stallprice = $sheetData[$i][2];
+                $image 		= $sheetData[$i][3];
+            }
+
+           // $data['barndetails']  = ['name' => $barnname, 'price' =>$stallprice, 'image' =>$image];
+
+            //$result = $this->event->action($data);
+
+		}
+
+ 		exit;
+    }
 }

@@ -66,6 +66,8 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 	$routes->match(['get','post'], 'dashboard', 'Site\Myaccount\Dashboard\Index::index');
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
+    $routes->post('events/add/import', 'Site\Myaccount\Event\Index::import');
+
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
     $routes->get('events/view/(:num)', 'Site\Myaccount\Event\Index::view/$1');
     $routes->get('events/export/(:num)', 'Site\Myaccount\Event\Index::export/$1');
@@ -81,6 +83,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->post('searchbookeduser', 'Site\Myaccount\Reservation\Index::bookedUser');
 
 
+
     $routes->match(['get','post'], 'pastactivity','Site\Myaccount\PastActivity\Index::index');
     
     $routes->match(['get','post'], 'payments','Site\Myaccount\PaymentInfo\Index::index');
@@ -88,8 +91,8 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 
 });
 
-$routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
-$routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
+    $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
+    $routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
 	$routes->get('logout', 'Admin\Logout\Index::index');
 	
 	// Users
