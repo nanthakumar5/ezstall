@@ -1092,6 +1092,26 @@ input.subscriptionInput:focus {
 /*Media Query Section Start*/
 
 @media (max-width: 767px) {
+    .dash-event a {
+    width: 42%;
+    display: inline-block;
+    margin: 6px 0;
+}
+
+.maxWidth.eventPagePanel .dashboard-box .col-md-5.d-flex {
+    display: block !important;
+    width: 100%;
+}
+
+.eventFirstIcon, .eventSecondIcon {
+    margin-left: 10px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.ucprice.fs-7.fw-bold {
+    margin-left: 10px;
+}
     .checkout-final {
         padding-left: 10px;
     }
@@ -3726,6 +3746,10 @@ a.ui-button:active,
         width: 220px;
     }
 }
+
+
+
+
 
 
 /* 4-4-2022 styles end here  */
