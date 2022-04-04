@@ -83,11 +83,12 @@ class Booking extends BaseModel
 		else $query->groupBy('DATE_FORMAT(b.created_at, "%M %Y")');
 		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
+		else $query->orderBy('b.id','asc');
 
 		if($type=='count'){
 			$result = $query->countAllResults(); 
 		}else{
-			$query = $query->get(); //echo $this->db->getLastQuery(); die();
+			$query = $query->get();
 			if($type=='all'){
 				$result = $query->getResultArray();
 				

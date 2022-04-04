@@ -30,14 +30,12 @@ class Index extends BaseController
   			$countpastamount += $event['paymentamount'];
       	}
 
-      	$events = $this->event->getEvent('all', ['event', 'bookingstall'],['userid'=>$userid,'start_date' => $datetime]);
+      	$currentreservation = $this->event->getEvent('all', ['event', 'bookingstall'],['userid'=>$userid,'start_date' => $datetime]);
       	
       	$bookingstall 		= [];
       	$stallid 			= [];
-      	$revent 			= [];
 
-  		foreach ($events as $stallkey => $stall) { 
-  			$revent[] = $stall['id'];
+  		foreach ($currentreservation as $stallkey => $stall) { 
   			foreach ($stall['bookingstall'] as $booking) {
 				$bookinid[] = $booking['booking_id'];
 				$stallid[] 	= $booking['stall_id'];
