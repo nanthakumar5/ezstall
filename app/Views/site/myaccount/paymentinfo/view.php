@@ -1,7 +1,7 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-      $id             = isset($result['id']) ? $result['id'] : '';
+      $transactionid  = isset($result['id']) ? $result['id'] : '';
       $username       = isset($result['username']) ? $result['username'] : '';
       $nameoncard     = isset($result['payer_name']) ? $result['payer_name'] : '';
       $email          = isset($result['payer_email']) ? $result['payer_email'] : '';
@@ -11,11 +11,6 @@
       $plan_start     = date("d-m-Y", strtotime($plan_start));
       $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
       $plan_end       = date("d-m-Y", strtotime($plan_end));
-
-        if($result['usertype']      == 2) $usertype = 'Facility';
-        elseif($result['usertype']  == 3) $usertype = 'Producer';
-        elseif($result['usertype']  == 4) $usertype = 'Stall Manager';
-        elseif($result['usertype']  == 5) $usertype = 'Horse Owner'; 
 ?>
 <div class="row">
   <div class="col">
@@ -28,12 +23,12 @@
 <section class="maxWidth eventPagePanel">
     <div class="row col-md-10 base-style">
     <div class="col fw-600">
-      <p class="my-2">Paid By</p>
+      <p class="my-2">Transaction ID</p>
     </div>
     <div class="col" align="left">
-      <p class="my-2"><?php echo $usertype;?></p>
+      <p class="my-2"><?php echo $transactionid;?></p>
     </div>
-  </div>
+  </div> 
   <div class="row col-md-10 base-style">
     <div class="col fw-600">
       <p class="my-2">Name</p>
@@ -88,6 +83,14 @@
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $plan_end;?></p>
+    </div>
+  </div>
+   <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Paid By</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $usertype[$result['usertype']]; ?></p>
     </div>
   </div>
 </section>

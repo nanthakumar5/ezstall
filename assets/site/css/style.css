@@ -902,6 +902,7 @@ li.nav-item {
     height: 50px;
     width: 200px;
     border-radius: 7px;
+    margin-top: 30px;
 }
 
 .footaboveLine {
@@ -3661,35 +3662,70 @@ td {
     padding: 8px 16px;
 }
 
-
-#ui-datepicker-div{
+#ui-datepicker-div {
     width: auto;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
     text-align: center;
 }
 
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
     border: none;
     background: #e10000;
     color: #fff;
     border-radius: 5px;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
     border: none;
     border-radius: 5px;
 }
 
 .ui-widget-header {
     border: none;
-    padding: 8px !important; 
-    }
+    padding: 8px !important;
+}
 
-    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
-        background: #000 !important;
-        color: #fff;
-        padding: .2em !important;
-    }
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    background: #000 !important;
+    color: #fff;
+    padding: .2em !important;
+}
+
+
 /* 2-4-2022 styles end here  */
+
+
+/* 4-4-2022 styles start here  */
+
+.howItWorks .hiwContent.colorGrey {
+    margin-bottom: 14px;
+}
+
+@media (max-width:998px) {
+    .logo {
+        height: 45px;
+        width: 220px;
+    }
+}
+
+
+/* 4-4-2022 styles end here  */

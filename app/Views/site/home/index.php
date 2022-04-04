@@ -3,7 +3,7 @@
 	<div class="wi-1200">
 		<div class="displayFlex">
 			<div class="flexOneLeft beforeRound">
-				<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/What.png" />
+				<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/what-we-do.jpg" />
 			</div>
 			<div class="flexOneRight afterHorse">
 			<h1 class="commonTitle">What We Do</h1>
@@ -21,10 +21,7 @@
 			<div class="flexOneRight">
 			<h1 class="commonTitle">Who We Are</h1>
 				<p class="commonContent">
-				Sed ut perspits unde onis iste naus error sit vuatem accantium
-				doloeque lauantium, totam rem aperiam, eaqe ipsa que ab illo
-				intore veitatis et quasi architecto beatae vitae dicta sunt
-				explicabo.
+				We are horse owners. We are the people who have arrived on site, only to find a full barn and no manager in site. We are also the people who have called the secretary ahead of time and cruised by the long line leading out of the facility office. We want everyone to experience that second feeling.
 				</p>
 				<button class="greyButton">Read More</button>
 			</div>
@@ -117,24 +114,19 @@
 	  <div class="contentPanel">
 	    <h1 class="howitworkTitle">How it works</h1>
 	    <p class="hiwmainContent colorGrey">
-	      Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-	      fugit, sed quia consuuntur magn dolores eos qui ratione voluptatem
-	      sequi nesciunt.
+		We are developing a community of facilities and horse owners to build a network to house equine athletes on the road.
 	    </p>
 	    <span class="hiwContent colorGrey">
 	      <img src="<?php echo base_url();?>/assets/site/img/download1.png" />
-	      Aenean accumsan mi id massa placerat, ac efficitur itudin urnaex
-	      tristique.
+		  Sign Up. Join in as either a horse owner or a facility. With us, if you need a stall you are a horse owner, if you have a stall that needs a horse in it you are a facility.
 	    </span>
 	    <span class="hiwContent colorGrey">
 	      <img src="<?php echo base_url();?>/assets/site/img/download2.png" />
-	      Nulla elementum magna rhous ligula sagittis, ac coentum purus
-	      fermentum.
+		  Search. Find where you are headed next, if this is an EZ Stall facility or event find the stall you want and reserve it. If not we’ll find the closest EZ Stall facility near you.
 	    </span>
 	    <span class="hiwContent colorGrey">
 	      <img src="<?php echo base_url();?>/assets/site/img/download3.png" />
-	      Mauris consequat lectus nec diam venenatis, non rhoncus magna
-	      scelerisque.
+		  Rest and Relax. Enjoy the drive to your destination. Your stall will be waiting for you and your horse to arrive.
 	    </span>
 	  </div>
 	  <div class="imagePanel colorGrey">
@@ -146,20 +138,20 @@
             <div class="horseOwners">
               <p class="footaboveTag">Looking for stalls</p>
               <h1 class="footaboveTitle">Horse Owners</h1>
-              <p class="footaboveContent colorGrey">
+              <!-- <p class="footaboveContent colorGrey">
                 Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
                 quam nihil molestiae consequatur.
-              </p>
+              </p> -->
               <button class="footaboveBtn">Search</button>
             </div>
             <span class="footaboveLine"></span>
             <div class="facilities">
               <p class="footaboveTag">Grow your business</p>
-              <h1 class="footaboveTitle">Facilities / Produces</h1>
-              <p class="footaboveContent colorGrey">
+              <h1 class="footaboveTitle">Facilities & Produces</h1>
+              <!-- <p class="footaboveContent colorGrey">
                 Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
                 quam nihil molestiae consequatur.
-              </p>
+              </p> -->
               <button class="footaboveBtn">List Your Stall</button>
             </div>
     </section>

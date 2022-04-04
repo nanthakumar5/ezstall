@@ -1,6 +1,5 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-<?php $userid = getSiteUserID(); ?>
 
 <h2 class="fw-bold mb-4">Payment Details</h2>
 <section class="maxWidth eventPagePanel">

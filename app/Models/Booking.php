@@ -26,7 +26,7 @@ class Booking extends BaseModel
 		}
 
 		if(in_array('payment', $querydata)){
-			$data		= 	['SUM(p.amount) as paymentamount'];							
+			$data		= 	['SUM(p.amount) as paymentamount','p.amount'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
@@ -46,6 +46,7 @@ class Booking extends BaseModel
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', $requestdata['start_date']);
+		if(isset($requestdata['userid'])) 				
 		{
 			$query->groupStart();
 				$query->whereIn('b.user_id', $requestdata['userid']);

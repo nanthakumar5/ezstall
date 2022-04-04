@@ -43,7 +43,7 @@ class Index extends BaseController
 	{
     	$userid = getSiteUserID();
 
-		$result = $this->payments->getPayments('row', ['payment'], ['userid' => $userid,'id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment','event', 'users','booking'], ['userid' => [$userid],'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;
@@ -51,7 +51,8 @@ class Index extends BaseController
 			$this->session->setFlashdata('danger', 'No Record Found.');
 			return redirect()->to(base_url().'/myaccount/payments'); 
 		}
-		
+
+		$data['usertype']        = $this->config->usertype;
 		return view('site/myaccount/paymentinfo/view', $data);
 	}	
 }

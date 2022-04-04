@@ -24,7 +24,7 @@ class Index extends BaseController
 		array_push($allids, $userid);
 
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall'], ['userid'=> $allids,'start_date'=> $date, 'start' => $offset, 'length' => $perpage]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid'=> $allids,'start_date'=> $date, 'start' => $offset, 'length' => $perpage]);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 
@@ -34,10 +34,10 @@ class Index extends BaseController
 
 	public function view($id)
 	{
-		
+
     	$userid = getSiteUserID();
 
-		$result = $this->booking->getBooking('row', ['booking', 'event','stall','barnstall','users'], ['id' => $id]);
+		$result = $this->booking->getBooking('row', ['booking', 'event', 'users','barnstall','payment'], ['userid' => [$userid], 'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;
@@ -45,7 +45,8 @@ class Index extends BaseController
 			$this->session->setFlashdata('danger', 'No Record Found.');
 			return redirect()->to(base_url().'/myaccount/bookings'); 
 		}
-
+		
+		$data['usertype'] = $this->config->usertype;
 		return view('site/myaccount/reservation/view', $data);
 	}	
 

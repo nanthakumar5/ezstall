@@ -82,10 +82,9 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->get('bookings/view/(:num)', 'Site\Myaccount\Reservation\Index::view/$1');
     $routes->post('searchbookeduser', 'Site\Myaccount\Reservation\Index::bookedUser');
 
-
-
     $routes->match(['get','post'], 'pastactivity','Site\Myaccount\PastActivity\Index::index');
-    
+    $routes->get('pastactivity/view/(:num)', 'Site\Myaccount\PastActivity\Index::view/$1');
+
     $routes->match(['get','post'], 'payments','Site\Myaccount\PaymentInfo\Index::index');
     $routes->get('payments/view/(:num)', 'Site\Myaccount\PaymentInfo\Index::view/$1');
 

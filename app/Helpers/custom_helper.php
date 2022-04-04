@@ -66,9 +66,9 @@ function checkEvent($data)
 		$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
 		$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
 
-		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
+		if($currentdate <= $strstartdate && $currentdate <= $strenddate){
 			$booknowBtn = "Book now";
-			if(in_array($usertype, [2, 3, 4])){
+			if(in_array($usertype, [2, 3])){
 				if($userid == $data['user_id']){
 					$booknowBtn = "Book now";
 				}elseif($usertype == 4 && $parentid == $data['user_id']){
