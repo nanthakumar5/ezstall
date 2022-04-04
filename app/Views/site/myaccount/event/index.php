@@ -2,9 +2,9 @@
 
 <?php $this->section('content') ?>
 <?php
-	$checksubscription = checkSubscription();
-	$checksubscriptiontype = $checksubscription['type'];
-	$checksubscriptionproducer = $checksubscription['producer'];
+$checksubscription = checkSubscription();
+$checksubscriptiontype = $checksubscription['type'];
+$checksubscriptionproducer = $checksubscription['producer'];
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
@@ -13,37 +13,42 @@
 	<?php } ?>
 	<?php if(count($list) > 0){ ?>
 		<?php foreach ($list as $data) {  ?>
-			<div class="ucEventInfo mt-4">
-				<div class="EventFlex">
-					<span class="wi-50 px-2">
-						<div class="EventFlex leftdata">
-							<span class="wi-30">
-								<span class="ucimg">
-									<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
-								</span>
-							</span>
-							<span class="wi-70">
-								<p class="topdate"> <?php echo date('d-m-Y', strtotime($data['start_date'])); ?> - <?php echo date('d-m-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
-								<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
-							</span>
+			<div class="dashboard-box mt-4">
+				<div class="row align-items-center px-2">
+					<div class="col-md-2">
+						<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>" class="dash-event-image">
+					</div>
+					<div class="col-md-5">
+						<p class="topdate fs-7 mb-2"> <?php echo date('d-m-Y', strtotime($data['start_date'])); ?> - <?php echo date('d-m-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
+						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
+					</div>
+					<div class="col-md-5 d-flex">
+						<div class="m-left w-100 md-left">
+							<p class="fs-7 mb-2"><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
+							<p class="ucprice fs-7 fw-bold"> from $<?php echo $data['stalls_price'] ?> / night</p>
 						</div>
-					</span>
-					<div class="wi-50-2 px-3 justify-content-between">
-						<span class="m-left w-100">
-							<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
-							<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
-						</span>
-						<span class="m-left w-100">
-							<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
-						</span>
-						<div class="edit">
-							<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>">Export</a>
-							<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>">View</a>
-							<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>">Edit</a>
-							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="delete">Delete</a>
+						<div class="m-left w-100">
+							<p class="fs-7 mb-2"><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+							<p class="ucprice fs-7 fw-bold">from $<?php echo $data['rvspots_price'] ?> / night</p>
 						</div>
 					</div>
+				</div>
+				<div class="dash-event">
+					<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>" 
+						class="dash-export-event fs-7 mx-2">
+						Export <i class="fas fa-file-export i-white-icon"></i>
+					</a>
+					<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>" 
+						class="dash-view-event fs-7 mx-2">
+						View <i class="far fa-eye i-white-icon"></i>
+					</a>
+					<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>" 
+						class="dash-edit-event fs-7 mx-2">
+						Edit <i class="far fa-edit i-white-icon"></i>
+					</a>
+					<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2">
+						Delete <i class="far fa-trash-alt i-white-icon"></i>
+					</a>
 				</div>
 			</div>
 		<?php } ?>
@@ -55,28 +60,28 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
-	<?php echo $stripe; ?>
-	<script>
-		var userid = '<?php echo $userid; ?>';
+<?php echo $stripe; ?>
+<script>
+	var userid = '<?php echo $userid; ?>';
 
-		$(document).on('click','.delete',function(){
-			var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
-			var data   = '\
-			<input type="hidden" value="'+$(this).data('id')+'" name="id">\
-			<input type="hidden" value="'+userid+'" name="userid">\
-			<input type="hidden" value="0" name="status">\
-			';
-			sweetalert2(action,data);
-		});	
-		
-		$('#stripeFormModal').on('shown.bs.modal', function () {
-			$('.stripeextra').remove();
-			
-			var data = 	'<div class="stripeextra">\
-							<input type="hidden" value="300" name="price">\
-						</div>';
-						
-			$('.stripepaybutton').append(data);
-		})
-	</script>
+	$(document).on('click','.delete',function(){
+		var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
+		var data   = '\
+		<input type="hidden" value="'+$(this).data('id')+'" name="id">\
+		<input type="hidden" value="'+userid+'" name="userid">\
+		<input type="hidden" value="0" name="status">\
+		';
+		sweetalert2(action,data);
+	});	
+
+	$('#stripeFormModal').on('shown.bs.modal', function () {
+		$('.stripeextra').remove();
+
+		var data = 	'<div class="stripeextra">\
+		<input type="hidden" value="300" name="price">\
+		</div>';
+
+		$('.stripepaybutton').append(data);
+	})
+</script>
 <?php $this->endSection(); ?>

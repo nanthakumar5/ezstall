@@ -3729,3 +3729,91 @@ a.ui-button:active,
 
 
 /* 4-4-2022 styles end here  */
+
+/*04-04-2022 style starts from here*/
+
+.dash-edit-event{
+    text-decoration: none;
+    background: #171717;
+    color: #fff;
+    padding: 6px 25px;
+    border-radius: 4px;
+    transition: all 1s ease;
+    font-weight: 500;
+}
+
+.dash-export-event{
+    text-decoration: none;
+    background: #171717;
+    color: #fff;
+    padding: 6px 25px;
+    border-radius: 4px;
+    transition: all 1s ease;
+    font-weight: 500;
+}
+
+.dash-view-event{
+    text-decoration: none;
+    background: #e54a4a;
+    color: #fff;
+    padding: 6px 25px;
+    border-radius: 4px;
+    transition: all 1s ease;
+    font-weight: 500;
+}
+
+.dash-delete-event{
+    text-decoration: none;
+    background: #e54a4a;
+    color: #fff;
+    padding: 6px 25px;
+    border-radius: 4px;
+    transition: all 1s ease;
+    font-weight: 500;
+}
+
+.dash-edit-event:hover{
+    border-radius: 50px;
+    transition: all 1s ease;
+    color: #fff;
+}
+
+.dash-export-event:hover{
+    border-radius: 50px;
+    transition: all 1s ease;
+    color: #fff;
+}
+
+.dash-view-event:hover{
+    border-radius: 50px;
+    transition: all 1s ease;
+    color: #fff;
+}
+
+.dash-delete-event:hover{
+    border-radius: 50px;
+    transition: all 1s ease;
+    color: #fff;
+}
+
+.dash-event {
+    text-align: right;
+    border-top: 1px solid #f1f1f1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.dash-event-image{
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.i-white-icon{
+    color: #fff;
+    font-size: 15px;
+    padding-left: 5px;
+}
+
+/*04-04-2022 styles end here*/
