@@ -3844,3 +3844,14 @@ a.ui-button:active,
 }
 
 /*04-04-2022 styles end here*/
+
+/*05-04-2022 styles starts from here*/
+
+.dash-info-i{
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/*05-04-2022 styles end here*/

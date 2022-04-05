@@ -32,7 +32,7 @@
 </section>
 <section class="container-lg">
 	<div class="row">
-		<div class="col-8">
+		<div class="col-md-9">
 			<div class="border rounded pt-5 ps-3 pe-3">
 				<div class="row">
 					<div class="col-6">
@@ -167,7 +167,7 @@
 				</div>
 			</div> 
 		</div>
-		<div class="checkout col-3">
+		<div class="checkout col-md-3">
 	</div>
 </section>
 <?php $this->endSection() ?>
@@ -273,7 +273,7 @@
 	                        <div class="w-100">\
 	                            <div class="border rounded pt-4 ps-3 pe-3 mb-5">\
 	                                <div class="row mb-2">\
-	                                    <div class="col-8 ">\
+	                                    <div class="col-md-8 ">\
 	                                        <span>'+result.barnstall.length+'</span> Stalls x \
 	                                        <span>'+result.interval+'</span> Nights \
 	                                    </div>\
@@ -297,7 +297,9 @@
 	                                        $'+total+'\
 	                                    </div>\
 	                               </div>\
-	                               <a href="<?php echo base_url()?>/checkout" class="ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</a>\
+	                               <div class="row mb-2 w-100">\
+	                               <a href="<?php echo base_url()?>/checkout" class="w-100 text-center mx-2 ucEventdetBtn ps-3 mb-3 ">Continue to Checkout</a>\
+	                               </div>\
 	                            </div>\
 	                        </div>\
 	                    ';
