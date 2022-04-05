@@ -207,7 +207,7 @@
 			if(newselettertoast=='1'){ 
 				toastr.success('Your Subscription Successfully.', {timeOut: 5000});
 			}else if(newselettertoast=='0'){
-				toastr.success('Email ID already Subscribed.', {timeOut: 5000});
+				toastr.success('Email ID already Subscribed..', {timeOut: 5000});
 			}
 
 		</script>
