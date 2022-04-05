@@ -185,32 +185,31 @@ class Index extends BaseController
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
     }
-
-    public function import()
+	
+	public function importbarnstall()
     {	
- 		//echo "Importfile";
+		$phpspreadsheet = new Spreadsheet();
 
       	$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
       	$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray();
-
-        if (!empty($sheetData)) {
-
-        	//echo "excell";
-
-            for ($i=1; $i<count($sheetData); $i++) {
-                $barnname 	= $sheetData[$i][0];
-                $stallname 	= $sheetData[$i][1];
-                $stallprice = $sheetData[$i][2];
-                $image 		= $sheetData[$i][3];
-            }
-
-           // $data['barndetails']  = ['name' => $barnname, 'price' =>$stallprice, 'image' =>$image];
-
-            //$result = $this->event->action($data);
-
+		$sheetdata = $spreadsheet->getActiveSheet()->toArray();
+		$array = [];
+		
+		foreach($sheetdata as $key1 => $data1){
+			if($key1=='0') continue;
+			
+			foreach($data1 as $key2 => $data2){
+				if($key1=='1' && ($key2%2)=='0'){
+					$array[$key2]['name'] = $data2;
+				}
+				
+				if($key1 > '1'  && ($key2%2)=='0'){
+					$array[$key2]['stall'][] = ['name' => $data2, 'price' => (isset($data1[$key2+1]) ? $data1[$key2+1] : '')];
+				}
+			}
 		}
-
- 		exit;
+		
+		$array = array_values($array);
+		echo json_encode($array);
     }
 }

@@ -42,7 +42,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
 				<div class="col-md-12">
 					<div class="row">
-						<div class="col-md-6 my-2">
+						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Name</label>								
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
@@ -96,13 +96,13 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 							</div>
 						</div>
-						<div class="col-md-6 my-2">
+						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Event Description</label>
 								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 							</div>
 						</div>
-						<div class="col-md-6 my-2">
+						<div class="col-md-4 my-2">
 							<div class="form-group">
 								<label>Event Image</label>			
 								<div>
@@ -115,7 +115,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 							</div>
 						</div>							
-						<div class="col-md-6 my-2">
+						<div class="col-md-4 my-2">
 							<div class="form-group">
 								<label>Event Flyer</label>			
 								<div>
@@ -128,7 +128,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
 							</div>
 						</div>
-						<div class="col-md-6 my-2">
+						<div class="col-md-4 my-2">
 							<div class="form-group">
 								<label>Stall Map (optional)</label>			
 								<div>
@@ -141,259 +141,77 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
 							</div>
 						</div>	
-						<div class="col-md-6 barn_wrapper"><br>
-							<a href="javascript:void(0);" class="btn btn-info barnbtn mb-3">Add Barn</a>
-							<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
-						</div>	
-						<div class="col-md-6 barn_wrapper"><br>
-							<a href="javascript:void(0);" class="btn btn-info bulkbarnbtn mb-3">Add Bulk Barn</a>
-
-<!--  					 <button type="submit" name="bulkbarn"><a href="<?php //echo base_url().'/myaccount/events/add/addbulkbarn' ?>" class="btn btn-info bulkbarnbtn mb-3">Add Bulk Barn</a></button>
--->
-</div>
-
-<div id="barnwrapper"></div>
-<div class="col-md-12 mt-4">
-	<input type="hidden" name="actionid" value="<?php echo $id; ?>">
-	<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-	<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
-	<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
-</div>
-</div>
-</div>
-</form>
-
-<!-- Barn and stall Tabs start -->
-
-<div class="container row mt-5 dash-barn-style mx-auto">
-	<div class="row align-items-center mb-4 p-0">
-		<div class="col-md-2">
-			<p class="fs-2 fw-bold mb-0">Barn</p>
-		</div>
-		<div class="col-md-10 t-right p-0">
-			<button class="btn-stall">Add Barn</button>
-		</div>
-	</div>
-
-	<!-- Nav pills -->
-	<ul class="nav nav-pills flex-column col-md-3" role="tablist">
-		<li class="nav-item text-center mb-3">
-			<a class="nav-link tab-link active" data-bs-toggle="pill" href="#tab1">
-				Barn 1
-			</a>
-		</li>
-		<li class="nav-item text-center mb-3">
-			<a class="nav-link tab-link" data-bs-toggle="pill" href="#tab2">
-				Barn 2
-			</a>
-		</li>
-		<li class="nav-item text-center mb-3">
-			<a class="nav-link tab-link" data-bs-toggle="pill" href="#tab3">
-				Barn 3
-			</a>
-		</li>
-	</ul>
-
-	<!-- Tab panes -->
-	<div class="tab-content col-md-9">
-		<div id="tab1" class="container tab-pane active p-0 mb-3">
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-
-			<div class="col-md-10 p-0 my-3">
-				<button class="btn-stall">Add stall</button>
-				<button class="btn-stall">Add bulk stall</button>
-				<button class="btn-stall">Remove</button>
-			</div>
-
-		</div>
-		<div id="tab2" class="container tab-pane fade p-0 mb-3">
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-
-			<div class="col-md-10 p-0 my-3">
-				<button class="btn-stall">Add stall</button>
-				<button class="btn-stall">Add bulk stall</button>
-				<button class="btn-stall">Remove</button>
-			</div>
-
-		</div>
-		<div id="tab3" class="container tab-pane fade p-0 mb-3">
-			<div class="row mb-2 dash-stall-base">
-				<div class="col-md-7 mb-3">
-					<input type="text" name="stall_name" class="form-control fs-7" placeholder="Stall name">
-				</div>
-				<div class="col-md-2 mb-3">
-					<input type="text" name="stall_price" class="form-control fs-7" placeholder="Price">
-				</div>
-				<div class="col-md-2 mb-3">
-					<button class="dash-upload fs-7" title="Upload image here">Upload</button>
-				</div>
-				<div class="col-md-1 mb-3">
-					<a href="#" class="dash-stall-remove fs-7"><i class="fas fa-times text-white"></i></a>
-				</div>
-			</div>
-
-			<div class="col-md-10 p-0 my-3">
-				<button class="btn-stall">Add stall</button>
-				<button class="btn-stall">Add bulk stall</button>
-				<button class="btn-stall">Remove</button>
-			</div>
-
-		</div>
-	</div>
-</div>
-
-<!-- Barn and stall Tabs end -->
-
-</div>
-</div>
-
-
-
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Stall</h4>
-				<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
-				<div class="col-md-12 my-2">
-					<div class="form-group">
-						<label>Stall Name</label>
-						<input type="text" id="stall_name" class="form-control" placeholder="Enter Stall Name">
 					</div>
-				</div>
-				<div class="col-md-12 my-2">
-					<div class="form-group">
-						<label>Stall Price</label>
-						<input type="text" id="stall_price" class="form-control" placeholder="Enter Stall Name">
-					</div>
-				</div>
-				<div class="col-md-6 my-2">
-					<div class="form-group">
-						<label>Stall Image</label>			
-						<div>
-							<a href="<?php echo $bulkstallimage[1];?>" target="_blank">
-								<img src="<?php echo $bulkstallimage[1];?>" class="stall_source" width="100">
-							</a>
+					
+					<div class="container row mt-5 dash-barn-style mx-auto">
+						<div class="row align-items-center mb-4 p-0">
+							<div class="col-md-2">
+								<p class="fs-2 fw-bold mb-0">Barn</p>
+							</div>
+							<div class="col-md-10 t-right p-0">
+								<a href="javascript:void(0);" class="btn btn-info addbulkbarnbtn">Add Bulk Barn</a>
+								<input type="file" class="bulkbarnfile" style="display:none;">
+								<button class="btn-stall barnbtn">Add Barn</button>
+							</div>
 						</div>
-						<input type="file" class="stall_file">
-						<span class="stall_msg"></span>
-						<input type="hidden" id="stall_image" class="stall_input" value="<?php echo $bulkstallimage[0];?>">
+						<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
+						<ul class="nav nav-pills flex-column col-md-3 barntab" role="tablist"></ul>
+						<div class="tab-content col-md-9 stalltab"></div>
 					</div>
-				</div>	
-				<div class="col-md-12 my-2">
-					<div class="form-group">
-						<label>Status</label>
-						<?php echo form_dropdown('bulkstallstatus', $statuslist, '1', ['id' => 'stall_status', 'class' => 'form-control']); ?>
-					</div>
-				</div>
-				<div class="col-md-12 my-2">
-					<div class="form-group">
-						<label>Total Number of Columns</label>
-						<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" required>
+					<div class="col-md-12 mt-4">
+						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
+						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
+						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<inpu type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
+			</form>
+
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Stall</h4>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Stall Name</label>
+							<input type="text" id="stall_name" class="form-control" placeholder="Enter Stall Name">
+						</div>
+					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Price</label>
+							<input type="text" id="stall_price" class="form-control" placeholder="Enter Price">
+						</div>
+					</div>
+					<div class="col-md-6 my-2">
+						<div class="form-group">
+							<label>Stall Image</label>			
+							<div>
+								<a href="<?php echo $bulkstallimage[1];?>" target="_blank">
+									<img src="<?php echo $bulkstallimage[1];?>" class="stall_source" width="100">
+								</a>
+							</div>
+							<input type="file" class="stall_file">
+							<span class="stall_msg"></span>
+							<input type="hidden" id="stall_image" class="stall_input" value="<?php echo $bulkstallimage[0];?>">
+						</div>
+					</div>	
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Total Number of Columns</label>
+							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
 					<button type="button"class="btn btn-info bulkstallbtn">Submit</button>
 					<button type="button"class="btn btn-info " data-bs-dismiss="modal">Close</button>
 				</div>
@@ -401,9 +219,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		</div>
 	</div>
 </section>
-
-
-
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
@@ -454,8 +269,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				barnvalidation : {
 					required 	: true
 				}
+			},
+			{
+				ignore : []
 			}
-			);
+		);
 
 
 		if(barn.length > 0){
@@ -465,45 +283,40 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}
 	});
 
-	$('.barnbtn').click(function(){
-		barndata();
+	$('.barnbtn').click(function(e){
+		e.preventDefault();
+		barndata([], 1);
 	});
 
-	$('.bulkbarnbtn').click(function(){
-		bulkbarndata();
-	});
-
-	function barndata(result=[]){ 
+	function barndata(result=[], type=''){ 
 		var barnId   	= result['id'] ? result['id'] : '';
 		var barnName 	= result['name'] ? result['name'] : '';
 		var stall		= result['stall'] ? result['stall'] : [];
-
-		var data='\
-		<div class="card barnspace mt-4">\
-		<div class="card-header">\
-		<h3 class="card-title">Barn</h3>\
-		<div class="card-tools">\
-		<a href="javascript:void(0);" data-barnIndex="'+barnIndex+'" class="btn btn-info stallbtn">Add stall</a>\
-		<button type="button" class="btn btn-info " data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add bulk stall</button>\
-		<a href="javascript:void(0);" class="btn btn-danger barnremovebtn">Remove</a>\
-		</div>\
-		</div>\
-		<div class="card-body">\
-		<div class="row">\
-		<input type="hidden" name="barn['+barnIndex+'][id]" value="'+barnId+'">\
-		<div class="col-md-12 mb-4">\
-		<div class="form-group">\
-		<label>Barn Name</label>\
-		<input type="text" id="barn'+barnIndex+'name" name="barn['+barnIndex+'][name]" class="form-control" placeholder="Enter Barn Name" value="'+barnName+'">\
-		</div>\
-		</div>\
-		<div class="col-md-12 barn_wrapper_'+barnIndex+'"></div>\
-		</div>\
-		</div>\
-		</div>\
+		
+		var activeclass = barnIndex=='0' ? 'active' : '';
+		
+		var barntab='\
+			<li class="nav-item text-center mb-3">\
+				<a class="nav-link tab-link '+activeclass+'" data-bs-toggle="pill" data-bs-target="#barnstall'+barnIndex+'">\
+					<span class="barnametext">'+(barnName=='' ? 'Barn' : barnName)+'</span>\
+					<input type="text" id="barn'+barnIndex+'name" name="barn['+barnIndex+'][name]" class="form-control barnnametextbox" placeholder="Enter Barn Name" value="'+barnName+'" style="display:none;">\
+				</a>\
+				<input type="hidden" name="barn['+barnIndex+'][id]" value="'+barnId+'">\
+			</li>\
+		';
+		
+		var stalltab = '\
+			<div id="barnstall'+barnIndex+'" class="container tab-pane p-0 mb-3 barn_wrapper_'+barnIndex+' '+activeclass+'">\
+				<div class="col-md-10 p-0 my-3 stallbtns">\
+					<button class="btn-stall stallbtn" data-barnIndex="'+barnIndex+'" >Add Stall</button>\
+					<button class="btn-stall" data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add Bulk Stall</button>\
+					<button class="btn-stall barnremovebtn">Remove Barn and Stall</button>\
+				</div>\
+			</div>\
 		';
 
-		$('#barnwrapper').append(data);
+		$('.barntab').append(barntab);
+		$('.stalltab').append(stalltab);
 		$('.barnvalidation').val('1');
 		$('.barnvalidation').valid();
 
@@ -514,61 +327,25 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				stalldata(barnIndex, v)
 			});
 		}
-
+		
+		if(type=='1') stalldata(barnIndex);
 		++barnIndex;
+		
+		$(document).find('.barntab li a').on('show.bs.tab', function(e){
+			 setTimeout(function () { barntext() }, 10);
+		});
 	}
 
-	function bulkbarndata(result=[]){ 
-		var barnId   	= result['id'] ? result['id'] : '';
-		var barnName 	= result['name'] ? result['name'] : '';
-		var stall		= result['stall'] ? result['stall'] : [];
-
-		var data='\
-		<div class="mb-3">\
-		<label for="bulkbarn" class="form-label">Choose your file:</label>\
-		<input class="form-control bulkbarn" type="file" id="bulkbarn">\
-		</div>';
-		$('#barnwrapper').append(data);
-
-	}
-
-	$(document).on('click', '.stallbtn', function(){ 
+	$(document).on('click', '.stallbtn', function(e){ 
+		e.preventDefault();
 		stalldata($(this).attr('data-barnIndex'));
 	});
-
-	$('#myModal').on('shown.bs.modal', function (e) {
-		$('#stall_name, #stall_price, #stall_image, #stall_file').val('');
-		$('#stall_status').val('1');
-		$('#stall_source').attr('src', '<?php echo base_url()?>/assets/images/upload.png');
-		$('#stall_source').parent().attr('href', '<?php echo base_url()?>/assets/images/upload.png');
-	})
-
-	$('.bulkstallbtn').click(function(){
-		if($('#stall').val()==''){
-			$('#stall').focus();
-			return false;
-		}
-
-		var name          = $('#stall_name').val();
-		var price         = $('#stall_price').val();
-		var status        = $('#stall_status').val();
-		var image         = $('#stall_image').val();
-		var stallcount    = $('#stall').val();
-		var barnIndex     = $('#barnIndexValue').val();
-
-		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name,price:price,status:status,bulkimage:image});
-		}
-
-		$('#myModal').modal('hide');
-	});
-
+	
 	function stalldata(barnIndex, result=[])
 	{  
 		var stallId       		= result['id'] ? result['id'] : '';
 		var stallName     		= result['name'] ? result['name'] : '';
 		var stallPrice    		= result['price'] ? result['price'] : '';
-		var stallStatus   		= result['status'] ? result['status'] : '';
 		var stallImage    		= result['image'] ? result['image'] : '';
 		var stallBulkImage    	= result['bulkimage'] ? result['bulkimage'] : '';
 		if(stallImage!='' && stallBulkImage==''){
@@ -579,95 +356,133 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			var stallImages   	= '<?php echo base_url()?>/assets/images/upload.png';
 		}
 
-		var statusdata = '';
-		$.each(statuslist, function(i, v){
-			var selected = stallStatus==i ? 'selected' : '';
-			statusdata += '<option value="'+i+'" '+selected+'>'+v+'</option>';
-		})
-
 		var data='\
-		<div class="card stallsection mt-4">\
-		<div class="card-header">\
-		<h3 class="card-title">Stall</h3>\
-		<div class="card-tools">\
-		<a href="javascript:void(0);" class="btn btn-danger stallremovebtn">Remove</a>\
-		</div>\
-		</div>\
-		<div class="card-body">\
-		<div class="row">\
-		<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
-		<div class="col-md-12 my-2">\
-		<div class="form-group">\
-		<label>Stall Name</label>\
-		<input type="text" id="stall'+stallIndex+'name" name="barn['+barnIndex+'][stall]['+stallIndex+'][name]" class="form-control" placeholder="Enter Stall Name" value="'+stallName+'">\
-		</div>\
-		</div>\
-		<div class="col-md-12 my-2">\
-		<div class="form-group">\
-		<label>Stall Price</label>\
-		<input type="text" id="stall'+stallIndex+'price" name="barn['+barnIndex+'][stall]['+stallIndex+'][price]" class="form-control" placeholder="Enter Stall price" value="'+stallPrice+'">\
-		</div>\
-		</div>\
-		<div class="col-md-6 my-2">\
-		<div class="form-group">\
-		<label>Stall Image</label>\
-		<div>\
-		<a href="'+stallImages+'" target="_blank">\
-		<img src="'+stallImages+'"  class="stall_image_source'+stallIndex+'" width="100">\
-		</a>\
-		</div>\
-		<input type="file" class="stall_image_file'+stallIndex+'" >\
-		<span class="stall_image_msg'+stallIndex+'"></span>\
-		<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallImage+'">\
-		</div>\
-		</div>\
-		<div class="col-md-12 my-2">\
-		<div class="form-group">\
-		<label>Status</label>\
-		<select name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" id="stall'+stallIndex+'status" class="form-control">'+statusdata+'</select>\
-		</div>\
-		</div>\
-		</div>\
-		</div>\
+		<div class="row mb-2 dash-stall-base">\
+			<div class="col-md-6 mb-3">\
+				<input type="text" id="stall'+stallIndex+'name" name="barn['+barnIndex+'][stall]['+stallIndex+'][name]" class="form-control  fs-7" placeholder="Stall Name" value="'+stallName+'">\
+			</div>\
+			<div class="col-md-2 mb-3">\
+				<input type="text" id="stall'+stallIndex+'price" name="barn['+barnIndex+'][stall]['+stallIndex+'][price]" class="form-control fs-7" placeholder="Price" value="'+stallPrice+'">\
+			</div>\
+			<div class="col-md-3 mb-3">\
+				<a href="'+stallImages+'" target="_blank">\
+					<img src="'+stallImages+'"  class="stall_image_source'+stallIndex+'" width="40" height="35">\
+				</a>\
+				<button class="dash-upload fs-7" title="Upload image here">Upload</button>\
+				<input type="file" class="stallimage stall_image_file'+stallIndex+'" style="display:none;">\
+				<span class="stall_image_msg'+stallIndex+'"></span>\
+				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallImage+'">\
+			</div>\
+			<div class="col-md-1 mb-3">\
+				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
+				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" value="1">\
+				<a href="javascript:void(0);" class="dash-stall-remove fs-7 stallremovebtn"><i class="fas fa-times text-white"></i></a>\
+			</div>\
 		</div>\
 		';
 
-		$(document).find('.barn_wrapper_'+barnIndex).append(data); 
+		$(document).find('.barn_wrapper_'+barnIndex).find('.stallbtns').before(data); 
 
-		fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex,".stall_image_msg"+stallIndex]);
+		fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex, ".stall_image_msg"+stallIndex]);
 
 		$(document).find('#stall'+stallIndex+'name').rules("add", {required: true, messages: {required: "Stall Name field is required."}});
-		$(document).find('#stall'+stallIndex+'price').rules("add", {required: true, messages: {required: "Stall Price field is required."}});
-		$(document).find('#stall'+stallIndex+'status').rules("add", {required: true, messages: {required: "Stall Status field is required."}});
+		$(document).find('#stall'+stallIndex+'price').rules("add", {required: true, messages: {required: "Price field is required."}});
 		++stallIndex;
 	}
-
-	$(document).on('click', '.barnremovebtn', function(){
-		$(this).parent().parent().parent().remove();
+	
+	function barntext(){
+		$(document).find('.barntab li').each(function(){
+			if($(this).find('.tab-link').hasClass('active')){
+				$(this).find('.tab-link .barnametext').hide();
+				$(this).find('.tab-link .barnnametextbox').show();
+			}else{
+				$(this).find('.tab-link .barnametext').show();
+				$(this).find('.tab-link .barnnametextbox').hide();
+			}
+			
+			if($(this).find('.tab-link .barnnametextbox').val()!=''){
+				$(this).find('.tab-link .barnametext').text($(this).find('.tab-link .barnnametextbox').val());
+			}
+		})
+	}
+		
+	$(document).on('click','.dash-upload', function (e) {
+		e.preventDefault();
+		$(this).parent().find('.stallimage').click();
+	});
+	
+	$(document).on('click', '.barnremovebtn', function(e){
+		e.preventDefault();
+		var stalltabparent = $(this).parent().parent();
+		$(document).find('[data-bs-target="#'+stalltabparent.attr('id')+'"]').parent().remove();
+		stalltabparent.remove();
+		
+		$(document).find('.barntab li:first a').addClass('active');
+		$(document).find('.stalltab div:first').addClass('active');
+		
+		$(document).find('.barntab li a').on('show.bs.tab', function(e){
+			 setTimeout(function () { barntext() }, 10);
+		});
 	});
 
-	$(document).on('click', '.stallremovebtn', function(){
-		$(this).parent().parent().parent().remove();
+	$(document).on('click', '.stallremovebtn', function(e){
+		e.preventDefault();
+		$(this).parent().parent().remove();
 	})
 
-	$(document).on('click','#addbulkstallbtn', function () {
+	$('#myModal').on('shown.bs.modal', function (e) {
+		$('#stall_name, #stall_price, #stall_image, #stall_file, #stall').val('');
+		$('#stall_status').val('1');
+		$('.stall_source').attr('src', '<?php echo base_url()?>/assets/images/upload.png');
+		$('.stall_source').parent().attr('href', '<?php echo base_url()?>/assets/images/upload.png');
+	})
+
+	$(document).on('click','#addbulkstallbtn', function (e) {
+		e.preventDefault();
 		$('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	});
-	$(document).on('click','#eventSubmit', function () {
 
-		if ($('#bulkbarn').get(0).files.length !== 0) {
-			console.log("Files selected.");
-			$.ajax({
-				type: "POST",
-				url: "<?php echo base_url();?>/myaccount/events/add/import",
-				success: function (res) {
-					alert('saas');
+	$('.bulkstallbtn').click(function(e){
+		e.preventDefault();
+		if($('#stall').val()==''){
+			$('#stall').focus();
+			return false;
+		}
+
+		var name          = $('#stall_name').val();
+		var price         = $('#stall_price').val();
+		var image         = $('#stall_image').val();
+		var stallcount    = $('#stall').val();
+		var barnIndex     = $('#barnIndexValue').val();
+
+		for(var i=0; i<stallcount; i++){ 
+			stalldata(barnIndex, {name:name,price:price,status:1,bulkimage:image});
+		}
+
+		$('#myModal').modal('hide');
+	});
+	
+	$(document).on('click','.addbulkbarnbtn', function () {
+		$('.bulkbarnfile').click();
+	});
+
+	$(document).on('change','.bulkbarnfile', function () {
+  		var formdata = new FormData();
+		formdata.append('file', $(this)[0].files[0]); 
+		
+		ajax(
+			'<?php echo base_url(); ?>/myaccount/events/importbarnstall', 
+			formdata, 
+			{
+				contenttype : 1,
+				processdata : 1,
+				success: function(result) {
+					$(result).each(function(i, v){
+						barndata(v)
+					})
 				}
-			});
-		}
-		else{
-			console.log("No files selected.");
-		}
+			}
+		);
 	});
 </script>
 <?php $this->endSection(); ?>

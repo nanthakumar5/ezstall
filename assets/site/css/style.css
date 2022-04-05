@@ -2984,6 +2984,10 @@ td {
     text-align: right;
 }
 
+.nav-link.active .barnametext{
+	color : white;
+}
+
 .dash-barn-style {
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 7px;
@@ -2996,7 +3000,6 @@ td {
     border: none;
     padding: 0.400rem .75rem;
     border-radius: 7px;
-    width: 100%;
 }
 
 .dash-stall-remove {

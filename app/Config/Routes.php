@@ -64,13 +64,13 @@ $routes->get('logout', 'Site\Logout\Index::index');
 
 $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($routes){
 	$routes->match(['get','post'], 'dashboard', 'Site\Myaccount\Dashboard\Index::index');
+	
     $routes->match(['get','post'], 'events', 'Site\Myaccount\Event\Index::index');
     $routes->match(['get','post'], 'events/add', 'Site\Myaccount\Event\Index::action'); 
-    $routes->post('events/add/import', 'Site\Myaccount\Event\Index::import');
-
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
     $routes->get('events/view/(:num)', 'Site\Myaccount\Event\Index::view/$1');
     $routes->get('events/export/(:num)', 'Site\Myaccount\Event\Index::export/$1');
+    $routes->post('events/importbarnstall', 'Site\Myaccount\Event\Index::importbarnstall');
 
     $routes->match(['get','post'], 'stallmanager', 'Site\Myaccount\Stallmanager\Index::index');
     $routes->match(['get','post'], 'stallmanager/add', 'Site\Myaccount\Stallmanager\Index::action'); 
