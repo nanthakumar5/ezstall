@@ -3,6 +3,7 @@
 
 <h2 class="fw-bold mb-4">Payment Details</h2>
 <section class="maxWidth eventPagePanel">
+<?php if(!empty($payments)) {  ?>
 <?php foreach ($payments as $data) { ?>
 	<div class="dashboard-box">
 	<div class="EventFlex leftdata">
@@ -41,6 +42,9 @@
 	</div>
 	</div>
 <?php } ?>
+<?php }else{ ?>
+		<p>No Reservation Found.</p>
+	<?php } ?>
 
 </section>
 <?php echo $pager; ?>

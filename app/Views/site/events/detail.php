@@ -106,10 +106,10 @@
 						<span class="iconProperty">
 <!--  						<input type="date" name="startdate" id="startdate" class="checkdate checkin" placeholder="Check-In">
  -->			
- 					<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In" value="<?php echo $eventstartdate;?>" /> 						
+ 					<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"  /> 						
 			</span>
 						<span class="iconProperty">
-			<!-- <input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">--> 					<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out" value="<?php echo $eventenddate;?>"/>
+			<!-- <input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">--> 					<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out" />
  								
  							</span>
 					</span>

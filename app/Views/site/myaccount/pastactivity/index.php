@@ -5,9 +5,8 @@
   <h2 class="fw-bold mb-4">Past Month Acivity</h2>
 </div>
 <section class="maxWidth eventPagePanel">
-  <?php  
-  foreach ($bookings as $data) {  ?>
-
+ <?php if(!empty($bookings)) {  ?>
+    <?php foreach ($bookings as $data) {  ?>
     <div class="dashboard-box">
       <div class="EventFlex leftdata">
         <div class="wi-30 row w-100 align-items-center">
@@ -65,7 +64,10 @@
        </div>
      </div>
    </div>
- <?php } ?>
+    <?php } ?>
+  <?php }else{ ?>
+    <p>No Reservation Found.</p>
+  <?php } ?>
 </section>
 
 <?php echo $pager; ?>
