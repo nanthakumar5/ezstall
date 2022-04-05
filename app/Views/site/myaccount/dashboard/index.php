@@ -1,12 +1,7 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
-<?php 
-$userdetail = getSiteUserDetails();
-$name = $userdetail['name'];
-?>
-
 <div class="welcome-content mb-5">
-	<h3 class="fw-bold d-flex flex-wrap">Welcome to EZStall, <p class="welcome-user"><?php echo $name; ?></p></h3>
+	<h3 class="fw-bold d-flex flex-wrap">Welcome to EZStall, <p class="welcome-user"><?php echo $userdetail['name']; ?></p></h3>
 	<p class="c-5">
 		We've glad you've decided to join us a EZStall Producer.
 	</p>
@@ -20,7 +15,7 @@ $name = $userdetail['name'];
 							<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded mx-auto d-block" />
 						</div>
 						<div class="col-md-9">
-							<h2><?php echo $stallid;?></h2>
+							<h2><?php echo $countcurrentstall;?></h2>
 							<p>Total no of. Stalls</p>
 						</div>
 					</div>
@@ -36,7 +31,7 @@ $name = $userdetail['name'];
 							/>
 						</div>
 						<div class="col-md-9"> 
-							<h2><?php echo $available;?></h2>
+							<h2><?php echo $countcurrentavailable;?></h2>
 							<p>Currently Available</p>
 						</div>
 					</div>
@@ -52,7 +47,7 @@ $name = $userdetail['name'];
 							/>
 						</div>
 						<div class="col-md-9">
-							<h2><?php echo $bookingstall;?></h2>
+							<h2><?php echo $countcurrentbooking;?></h2>
 							<p>Currently booked</p>
 						</div>
 					</div>
@@ -119,22 +114,22 @@ $name = $userdetail['name'];
 					</thead>
 					<tbody>
 						<?php 
-						$i=1; 
-						foreach($monthlyincome as $income){ //echo "<pre>";print_r($income);?>						
+						foreach($monthlyincome as $key => $income){?>						
 							<tr class="monthlyincome">
-								<td><?php echo $i ?></td>
+								<td><?php echo $key+1; ?></td>
 								<td><?php echo $income['month']?></td>
-								<td>$<?php echo $income['paymentamount'] ?></td>
+								<td><?php echo $income['paymentamount'] ?></td>
 								<td>
 									<button class="View">
-										<a href="<?php echo base_url();?>/myaccount/payments/view/<?php echo $income['payment_id']; ?>" >View</button><br>
+										<a href="<?php echo base_url();?>/myaccount/payments" >View</a>
+									</button><br>
 								</td>
 							</tr>
-						<?php $i++; } ?>
+						<?php } ?>
 						
 						<tr>
 							<td colspan="4" class="text-center">
-								<a href="" id="loadincome" class="dash-view">VIEW ALL</a>
+								<a href="<?php echo base_url();?>/myaccount/payments" id="loadincome" class="dash-view">VIEW ALL</a>
 							</td>
 						</tr>
 					</tbody>
@@ -154,7 +149,6 @@ $name = $userdetail['name'];
 					</thead>
 					<tbody>
 						<?php foreach ($upcomingevents as $value){ ?>
-						
 						<tr class="upcoming">
 							<td><?php echo date('d-m-Y',strtotime($value['start_date'])); ?></td>
 							<td><?php echo $value['name']; ?></td>
@@ -166,10 +160,9 @@ $name = $userdetail['name'];
 							</td>
 						</tr>
 						<?php } ?>
-						
 						<tr>
 							<td colspan="3" class="text-center">
-								<a href="" id="loadMore" class="dash-view">VIEW ALL</a>
+								<a href="<?php echo base_url().'/myaccount/events'; ?>" id="loadMore" class="dash-view">VIEW ALL</a>
 							</td>
 						</tr>
 					</tbody>
@@ -178,45 +171,4 @@ $name = $userdetail['name'];
 		</div>
 	</div>
 </div>
-
 <?php $this->endSection(); ?>
-<?php $this->section('js') ?>
-<script>
-	/*$(".payment").on("click", function() { 
-		var paymentId = $(this).attr('data-payment_id'); 
-		paymentdetail({paymentId : paymentId});
-		});
-		function paymentdetail(data){ 
-		 	//console.log(data);
-	    ajax(
-		    '<?php //echo base_url()."/cart"; ?>',
-	        data,
-	    	{ 
-	    		success  : function(result){
-	    			
-		        }
-	 }
-		);
-	}*/
- $(function () {
-      $(".upcoming").slice(0, 2).show();
-      $("#loadMore").on('click', function (e) {
-          e.preventDefault();
-          $(".upcoming:hidden").slideDown();
-          if ($(".upcoming:hidden").length == 0) {
-              $("#load").fadeOut('slow');
-              $('#loadMore').replaceWith("<a href='' id='loadMore' class='dash-view'>No More</a>");
-          }
-      });
-   	$(".monthlyincome").slice(0, 1).show();
-  	$("#loadincome").on('click', function (e) {
-      e.preventDefault();
-      $(".monthlyincome:hidden").slideDown();
-      if ($(".monthlyincome:hidden").length == 0) {
-          $("#load").fadeOut('slow');
-          $('#loadincome').replaceWith("<a href='' class='dash-view'>No More</a>");
-      }
-  });
-  });
-</script>
-<?php echo $this->endSection() ?>

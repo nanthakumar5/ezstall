@@ -9,14 +9,13 @@ class Booking extends BaseModel
     {  
     	$select 		= [];
 		
-
 		if(in_array('booking', $querydata)){
-			$data		= 	['b.*','DATE_FORMAT(b.created_at, "%M %Y") AS month'];							
+			$data		= 	['b.*'];							
 			$select[] 	= 	implode(',', $data);
 		}
 		
 		if(in_array('event', $querydata)){
-			$data		= 	['e.name eventname','GROUP_CONCAT(e.id) as eventid'];							
+			$data		= 	['e.name eventname'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
@@ -26,17 +25,13 @@ class Booking extends BaseModel
 		}
 
 		if(in_array('payment', $querydata)){
-			$data		= 	['SUM(p.amount) as paymentamount','p.amount'];							
+			$data		= 	['p.amount'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
 		$query = $this->db->table('booking b');
 
-		if(in_array('event', $querydata)){
-			$query->join('event e', 'e.id=b.event_id', 'left');
-			if(isset($extras['groupBy'])) $query->groupBy('e.id');
-		} 
-
+		if(in_array('event', $querydata)) 	$query->join('event e', 'e.id=b.event_id', 'left');
 		if(in_array('users', $querydata)) 	$query->join('users u', 'u.id=b.user_id', 'left');		
 		if(in_array('payment',$querydata))	$query->join('payment p', 'p.id=b.payment_id', 'left');
 		
@@ -44,8 +39,10 @@ class Booking extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
-		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
-		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', $requestdata['start_date']);
+		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);
+		if(isset($requestdata['istartdate'])) 			$query->where('e.start_date <=', $requestdata['istartdate']);
+		if(isset($requestdata['ienddate'])) 			$query->where('e.end_date >=', $requestdata['ienddate']);
+		if(isset($requestdata['oenddate'])) 			$query->where('e.end_date <', $requestdata['oenddate']);
 		if(isset($requestdata['userid'])) 				
 		{
 			$query->groupStart();
@@ -75,15 +72,18 @@ class Booking extends BaseModel
 						$query->orLike('b.lastname', $searchvalue);
 						$query->orLike('b.mobile', $searchvalue);
 					}
+					
+					if($page=='reservations'){				
+						$query->like('b.firstname', $searchvalue);
+						$query->orLike('b.lastname', $searchvalue);
+						$query->orLike('b.mobile', $searchvalue);
+					}
 				$query->groupEnd();
 			}			
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
-		else $query->groupBy('DATE_FORMAT(b.created_at, "%M %Y")');
-		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
-		else $query->orderBy('b.id','asc');
 
 		if($type=='count'){
 			$result = $query->countAllResults(); 
@@ -92,31 +92,37 @@ class Booking extends BaseModel
 			if($type=='all'){
 				$result = $query->getResultArray();
 				
-				if(in_array('barnstall', $querydata)){
-					foreach ($result as $key => $booking) {
-						$bookingstall = $this->db->table('booking_details bd')
-										->join('barn b', 'b.id = bd.barn_id', 'left')
-										->join('stall s','s.id  = bd.stall_id', 'left')
-										->select('bd.*, b.name barnname, s.name stallname')
-										->where('bd.booking_id', $booking['id'])
-										->get()
-										->getResultArray();
-						$result[$key]['barnstall'] = $bookingstall;
+				if(count($result) > 0){
+					if(in_array('barnstall', $querydata)){
+						foreach ($result as $key => $booking) {
+							$bookingstall = $this->db->table('booking_details bd')
+											->join('barn b', 'b.id = bd.barn_id', 'left')
+											->join('stall s','s.id  = bd.stall_id', 'left')
+											->select('bd.*, b.name barnname, s.name stallname')
+											->where('bd.booking_id', $booking['id'])
+											->get()
+											->getResultArray();
+											
+							$result[$key]['barnstall'] = $bookingstall;
+						}
 					}
 				}
 
 			}elseif($type=='row'){
 				$result = $query->getRowArray();
 				
-			 	if(in_array('barnstall', $querydata)){
-					$bookingstall = $this->db->table('booking_details bd')
-									->join('barn b', 'b.id = bd.barn_id', 'left')
-									->join('stall s', 's.id  = bd.stall_id', 'left')
-									->select('bd.*, b.name barnname, s.name stallname')
-									->where('bd.booking_id', $result['id'])
-									->get()
-									->getResultArray();
-					$result['barnstall'] = $bookingstall;
+				if($result){
+					if(in_array('barnstall', $querydata)){
+						$bookingstall = $this->db->table('booking_details bd')
+										->join('barn b', 'b.id = bd.barn_id', 'left')
+										->join('stall s', 's.id  = bd.stall_id', 'left')
+										->select('bd.*, b.name barnname, s.name stallname')
+										->where('bd.booking_id', $result['id'])
+										->get()
+										->getResultArray();
+										
+						$result['barnstall'] = $bookingstall;
+					}
 				}
 			}
 		}

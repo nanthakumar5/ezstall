@@ -18,12 +18,19 @@ class Payments extends BaseModel
 			$data		= 	['e.name eventname'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		
 		if(in_array('users', $querydata)){
 			$data		= 	['u.name username','u.type usertype'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		
 		if(in_array('booking', $querydata)){
 			$data		= 	['b.payment_id'];							
+			$select[] 	= 	implode(',', $data);
+		}
+		
+		if(in_array('plan', $querydata)){
+			$data		= 	['pl.name as planname'];							
 			$select[] 	= 	implode(',', $data);
 		}
 		
@@ -31,6 +38,7 @@ class Payments extends BaseModel
 		if(in_array('users', $querydata)) $query->join('users u', 'u.id=p.payer_id', 'left');
 		if(in_array('booking', $querydata)) $query->join('booking b', 'b.payment_id=p.id', 'left');
 		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
+		if(in_array('plan', $querydata)) $query->join('plan pl', 'pl.id=p.plan_id', 'left');
 
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
@@ -41,9 +49,7 @@ class Payments extends BaseModel
 		if(isset($requestdata['userid'])){
 			$query->groupStart();
 				$query->whereIn('p.payer_id', $requestdata['userid']);
-				$query->orWhereIn('b.user_id', $requestdata['userid']);
 				$query->orWhereIn('e.user_id', $requestdata['userid']);
-
 			$query->groupEnd();
 		}
 		
@@ -72,56 +78,15 @@ class Payments extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
-		else $query->groupBy('p.id');
-		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
-
+		
 		if($type=='count'){
-			$result = $query->countAllResults();
-		}else{
-			$query = $query->get();
-
-			if($type=='all'){
-				$result = $query->getResultArray();
-				
-				if(in_array('paymentdetail', $querydata)){
-					foreach ($result as $key => $payment) {
-						$bookingstall = $this->db->table('payment p')
-										->join('event e', 'e.user_id = p.payer_id', 'left')
-										->join('booking b','b.payment_id  = p.id', 'left')
-										->select('p.*, e.id eventid,e.user_id eventuser, b.user_id bookuser')
-										->where('p.booking_id', $booking['id'])
-										->get()
-										->getResultArray();
-										echo "<pre>";
-										print_r($payment);
-						$result[$key]['paymentdetail'] = $bookingstall;
-					}
-				}
-				
-			}elseif($type=='row'){
-				$result = $query->getRowArray();
-				
-			 	if(in_array('barnstall', $querydata)){
-					$bookingstall = $this->db->table('booking_details bd')
-									->join('barn b', 'b.id = bd.barn_id', 'left')
-									->join('stall s', 's.id  = bd.stall_id', 'left')
-									->select('bd.*, b.name barnname, s.name stallname')
-									->where('bd.booking_id', $result['id'])
-									->get()
-									->getResultArray();
-					$result['barnstall'] = $bookingstall;
-				}
-			}	
-
-		}
-/*		if($type=='count'){
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
-		}*/
+		}
 	
 		return $result;
     }

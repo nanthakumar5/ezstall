@@ -66,7 +66,7 @@ function checkEvent($data)
 		$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
 		$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
 
-		if($currentdate <= $strstartdate && $currentdate <= $strenddate){
+		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
 			$booknowBtn = "Book now";
 			if(in_array($usertype, [2, 3])){
 				if($userid == $data['user_id']){
@@ -105,15 +105,15 @@ function checkSubscription()
 	if(isset($userdetails)){
 		$type = $userdetails['type'];
 		
-		if($type=='2' && $date < $userdetails['subscription_end_date']){
+		if($type=='2' && $date < $userdetails['subscriptionenddate']){
 			$facility = '1';
 		}
 		
 		if($type=='3'){
-			$producer = $userdetails['subscription_count'];
+			$producer = $userdetails['producer_count'];
 		}
 
-		if($type=='4' && $date < $userdetails['subscription_end_date']){
+		if($type=='4' && $date < $userdetails['subscriptionenddate']){
 			$stallmanager = '1';
 		}
 	}

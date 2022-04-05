@@ -30,12 +30,11 @@ class Index extends BaseController
         }
 		
 		$userdetail     = getSiteUserDetails();
-		$userid         = $userdetail['id'];
 		$type           = $userdetail['type'];
 		$subscriptionid = $userdetail['subscription_id'];
 
 		$data['plans']          = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
-		$data['subscriptions']  = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['userid' => [$userid], 'paymenttype' => 2]);
+		$data['subscriptions']  = $this->payments->getPayments('row', ['payment', 'plan'], ['id' => $subscriptionid]);
 
 		$data['userdetail']     = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;

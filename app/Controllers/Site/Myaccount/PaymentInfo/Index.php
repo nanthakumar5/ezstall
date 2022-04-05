@@ -27,7 +27,7 @@ class Index extends BaseController
 		array_push($allids, $userid);
 
 		$paymentcount = $this->payments->getPayments('count', ['payment','event', 'users','booking'],['userid' => $allids]);
-		$data['payments'] = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['userid' => $allids,'start' => $offset, 'length' => $perpage]);
+		$data['payments'] = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['userid' => $allids, 'start' => $offset, 'length' => $perpage]);
 
 	    $data['pager'] 			 = $pager->makeLinks($page, $perpage, $paymentcount);
 		$data['paymentinterval'] = $this->config->paymentinterval;

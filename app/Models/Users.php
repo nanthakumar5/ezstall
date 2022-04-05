@@ -67,8 +67,6 @@ class Users extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-			//echo  $this->db->getlastQuery();
-			//die;
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
@@ -91,9 +89,8 @@ class Users extends BaseModel
 		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
 		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
 		if(isset($data['email_status']) && $data['email_status']!='') 	  				$request['email_status'] 			= $data['email_status'];
-		if(isset($data['subscriptionenddate']) && $data['subscriptionenddate']!='') 	$request['subscription_end_date'] 	= $data['subscriptionenddate'];
-		if(isset($data['subscriptioncount']) && $data['subscriptioncount']!='') 	  	$request['subscription_count'] 		= $data['subscriptioncount'];
-		if(isset($data['parentid']) && $data['parentid']!='') 	  						$request['parent_id'] 		= $data['parentid'];
+		if(isset($data['producercount']) && $data['producercount']!='') 	  			$request['producer_count'] 			= $data['producercount'];
+		if(isset($data['parentid']) && $data['parentid']!='') 	  						$request['parent_id'] 				= $data['parentid'];
 
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;

@@ -30,8 +30,8 @@ class Index extends BaseController
 			if(isset($requestData['stripepay'])){
 				$payment = $this->stripe->stripepayment($requestData);
 				if($payment){
-					$usersubscriptioncount = $userdetail['subscription_count'];
-					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'subscriptioncount' => $usersubscriptioncount+1]);
+					$usersubscriptioncount = $userdetail['producer_count'];
+					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'producercount' => $usersubscriptioncount+1]);
 					$this->session->setFlashdata('success', 'Successfully paid.');
 				}else{
 					$this->session->setFlashdata('danger', 'Try Later.');

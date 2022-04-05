@@ -19,10 +19,12 @@ class Cart extends BaseModel
 			$data		= 	['e.name eventname, e.location eventlocation, e.description eventdescription'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		
 		if(in_array('barn', $querydata)){
 			$data		= 	['b.name barnname'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		
 		if(in_array('stall', $querydata)){
 			$data		= 	['s.name stallname'];							
 			$select[] 	= 	implode(',', $data);
@@ -63,8 +65,8 @@ class Cart extends BaseModel
 		if(isset($data['event_id'])&& $data['event_id']!='')           	$request['event_id'] 	    = $data['event_id'];
 		if(isset($data['barn_id'])&& $data['barn_id']!='')           	$request['barn_id'] 	    = $data['barn_id'];
 		if(isset($data['price'])&& $data['price']!='')     				$request['price'] 	        = $data['price'];
-		if(isset($data['startdate'])&& $data['startdate']!='')         	$request['check_in'] 	    = $data['startdate'];
-		if(isset($data['enddate'])&& $data['enddate']!='')             	$request['check_out'] 	    = $data['enddate'];
+		if(isset($data['startdate'])&& $data['startdate']!='')         	$request['check_in'] 	    = date('Y-m-d', strtotime($data['startdate']));
+		if(isset($data['enddate'])&& $data['enddate']!='')             	$request['check_out'] 	    = date('Y-m-d', strtotime($data['enddate']));
 
 
 		if(isset($request)){ 

@@ -80,7 +80,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 
     $routes->match(['get','post'], 'bookings','Site\Myaccount\Reservation\Index::index');
     $routes->get('bookings/view/(:num)', 'Site\Myaccount\Reservation\Index::view/$1');
-    $routes->post('searchbookeduser', 'Site\Myaccount\Reservation\Index::bookedUser');
+    $routes->post('bookings/searchbookeduser', 'Site\Myaccount\Reservation\Index::bookeduser');
 
     $routes->match(['get','post'], 'pastactivity','Site\Myaccount\PastActivity\Index::index');
     $routes->get('pastactivity/view/(:num)', 'Site\Myaccount\PastActivity\Index::view/$1');

@@ -36,9 +36,9 @@ class Index extends BaseController
 			return redirect()->to(base_url().'/'); 
         }
 		
-    	$now = date('Y-m-d h:i:s');
-    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'upcoming' => $now], ['orderby' => 'start_date', 'sort'=>'ASC']);         
-    	$data['pastevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'past' => $now], ['orderby' => 'start_date', 'sort'=>'ASC']);
+    	$date = date('Y-m-d');
+    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => $date], ['orderby' => 'start_date', 'sort'=>'ASC']);         
+    	$data['pastevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'end_date' => $date], ['orderby' => 'start_date', 'sort'=>'ASC']);
         $data['banners'] = $this->cms->getCms('all', ['cms'], ['status' => ['1'], 'type' => ['3']]);
     	
      	return view('site/home/index', $data);

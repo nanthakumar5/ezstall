@@ -1,7 +1,7 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <div class="page-action mb-4 m-0" align="left">
-	<a href="http://localhost/ezstall/myaccount/events" class="btn btn-dark">Back</a>
+	<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 </div>
 <section class="container-lg">
 	<div class="row">
@@ -77,19 +77,13 @@
 											<ul class="list-group">';
 						foreach($barndata['stall'] as $stalldata){
 							$boxcolor  = 'green-box';
-							$checkboxstatus = '';
-							$Bookingstatus = 'Available';
 							if(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
-								$checkboxstatus = 'disabled checked';
-								$Bookingstatus = 'Occupied';
-
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item">
-							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="hidden" '.$checkboxstatus.'>
 							'.$stalldata['name'].'
-							<span class="'.$boxcolor.' stall-avail stallavailability" data-stallid="'.$stalldata['id'].'" >'.$Bookingstatus.'</span>
+							<span class="'.$boxcolor.' stall-avail stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
 							</li>';
 						}
 						$tabcontent .= '</ul></div>';
@@ -103,10 +97,16 @@
 					</nav>
 					<div class="tab-content" id="nav-tabContent">
 						<?php echo $tabcontent; ?>
+						<div class="row">
+							<div class="btm-color">
+								<p><span class="green-circle"></span>Available</p>
+								<p><span class="yellow-circle"></span>Reserved</p>
+								<p><span class="red-circle"></span>Occupied</p>
+							</div>
+						</div>
 					</div>    
 				</div>
 		</div>
+	</div>
 </section>
 <?php $this->endSection() ?>
-<?php $this->section('js') ?>
-<?php echo $this->endSection() ?>

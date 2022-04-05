@@ -25,7 +25,7 @@
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
 					<i class="side-nav-i bi bi-calendar2-event"></i>
-					<p>Add Event</p>
+					<p>Event</p>
 				</a>
 			</li>
 			<li>

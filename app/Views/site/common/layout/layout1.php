@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
-		<link href="<?php echo base_url() ?>/assets/site/css/toas/toastr.min.css" rel="stylesheet">
+		<link href="<?php echo base_url() ?>/assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
 
@@ -198,7 +198,7 @@
 		<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-	    <script src="<?php echo base_url();?>/assets/site/js/toas/toastr.min.js"></script>
+	    <script src="<?php echo base_url();?>/assets/plugins/toastr/toastr.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<script>
 			dateformat('#search_start_date, #search_end_date');

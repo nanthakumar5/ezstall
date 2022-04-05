@@ -15,45 +15,53 @@ class Index extends BaseController
     
     public function index()
     { 	
+		$countcurrentstall 		= 0;
+      	$countcurrentbooking 	= 0;
+      	$countpastevent 		= [];
+      	$countpaststall 		= 0;
+      	$countpastamount 		= 0;
+		
      	$datetime			= date('Y-m-d H:i:s');
      	$date				= date('Y-m-d');
-    	$userid 			= getSiteUserID();
+    	$userdetail 		= getSiteUserDetails();
+    	$userid 			= $userdetail['id'];
+		$allids 			= getStallManagerIDS($userid);
+		array_push($allids, $userid);
+      	
+      	$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'istart_date' => $date, 'iend_date' => $date]);
+  		foreach ($currentreservation as $event) { 
+  			foreach ($event['barn'] as $barn) {
+				$countcurrentstall += count(array_column($barn['stall'], 'id'));
+			}
 		
-      	$countpaststall 	= 0;
-      	$countpastamount 	= 0;
-      	
-    	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=>[$userid],'end_date' => $date],['groupBy'=>'id']);
-
-  		foreach ($pastevent as $event) {  
-  			$barnstall = $event['barnstall'];
-  			if(count($barnstall) > 0) $countpaststall += count(array_column($barnstall, 'stall_id'));
-  			$countpastamount += $event['paymentamount'];
-      	}
-
-      	$currentreservation = $this->event->getEvent('all', ['event', 'bookingstall'],['userid'=>$userid,'start_date' => $datetime]);
-      	
-      	$bookingstall 		= [];
-      	$stallid 			= [];
-
-  		foreach ($currentreservation as $stallkey => $stall) { 
-  			foreach ($stall['bookingstall'] as $booking) {
-				$bookinid[] = $booking['booking_id'];
-				$stallid[] 	= $booking['stall_id'];
+			$bookedevents = $this->booking->getBooking('all', ['booking','event','barnstall'],['eventid'=> $event['id']]);
+			if(count($bookedevents) > 0){
+				foreach($bookedevents as $bookedevent){
+					$barnstall = $bookedevent['barnstall'];
+					if(count($barnstall) > 0) $countcurrentbooking += count(array_column($barnstall, 'stall_id'));
+				}
 			}
       	}
+		
+      	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids, 'oenddate' => $date]);
+		foreach ($pastevent as $event) {  
+  			$countpastevent[] = $event['event_id'];
+  			$barnstall = $event['barnstall'];
+  			if(count($barnstall) > 0) $countpaststall += count(array_column($barnstall, 'stall_id'));
+  			$countpastamount += $event['amount'];
+      	}
 
-      	$data['monthlyincome'] = $this->booking->getBooking('all', ['event','booking','payment'],['userid'=>[$userid]]);
-    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userid'=>$userid,'start_date' => $datetime,'status' => ['1']]);
+		$data['monthlyincome'] = $this->booking->getBooking('all', ['booking', 'event', 'payment'],['userid'=> $allids], ['groupby' => 'DATE_FORMAT(b.created_at, "%M %Y")', 'select' => 'SUM(p.amount) as paymentamount, DATE_FORMAT(b.created_at, "%M %Y") AS month']);
+    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userids' => $allids, 'start_date' => $date, 'status' => ['1']]);
       	
-
-      	$data['stallid'] 			= count($stallid);
-      	$data['bookingstall'] 		= count($bookingstall); 
-      	$data['pastevent'] 			= count($pastevent);
-      	$data['countpaststall'] 	= $countpaststall;
-      	$data['countpastamount'] 	= $countpastamount;
-
-      	$data['available'] 	= ($data['stallid'] - $data['bookingstall']);
-      	
+      	$data['userdetail'] 			= $userdetail;
+      	$data['countcurrentstall'] 		= $countcurrentstall; 
+      	$data['countcurrentbooking'] 	= $countcurrentbooking;
+      	$data['countcurrentavailable'] 	= ($countcurrentstall - $countcurrentbooking);
+      	$data['pastevent'] 				= count(array_unique($countpastevent));
+      	$data['countpaststall'] 		= $countpaststall;
+      	$data['countpastamount'] 		= $countpastamount;
+		
 		return view('site/myaccount/dashboard/index',$data);
 	}
 }

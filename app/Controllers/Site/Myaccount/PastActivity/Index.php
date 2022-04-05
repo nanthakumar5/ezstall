@@ -25,14 +25,15 @@ class Index extends BaseController
 		array_push($allids, $userid);
 
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid' => $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids,'end_date' => $date,'start' => $offset, 'length' => $perpage]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids,'oenddate' => $date, 'start' => $offset, 'length' => $perpage]);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 
     	return view('site/myaccount/pastactivity/index',$data);
 
     }
-    	public function view($id)
+	
+	public function view($id)
 	{
 		
     	$userid = getSiteUserID();

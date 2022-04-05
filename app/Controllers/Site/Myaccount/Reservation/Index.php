@@ -22,9 +22,9 @@ class Index extends BaseController
 		$userid = getSiteUserID();
 		$allids = getStallManagerIDS($userid);
 		array_push($allids, $userid);
-
-		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid'=> $allids,'start_date'=> $date, 'start' => $offset, 'length' => $perpage]);
+		
+		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids, 'istartdate'=> $date, 'ienddate'=> $date]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users', 'barnstall', 'payment'], ['userid'=> $allids, 'istartdate'=> $date, 'ienddate'=> $date, 'start' => $offset, 'length' => $perpage]);		
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 
@@ -34,7 +34,6 @@ class Index extends BaseController
 
 	public function view($id)
 	{
-
     	$userid = getSiteUserID();
 
 		$result = $this->booking->getBooking('row', ['booking', 'event', 'users','barnstall','payment'], ['userid' => [$userid], 'id' => $id]);
@@ -50,14 +49,13 @@ class Index extends BaseController
 		return view('site/myaccount/reservation/view', $data);
 	}	
 
-		public function bookedUser()
+	public function bookeduser()
 	{
-
 		$requestData = $this->request->getPost(); 
 		$result = array();
 
 		if (isset($requestData['search'])) {
-			$result = $this->booking->getBooking('all', ['booking', 'event','stall','barnstall','users'], ['status'=> ['1'], 'search' => ['value' => $requestData['search']]]);
+			$result = $this->booking->getBooking('all', ['booking'], ['page' => 'reservations', 'search' => ['value' => $requestData['search']]]);
 		}
 
 		$response['data'] = $result;

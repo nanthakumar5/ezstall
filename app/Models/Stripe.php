@@ -203,8 +203,7 @@ class Stripe extends BaseModel
        
 	                if ($subscription_id)
 	                {
-						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_id' => $subscription_id,
-							'subscription_end_date' => date("Y-m-d", strtotime($current_period_end))]);
+						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_id' => $subscription_id]);
 						
 	                    return $subscription_id;
 	                }

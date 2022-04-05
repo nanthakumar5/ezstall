@@ -2,6 +2,7 @@
 <?php $this->section('content') ?>
 <?php 
 	$getcart = getCart();
+	
 	$cartevent = 0;
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
@@ -10,7 +11,6 @@
 	$eventstartdate = date('d-m-Y', strtotime($detail['start_date']));
     $beforestartdate = date( 'd-m-Y', strtotime($detail['start_date']. ' -1 day') );
 	$eventenddate = date('d-m-Y', strtotime($detail['end_date']));
-
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -184,6 +184,7 @@
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
 	 	}
+		
 		$( "#startdate" ).datepicker({
 			dateFormat 	: 'dd-mm-yy', 
 			minDate		: eventstartdate, 
@@ -194,6 +195,7 @@
 				$("#enddate").datepicker( "option", "minDate", selectedDate );
 			}
 		});
+		
 		$( "#enddate").datepicker({
 			dateFormat 	: 'dd-mm-yy', 
 			minDate		: eventenddate, 
