@@ -63,10 +63,10 @@
 							<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
 							<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
 						</span>
-						<span class="m-left">
-							<p><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-							<h6 class="ucprice">from $<?php echo $data['rvspots_price'] ?> / night</h6>
-						</span>
+<!-- 						<span class="m-left">
+							<p><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+							<h6 class="ucprice">from $<?php //echo $data['rvspots_price'] ?> / night</h6>
+						</span> -->
 						<button class="ucEventBtn">
 							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn;?></a>
 						</button>

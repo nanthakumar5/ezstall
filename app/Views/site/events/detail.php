@@ -8,9 +8,8 @@
 		$cartevent = 1;
 	}
 	
-	$eventstartdate = date('d-m-Y', strtotime($detail['start_date']));
-    $beforestartdate = date( 'd-m-Y', strtotime($detail['start_date']. ' -1 day') );
-	$eventenddate = date('d-m-Y', strtotime($detail['end_date']));
+	$eventstartdate = date('Y-m-d', strtotime($detail['start_date']));
+	$eventenddate = date('Y-m-d', strtotime($detail['end_date']));
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -63,10 +62,10 @@
 									<p class="mb-1 fw-bold"><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/stall.jpg">Stalls</p>
 									<h6 class="ucprice"> from $<?php echo $detail['stalls_price'] ?> / night</h6>
 								</span>
-								<span class="col-6">
-									<p class="mb-1 fw-bold"><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rv.jpg">RV Spots</p>
-									<h6 class="ucprice">from $<?php echo $detail['rvspots_price'] ?> / night</h6>
-								</span>
+								<!-- <span class="col-6">
+									<p class="mb-1 fw-bold"><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rv.jpg">RV Spots</p>
+									<h6 class="ucprice">from $<?php //echo $detail['rvspots_price'] ?> / night</h6>
+								</span> -->
 							</div>
 						</ul>
 					</div>
@@ -176,7 +175,6 @@
 	var cartevent 		= '<?php echo $cartevent; ?>';
 	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
-	var startdate 		= '<?php echo date("mm/dd/yyyy", strtotime($detail['start_date'])) ;?>';
 
 	$(document).ready(function (){
 	 	if(cartevent == 0){
@@ -186,23 +184,23 @@
 	 	}
 		
 		$( "#startdate" ).datepicker({
-			dateFormat 	: 'dd-mm-yy', 
+			dateFormat 	: 'yy-mm-dd', 
 			minDate		: eventstartdate, 
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-				$("#enddate").datepicker( "option", "dateFormat", "dd-mm-yy");
+				$("#enddate").datepicker( "option", "dateFormat", "yy-mm-dd");
 				$("#enddate").datepicker( "option", "minDate", selectedDate );
 			}
 		});
 		
 		$( "#enddate").datepicker({
-			dateFormat 	: 'dd-mm-yy', 
+			dateFormat 	: 'yy-mm-dd', 
 			minDate		: eventenddate, 
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-				$("#startdate").datepicker( "option", "dateFormat", "dd-mm-yy");
+				$("#startdate").datepicker( "option", "dateFormat", "yy-mm-dd");
 				$("#startdate").datepicker( "option", "maxDate", selectedDate );
 			}
 		}); 

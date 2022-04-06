@@ -3855,3 +3855,29 @@ a.ui-button:active,
 
 
 /*05-04-2022 styles end here*/
+
+.ui-icon-circle-triangle-w{
+    background-position: 0;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
+    border: none !important;
+    background: #e00000 !important;
+    font-weight: normal;
+    margin: 7px !important;
+    color: #fff !important;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    margin: 7px;
+}
+
+.ui-icon-circle-triangle-e {
+    background-position: 0;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    margin: 7px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}

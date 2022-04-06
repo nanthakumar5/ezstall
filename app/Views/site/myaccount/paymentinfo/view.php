@@ -11,6 +11,7 @@
       $plan_start     = date("d-m-Y", strtotime($plan_start));
       $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
       $plan_end       = date("d-m-Y", strtotime($plan_end));
+      $created       = date("d-m-Y", strtotime($result['created']));
 ?>
 <div class="row">
   <div class="col">
@@ -69,6 +70,7 @@
       <p class="my-2"><?php echo $amount;?></p>
     </div>
   </div>  
+  <?php if($result == 2 ){?>
   <div class="row col-md-10 base-style">
     <div class="col fw-600">
       <p class="my-2">Plan Date</p>
@@ -85,6 +87,16 @@
       <p class="my-2"><?php echo $plan_end;?></p>
     </div>
   </div>
+<?php }else{ ?>
+  <div class="row col-md-10 base-style">
+    <div class="col fw-600">
+      <p class="my-2">Date</p>
+    </div>
+    <div class="col" align="left">
+      <p class="my-2"><?php echo $created;?></p>
+    </div>
+  </div>
+<?php } ?>
    <div class="row col-md-10 base-style">
     <div class="col fw-600">
       <p class="my-2">Paid By</p>

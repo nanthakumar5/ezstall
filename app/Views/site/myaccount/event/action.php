@@ -12,7 +12,7 @@ $end_date 				= isset($result['end_date']) ? dateformat($result['end_date']) : '
 $start_time 			= isset($result['start_time']) ? $result['start_time'] : '';
 $end_time 			    = isset($result['end_time']) ? $result['end_time'] : '';
 $stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
-$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
+//$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
 $image      			= isset($result['image']) ? $result['image'] : '';
 $image 				    = filedata($image, base_url().'/assets/uploads/event/');
 $status 				= isset($result['status']) ? $result['status'] : '';
@@ -90,12 +90,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 							</div>
 						</div>
-						<div class="col-md-6 my-2">
+<!-- 						<div class="col-md-6 my-2">
 							<div class="form-group">
 								<label>RV Spots Price</label>								
-								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
+								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php //echo $rvspots_price;?>">								
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Event Description</label>

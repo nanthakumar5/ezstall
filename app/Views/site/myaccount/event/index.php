@@ -27,10 +27,10 @@ $checksubscriptionproducer = $checksubscription['producer'];
 							<p class="fs-7 mb-2"><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
 							<p class="ucprice fs-7 fw-bold"> from $<?php echo $data['stalls_price'] ?> / night</p>
 						</div>
-						<div class="m-left w-100">
-							<p class="fs-7 mb-2"><img class="eventSecondIcon" src="<?php echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-							<p class="ucprice fs-7 fw-bold">from $<?php echo $data['rvspots_price'] ?> / night</p>
-						</div>
+						<!-- <div class="m-left w-100">
+							<p class="fs-7 mb-2"><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+							<p class="ucprice fs-7 fw-bold">from $<?php //echo $data['rvspots_price'] ?> / night</p>
+						</div> -->
 					</div>
 				</div>
 				<div class="dash-event">

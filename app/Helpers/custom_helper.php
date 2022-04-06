@@ -79,7 +79,10 @@ function checkEvent($data)
 			}elseif($usertype==5 && $currentdate > $userplanend){
 				$booknowBtn = "Subscription Expired";
 			}
-		}else{
+		}elseif($currentdate <= $strstartdate && $currentdate <= $strenddate){
+			$booknowBtn = "Upcoming";
+		}
+		else{
 			$booknowBtn = "Closed";
 		}
 
