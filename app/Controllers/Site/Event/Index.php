@@ -41,6 +41,7 @@ class Index extends BaseController
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
 
 		$data['userdetail'] = $userdetail;
+		$data['usertype'] = $this->config->usertype;
 		$data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		
@@ -53,10 +54,6 @@ class Index extends BaseController
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$checkEvent = checkEvent($event);
-		if($checkEvent != 'Book now'){
-			$this->session->setFlashdata('danger', 'You Cannot Access the Event.');
-			return redirect()->to(base_url().'/events'); 
-		}
 
 		$data['detail']  = $event;
 		$booking = $this->booking->getBooking('all', ['booking','barnstall'],['eventid' => $id]);
@@ -68,6 +65,7 @@ class Index extends BaseController
 		}
 
 		$data['occupied'] = explode(',', implode(',', $occupied));
+		$data['checkevent'] = $checkEvent;
 
 		return view('site/events/detail',$data);
     }

@@ -21,13 +21,15 @@
 				<p>Account Information</p>
 			</a>
 		</li>
-		<?php if($role=='2' || $role=='3'){ ?>
+		<?php if($role=='2' || $role=='3' || $role=='4'){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
 					<i class="side-nav-i bi bi-calendar2-event"></i>
 					<p>Event</p>
 				</a>
 			</li>
+		<?php } ?>
+		<?php if($role=='2' || $role=='3'){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/stallmanager">
 					<i class="side-nav-i bi bi-person"></i>

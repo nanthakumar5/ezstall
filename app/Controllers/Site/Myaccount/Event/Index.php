@@ -23,6 +23,8 @@ class Index extends BaseController
     { 			
 		$userdetail = getSiteUserDetails();
 		$userid = $userdetail['id'];
+		$usertype = $userdetail['type'];
+		if($usertype == '4') $userid = $userdetail['parent_id'];
 		
 		if ($this->request->getMethod()=='post')
         {
@@ -69,6 +71,7 @@ class Index extends BaseController
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
+		$data['usertype'] = $usertype;
 		$data['eventcount'] = $eventcount;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
 		

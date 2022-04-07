@@ -7,9 +7,10 @@
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
 	}
-	
+
 	$eventstartdate = date('Y-m-d', strtotime($detail['start_date']));
 	$eventenddate = date('Y-m-d', strtotime($detail['end_date']));
+
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -47,11 +48,11 @@
 							</svg> 
 								<?php echo $detail['location'] ?>
 							</li>
-							<li class="mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
+							<!-- <li class="mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
 							<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
 							</svg> 
-								<?php echo date('d-m-Y', strtotime($detail['start_date'])); ?>
-							</li>
+								<?php //echo date('d-m-Y', strtotime($detail['start_date'])); ?>
+							</li> -->
 							<li class="mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
 							</svg> 
@@ -102,15 +103,12 @@
 							<input type="text" readonly id="stallcount"  value="" placeholder="Number of Stalls">
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
+						<span class="iconProperty">			
+ 								<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/> 						
+						</span>
 						<span class="iconProperty">
-<!--  						<input type="date" name="startdate" id="startdate" class="checkdate checkin" placeholder="Check-In">
- -->			
- 					<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"  /> 						
-			</span>
-						<span class="iconProperty">
-			<!-- <input type="date" name="enddate" id="enddate" class="checkdate checkout" placeholder="Check-Out">--> 					<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out" />
- 								
- 							</span>
+								<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
+						</span>
 					</span>
 					<input type="hidden" name="datecount" id="datecount">
 				</div>
@@ -129,8 +127,9 @@
 						foreach($barndata['stall'] as $stalldata){
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
-							
-							if($cartevent=='1'){
+
+							//if($cartevent=='1' || $checkevent == 'Closed'){
+							if($checkevent == 'Closed'){
 								$checkboxstatus = 'disabled';
 							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
@@ -173,16 +172,20 @@
 <?php $this->section('js') ?>
 <script> 
 	var cartevent 		= '<?php echo $cartevent; ?>';
+	var checkevent 		= '<?php echo $checkevent; ?>';
 	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
 
 	$(document).ready(function (){
-	 	if(cartevent == 0){
+/*	 	if(cartevent == 0 ){
 	 		cart();
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
-	 	}
-		
+	 	}*/
+		if(checkevent == 'Closed'){
+ 			$("#startdate, #enddate").attr('disabled', 'disabled');
+		}
+
 		$( "#startdate" ).datepicker({
 			dateFormat 	: 'yy-mm-dd', 
 			minDate		: eventstartdate, 

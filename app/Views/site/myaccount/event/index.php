@@ -1,5 +1,4 @@
 <?php $this->extend('site/common/layout/layout1') ?>
-
 <?php $this->section('content') ?>
 <?php
 $checksubscription = checkSubscription();
@@ -7,7 +6,9 @@ $checksubscriptiontype = $checksubscription['type'];
 $checksubscriptionproducer = $checksubscription['producer'];
 ?>
 <section class="maxWidth eventPagePanel mt-2">
-	<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+	<?php if($usertype !='4'){ ?>
+		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+	<?php } ?>
 	<?php if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
 		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
 	<?php } ?>
@@ -34,14 +35,17 @@ $checksubscriptionproducer = $checksubscription['producer'];
 					</div>
 				</div>
 				<div class="dash-event">
+				<?php if($usertype !='4'){ ?>
 					<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>" 
 						class="dash-export-event fs-7 mx-2">
 						Export <i class="fas fa-file-export i-white-icon"></i>
 					</a>
+				<?php }?>
 					<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>" 
 						class="dash-view-event fs-7 mx-2">
 						View <i class="far fa-eye i-white-icon"></i>
 					</a>
+				<?php if($usertype !='4'){ ?>
 					<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>" 
 						class="dash-edit-event fs-7 mx-2">
 						Edit <i class="far fa-edit i-white-icon"></i>
@@ -49,6 +53,8 @@ $checksubscriptionproducer = $checksubscription['producer'];
 					<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2">
 						Delete <i class="far fa-trash-alt i-white-icon"></i>
 					</a>
+				<?php }?>
+
 				</div>
 			</div>
 		<?php } ?>
