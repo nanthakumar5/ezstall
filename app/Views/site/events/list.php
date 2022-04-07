@@ -68,7 +68,7 @@
 							<h6 class="ucprice">from $<?php //echo $data['rvspots_price'] ?> / night</h6>
 						</span> -->
 						<button class="ucEventBtn">
-							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn;?></a>
+							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn['btn'];?></a>
 						</button>
 					</div>
 				</div>

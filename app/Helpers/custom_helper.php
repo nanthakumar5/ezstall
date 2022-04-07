@@ -67,26 +67,32 @@ function checkEvent($data)
 		$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
 
 		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
-			$booknowBtn = "Book now";
+			$btn = "Book now";
 			if(in_array($usertype, [2, 3])){
 				if($userid == $data['user_id']){
-					$booknowBtn = "Book now";
+					$btn = "Book now";
+					$status = "1";
 				}elseif($usertype == 4 && $parentid == $data['user_id']){
-					$booknowBtn = "Book now";
+					$btn = "Book now";
+					$status = "1";
 				}else{
-					$booknowBtn = "Booking Not Available";
+					$btn = "Booking Not Available";
+					$status = "0";
 				}
 			}elseif($usertype==5 && $currentdate > $userplanend){
-				$booknowBtn = "Subscription Expired";
+				$btn = "Subscription Expired";
+				$status = "0";
 			}
 		}elseif($currentdate <= $strstartdate && $currentdate <= $strenddate){
-			$booknowBtn = "Upcoming";
+			$btn = "Upcoming";
+			$status = "1";
 		}
 		else{
-			$booknowBtn = "Closed";
+			$btn = "Closed";
+			$status = "0";
 		}
 
-		return $booknowBtn;
+		return ['btn' => $btn, 'status' => $status];
 }
 
 function getStallManagerIDS($parentid)
@@ -178,12 +184,16 @@ function send_mail($to,$subject,$message)
 {
 	$email = \Config\Services::email();
 
-	$config['protocol'] = 'sendmail';
-	$config['mailPath'] = '/usr/sbin/sendmail';
-	$config['charset']  = 'iso-8859-1';
-	$config['wordWrap'] = true;
+	$config['protocol'] 	= 'smtp';
+	$config['SMTPHost'] 	= 'smtp.gmail.com';
+	$config['SMTPUser'] 	= 'nanthakumar@itflexsolutions.com';
+	$config['SMTPPass'] 	= 'nanthakumar12345';
+	$config['SMTPPort'] 	= '587';
+	$config['SMTPCrypto'] 	= 'tls';
+	$config['charset']  	= 'iso-8859-1';
+	$config['wordWrap'] 	= true;
 
-	//$email->initialize($config);
+	$email->initialize($config);
 
 	$email->setFrom('developer@itflexsolutions.com', 'Ezstall');
 	$email->setTo($to);

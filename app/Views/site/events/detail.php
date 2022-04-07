@@ -128,8 +128,7 @@
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
 
-							//if($cartevent=='1' || $checkevent == 'Closed'){
-							if($checkevent == 'Closed'){
+							if($cartevent=='1' || $checkevent['status']=='0'){
 								$checkboxstatus = 'disabled';
 							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
@@ -172,17 +171,18 @@
 <?php $this->section('js') ?>
 <script> 
 	var cartevent 		= '<?php echo $cartevent; ?>';
-	var checkevent 		= '<?php echo $checkevent; ?>';
+	var checkevent 		= '<?php echo $checkevent["status"]; ?>';
 	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
 
 	$(document).ready(function (){
-/*	 	if(cartevent == 0 ){
+	 	if(cartevent == 0 ){
 	 		cart();
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
-	 	}*/
-		if(checkevent == 'Closed'){
+	 	}
+		
+		if(checkevent == 0){
  			$("#startdate, #enddate").attr('disabled', 'disabled');
 		}
 

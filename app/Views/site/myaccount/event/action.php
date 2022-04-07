@@ -275,7 +275,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			}
 		);
 
-
 		if(barn.length > 0){
 			$(barn).each(function(i, v){
 				barndata(v);
@@ -283,6 +282,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}
 	});
 
+	$(document).on('click', '.barntab li a.active', function(e){ 
+		e.preventDefault();
+		barntext();
+	});
+	
 	$('.barnbtn').click(function(e){
 		e.preventDefault();
 		barndata([], 1);
@@ -290,15 +294,15 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 
 	function barndata(result=[], type=''){ 
 		var barnId   	= result['id'] ? result['id'] : '';
-		var barnName 	= result['name'] ? result['name'] : '';
+		var barnName 	= result['name'] ? result['name'] : 'Barn';
 		var stall		= result['stall'] ? result['stall'] : [];
 		
-		var activeclass = barnIndex=='0' ? 'active' : '';
+		var activeclass = $.trim($(".barntab").html())=='' ? 'active' : '';
 		
 		var barntab='\
 			<li class="nav-item text-center mb-3">\
 				<a class="nav-link tab-link '+activeclass+'" data-bs-toggle="pill" data-bs-target="#barnstall'+barnIndex+'">\
-					<span class="barnametext">'+(barnName=='' ? 'Barn' : barnName)+'</span>\
+					<span class="barnametext">'+barnName+'</span>\
 					<input type="text" id="barn'+barnIndex+'name" name="barn['+barnIndex+'][name]" class="form-control barnnametextbox" placeholder="Enter Barn Name" value="'+barnName+'" style="display:none;">\
 				</a>\
 				<input type="hidden" name="barn['+barnIndex+'][id]" value="'+barnId+'">\
@@ -330,10 +334,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		
 		if(type=='1') stalldata(barnIndex);
 		++barnIndex;
-		
-		$(document).find('.barntab li a').on('show.bs.tab', function(e){
-			 setTimeout(function () { barntext() }, 10);
-		});
 	}
 
 	$(document).on('click', '.stallbtn', function(e){ 
@@ -390,20 +390,31 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		++stallIndex;
 	}
 	
-	function barntext(){
-		$(document).find('.barntab li').each(function(){
-			if($(this).find('.tab-link').hasClass('active')){
-				$(this).find('.tab-link .barnametext').hide();
-				$(this).find('.tab-link .barnnametextbox').show();
-			}else{
-				$(this).find('.tab-link .barnametext').show();
-				$(this).find('.tab-link .barnnametextbox').hide();
-			}
-			
-			if($(this).find('.tab-link .barnnametextbox').val()!=''){
+	$(document).on('keyup', '.barnnametextbox', function(){
+		$(this).parent().find('.barnametext').text($(this).val());
+	})
+	
+	$(document).on('click', function(){
+		if (!$(event.target).is(".barnnametextbox, .barnametext")){
+			$(document).find('.barnametext').show();
+			$(document).find('.barnnametextbox').hide();
+		}
+	})
+	
+	function barntext(type=''){
+		setTimeout(function () {
+			$(document).find('.barntab li').each(function(){
+				if($(this).find('.tab-link').hasClass('active')){
+					$(this).find('.tab-link .barnametext').hide();
+					$(this).find('.tab-link .barnnametextbox').show();
+				}else{
+					$(this).find('.tab-link .barnametext').show();
+					$(this).find('.tab-link .barnnametextbox').hide();
+				}
+				
 				$(this).find('.tab-link .barnametext').text($(this).find('.tab-link .barnnametextbox').val());
-			}
-		})
+			})
+		}, 10);
 	}
 		
 	$(document).on('click','.dash-upload', function (e) {
@@ -419,10 +430,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		
 		$(document).find('.barntab li:first a').addClass('active');
 		$(document).find('.stalltab div:first').addClass('active');
-		
-		$(document).find('.barntab li a').on('show.bs.tab', function(e){
-			 setTimeout(function () { barntext() }, 10);
-		});
 	});
 
 	$(document).on('click', '.stallremovebtn', function(e){

@@ -53,9 +53,6 @@ class Index extends BaseController
     	$userid = getSiteUserID();
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		$checkEvent = checkEvent($event);
-
-		$data['detail']  = $event;
 		$booking = $this->booking->getBooking('all', ['booking','barnstall'],['eventid' => $id]);
 
 		$occupied = [];
@@ -65,8 +62,9 @@ class Index extends BaseController
 		}
 
 		$data['occupied'] = explode(',', implode(',', $occupied));
-		$data['checkevent'] = $checkEvent;
-
+		$data['checkevent'] = checkEvent($event);
+		$data['detail']  = $event;
+		
 		return view('site/events/detail',$data);
     }
 
