@@ -68,6 +68,7 @@ function checkEvent($data)
 
 		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
 			$btn = "Book now";
+			$status = "1";
 			if(in_array($usertype, [2, 3])){
 				if($userid == $data['user_id']){
 					$btn = "Book now";
