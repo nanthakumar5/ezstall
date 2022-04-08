@@ -185,9 +185,9 @@ function send_mail($to,$subject,$message)
 	$email = \Config\Services::email();
 
 	$config['protocol'] 	= 'smtp';
-	$config['SMTPHost'] 	= 'smtp.gmail.com';
-	$config['SMTPUser'] 	= 'nanthakumar@itflexsolutions.com';
-	$config['SMTPPass'] 	= 'nanthakumar12345';
+	$config['SMTPHost'] 	= 'mail.itfhrm.com';
+	$config['SMTPUser'] 	= 'info@itfhrm.com';
+	$config['SMTPPass'] 	= 'itFlex@123';
 	$config['SMTPPort'] 	= '587';
 	$config['SMTPCrypto'] 	= 'tls';
 	$config['charset']  	= 'iso-8859-1';
@@ -195,7 +195,7 @@ function send_mail($to,$subject,$message)
 
 	$email->initialize($config);
 
-	$email->setFrom('developer@itflexsolutions.com', 'Ezstall');
+	$email->setFrom('info@itfhrm.com', 'Ezstall');
 	$email->setTo($to);
 	$email->setSubject($subject);
 	$email->setMessage($message);
