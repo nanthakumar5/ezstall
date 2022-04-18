@@ -28,9 +28,12 @@ class Index extends BaseController
 		}
 
         if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
-        if($this->request->getGet('start_date')) $searchdata['start_date']   = date("Y-m-d", strtotime($this->request->getGet('start_date')));
-        if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
-        
+       	if($this->request->getGet('start_date')!="" || $this->request->getGet('start_date')!=""){
+			$startdate 	= explode('-', $this->request->getGet('start_date'));
+    		$enddate 	= explode('-', $this->request->getGet('end_date')); 
+			if($startdate) 	$searchdata['startdate']   	= $startdate[2].'-'.$startdate[0].'-'.$startdate[1];
+			if($enddate) 	$searchdata['enddate']   	= $enddate[2].'-'.$enddate[0].'-'.$enddate[1];
+		}
 		$stallcount = $this->stall->getStall('count', ['stall','event'], $searchdata+['status'=> ['1']]);
     	$stalls 	= $this->stall->getStall('all', ['stall','event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
         $data['stalllist'] = $stalls; 

@@ -11,9 +11,9 @@ class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->event   = new Event();
-		$this->booking = new Booking();
-		$this->users = new Users();
+		$this->event   	= new Event();
+		$this->booking 	= new Booking();
+		$this->users 	= new Users();
 
 	}
     
@@ -33,10 +33,14 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
+
 		if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
-		if($this->request->getGet('start_date')) $searchdata['start_date']   = date("Y-m-d", strtotime($this->request->getGet('start_date')));
-		if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
-    	
+		if($this->request->getGet('start_date')!="" || $this->request->getGet('start_date')!=""){
+			$startdate 	= explode('-', $this->request->getGet('start_date'));
+    		$enddate 	= explode('-', $this->request->getGet('end_date')); 
+			if($startdate) 	$searchdata['startdate']   	= $startdate[2].'-'.$startdate[0].'-'.$startdate[1];
+			if($enddate) 	$searchdata['enddate']   	= $enddate[2].'-'.$enddate[0].'-'.$enddate[1];
+		}
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage], ['orderby' =>'id']);
 
@@ -49,7 +53,8 @@ class Index extends BaseController
     }
 	
 	public function detail($id)
-    {  
+    {  	
+			
     	$userid = getSiteUserID();
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
