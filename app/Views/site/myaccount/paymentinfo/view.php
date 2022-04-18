@@ -8,10 +8,10 @@
       $type           = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
       $amount         = isset($result['amount']) ? $result['amount'] : '';
       $plan_start     = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
-      $plan_start     = date("d-m-Y", strtotime($plan_start));
+      $plan_start     = date("m-d-Y", strtotime($plan_start));
       $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
-      $plan_end       = date("d-m-Y", strtotime($plan_end));
-      $created       = date("d-m-Y", strtotime($result['created']));
+      $plan_end       = date("m-d-Y", strtotime($plan_end));
+      $created       = date("m-d-Y", strtotime($result['created']));
 ?>
 <div class="row">
   <div class="col">

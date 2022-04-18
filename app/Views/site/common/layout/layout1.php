@@ -155,15 +155,15 @@
 					<h5 class="mar-b-3vh">Upcoming Events</h5>
 					<span class="footerucEvents">
 						<h5>Excepteur sint occaecat</h5>
-						<p>26 Jan 2021</p>
+						<p>Jan 26 2021</p>
 					</span>
 					<span class="footerucEvents">
 						<h5>Sed ut perspiciatis unde</h5>
-						<p>26 Jan 2021</p>
+						<p>Jan 26 2021</p>
 					</span>
 					<span class="footerucEvents">
 						<h5>Quis autem vel eum</h5>
-						<p>26 Jan 2021</p>
+						<p>Jan 26 2021</p>
 					</span>
 				</div>
 				<div class="panel4">

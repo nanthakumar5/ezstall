@@ -150,7 +150,7 @@
 					<tbody>
 						<?php foreach ($upcomingevents as $value){ ?>
 						<tr class="upcoming">
-							<td><?php echo date('d-m-Y',strtotime($value['start_date'])); ?></td>
+							<td><?php echo date('m-d-Y',strtotime($value['start_date']));?></td>
 							<td><?php echo $value['name']; ?></td>
 							<td>
 								<button class="View">

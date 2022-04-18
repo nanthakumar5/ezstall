@@ -20,7 +20,7 @@ $checksubscriptionproducer = $checksubscription['producer'];
 						<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>" class="dash-event-image">
 					</div>
 					<div class="col-md-5">
-						<p class="topdate fs-7 mb-2"> <?php echo date('d-m-Y', strtotime($data['start_date'])); ?> - <?php echo date('d-m-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
+						<p class="topdate fs-7 mb-2"> <?php echo date('m-d-Y', strtotime($data['start_date'])); ?> - <?php echo date('m-d-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
 						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
 					</div>
 					<div class="col-md-5 d-flex">

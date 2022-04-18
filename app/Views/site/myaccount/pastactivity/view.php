@@ -8,9 +8,9 @@
       $eventname          = isset($result['eventname']) ? $result['eventname'] : '';
       $stall              = isset($result['stall']) ? $result['stall'] : '';
       $checkin            = isset($result['check_in']) ? $result['check_in'] : '';
-      $checkin            = date("d-m-Y", strtotime($checkin));
+      $checkin            = date("m-d-Y", strtotime($checkin));
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
-      $checkout           = date("d-m-Y", strtotime($checkout));
+      $checkout           = date("m-d-Y", strtotime($checkout));
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
 
   ?>

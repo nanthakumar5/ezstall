@@ -295,7 +295,7 @@ function editor(selector, height=300){
 function dateformat(selector, extras=[]){
 
 	var options = {};	
-	options['format'] 		= 'dd-mm-yyyy';
+	options['format'] 		= 'mm-dd-yyyy';
 	options['autoclose'] 	= true;
 
 	if($.inArray('startdate', extras) != -1) options['startDate'] = new Date();

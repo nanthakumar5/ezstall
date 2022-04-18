@@ -47,7 +47,7 @@
           <div class="col-md-3">
             <div>
               <p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
-              <p class="mb-0 fs-7"><?php echo date("d-m-Y", strtotime($data['check_in']));?> - <?php echo date("d-m-Y", strtotime($data['check_out']));?></p>
+              <p class="mb-0 fs-7"><?php echo date("m-d-Y", strtotime($data['check_in']));?> - <?php echo date("m-d-Y", strtotime($data['check_out']));?></p>
             </div>
           </div>
           <div class="col-md-3">

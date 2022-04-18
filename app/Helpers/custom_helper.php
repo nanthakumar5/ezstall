@@ -133,8 +133,8 @@ function checkSubscription()
 
 function dateformat($date, $type='')
 {
-	if ($type == '1') return date('d-m-Y H:i:s', strtotime($date));
-	else return date('d-m-Y', strtotime($date));
+	if ($type == '1') return date('m-d-Y H:i:s', strtotime($date));
+	else return date('m-d-Y', strtotime($date));
 }
 
 function filedata($file, $path, $extras=[])

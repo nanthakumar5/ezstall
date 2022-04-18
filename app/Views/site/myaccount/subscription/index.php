@@ -44,7 +44,7 @@
 	<?php } else{ ?>
 		<div class="col payment-border">
 			<div>
-				<h6>Your subscription was activated.</h6><h6>Your next subscription payment will be due by <?php echo date("d-m-Y", strtotime($userdetail['subscriptionenddate']));?></h6>
+				<h6>Your subscription was activated.</h6><h6>Your next subscription payment will be due by <?php echo date("m-d-Y", strtotime($userdetail['subscriptionenddate']));?></h6>
 			</div>
 		</div>
 	<?php } ?>

@@ -66,7 +66,7 @@
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
                 				</span>
-                				<button class="ucEventBtn">Book Now</button>
+                				<button class="ucEventBtn"><a href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">Book Now</a></button>
                 			</div>
                 		</div>
                 	</div>
@@ -97,7 +97,7 @@
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
                 				</span>
-                				<button class="ucEventBtn">Book Now</button>
+                				<button class="ucEventBtn"><a href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">Book Now</a></button>
                 			</div>
                 		</div>
                 	</div>

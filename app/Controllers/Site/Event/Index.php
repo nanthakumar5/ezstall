@@ -38,7 +38,7 @@ class Index extends BaseController
 		if($this->request->getGet('end_date'))   $searchdata['end_date']     = date("Y-m-d", strtotime($this->request->getGet('end_date')));
     	
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage]);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage], ['orderby' =>'id']);
 
 		$data['userdetail'] = $userdetail;
 		$data['usertype'] = $this->config->usertype;

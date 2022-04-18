@@ -57,7 +57,7 @@ class Event extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);		
-		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
+		if(isset($extras['orderby'])) 	$query->orderBy('e.id','desc');
 
 		if($type=='count'){
 			$result = $query->countAllResults();

@@ -106,9 +106,9 @@ $barnstall = $cartdetail['barnstall'];
                 <h2 class="checkout-fw-6 stallsum-head">Stall Summary</h2>
                 <div class="col-lg-6 mb-4">
                   <b>Check In</b>
-                  <p class="mb-4"><?php echo date('d-m-Y', strtotime($cartdetail['check_in'])) ?></p>
+                  <p class="mb-4"><?php echo date('m-d-Y', strtotime($cartdetail['check_in'])) ?></p>
                   <b>Check Out</b>
-                  <p><?php echo date('d-m-Y', strtotime($cartdetail['check_out'])) ?></p>
+                  <p><?php echo date('m-d-Y', strtotime($cartdetail['check_out'])) ?></p>
                 </div>
 
                 <div class="col-lg-6 mb-4">
