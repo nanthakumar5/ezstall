@@ -234,7 +234,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
         $("#end_date").datepicker({dateFormat: 'mm-dd-yy'});
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 		fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
-		fileupload([".stallmap_file"], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
+		fileupload([".stallmap_file",['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(

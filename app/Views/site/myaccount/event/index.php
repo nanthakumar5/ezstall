@@ -4,6 +4,7 @@
 $checksubscription = checkSubscription();
 $checksubscriptiontype = $checksubscription['type'];
 $checksubscriptionproducer = $checksubscription['producer'];
+$currentdate 	= date("Y-m-d");
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
@@ -45,7 +46,8 @@ $checksubscriptionproducer = $checksubscription['producer'];
 						class="dash-view-event fs-7 mx-2">
 						View <i class="far fa-eye i-white-icon"></i>
 					</a>
-				<?php if($usertype !='4'){ ?>
+				<?php if($currentdate <= $data['end_date']){
+				        if($usertype !='4'){ ?>
 					<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>" 
 						class="dash-edit-event fs-7 mx-2">
 						Edit <i class="far fa-edit i-white-icon"></i>
@@ -53,7 +55,8 @@ $checksubscriptionproducer = $checksubscription['producer'];
 					<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2">
 						Delete <i class="far fa-trash-alt i-white-icon"></i>
 					</a>
-				<?php }?>
+				    <?php }?>
+				 <?php }?>
 
 				</div>
 			</div>
