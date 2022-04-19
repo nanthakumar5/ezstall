@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 <?php 
 	$getcart = getCart();
-	
+	$userid  = getSiteUserID();
 	$cartevent = 0;
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
@@ -98,9 +98,9 @@
 			<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5">
 				<h3 class="fw-bold mb-4">Book Your Stalls</h3>
 				<div class="infoPanel form_check">
-					<span class="infoSection">
+					<span class="infoSection" >
 						<span class="iconProperty">
-							<input type="text" readonly id="stallcount"  value="" placeholder="Number of Stalls">
+							<input type="text"  readonly id="stallcount"  value="" placeholder="Number of Stalls">
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">			
@@ -110,6 +110,7 @@
 								<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
 						</span>
 					</span>
+					
 					<input type="hidden" name="datecount" id="datecount">
 				</div>
 				
@@ -128,7 +129,7 @@
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
 
-							if($cartevent=='1' || $checkevent['status']=='0'){
+							if($cartevent=='1' || $checkevent['status']=='0' || $userid==""){
 								$checkboxstatus = 'disabled';
 							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
@@ -169,14 +170,16 @@
 </section>
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
-<script> 
+<script>  
+
 	var cartevent 		= '<?php echo $cartevent; ?>';
 	var checkevent 		= '<?php echo $checkevent["status"]; ?>';
 	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
+	var userid 			= '<?php echo $userid; ?>';
 
 	$(document).ready(function (){
-	 	if(cartevent == 0 ){
+	 	if(cartevent == 0 && userid !=""){ 
 	 		cart();
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
@@ -187,23 +190,23 @@
 		}
 
 		$( "#startdate" ).datepicker({
-			dateFormat 	: 'yy-mm-dd', 
+			dateFormat 	: 'mm-dd-yy', 
 			minDate		: eventstartdate, 
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-				$("#enddate").datepicker( "option", "dateFormat", "yy-mm-dd");
+				$("#enddate").datepicker( "option", "dateFormat", "mm-dd-yy");
 				$("#enddate").datepicker( "option", "minDate", selectedDate );
 			}
 		});
 		
 		$( "#enddate").datepicker({
-			dateFormat 	: 'yy-mm-dd', 
+			dateFormat 	: 'mm-dd-yy', 
 			minDate		: eventenddate, 
 			changeMonth	: true,
 			changeYear	: true,
 			onClose: function( selectedDate ) {
-				$("#startdate").datepicker( "option", "dateFormat", "yy-mm-dd");
+				$("#startdate").datepicker( "option", "dateFormat", "mm-dd-yy");
 				$("#startdate").datepicker( "option", "maxDate", selectedDate );
 			}
 		}); 
