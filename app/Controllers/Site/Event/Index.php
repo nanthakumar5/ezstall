@@ -36,10 +36,8 @@ class Index extends BaseController
 
 		if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
 		if($this->request->getGet('start_date')!="" || $this->request->getGet('start_date')!=""){
-			$startdate 	= explode('-', $this->request->getGet('start_date'));
-    		$enddate 	= explode('-', $this->request->getGet('end_date')); 
-			if($startdate) 	$searchdata['startdate']   	= $startdate[2].'-'.$startdate[0].'-'.$startdate[1];
-			if($enddate) 	$searchdata['enddate']   	= $enddate[2].'-'.$enddate[0].'-'.$enddate[1];
+			$searchdata['startdate'] 	= formatdate($this->request->getGet('start_date'));
+    		$searchdata['enddate'] 		= formatdate($this->request->getGet('end_date'));
 		}
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage], ['orderby' =>'id']);
@@ -59,7 +57,7 @@ class Index extends BaseController
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$booking = $this->booking->getBooking('all', ['booking','barnstall'],['eventid' => $id]);
-
+		
 		$occupied = [];
 		foreach ($booking as  $bookdata) {
 			$barnstall = $bookdata['barnstall'];
@@ -69,7 +67,7 @@ class Index extends BaseController
 		$data['occupied'] = explode(',', implode(',', $occupied));
 		$data['checkevent'] = checkEvent($event);
 		$data['detail']  = $event;
-		
+		//print_r($data);die;
 		return view('site/events/detail',$data);
     }
 

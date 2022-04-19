@@ -14,16 +14,16 @@ class Index extends BaseController
 
     public function action(){ 
     	if($this->request->getMethod()=='post'){ 
-    		$requestdata       	= $this->request->getPost(); 
+    		$requestdata       	= $this->request->getPost();
 			$userid 			= getSiteUserID();
-
-    		if(!isset($requestdata['cart'])){
-	    		$requestdata['user_id'] = $userid;
-	    		if($requestdata['checked']==1){
-	    			$startdate 	= explode('-', $requestdata['startdate']);
-		    		$enddate 	= explode('-', $requestdata['enddate']); 
-					if($startdate) 	$requestdata['startdate']   	= $startdate[2].'-'.$startdate[0].'-'.$startdate[1];
-					if($enddate) 	$requestdata['enddate']   	= $enddate[2].'-'.$enddate[0].'-'.$enddate[1];
+			
+			if(!isset($requestdata['cart'])){
+	    		if($userid) $requestdata['user_id'] = $userid;
+	    		$requestdata['ip']  = $this->request->getIPAddress();
+    			
+    			if($requestdata['checked']==1){
+	    			$requestdata['startdate'] 		= formatdate($requestdata['startdate'], 1);
+    				$requestdata['enddate'] 		= formatdate($requestdata['enddate'], 1);
 	               	$result = $this->cart->action($requestdata);  
 	            }else{
 	            	$result = $this->cart->delete($requestdata);

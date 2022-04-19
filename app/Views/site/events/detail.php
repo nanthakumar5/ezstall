@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 <?php 
 	$getcart = getCart();
-	$userid  = getSiteUserID();
+	 $userid 		= getSiteUserID();
 	$cartevent = 0;
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
@@ -20,6 +20,12 @@
 		<a href="javascript:void(0);"><?php echo $detail['name'] ?></a>
 	  </span>
 	</div>
+	<?php if($cartevent==1){?>
+		<div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+			<?php echo 'For booking this event remove other event from the cart'; ?>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+		</div>
+	<?php } ?>
 	<div class="marFive dFlexComBetween eventTP pb-3 pt-4">
 		<div class="pageInfo m-0 bg-transparent">
 			<span class="eventHead">
@@ -98,9 +104,9 @@
 			<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5">
 				<h3 class="fw-bold mb-4">Book Your Stalls</h3>
 				<div class="infoPanel form_check">
-					<span class="infoSection" >
+					<span class="infoSection">
 						<span class="iconProperty">
-							<input type="text"  readonly id="stallcount"  value="" placeholder="Number of Stalls">
+							<input type="text" readonly id="stallcount"  value="" placeholder="Number of Stalls">
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">			
@@ -110,7 +116,6 @@
 								<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
 						</span>
 					</span>
-					
 					<input type="hidden" name="datecount" id="datecount">
 				</div>
 				
@@ -129,7 +134,7 @@
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
 
-							if($cartevent=='1' || $checkevent['status']=='0' || $userid==""){
+							if($cartevent=='1' || $checkevent['status']=='0'){
 								$checkboxstatus = 'disabled';
 							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
@@ -170,16 +175,14 @@
 </section>
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
-<script>  
-
+<script> 
 	var cartevent 		= '<?php echo $cartevent; ?>';
 	var checkevent 		= '<?php echo $checkevent["status"]; ?>';
 	var eventstartdate  = '<?php echo $eventstartdate; ?>';
 	var eventenddate 	= '<?php echo $eventenddate; ?>';
-	var userid 			= '<?php echo $userid; ?>';
 
 	$(document).ready(function (){
-	 	if(cartevent == 0 && userid !=""){ 
+	 	if(cartevent == 0 ){
 	 		cart();
 	 	}else{
 	 		$("#startdate, #enddate").attr('disabled', 'disabled');
@@ -246,7 +249,7 @@
 		dateformat('#start_date, #end_date');
 
 		if($(this).is(':checked')){
-			cart({stall_id : stall_id, event_id : event_id, barn_id : barn_id, price : price, startdate : startdate, enddate : enddate, checked : 1});
+			cart({stall_id : stall_id, event_id : event_id, barn_id : barn_id, price : price, startdate : startdate, enddate : enddate, checked : 1, actionid : ''});
 		}else{
 			$('.stallavailability[data-stallid='+stall_id+']').removeClass("yellow-box").addClass("green-box");
 			cart({stall_id : stall_id, checked : 0}); 

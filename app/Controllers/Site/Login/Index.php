@@ -4,12 +4,14 @@ namespace App\Controllers\Site\Login;
 
 use App\Controllers\BaseController;
 use App\Models\Users;
+use App\Models\Cart;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->users = new Users();	
+		$this->users = new Users();
+		$this->cart = new Cart();		
 	}
     
     public function index()
@@ -26,6 +28,7 @@ class Index extends BaseController
 						$this->session->setFlashdata('danger', 'Email is still not verified.');
 						return redirect()->to(base_url().'/login'); 
 					}else{
+						$this->cart->action(['user_id' => $result['id'], 'ip' => $this->request->getIPAddress(), 'actionid' => 1]);
 						$this->session->set('sitesession', ['userid' => $result['id']]);
 						return redirect()->to(base_url().'/myaccount/dashboard'); 
 					}

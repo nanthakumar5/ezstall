@@ -44,6 +44,8 @@ class Cart extends BaseModel
 		if(isset($requestdata['event_id'])) 				    $query->where('c.event_id', $requestdata['event_id']);
 		if(isset($requestdata['barn_id'])) 				    	$query->where('c.barn_id', $requestdata['barn_id']);
 		if(isset($requestdata['stall_id'])) 				    $query->where('c.stall_id', $requestdata['stall_id']);
+		if(isset($requestdata['ip'])) 				    		$query->where('c.ip', $requestdata['ip']);
+
 		
 		if($type=='count'){
 			$result = $query->countAllResults();
@@ -59,7 +61,10 @@ class Cart extends BaseModel
 	public function action($data)
 	{    
 		$this->db->transStart();
-	
+
+		$ip = $data['ip'];
+		$request['ip'] = $ip;
+
 		if(isset($data['user_id'])&& $data['user_id']!='') 	 	       	$request['user_id'] 		= $data['user_id'];
 		if(isset($data['stall_id'])&& $data['stall_id']!='')           	$request['stall_id'] 	    = $data['stall_id'];
 		if(isset($data['event_id'])&& $data['event_id']!='')           	$request['event_id'] 	    = $data['event_id'];
@@ -68,18 +73,21 @@ class Cart extends BaseModel
 		if(isset($data['startdate'])&& $data['startdate']!='')         	$request['check_in'] 	    = date('Y-m-d', strtotime($data['startdate']));
 		if(isset($data['enddate'])&& $data['enddate']!='')             	$request['check_out'] 	    = date('Y-m-d', strtotime($data['enddate']));
 
-
-		if(isset($request)){ 
+		if($data['actionid']==""){   
+			$request['datetime'] = date('Y-m-d H:i:s');
 			$cart = $this->db->table('cart')->insert($request);
-			$usersinsertid = $this->db->insertID();
+			$insertid = $this->db->insertID();
+		}else{ 
+			$cart = $this->db->table('cart')->update($request, ['ip' => $ip]);
+			$insertid = $this->db->insertID();
 		}
 		
-		if(isset($usersinsertid) && $this->db->transStatus() === FALSE){
+		if(isset($insertid) && $this->db->transStatus() === FALSE){
 			$this->db->transRollback();
 			return false;
 		}else{
 			$this->db->transCommit();
-			return $usersinsertid;
+			return $insertid;
 		}
 	}
 
@@ -88,8 +96,9 @@ class Cart extends BaseModel
 		$this->db->transStart();
 		
 		$request = [];
-		if(isset($data['user_id']))            	 $request['user_id']    = $data['user_id'];
-		if(isset($data['stall_id']))             $request['stall_id'] 	= $data['stall_id'];
+		if(isset($data['user_id']))            	$request['user_id']    	= $data['user_id'];
+		if(isset($data['ip']))            	 	$request['ip']    		= $data['ip'];
+		if(isset($data['stall_id']))            $request['stall_id'] 	= $data['stall_id'];
 		
 		if(count($request)){
 			$cart 			= $this->db->table('cart')->delete($request);

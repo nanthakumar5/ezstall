@@ -219,11 +219,17 @@ function getUsersList()
 	else return [];	
 }
 
+function formatdate($date, $type=''){
+    $date = explode('-', $date);
+    if($type=='') return $date[1].'-'.$date[2].'-'.$date[0];
+    elseif($type=='1') return $date[2].'-'.$date[0].'-'.$date[1];
+}
+
 function getCart(){ 
 	$request 		= service('request');
-    $userid 		= getSiteUserID();
+    $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['ip' =>$request->getIPAddress()] ;
 	$cart 		    = new \App\Models\Cart;
-	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], ['user_id' => $userid]);
+	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], [$condition]);
 	if($result){
 
 		$barnstall = [];
@@ -240,16 +246,12 @@ function getCart(){
 		$event_name 			= array_unique(array_column($result, 'eventname'))[0];
 		$event_location 		= array_unique(array_column($result, 'eventlocation'))[0];
 		$event_description 		= array_unique(array_column($result, 'eventdescription'))[0];
-	    $check_in       		= array_unique(array_column($result, 'check_in'))[0];
-	    $check_out      		= array_unique(array_column($result, 'check_out'))[0];
-	    $start          		= strtotime($check_in);
-		$end            		= strtotime($check_out);
-		$date           		= ceil(abs($end - $start) / 86400);
-		$price          		= array_sum(array_column($result, 'price')); 	
-		$check_inresult 		= explode('-', $check_in);
-		$check_outresult 		= explode('-', $check_out); 
-		$check_in =$check_inresult[1].'-'.$check_inresult[2].'-'.$check_inresult[0];
-		$check_out =$check_outresult[1].'-'.$check_outresult[2].'-'.$check_outresult[0];
+	    $check_in       		= formatdate(array_unique(array_column($result, 'check_in'))[0]);
+	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0]);
+	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0]);
+		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0]);
+		$date           		= ceil(abs($start - $end) / 86400);
+		$price          		= array_sum(array_column($result, 'price'));
 		
 		return [
 			'event_id' => $event_id, 
