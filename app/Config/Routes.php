@@ -39,6 +39,8 @@ $routes->setAutoRoute(true);
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 $routes->post('searchevents', 'Site\Event\Index::searchevents');
 
+// Cron
+$routes->get('cartremoval', 'Common\Cron::cartremoval');	
 
 // Validation
 $routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');
@@ -90,8 +92,8 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 
 });
 
-    $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
-    $routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
+$routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
+$routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
 	$routes->get('logout', 'Admin\Logout\Index::index');
 	
 	// Users
