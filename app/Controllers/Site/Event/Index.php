@@ -35,6 +35,7 @@ class Index extends BaseController
 
 
 		if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
+		if($this->request->getGet('stalls'))   	 $searchdata['stalls']    = $this->request->getGet('stalls');
 		if($this->request->getGet('start_date')!="" || $this->request->getGet('start_date')!=""){
 			$searchdata['startdate'] 	= formatdate($this->request->getGet('start_date'));
     		$searchdata['enddate'] 		= formatdate($this->request->getGet('end_date'));

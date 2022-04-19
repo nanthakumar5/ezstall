@@ -21,6 +21,9 @@ class Index extends BaseController
         if(!getCart()){
             return redirect()->to(base_url().'/'); 
         }
+        $db = db_connect();
+        $count = 2;
+            $db->table('event')->where('id', '16')->set('stall_available', 'stall_available-'.$count, FALSE)->update();
 
     	if ($this->request->getMethod()=='post')
     	{  

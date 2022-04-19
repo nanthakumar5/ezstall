@@ -29,6 +29,7 @@ class Event extends BaseModel
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
 		if(isset($requestdata['istart_date'])) 			$query->where('e.start_date <=', $requestdata['istart_date']);
 		if(isset($requestdata['iend_date'])) 			$query->where('e.end_date >=', $requestdata['iend_date']);
+		if(isset($requestdata['stalls'])) 				$query->where('e.stall_available >=', $requestdata['stalls']);
 		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
 		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
@@ -129,6 +130,7 @@ class Event extends BaseModel
 		if(isset($data['stalls_price']) && $data['stalls_price']!='')   $request['stalls_price']	= $data['stalls_price'];
 		if(isset($data['rvspots_price']) && $data['rvspots_price']!='') $request['rvspots_price'] 	= $data['rvspots_price'];
 		if(isset($data['status']) && $data['status']!='')      		    $request['status'] 			= $data['status'];
+		if(isset($data['stlcount']) && $data['stlcount']!='')      		    $request['stall_available'] 			= $data['stlcount'];
 		
 		if(isset($data['image']) && $data['image']!=''){
  			$request['image'] = $data['image'];		
