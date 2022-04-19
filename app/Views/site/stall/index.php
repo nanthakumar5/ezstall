@@ -57,7 +57,9 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
     <script>
-        dateformat('#search_start_date, #search_end_date');
+        //dateformat('#search_start_date, #search_end_date');
+        $("#search_start_date").datepicker({dateFormat: 'mm-dd-yy'});
+        $("#search_end_date").datepicker({dateFormat: 'mm-dd-yy'});
         $('#searchstalls').keypress(function (e) {
             if($(this).val()!='' && e.which == 13){
                 window.location.href = '<?php echo base_url(); ?>/stalls?q='+$(this).val();

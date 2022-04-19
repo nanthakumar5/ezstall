@@ -224,7 +224,6 @@ function getCart(){
     $userid 		= getSiteUserID();
 	$cart 		    = new \App\Models\Cart;
 	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], ['user_id' => $userid]);
-
 	if($result){
 
 		$barnstall = [];
@@ -247,7 +246,11 @@ function getCart(){
 		$end            		= strtotime($check_out);
 		$date           		= ceil(abs($end - $start) / 86400);
 		$price          		= array_sum(array_column($result, 'price')); 	
-
+		$check_inresult 		= explode('-', $check_in);
+		$check_outresult 		= explode('-', $check_out); 
+		$check_in =$check_inresult[1].'-'.$check_inresult[2].'-'.$check_inresult[0];
+		$check_out =$check_outresult[1].'-'.$check_outresult[2].'-'.$check_outresult[0];
+		
 		return [
 			'event_id' => $event_id, 
 			'event_name' => $event_name, 

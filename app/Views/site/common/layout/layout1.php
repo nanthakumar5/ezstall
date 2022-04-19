@@ -13,9 +13,10 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.css">
 		<link href="<?php echo base_url() ?>/assets/site/css/bootstrap.min.css" rel="stylesheet">
-		<link href="<?php echo base_url() ?>/assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+		<link href="<?php echo base_url() ?>/assets/site/css/toas/toastr.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/site/css/style.css" rel="stylesheet">
 		<link href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
 
 	</head>
 	<body>
@@ -60,11 +61,11 @@
 									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="start_date" id="search_start_date" placeholder="Check-In">
+									<input type="text" name="start_date" id="search_start_date" class="start_datepicker" placeholder="Check-In">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="end_date" id="search_end_date" placeholder="Check-Out">
+									<input type="text" name="end_date" class="end_datepicker" id="search_end_date" placeholder="Check-Out">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<input type="text" placeholder="No.of stalls">
@@ -191,17 +192,22 @@
 			</div>
 		</section>
 	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/jquery/jquery.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/bootstrap.bundle.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
+	    <script src="<?php echo base_url();?>/assets/site/js/toas/toastr.min.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-	    <script src="<?php echo base_url();?>/assets/plugins/toastr/toastr.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<script>
-			dateformat('#search_start_date, #search_end_date');
+			//dateformat('#search_start_date, #search_end_date');
+			
+            $(".start_datepicker").datepicker({dateFormat: 'mm-dd-yy'});
+            $(".end_datepicker").datepicker({dateFormat: 'mm-dd-yy'});
+     
 			var newselettertoast = '<?php echo $newselettertoast; ?>'; 
 			
 			if(newselettertoast=='1'){ 

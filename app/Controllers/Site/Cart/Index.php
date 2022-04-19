@@ -19,7 +19,11 @@ class Index extends BaseController
 
     		if(!isset($requestdata['cart'])){
 	    		$requestdata['user_id'] = $userid;
-	    		if($requestdata['checked']==1){ 
+	    		if($requestdata['checked']==1){
+	    			$startdate 	= explode('-', $requestdata['startdate']);
+		    		$enddate 	= explode('-', $requestdata['enddate']); 
+					if($startdate) 	$requestdata['startdate']   	= $startdate[2].'-'.$startdate[0].'-'.$startdate[1];
+					if($enddate) 	$requestdata['enddate']   	= $enddate[2].'-'.$enddate[0].'-'.$enddate[1];
 	               	$result = $this->cart->action($requestdata);  
 	            }else{
 	            	$result = $this->cart->delete($requestdata);

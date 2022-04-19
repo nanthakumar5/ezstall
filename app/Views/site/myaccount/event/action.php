@@ -229,7 +229,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var stallIndex       = '0';
 
 	$(function(){
-		dateformat('#start_date, #end_date');
+		//dateformat('#start_date, #end_date');
+		$("#start_date").datepicker({dateFormat: 'mm-dd-yy'});
+        $("#end_date").datepicker({dateFormat: 'mm-dd-yy'});
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 		fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
 		fileupload([".stallmap_file"], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
