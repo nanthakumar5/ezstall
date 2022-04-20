@@ -44,7 +44,8 @@ $routes->get('cartremoval', 'Common\Cron::cartremoval');
 
 // Validation
 $routes->post('validation/emailvalidation', 'Common\Validation::emailvalidation');
-$routes->get('event/pdf/(:any)', 'Site\Event\Index::downloadPdf');
+
+$routes->get('event/pdf/(:any)', 'Site\Event\Index::downloadeventflyer/$1');
 $routes->match(['get', 'post'], '/', 'Site\Home\Index::index');	
 $routes->match(['get','post'], 'login', 'Site\Login\Index::index', ['filter' => 'siteauthentication1']);
 $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filter' => 'siteauthentication1']);
