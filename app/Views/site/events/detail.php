@@ -71,7 +71,9 @@
 					</div>
 					<div class="col-12 mb-5 mt-2">
 						<p>Contact the stall manager at <?php echo $detail['mobile'] ?> for more information and stall maps.</p>
-						<button class="ucEventdetBtn"><img src="<?php echo base_url() ?>/assets/site/img/flyer.png"> Dowload Event Flyer</button>
+						<?php if($detail['eventflyer']!=""){ ?>
+							<button class="ucEventdetBtn"><a href="<?php echo base_url();?>/event/pdf/<?php echo $detail['eventflyer'] ?>"><img src="<?php echo base_url() ?>/assets/site/img/flyer.png"> Download Event Flyer</a></button>
+						<?php } ?>
 					</div>
 				</div>
 				<div class="row row border-top pt-4 pb-4">

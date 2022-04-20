@@ -71,4 +71,15 @@ class Index extends BaseController
 
 		return $this->response->setJSON($result);
 	}
+	public function downloadPdf()
+	{  
+		$uri 		= service('uri');
+		$filename 	= $uri->getSegments()[2];
+		$filepath   = base_url().'/assets/uploads/eventflyer/'.$filename;		
+		header("Content-Type: application/octet-stream"); 
+        header("Content-Disposition: attachment; filename=\"". basename($filepath) ."\"");
+        readfile ($filepath);
+        exit();
+        return view('site/events/detail');
+	}
 }
