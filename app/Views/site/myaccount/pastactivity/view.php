@@ -12,6 +12,7 @@
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
       $checkout           = date("m-d-Y", strtotime($checkout));
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
+      $dateofformat       = isset($result['created_at']) ? date('m-d-Y h:i A',strtotime($result['created_at'])) : '';
 
   ?>
     <div class="row">
@@ -95,6 +96,14 @@
         </div>
         <div class="col" align="left">
           <p class="my-2"><?php echo $usertype[$result['usertype']];?></p>
+        </div>
+      </div>
+       <div class="row col-md-10 base-style">
+        <div class="col fw-600">
+          <p class="my-2">Date of Booking</p>
+        </div>
+        <div class="col" align="left">
+          <p class="my-2"><?php echo $dateofformat;?></p>
         </div>
       </div>
     </section>

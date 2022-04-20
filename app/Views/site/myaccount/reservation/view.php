@@ -11,9 +11,8 @@
       $checkin            = date("m-d-Y", strtotime($checkin));
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
       $checkout           = date("m-d-Y", strtotime($checkout));
-      $dateofformat       = isset($result['created_at']) ? dateformat($result['created_at']) : '';
+      $dateofformat       = isset($result['created_at']) ? date('m-d-Y h:i A',strtotime($result['created_at'])) : '';
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
-
   ?>
     <div class="row">
       <div class="col">
