@@ -32,8 +32,9 @@
 							<div class="col-md-3 mb-2">
 								<div>
 									<p class="mb-0 fs-7 fw-600">Date of booking</p>
-									<p class="mb-0 fs-7"><?php echo dateformat($data['created_at']);?></p>
+									<p class="mb-0 fs-7"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
 								</div>
+
 							</div>
 						</div>
 						<div class="col-md-2">

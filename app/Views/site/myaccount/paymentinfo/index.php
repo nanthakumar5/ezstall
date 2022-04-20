@@ -14,7 +14,7 @@
 	<p class="mb-0 fs-7"><?php echo $data['id'];?></p>
 	</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-10">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Name</p>
 	<p class="mb-0 fs-7"><?php echo $data['payer_name'];?></p>
@@ -26,13 +26,19 @@
 	<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
 	</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Paid By:</p>
 	<p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
 	</div>
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-3">
+	<div>
+	<p class="mb-0 text-sm fs-7 fw-600">Paid Date:</p>
+	<p class="mb-0 fs-7"><?php echo date('m-d-Y h:i A', strtotime($data['created']));?></p>
+	</div>
+	</div>
+	<div class="col-md-5">
 	<div class="d-flex justify-content-end">
 	<a href="<?php echo base_url().'/myaccount/payments/view/'.$data['id']; ?>" class="view-res">View</a>
 	</div>
