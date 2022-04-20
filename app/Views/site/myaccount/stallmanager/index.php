@@ -17,7 +17,7 @@
 					</div>
 					<div class="col-md-4">
 						<a class="fs-7 dash-edit" href="<?php echo base_url().'/myaccount/stallmanager/edit/'.$data['id']; ?>">Edit <i class="far fa-edit"></i></a>
-						<a class="fs-7 dash-trash" data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="delete">Delete <i class="far fa-trash-alt"></i></a>
+						<a class="fs-7 dash-trash delete" data-id="<?php echo $data['id']; ?>" href="javascript:void(0);">Delete <i class="far fa-trash-alt"></i></a>
 					</div>
 				</div>
 			</div>

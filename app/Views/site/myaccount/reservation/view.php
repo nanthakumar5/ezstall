@@ -11,6 +11,7 @@
       $checkin            = date("m-d-Y", strtotime($checkin));
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
       $checkout           = date("m-d-Y", strtotime($checkout));
+      $dateofformat       = isset($result['created_at']) ? dateformat($result['created_at']) : '';
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
 
   ?>
@@ -87,6 +88,14 @@
         </div>
         <div class="col" align="left">
           <p class="my-2"><?php echo $checkout;?></p>
+        </div>
+      </div>
+      <div class="row col-md-10 base-style">
+        <div class="col fw-600">
+          <p class="my-2">Date of Booking</p>
+        </div>
+        <div class="col" align="left">
+          <p class="my-2"><?php echo $dateofformat;?></p>
         </div>
       </div>
        <div class="row col-md-10 base-style">
