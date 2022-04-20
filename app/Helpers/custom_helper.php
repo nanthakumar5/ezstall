@@ -229,7 +229,7 @@ function getCart(){
 	$request 		= service('request');
     $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['ip' =>$request->getIPAddress()] ;
 	$cart 		    = new \App\Models\Cart;
-	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], [$condition]);
+	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], $condition);
 	if($result){
 
 		$barnstall = [];
@@ -250,7 +250,7 @@ function getCart(){
 	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0], 1);
 	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0]);
 		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0]);
-		$date           		= ceil(abs($start - $end) / 86400);
+		$interval           	= ceil(abs($start - $end) / 86400);
 		$price          		= array_sum(array_column($result, 'price'));
 		
 		return [
@@ -259,12 +259,32 @@ function getCart(){
 			'event_location' => $event_location, 
 			'event_description' => $event_description, 
 			'barnstall'=> $barnstall, 
-			'price' => $price, 
-			'interval' => $date, 
+			'price' => $price * $interval, 
+			'interval' => $interval, 
 			'check_in' => $check_in,
 			'check_out' => $check_out
 		];	
 	}else{
 		return false;
 	}
+}
+
+function getOccupied($eventid){
+	$booking	= new \App\Models\Booking;
+	$booking 	= $booking->getBooking('all', ['booking','barnstall'],['eventid' => $eventid]);
+	
+	$occupied = [];
+	foreach ($booking as  $bookdata) {
+		$barnstall = $bookdata['barnstall'];
+		$occupied[] = implode(',', array_column($barnstall, 'stall_id'));
+	}
+
+	return (count($occupied) > 0) ? explode(',', implode(',', $occupied)) : [];
+}
+
+function getReserved($eventid){
+	$cart	= new \App\Models\Cart;
+	$cart	= $cart->getCart('all', ['cart'], ['event_id' => $eventid]);
+	
+	return (count($cart) > 0) ? array_column($cart, 'user_id', 'stall_id') : [];
 }

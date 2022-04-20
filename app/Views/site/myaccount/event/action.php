@@ -22,7 +22,7 @@ $stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 $stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 $bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
-$stall_avail        	= isset($result['stall_available']) ? $result['stall_available'] : [];
+$stall_available        = isset($result['stall_available']) ? $result['stall_available'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 ?>
 
@@ -162,9 +162,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-						<input type="hidden" name="stlcount" id="stlcount" value="">
-						<input type="hidden" name="stal_ocupied" id="stal_ocupied" value="<?php echo count($occupied); ?>">
-						<input type="hidden" name="stall_avail" id="stall_avail" value="<?php echo $stall_avail; ?>">
+						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
@@ -227,18 +225,18 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 
 <?php $this->section('js') ?>
 <script>
-	var barn			 = $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
-	var statuslist		 = $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
-	var barnIndex        = '0';
-	var stallIndex       = '0';
-
+	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
+	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
+	var barnIndex        		= '0';
+	var stallIndex       		= '0';
+	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
+	
 	$(function(){
-		//dateformat('#start_date, #end_date');
 		$("#start_date").datepicker({dateFormat: 'mm-dd-yy'});
         $("#end_date").datepicker({dateFormat: 'mm-dd-yy'});
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
-		fileupload([".eventflyer_file"], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
-		fileupload([".stallmap_file",['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
+		fileupload([".eventflyer_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
+		fileupload([".stallmap_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(
@@ -288,6 +286,13 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}
 	});
 
+	$('#eventSubmit').click(function(e){
+		var totalstall 		= $('.dash-stall-base').length
+		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);
+		
+		$('#stall_available').val(result);
+	});
+	
 	$(document).on('click', '.barntab li a.active', function(e){ 
 		e.preventDefault();
 		barntext();
@@ -296,18 +301,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	$('.barnbtn').click(function(e){
 		e.preventDefault();
 		barndata([], 1);
-	});
-
-	$('#eventSubmit').click(function(e){
-		if($('#stal_ocupied').val() == ''){
-			$('#stlcount').val($('.dash-stall-base').length);	
-		}else{
-			var total_stall  = $('.dash-stall-base').length;
-			var stal_ocupied = $('#stal_ocupied').val();
-			var a 			 = parseInt(total_stall) - parseInt(stal_ocupied);
-			$('#stlcount').val(a);
-			
-		}		
 	});
 
 	function barndata(result=[], type=''){ 

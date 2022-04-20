@@ -5,7 +5,6 @@ use App\Controllers\BaseController;
 use App\Models\Users;
 use App\Models\Event;
 use App\Models\Stripe;
-use App\Models\Booking;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -16,7 +15,6 @@ class Index extends BaseController
 		$this->event = new Event();
 		$this->users = new Users();
 		$this->stripe = new Stripe();
-		$this->booking = new Booking();		
 	}
     
     public function index()
@@ -67,7 +65,7 @@ class Index extends BaseController
 		}
 		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid]);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid], ['orderby' => 'e.id desc']);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
@@ -102,10 +100,9 @@ class Index extends BaseController
 		
 		if($id!=''){
 			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid]);
-			if($result){
-				$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-				$data['occupied'] = explode(',', implode(',', array_column($booking, 'stall_id')));
-				$data['result'] = $result;
+			if($result){				
+				$data['occupied'] 	= getOccupied($id);
+				$data['result'] 	= $result;
 			}else{
 				$this->session->setFlashdata('danger', 'No Record Found.');
 				return redirect()->to(base_url().'/myaccount/events'); 
@@ -134,9 +131,8 @@ class Index extends BaseController
 	
 	public function view($id)
     {  
-		$data['detail']  = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		$booking = $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$data['occupied'] = explode(',', implode(',', array_column($booking, 'stall_id')));
+		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$data['occupied'] 	= getOccupied($id); 
 		
 		return view('site/myaccount/event/view',$data);
     }
@@ -145,7 +141,7 @@ class Index extends BaseController
     {	
     	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$occupied 	= explode(',', implode(',', array_column($booking, 'stall_id')));
+		$occupied 	= getOccupied($id); 
 
 		$spreadsheet = new Spreadsheet();
 		$sheet 		 = $spreadsheet->getActiveSheet();

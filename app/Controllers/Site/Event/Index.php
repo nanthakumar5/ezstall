@@ -4,7 +4,6 @@ namespace App\Controllers\Site\Event;
 
 use App\Controllers\BaseController;
 use App\Models\Event;
-use App\Models\Booking;
 use App\Models\Users;
 
 class Index extends BaseController
@@ -12,9 +11,7 @@ class Index extends BaseController
 	public function __construct()
 	{
 		$this->event   	= new Event();
-		$this->booking 	= new Booking();
 		$this->users 	= new Users();
-
 	}
     
     public function lists()
@@ -51,21 +48,14 @@ class Index extends BaseController
 	
 	public function detail($id)
     {  	
-			
     	$userid = getSiteUserID();
 
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		$booking = $this->booking->getBooking('all', ['booking','barnstall'],['eventid' => $id]);
 		
-		$occupied = [];
-		foreach ($booking as  $bookdata) {
-			$barnstall = $bookdata['barnstall'];
-			$occupied[] = implode(',', array_column($barnstall, 'stall_id'));
-		}
-
-		$data['occupied'] = explode(',', implode(',', $occupied));
+		$data['occupied'] 	= getOccupied($id);
+		$data['reserved'] 	= getReserved($id);
 		$data['checkevent'] = checkEvent($event);
-		$data['detail']  = $event;
+		$data['detail']  	= $event;
 		
 		return view('site/events/detail',$data);
     }

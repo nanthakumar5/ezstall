@@ -78,7 +78,7 @@ class Cart extends BaseModel
 			$cart = $this->db->table('cart')->insert($request);
 			$insertid = $this->db->insertID();
 		}else{ 
-			$cart = $this->db->table('cart')->update($request, ['ip' => $ip]);
+			$cart = $this->db->table('cart')->where(['user_id' => 0])->update($request, ['ip' => $ip]);
 			$insertid = $this->db->insertID();
 		}
 		

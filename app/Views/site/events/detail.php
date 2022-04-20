@@ -1,12 +1,9 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php 
-	$getcart = getCart();
-	 $userid 		= getSiteUserID();
-	$cartevent = 0;
-	if($getcart && $getcart['event_id'] != $detail['id']){
-		$cartevent = 1;
-	}
+	$userid 	= getSiteUserID();
+	$getcart 	= getCart();
+	$cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -129,12 +126,21 @@
 						foreach($barndata['stall'] as $stalldata){
 							$boxcolor  = 'green-box';
 							$checkboxstatus = '';
-
+							
 							if($cartevent=='1' || $checkevent['status']=='0'){
 								$checkboxstatus = 'disabled';
 							}elseif(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
 								$checkboxstatus = 'disabled checked';
+							}elseif(in_array($stalldata['id'], array_keys($reserved))){
+								$boxcolor  = 'yellow-box';
+								$checkboxstatus = 'disabled checked';
+								foreach($reserved as $rvalue){
+									if($rvalue==$userid){
+										$checkboxstatus = 'checked';
+										break;
+									}
+								}
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item">
@@ -220,7 +226,7 @@
 				if(startdate=='') $("#startdate").focus();
 				else if(enddate=='') $("#enddate").focus();
 
-				$(".form-check-input").prop('checked', false);
+				$(".form-check-input:not(:disabled)").prop('checked', false);
 				return false;
 			}
 

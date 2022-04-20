@@ -121,18 +121,18 @@ class Event extends BaseModel
 		
 		$request['user_id'] = $userid;
 		$request['status'] 	= '1';
-		if(isset($data['name']) && $data['name']!='')      		        $request['name'] 			= $data['name'];
-		if(isset($data['description']) && $data['description']!='')     $request['description']     = $data['description'];
-		if(isset($data['location']) && $data['location']!='')           $request['location'] 		= $data['location'];
-		if(isset($data['mobile']) && $data['mobile']!='')      	        $request['mobile'] 			= $data['mobile'];
-		if(isset($data['start_date']) && $data['start_date']!='')       $request['start_date']		= date('Y-m-d', strtotime($data['start_date']));;
-		if(isset($data['end_date']) && $data['end_date']!='')           $request['end_date'] 		= date('Y-m-d', strtotime($data['end_date']));		
-		if(isset($data['start_time']) && $data['start_time']!='')       $request['start_time'] 		= $data['start_time'];
-		if(isset($data['end_time']) && $data['end_time']!='')           $request['end_time'] 		= $data['end_time'];
-		if(isset($data['stalls_price']) && $data['stalls_price']!='')   $request['stalls_price']	= $data['stalls_price'];
-		if(isset($data['rvspots_price']) && $data['rvspots_price']!='') $request['rvspots_price'] 	= $data['rvspots_price'];
-		if(isset($data['status']) && $data['status']!='')      		    $request['status'] 			= $data['status'];
-		if(isset($data['stlcount']) && $data['stlcount']!='')      		$request['stall_available'] = $data['stlcount'];
+		if(isset($data['name']) && $data['name']!='')      		        		$request['name'] 			= $data['name'];
+		if(isset($data['description']) && $data['description']!='')     		$request['description']     = $data['description'];
+		if(isset($data['location']) && $data['location']!='')           		$request['location'] 		= $data['location'];
+		if(isset($data['mobile']) && $data['mobile']!='')      	        		$request['mobile'] 			= $data['mobile'];
+		if(isset($data['start_date']) && $data['start_date']!='')       		$request['start_date']		= date('Y-m-d', strtotime($data['start_date']));;
+		if(isset($data['end_date']) && $data['end_date']!='')           		$request['end_date'] 		= date('Y-m-d', strtotime($data['end_date']));		
+		if(isset($data['start_time']) && $data['start_time']!='')       		$request['start_time'] 		= $data['start_time'];
+		if(isset($data['end_time']) && $data['end_time']!='')           		$request['end_time'] 		= $data['end_time'];
+		if(isset($data['stalls_price']) && $data['stalls_price']!='')   		$request['stalls_price']	= $data['stalls_price'];
+		if(isset($data['rvspots_price']) && $data['rvspots_price']!='') 		$request['rvspots_price'] 	= $data['rvspots_price'];
+		if(isset($data['status']) && $data['status']!='')      		    		$request['status'] 			= $data['status'];
+		if(isset($data['stall_available']) && $data['stall_available']!='')     $request['stall_available'] = $data['stall_available'];
 		
 		if(isset($data['image']) && $data['image']!=''){
  			$request['image'] = $data['image'];		
