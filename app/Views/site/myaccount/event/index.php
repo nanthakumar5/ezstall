@@ -87,9 +87,10 @@ $currentdate 	= date("Y-m-d");
 		$('.stripeextra').remove();
 
 		var data = 	'<div class="stripeextra">\
-		<input type="hidden" value="300" name="price">\
+			<input type="hidden" value="300" name="price">\
 		</div>';
 
+		$('.stripetotal').text(' (Total - 300)');
 		$('.stripepaybutton').append(data);
 	})
 </script>

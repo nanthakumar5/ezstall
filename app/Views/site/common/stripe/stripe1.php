@@ -5,30 +5,30 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Stripe Payment</h5>
+				<h5 class="modal-title">Stripe Payment <span class="stripetotal"></span></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 		    <div class="modal-body">
 		    	<form role="form" action="" method="post" class="stripeform">
 					<div class="mb-3">
 						<label class='control-label'>Name on Card:</label> 
-						<input autocomplete='off' class='form-control' size='4' placeholder='Name on Card' type='text' name='payer_name'>
+						<input autocomplete='off' class='form-control' size='4' placeholder='Name on Card' type='text' name='payer_name' value="test">
 					</div>
 					<div class="mb-3">
 						<label class='control-label'>Card Number:</label> 
-						<input autocomplete='off' class='form-control card-number' placeholder='Your Card Number' size='20' type='text' name='card_number'>
+						<input autocomplete='off' class='form-control card-number' placeholder='Your Card Number' size='20' type='text' name='card_number' value="4242424242424242">
 					</div>
 					<div class="mb-3">
 						<label class='control-label'>CVC:</label> 
-						<input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' name='card_cvc'>
+						<input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' name='card_cvc' value="123">
 					</div>
 					<div class='mb-3'>
 						<label class='control-label'>Expiration Month:</label> 
-						<input class='form-control card-expiry-month' placeholder='MM' size='2' type='text' name='card_exp_month'>
+						<input class='form-control card-expiry-month' placeholder='MM' size='2' type='text' name='card_exp_month' value="11">
 					</div>
 					<div class='mb-3'>
 						<label class='control-label'>Expiration Year:</label> 
-						<input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' name='card_exp_year'>
+						<input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' name='card_exp_year' value="2023">
 					</div>
 					<div class='error hide'><div class='alert' style="color: red;"></div></div> 
 				   	<div class="mb-3 stripepaybutton">
