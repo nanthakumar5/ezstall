@@ -22,7 +22,7 @@ $stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 $stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 $bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
-$stall_available        = isset($result['stall_available']) ? $result['stall_available'] : [];
+$stall_available        = isset($result['stall_available']) ? $result['stall_available'] : '';
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 ?>
 
