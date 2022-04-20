@@ -248,9 +248,10 @@ function getCart(){
 		$event_description 		= array_unique(array_column($result, 'eventdescription'))[0];
 	    $check_in       		= formatdate(array_unique(array_column($result, 'check_in'))[0], 1);
 	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0], 1);
-	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0].' 00:00:00');
-		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0].' 23:59:00');
-		$interval           	= ceil(abs($start - $end) / 86400);
+	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0]);
+		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0]);
+		$daydiff           		= ceil(abs($start - $end) / 86400);
+		$interval           	= $daydiff==0 ? 1 : $daydiff;
 		$price          		= array_sum(array_column($result, 'price'));
 		
 		return [
