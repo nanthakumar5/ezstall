@@ -22,6 +22,7 @@ $stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 $stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 $bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
+$stall_avail        	= isset($result['stall_available']) ? $result['stall_available'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 ?>
 
@@ -162,6 +163,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="stlcount" id="stlcount" value="">
+						<input type="hidden" name="stal_ocupied" id="stal_ocupied" value="<?php echo count($occupied); ?>">
+						<input type="hidden" name="stall_avail" id="stall_avail" value="<?php echo $stall_avail; ?>">
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
@@ -296,7 +299,15 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	});
 
 	$('#eventSubmit').click(function(e){
-		$('#stlcount').val($('.dash-stall-base').length);
+		if($('#stal_ocupied').val() == ''){
+			$('#stlcount').val($('.dash-stall-base').length);	
+		}else{
+			var total_stall  = $('.dash-stall-base').length;
+			var stal_ocupied = $('#stal_ocupied').val();
+			var a 			 = parseInt(total_stall) - parseInt(stal_ocupied);
+			$('#stlcount').val(a);
+			
+		}		
 	});
 
 	function barndata(result=[], type=''){ 
