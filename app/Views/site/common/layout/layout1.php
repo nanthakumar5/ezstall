@@ -37,6 +37,9 @@
 							</div>
 							<?php if($userdetail){ ?>
 								<div class="navbar-nav">
+									<?php if(getCart()){ ?>
+										<a href="<?php echo base_url().'/checkout'; ?>" class="text-decoration-none me-3"><i class="fa fa-shopping-cart text-white"></i></a>
+									<?php } ?>
 									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/dashboard'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>
 								</div>
 							<?php }else{ ?>

@@ -23,16 +23,17 @@ class Index extends BaseController
             $post           = $this->request->getPost();
             $check_email    = $this->news->getNewsletter('count', ['newsletter'],['email' => $post['email']]);
 
-                if($check_email!=0){ 
-                    $this->session->setFlashdata('toastr', '0');
-                    return redirect()->to(base_url().'/'); 
-                }else{ 
-                    $result = $this->news->action($post);
-                if($result){ 
-                    $this->session->setFlashdata('toastr', '1');
-                    return redirect()->to(base_url().'/'); 
-                } 
-            }
+			if($check_email!=0){ 
+				$this->session->setFlashdata('toastr', '0');
+				return redirect()->to(base_url().'/'); 
+			}else{ 
+				$result = $this->news->action($post);
+				if($result){ 
+					$this->session->setFlashdata('toastr', '1');
+					return redirect()->to(base_url().'/'); 
+				} 
+			}
+			
 			return redirect()->to(base_url().'/'); 
         }
 		

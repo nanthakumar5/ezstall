@@ -72,8 +72,8 @@ $barnstall = $cartdetail['barnstall'];
         <input type="hidden" name="payer_id" value="<?php echo $userdetail['id']; ?>">
         <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
         <input type="hidden" name="payer_email" value="<?php echo $userdetail['email']; ?>" >
-        <input type="hidden" name="checkin" value="<?php echo $cartdetail['check_in']; ?>" >
-        <input type="hidden" name="checkout" value="<?php echo $cartdetail['check_out']; ?>" >
+        <input type="hidden" name="checkin" value="<?php echo formatdate($cartdetail['check_in']); ?>" >
+        <input type="hidden" name="checkout" value="<?php echo formatdate($cartdetail['check_out']); ?>" >
         <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
         <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
         <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
@@ -126,7 +126,7 @@ $barnstall = $cartdetail['barnstall'];
 
            <div class="checkout-complete-btn">
             <span>
-              <input class="form-check-input me-1" type="checkbox" value="" aria-label="..."> I confirm that I have read and accepted the <span class="redcolor">Agreement.</span></span>
+              <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent"> I confirm that I have read and accepted the <span class="redcolor">Agreement.</span></span>
               <button class="payment-btn " type="submit">Complete Payment</button>
             </div>
           </form>
@@ -198,6 +198,9 @@ $barnstall = $cartdetail['barnstall'];
           },
           card_exp_year   : {
             required  :   true
+          },
+          tc   : {
+            required  :   true
           }
         },
         { 
@@ -224,6 +227,9 @@ $barnstall = $cartdetail['barnstall'];
         },
         card_exp_year   : {
           required    : "Card Expiry Year field is required."
+        },
+        tc   : {
+          required    : "Please check the checkbox."
         },
       }
       );

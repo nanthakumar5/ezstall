@@ -7,10 +7,6 @@
 	if($getcart && $getcart['event_id'] != $detail['id']){
 		$cartevent = 1;
 	}
-
-	$eventstartdate = date('m-d-Y', strtotime($detail['start_date']));
-	$eventenddate = date('m-d-Y', strtotime($detail['end_date']));
-
 ?>
 <section class="maxWidth">
 	<div class="pageInfo">
@@ -178,8 +174,8 @@
 <script> 
 	var cartevent 		= '<?php echo $cartevent; ?>';
 	var checkevent 		= '<?php echo $checkevent["status"]; ?>';
-	var eventstartdate  = '<?php echo $eventstartdate; ?>';
-	var eventenddate 	= '<?php echo $eventenddate; ?>';
+	var eventstartdate  = '<?php echo date("m-d-Y", strtotime($detail["start_date"])); ?>';
+	var eventenddate 	= '<?php echo date("m-d-Y", strtotime($detail["end_date"])); ?>';
 
 	$(document).ready(function (){
 	 	if(cartevent == 0 ){

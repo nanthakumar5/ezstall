@@ -112,8 +112,8 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post'){
 			$requestData = $this->request->getPost();
-			$requestdata['startdate'] 		= formatdate($requestdata['start_date']);
-    		$requestdata['enddate'] 		= formatdate($requestdata['end_date']);
+			$requestData['start_date'] 		= formatdate($requestData['start_date']);
+    		$requestData['end_date'] 		= formatdate($requestData['end_date']);
             $result = $this->event->action($requestData);
 			
 			if($result){

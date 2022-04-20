@@ -25,13 +25,15 @@ class Event extends BaseModel
 		if(isset($requestdata['status'])) 				$query->whereIn('e.status', $requestdata['status']);
 		if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);
 		if(isset($requestdata['userids'])) 				$query->whereIn('e.user_id', $requestdata['userids']);
-		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', $requestdata['start_date']);
-		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', $requestdata['end_date']);
-		if(isset($requestdata['istart_date'])) 			$query->where('e.start_date <=', $requestdata['istart_date']);
-		if(isset($requestdata['iend_date'])) 			$query->where('e.end_date >=', $requestdata['iend_date']);
+		if(isset($requestdata['location'])) 			$query->like('e.location', $requestdata['location']);
+		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', date('Y-m-d', strtotime($requestdata['start_date'])));
+		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', date('Y-m-d', strtotime($requestdata['end_date'])));
+		if(isset($requestdata['search_start_date'])) 	$query->where("'".$requestdata['search_start_date']."' BETWEEN e.start_date AND e.end_date");
+		if(isset($requestdata['search_end_date'])) 		$query->where("'".$requestdata['search_end_date']."' BETWEEN e.start_date AND e.end_date");
+		if(isset($requestdata['istart_date'])) 			$query->where('e.start_date <=', date('Y-m-d', strtotime($requestdata['istart_date'])));
+		if(isset($requestdata['iend_date'])) 			$query->where('e.end_date >=', date('Y-m-d', strtotime($requestdata['iend_date'])));
 		if(isset($requestdata['stalls'])) 				$query->where('e.stall_available >=', $requestdata['stalls']);
-		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
-		
+			
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
@@ -58,7 +60,7 @@ class Event extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);		
-		if(isset($extras['orderby'])) 	$query->orderBy('e.id','desc');
+		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby']);
 
 		if($type=='count'){
 			$result = $query->countAllResults();
@@ -130,7 +132,7 @@ class Event extends BaseModel
 		if(isset($data['stalls_price']) && $data['stalls_price']!='')   $request['stalls_price']	= $data['stalls_price'];
 		if(isset($data['rvspots_price']) && $data['rvspots_price']!='') $request['rvspots_price'] 	= $data['rvspots_price'];
 		if(isset($data['status']) && $data['status']!='')      		    $request['status'] 			= $data['status'];
-		if(isset($data['stlcount']) && $data['stlcount']!='')      		    $request['stall_available'] 			= $data['stlcount'];
+		if(isset($data['stlcount']) && $data['stlcount']!='')      		$request['stall_available'] = $data['stlcount'];
 		
 		if(isset($data['image']) && $data['image']!=''){
  			$request['image'] = $data['image'];		

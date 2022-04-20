@@ -137,8 +137,8 @@ class Booking extends BaseModel
 		if(isset($data['firstname']) && $data['firstname']!='')            $request['firstname']      = $data['firstname'];
 		if(isset($data['lastname']) && $data['lastname']!='')              $request['lastname']       = $data['lastname'];
 		if(isset($data['mobile']) && $data['mobile']!='')      	           $request['mobile'] 	      = $data['mobile'];
-		if(isset($data['checkin']) && $data['checkin']!='')                $request['check_in'] 	  = $data['checkin'];
-		if(isset($data['checkout']) && $data['checkout']!='')      	  	   $request['check_out'] 	  = $data['checkout'];
+		if(isset($data['checkin']) && $data['checkin']!='')                $request['check_in'] 	  = date('Y-m-d', strtotime($data['checkin']));
+		if(isset($data['checkout']) && $data['checkout']!='')      	  	   $request['check_out'] 	  = date('Y-m-d', strtotime($data['checkout']));
 		if(isset($data['eventid']) && $data['eventid']!='')      	       $request['event_id'] 	  = $data['eventid'];
 		if(isset($data['paymentid']) && $data['paymentid']!='')      	   $request['payment_id'] 	  = $data['paymentid'];
 		if(isset($data['userid']) && $data['userid']!='')      	           $request['user_id'] 	      = $data['userid'];

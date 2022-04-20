@@ -33,15 +33,13 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
-
-		if($this->request->getGet('location'))   $searchdata['llocation']    = $this->request->getGet('location');
-		if($this->request->getGet('stalls'))   	 $searchdata['stalls']    = $this->request->getGet('stalls');
-		if($this->request->getGet('start_date')!="" || $this->request->getGet('start_date')!=""){
-			$searchdata['startdate'] 	= formatdate($this->request->getGet('start_date'));
-    		$searchdata['enddate'] 		= formatdate($this->request->getGet('end_date'));
-		}
+		if($this->request->getGet('location')!="")   		$searchdata['location']    			= $this->request->getGet('location');
+		if($this->request->getGet('stalls')!="")   	 		$searchdata['stalls']    			= $this->request->getGet('stalls');
+		if($this->request->getGet('start_date')!="")   	 	$searchdata['search_start_date']    = formatdate($this->request->getGet('start_date'));
+		if($this->request->getGet('end_date')!="")   	 	$searchdata['search_end_date']    	= formatdate($this->request->getGet('end_date'));
+		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1']]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage], ['orderby' =>'id']);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage], ['orderby' =>'e.id desc']);
 
 		$data['userdetail'] = $userdetail;
 		$data['usertype'] = $this->config->usertype;
@@ -68,7 +66,7 @@ class Index extends BaseController
 		$data['occupied'] = explode(',', implode(',', $occupied));
 		$data['checkevent'] = checkEvent($event);
 		$data['detail']  = $event;
-		//print_r($data);die;
+		
 		return view('site/events/detail',$data);
     }
 

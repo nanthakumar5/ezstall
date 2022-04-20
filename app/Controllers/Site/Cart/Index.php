@@ -22,8 +22,8 @@ class Index extends BaseController
 	    		$requestdata['ip']  = $this->request->getIPAddress();
     			
     			if($requestdata['checked']==1){
-	    			$requestdata['startdate'] 		= formatdate($requestdata['startdate'], 1);
-    				$requestdata['enddate'] 		= formatdate($requestdata['enddate'], 1);
+	    			$requestdata['startdate'] 		= formatdate($requestdata['startdate']);
+    				$requestdata['enddate'] 		= formatdate($requestdata['enddate']);
 	               	$result = $this->cart->action($requestdata);  
 	            }else{
 	            	$result = $this->cart->delete($requestdata);

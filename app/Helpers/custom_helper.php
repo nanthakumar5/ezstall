@@ -221,8 +221,8 @@ function getUsersList()
 
 function formatdate($date, $type=''){
     $date = explode('-', $date);
-    if($type=='') return $date[1].'-'.$date[2].'-'.$date[0];
-    elseif($type=='1') return $date[2].'-'.$date[0].'-'.$date[1];
+    if($type=='') return $date[2].'-'.$date[0].'-'.$date[1]; //m-d-Y to Y-m-d
+    elseif($type=='1') return $date[1].'-'.$date[2].'-'.$date[0]; //Y-m-d to m-d-Y
 }
 
 function getCart(){ 
@@ -246,8 +246,8 @@ function getCart(){
 		$event_name 			= array_unique(array_column($result, 'eventname'))[0];
 		$event_location 		= array_unique(array_column($result, 'eventlocation'))[0];
 		$event_description 		= array_unique(array_column($result, 'eventdescription'))[0];
-	    $check_in       		= formatdate(array_unique(array_column($result, 'check_in'))[0]);
-	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0]);
+	    $check_in       		= formatdate(array_unique(array_column($result, 'check_in'))[0], 1);
+	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0], 1);
 	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0]);
 		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0]);
 		$date           		= ceil(abs($start - $end) / 86400);
