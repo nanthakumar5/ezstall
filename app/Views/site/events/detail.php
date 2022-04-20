@@ -1,8 +1,9 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php 
-	$userid 	= getSiteUserID();
+	$userid 	= getSiteUserID() ? getSiteUserID() : 0;
 	$getcart 	= getCart();
+	//echo '<pre>';print_r($getcart);
 	$cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 ?>
 <section class="maxWidth">
@@ -101,7 +102,7 @@
 				<div class="infoPanel form_check">
 					<span class="infoSection">
 						<span class="iconProperty">
-							<input type="text" readonly id="stallcount"  value="" placeholder="Number of Stalls">
+							<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls">
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">			
@@ -137,8 +138,8 @@
 							}elseif(in_array($stalldata['id'], array_keys($reserved))){
 								$boxcolor  = 'yellow-box';
 								$checkboxstatus = 'disabled checked';
-								foreach($reserved as $rvalue){
-									if($rvalue==$userid){
+								foreach($reserved as $rkey => $rvalue){
+									if($rkey==$stalldata['id'] && $rvalue==$userid){
 										$checkboxstatus = 'checked';
 										break;
 									}
@@ -328,6 +329,7 @@
 
 	                    $('.checkout').empty().append(result);
                     }else{
+						$('#stallcount').val(0);
 						$('.checkout').empty();
 					}
 		        }

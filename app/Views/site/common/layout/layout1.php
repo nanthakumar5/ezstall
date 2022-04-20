@@ -40,13 +40,16 @@
 									<?php if(getCart()){ ?>
 										<a href="<?php echo base_url().'/checkout'; ?>" class="text-decoration-none me-3"><i class="fa fa-shopping-cart text-white"></i></a>
 									<?php } ?>
-									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/dashboard'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a>
+									<a class="text-decoration-none text-white" href="<?php echo base_url().'/myaccount/dashboard'; ?>" class="ml-2rem nav-link">Hi <?php echo ucfirst($userdetail['name']);?></a> 
+									<span class="text-white px-2"> /</span>
+									<a class="text-decoration-none text-white" href="<?php echo base_url().'/logout'; ?>" class="ml-2rem nav-link">Logout</a> 
 								</div>
 							<?php }else{ ?>
 								<div class="navbar-nav">
 									<a href="<?php echo base_url()?>/login" class="ml-0 nav-link">
 										<img src="<?php echo base_url()?>/assets/site/img/profile.svg" class="profileIcon" alt="Profile Icon">Sign In
-									</a> <span class="text-white px-2"> /</span>
+									</a> 
+									<span class="text-white px-2"> /</span>
 									<a href="<?php echo base_url()?>/register" class="ml-0 nav-link">Sign Up</a>
 								</div>
 							<?php } ?>
