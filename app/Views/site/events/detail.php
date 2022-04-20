@@ -105,10 +105,10 @@
 							<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 						</span>
 						<span class="iconProperty">			
- 								<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/> 						
+ 							<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/> 						
 						</span>
 						<span class="iconProperty">
-								<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
+							<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
 						</span>
 					</span>
 					<input type="hidden" name="datecount" id="datecount">
@@ -225,20 +225,35 @@
 		
 		if($(".form-check-input:checked").length > 0){			
 			if(startdate=='' || enddate==''){
-				if(startdate=='') $("#startdate").focus();
-				else if(enddate=='') $("#enddate").focus();
-
+				if(startdate==''){
+					$("#startdate").focus();
+					toastr.warning('Please select the Check-In Date.', {timeOut: 5000});
+				}else if(enddate==''){
+					$("#enddate").focus();
+					toastr.warning('Please select the Check-Out Date.', {timeOut: 5000});
+				}
+				
 				$(".form-check-input:not(:disabled)").prop('checked', false);
 				return false;
 			}
-
-			$(".checkin").attr('readonly', 'readonly');
-			$(".checkout").attr('readonly', 'readonly');
-		}else{
-			$(".checkin").removeAttr('readonly', 'readonly');
-			$(".checkout").removeAttr('readonly', 'readonly');
 		}
 	}
+	
+	$("#startdate, #enddate").change(function(){
+		var startdate 	= $("#startdate").val(); 
+		var enddate   	= $("#enddate").val(); 
+		
+		cart();
+		
+		if(startdate!='' && enddate!='' && $(".form-check-input:checked:not(:disabled)").length){
+			var stallids = [];
+			$(".form-check-input:checked:not(:disabled)").each(function(){
+				stallids.push($(this).val())
+			})
+			
+			cart({stall_ids : stallids, startdate : startdate, enddate : enddate, checked : 1, actionid : 1}); 
+		}
+	})
 
 	$(".form-check-input").on("click", function() {
 		checkdate();
@@ -249,8 +264,6 @@
 		var event_id    = $(this).attr('data-eventid');
 		var barn_id    	= $(this).attr('data-barnid');
 		var price 		= $(this).attr('data-price');
-
-		dateformat('#start_date, #end_date');
 
 		if($(this).is(':checked')){
 			cart({stall_id : stall_id, event_id : event_id, barn_id : barn_id, price : price, startdate : startdate, enddate : enddate, checked : 1, actionid : ''});
@@ -266,9 +279,7 @@
 	        data,
 	    	{ 
 	    		success  : function(result){
-	    			checkdate();
-
-	    			if(result){  
+	    			if(Object.keys(result).length){  
 	    				$("#startdate").val(result.check_in); 
 						$("#enddate").val(result.check_out); 
 
@@ -316,7 +327,9 @@
 	                    ';
 
 	                    $('.checkout').empty().append(result);
-                    }
+                    }else{
+						$('.checkout').empty();
+					}
 		        }
 	        }
 		);

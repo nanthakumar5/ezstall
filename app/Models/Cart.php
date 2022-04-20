@@ -77,8 +77,9 @@ class Cart extends BaseModel
 			$request['datetime'] = date('Y-m-d H:i:s');
 			$cart = $this->db->table('cart')->insert($request);
 			$insertid = $this->db->insertID();
-		}else{ 
-			$cart = $this->db->table('cart')->where(['user_id' => 0])->update($request, ['ip' => $ip]);
+		}else{
+			if(isset($data['stall_ids'])) $this->db->table('cart')->whereIn('stall_id', $data['stall_ids'])->update($request);
+			else $this->db->table('cart')->where(['user_id' => 0])->update($request, ['ip' => $ip]);
 			$insertid = $this->db->insertID();
 		}
 		

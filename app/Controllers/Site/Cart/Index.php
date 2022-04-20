@@ -30,7 +30,7 @@ class Index extends BaseController
 	            }
         	}
 
-	        if(getCart()) echo json_encode(getCart());
+	        echo json_encode(getCart() ? getCart() : []);
         }
     }
 }

@@ -227,7 +227,7 @@ function formatdate($date, $type=''){
 
 function getCart(){ 
 	$request 		= service('request');
-    $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['ip' =>$request->getIPAddress()] ;
+    $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['user_id' => 0, 'ip' =>$request->getIPAddress()] ;
 	$cart 		    = new \App\Models\Cart;
 	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], $condition);
 	if($result){
@@ -248,8 +248,8 @@ function getCart(){
 		$event_description 		= array_unique(array_column($result, 'eventdescription'))[0];
 	    $check_in       		= formatdate(array_unique(array_column($result, 'check_in'))[0], 1);
 	    $check_out      		= formatdate(array_unique(array_column($result, 'check_out'))[0], 1);
-	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0]);
-		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0]);
+	    $start          		= strtotime(array_unique(array_column($result, 'check_in'))[0].' 00:00:00');
+		$end            		= strtotime(array_unique(array_column($result, 'check_out'))[0].' 23:59:00');
 		$interval           	= ceil(abs($start - $end) / 86400);
 		$price          		= array_sum(array_column($result, 'price'));
 		
