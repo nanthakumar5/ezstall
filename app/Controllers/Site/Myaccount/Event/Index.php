@@ -102,6 +102,7 @@ class Index extends BaseController
 			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid]);
 			if($result){				
 				$data['occupied'] 	= getOccupied($id);
+				$data['reserved'] 	= getReserved($id);
 				$data['result'] 	= $result;
 			}else{
 				$this->session->setFlashdata('danger', 'No Record Found.');
@@ -133,6 +134,7 @@ class Index extends BaseController
     {  
 		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
 		$data['occupied'] 	= getOccupied($id); 
+		$data['reserved'] 	= getReserved($id);
 		
 		return view('site/myaccount/event/view',$data);
     }

@@ -74,6 +74,8 @@
 							$boxcolor  = 'green-box';
 							if(in_array($stalldata['id'], $occupied)){
 								$boxcolor  = 'red-box';
+							}elseif(in_array($stalldata['id'], array_keys($reserved))){
+								$boxcolor  = 'yellow-box';
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item">

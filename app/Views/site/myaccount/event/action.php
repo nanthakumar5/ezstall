@@ -229,6 +229,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	var barnIndex        		= '0';
 	var stallIndex       		= '0';
+	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
+	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
 	
 	$(function(){
@@ -366,6 +368,10 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}else{
 			var stallImages   	= '<?php echo base_url()?>/assets/images/upload.png';
 		}
+		
+		var availability = '<a href="javascript:void(0);" class="dash-stall-remove fs-7 stallremovebtn"><i class="fas fa-times text-white"></i></a>';
+		if($.inArray(stallId, occupied) !== -1)	availability = '<span class="red-box"></span>';
+		if($.inArray(stallId, reserved) !== -1)	availability = '<span class="yellow-box"></span>';
 
 		var data='\
 		<div class="row mb-2 dash-stall-base">\
@@ -387,7 +393,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			<div class="col-md-1 mb-3">\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" value="1">\
-				<a href="javascript:void(0);" class="dash-stall-remove fs-7 stallremovebtn"><i class="fas fa-times text-white"></i></a>\
+				'+availability+'\
 			</div>\
 		</div>\
 		';
