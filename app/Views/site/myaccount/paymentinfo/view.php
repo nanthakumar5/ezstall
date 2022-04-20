@@ -11,7 +11,7 @@
       $plan_start     = date("m-d-Y", strtotime($plan_start));
       $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
       $plan_end       = date("m-d-Y", strtotime($plan_end));
-      $created       = date("m-d-Y h:i A", strtotime($result['created']));
+      $created        = date("m-d-Y h:i A", strtotime($result['created']));
 ?>
 <div class="row">
   <div class="col">
@@ -93,7 +93,7 @@
       <p class="my-2">Payed Date</p>
     </div>
     <div class="col" align="left">
-      <p class="my-2"><?php echo date('m-d-Y h:i A', strtotime($created));?></p>
+      <p class="my-2"><?php echo $created; ?></p>
        <div class="col" align="left">
       <p class="my-2"></p>
     </div>
