@@ -15,7 +15,7 @@
 	</div>
 	<?php if($cartevent==1){?>
 		<div class="alert alert-success alert-dismissible fade show m-2" role="alert">
-			<?php echo 'For booking this event remove other event from the cart'; ?>
+			For booking this event remove other event from the cart <a href="<?php echo base_url().'/events/detail/'.$getcart['event_id']; ?>">Go To Event</a>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
 		</div>
 	<?php } ?>
@@ -211,6 +211,25 @@
 	$("#startdate, #enddate").change(function(){
 		var startdate 	= $("#startdate").val(); 
 		var enddate   	= $("#enddate").val(); 
+		
+		if(startdate!='' && enddate!=''){
+			$('.stallid').prop('checked', false).removeAttr('disabled');
+			$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
+			
+			ajax(
+				'<?php echo base_url()."/ajax/ajaxoccupied"; ?>',
+				{ eventid : '<?php echo $detail["id"]; ?>', checkin : startdate, checkout : enddate },
+				{
+					success : function(data){
+						$(data.success).each(function(i,v){ 
+							console.log(v);
+							$('.stallid[value='+v+']').prop('checked', true).attr('disabled', 'disabled');
+							$('.stallavailability[data-stallid='+v+']').removeClass("green-box").addClass("red-box");
+						});
+					}
+				}
+			)
+		}
 		
 		cart();
 		

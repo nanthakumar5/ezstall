@@ -37,6 +37,7 @@ $routes->setAutoRoute(true);
 
 // Ajax
 $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
+$routes->post('ajax/ajaxoccupied', 'Common\Ajax::ajaxoccupied');
 $routes->post('searchevents', 'Site\Event\Index::searchevents');
 
 // Cron

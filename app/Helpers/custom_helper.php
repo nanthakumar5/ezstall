@@ -275,9 +275,12 @@ function getCart(){
 	}
 }
 
-function getOccupied($eventid){
+function getOccupied($eventid, $extras=[]){
+	$condition 	= ['eventid' => $eventid];
+	if(count($extras) > 0) $condition 	= $condition+$extras;
+		
 	$booking	= new \App\Models\Booking;
-	$booking 	= $booking->getBooking('all', ['booking','barnstall'],['eventid' => $eventid]);
+	$booking 	= $booking->getBooking('all', ['booking','barnstall'], $condition);
 	
 	$occupied = [];
 	foreach ($booking as  $bookdata) {

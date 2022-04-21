@@ -45,7 +45,13 @@ class Cart extends BaseModel
 		if(isset($requestdata['barn_id'])) 				    	$query->where('c.barn_id', $requestdata['barn_id']);
 		if(isset($requestdata['stall_id'])) 				    $query->where('c.stall_id', $requestdata['stall_id']);
 		if(isset($requestdata['ip'])) 				    		$query->where('c.ip', $requestdata['ip']);
-
+		
+		if(isset($requestdata['checkin']) && isset($requestdata['checkout'])){
+			$query->groupStart();
+				$query->where("c.check_in BETWEEN '".date('Y-m-d', strtotime($requestdata['checkin']))."' AND '".date('Y-m-d', strtotime($requestdata['checkout']))."'");
+				$query->orWhere("c.check_out BETWEEN '".date('Y-m-d', strtotime($requestdata['checkin']))."' AND '".date('Y-m-d', strtotime($requestdata['checkout']))."'");
+			$query->groupEnd();
+		}
 		
 		if($type=='count'){
 			$result = $query->countAllResults();

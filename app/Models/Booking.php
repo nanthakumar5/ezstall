@@ -40,8 +40,9 @@ class Booking extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);
-		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', $requestdata['gtenddate']);
-		if(isset($requestdata['ltenddate'])) 			$query->where('e.end_date <', $requestdata['ltenddate']);
+		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', date('Y-m-d', strtotime($requestdata['gtenddate'])));
+		if(isset($requestdata['ltenddate'])) 			$query->where('e.end_date <', date('Y-m-d', strtotime($requestdata['ltenddate'])));
+		
 		if(isset($requestdata['userid'])) 				
 		{
 			$query->groupStart();
@@ -49,7 +50,14 @@ class Booking extends BaseModel
 				$query->orWhereIn('e.user_id', $requestdata['userid']);
 			$query->groupEnd();
 		} 		
-
+		
+		if(isset($requestdata['checkin']) && isset($requestdata['checkout'])){
+			$query->groupStart();
+				$query->where("b.check_in BETWEEN '".date('Y-m-d', strtotime($requestdata['checkin']))."' AND '".date('Y-m-d', strtotime($requestdata['checkout']))."'");
+				$query->orWhere("b.check_out BETWEEN '".date('Y-m-d', strtotime($requestdata['checkin']))."' AND '".date('Y-m-d', strtotime($requestdata['checkout']))."'");
+			$query->groupEnd();
+		}
+		
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
@@ -90,7 +98,7 @@ class Booking extends BaseModel
 			$query = $query->get();
 			if($type=='all'){
 				$result = $query->getResultArray();
-				
+				//echo $this->db->getLastQuery();
 				if(count($result) > 0){
 					if(in_array('barnstall', $querydata)){
 						foreach ($result as $key => $booking) {
