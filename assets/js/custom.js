@@ -305,6 +305,21 @@ function dateformat(selector, extras=[]){
 		return false;
 	});
 }
+
+function uidatepicker(selector, extras=[]){
+
+	var options = {};	
+	options['dateFormat'] 		= 'mm-dd-yy';
+	options['changeMonth'] 		= true;
+	options['changeYear'] 		= true;
+	
+	if(extras['mindate'])	options['minDate'] = extras['mindate'];
+	if(extras['maxdate'])	options['maxDate'] = extras['maxdate'];
+	if(extras['close'])		options['onClose'] = extras['close'];
+	
+	$(selector).datepicker(options);
+}
+
 $(".navbar-toggler.collapsed").click(function() {
     $(".navbar-collapse.collapse").slideToggle();
 });

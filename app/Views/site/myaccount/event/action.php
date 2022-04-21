@@ -234,8 +234,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
 	
 	$(function(){
-		$("#start_date").datepicker({dateFormat: 'mm-dd-yy'});
-        $("#end_date").datepicker({dateFormat: 'mm-dd-yy'});
+		uidatepicker("#start_date, #end_date");
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 		fileupload([".eventflyer_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
 		fileupload([".stallmap_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);

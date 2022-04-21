@@ -8,14 +8,13 @@
                 <img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
             </span>
             <span class="iconProperty">
-                <input type="text" name="start_date" id="search_start_date" placeholder="Check-In">
-									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
+                <input type="text" name="start_date" class="stall_search_start_date" placeholder="Check-In">
+				<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
                 
             </span>
             <span class="iconProperty">
-                <input type="text" name="end_date" id="search_end_date" placeholder="Check-Out">
-									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
-               
+                <input type="text" name="end_date" id="stall_search_end_date" placeholder="Check-Out">
+				<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
             </span>
             <input
                   type="text"
@@ -57,9 +56,8 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
     <script>
-        //dateformat('#search_start_date, #search_end_date');
-        $("#search_start_date").datepicker({dateFormat: 'mm-dd-yy'});
-        $("#search_end_date").datepicker({dateFormat: 'mm-dd-yy'});
+		uidatepicker(".stall_search_start_date, .stall_search_end_date");
+		
         $('#searchstalls').keypress(function (e) {
             if($(this).val()!='' && e.which == 13){
                 window.location.href = '<?php echo base_url(); ?>/stalls?q='+$(this).val();

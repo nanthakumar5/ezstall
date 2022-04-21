@@ -67,11 +67,11 @@
 									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="start_date" class="start_datepicker" placeholder="Check-In">
+									<input type="text" name="start_date" class="event_search_start_date" placeholder="Check-In">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="end_date" class="end_datepicker" placeholder="Check-Out">
+									<input type="text" name="end_date" class="event_search_end_date" placeholder="Check-Out">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<input type="text" name="stalls" placeholder="No.of stalls">
@@ -208,15 +208,14 @@
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<?php $this->renderSection('js') ?>
 		<script>
+			uidatepicker(".event_search_start_date, .event_search_end_date");
+			
 			var newselettertoast = '<?php echo $newselettertoast; ?>'; 
 			if(newselettertoast=='1'){ 
 				toastr.success('Your Subscription Successfully.', {timeOut: 5000});
 			}else if(newselettertoast=='0'){
 				toastr.success('Email ID already Subscribed..', {timeOut: 5000});
 			}
-			
-			$(".start_datepicker").datepicker({dateFormat: 'mm-dd-yy'});
-            $(".end_datepicker").datepicker({dateFormat: 'mm-dd-yy'});
 		</script>
 	</body>
 </html>

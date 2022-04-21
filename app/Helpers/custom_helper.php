@@ -57,43 +57,43 @@ function getSiteUserDetails($id='')
 
 function checkEvent($data)
 {
-		$userdetail 	= getSiteUserDetails();
-		$currentdate 	= date("Y-m-d");
-		$userid 		= isset($userdetail['id']) ? $userdetail['id'] : '';
-		$parentid 		= isset($userdetail['parent_id']) ? $userdetail['parent_id'] : '';
-		$usertype 		= isset($userdetail['type']) ? $userdetail['type'] : '';
-		$userplanend 	= isset($userdetail['subscriptionenddate']) ? date('Y-m-d', strtotime($userdetail['subscriptionenddate'])) : '';
-		$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
-		$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
+	$userdetail 	= getSiteUserDetails();
+	$currentdate 	= date("Y-m-d");
+	$userid 		= isset($userdetail['id']) ? $userdetail['id'] : '';
+	$parentid 		= isset($userdetail['parent_id']) ? $userdetail['parent_id'] : '';
+	$usertype 		= isset($userdetail['type']) ? $userdetail['type'] : '';
+	$userplanend 	= isset($userdetail['subscriptionenddate']) ? date('Y-m-d', strtotime($userdetail['subscriptionenddate'])) : '';
+	$strstartdate 	= date("Y-m-d", strtotime($data['start_date']));
+	$strenddate 	= date("Y-m-d", strtotime($data['end_date']));
 
-		if($currentdate >= $strstartdate && $currentdate <= $strenddate){
-			$btn = "Book now";
-			$status = "1";
-			if(in_array($usertype, [2, 3])){
-				if($userid == $data['user_id']){
-					$btn = "Book now";
-					$status = "1";
-				}elseif($usertype == 4 && $parentid == $data['user_id']){
-					$btn = "Book now";
-					$status = "1";
-				}else{
-					$btn = "Booking Not Available";
-					$status = "0";
-				}
-			}elseif($usertype==5 && $currentdate > $userplanend){
-				$btn = "Subscription Expired";
+	if($currentdate >= $strstartdate && $currentdate <= $strenddate){
+		$btn = "Book now";
+		$status = "1";
+		if(in_array($usertype, [2, 3])){
+			if($userid == $data['user_id']){
+				$btn = "Book now";
+				$status = "1";
+			}elseif($usertype == 4 && $parentid == $data['user_id']){
+				$btn = "Book now";
+				$status = "1";
+			}else{
+				$btn = "Booking Not Available";
 				$status = "0";
 			}
-		}elseif($currentdate <= $strstartdate && $currentdate <= $strenddate){
-			$btn = "Upcoming";
-			$status = "1";
-		}
-		else{
-			$btn = "Closed";
+		}elseif($usertype==5 && $currentdate > $userplanend){
+			$btn = "Subscription Expired";
 			$status = "0";
 		}
+	}elseif($currentdate <= $strstartdate && $currentdate <= $strenddate){
+		$btn = "Upcoming";
+		$status = "1";
+	}
+	else{
+		$btn = "Closed";
+		$status = "0";
+	}
 
-		return ['btn' => $btn, 'status' => $status];
+	return ['btn' => $btn, 'status' => $status];
 }
 
 function getStallManagerIDS($parentid)

@@ -132,24 +132,12 @@
 							
 							if($cartevent=='1' || $checkevent['status']=='0'){
 								$checkboxstatus = 'disabled';
-							}elseif(in_array($stalldata['id'], $occupied)){
-								$boxcolor  = 'red-box';
-								$checkboxstatus = 'disabled checked';
-							}elseif(in_array($stalldata['id'], array_keys($reserved))){
-								$boxcolor  = 'yellow-box';
-								$checkboxstatus = 'disabled checked';
-								foreach($reserved as $rkey => $rvalue){
-									if($rkey==$stalldata['id'] && $rvalue==$userid){
-										$checkboxstatus = 'checked';
-										break;
-									}
-								}
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item">
-							<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" data-barnid="'.$stalldata['barn_id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$checkboxstatus.'>
-							'.$stalldata['name'].'
-							<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
+								<input class="form-check-input stallid me-1" data-price="'.$stalldata['price'].'" data-eventid="'.$detail['id'].'" data-barnid="'.$stalldata['barn_id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox" '.$checkboxstatus.'>
+								'.$stalldata['name'].'
+								<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
 							</li>';
 						}
 						$tabcontent .= '</ul></div>';
@@ -181,10 +169,11 @@
 <?php $this->endSection() ?>
 <?php $this->section('js') ?>
 <script> 
-	var cartevent 		= '<?php echo $cartevent; ?>';
-	var checkevent 		= '<?php echo $checkevent["status"]; ?>';
-	var eventstartdate  = '<?php echo formatdate($detail["start_date"], 1); ?>';
-	var eventenddate 	= '<?php echo formatdate($detail["end_date"], 1); ?>';
+	var cartevent 			= '<?php echo $cartevent; ?>';
+	var checkevent 			= '<?php echo $checkevent["status"]; ?>';
+	var eventstartdate  	= '<?php echo $detail["start_date"] > date("Y-m-d") ? formatdate($detail["start_date"], 1) : 0; ?>';
+	var eventenddate 		= '<?php echo formatdate($detail["end_date"], 1); ?>';
+	var eventenddateadd 	= '<?php echo formatdate(date("Y-m-d", strtotime($detail["end_date"]." +1 day")), 1); ?>';
 
 	$(document).ready(function (){
 	 	if(cartevent == 0 ){
@@ -196,28 +185,21 @@
 		if(checkevent == 0){
  			$("#startdate, #enddate").attr('disabled', 'disabled');
 		}
-
-		$( "#startdate" ).datepicker({
-			dateFormat 	: 'mm-dd-yy', 
-			minDate		: eventstartdate, 
-			changeMonth	: true,
-			changeYear	: true,
-			onClose: function( selectedDate ) {
-				$("#enddate").datepicker( "option", "dateFormat", "mm-dd-yy");
-				$("#enddate").datepicker( "option", "minDate", selectedDate );
-			}
-		});
 		
-		$( "#enddate").datepicker({
-			dateFormat 	: 'mm-dd-yy', 
-			minDate		: eventenddate, 
-			changeMonth	: true,
-			changeYear	: true,
-			onClose: function( selectedDate ) {
-				$("#startdate").datepicker( "option", "dateFormat", "mm-dd-yy");
-				$("#startdate").datepicker( "option", "maxDate", selectedDate );
+		uidatepicker(
+			'#startdate', 
+			{ 
+				'mindate' 	: eventstartdate,
+				'maxdate' 	: eventenddate,
+				'close' 	: function(selecteddate){
+					var date = new Date(selecteddate)
+					date.setDate(date.getDate() + 1);
+					$("#enddate").datepicker( "option", "minDate", date );
+				}
 			}
-		}); 
+		);
+		
+		uidatepicker('#enddate', { 'mindate' : eventstartdate, 'maxdate' : eventenddateadd });
 	});
 
 	function checkdate(){
@@ -239,6 +221,13 @@
 			}
 		}
 	}
+	
+	$("#enddate").click(function(){
+		var startdate 	= $("#startdate").val();
+		if(startdate==''){
+			$("#startdate").focus();
+		}
+	});
 	
 	$("#startdate, #enddate").change(function(){
 		var startdate 	= $("#startdate").val(); 
