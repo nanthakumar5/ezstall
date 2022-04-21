@@ -7,11 +7,9 @@
       $mobile             = isset($result['mobile']) ? $result['mobile'] : '';
       $eventname          = isset($result['eventname']) ? $result['eventname'] : '';
       $stall              = isset($result['stall']) ? $result['stall'] : '';
-      $checkin            = isset($result['check_in']) ? $result['check_in'] : '';
-      $checkin            = date("m-d-Y", strtotime($checkin));
-      $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
-      $checkout           = date("m-d-Y", strtotime($checkout));
-      $dateofformat       = isset($result['created_at']) ? date('m-d-Y h:i A',strtotime($result['created_at'])) : '';
+      $checkin            = isset($result['check_in']) ? formatdate($result['check_in'], 1) : '';
+      $checkout           = isset($result['check_out']) ? formatdate($result['check_out'], 1) : '';
+      $createdat       	  = isset($result['created_at']) ? formatdate($result['created_at'], 2) : '';
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
   ?>
     <div class="row">
@@ -94,7 +92,7 @@
           <p class="my-2">Date of Booking</p>
         </div>
         <div class="col" align="left">
-          <p class="my-2"><?php echo $dateofformat;?></p>
+          <p class="my-2"><?php echo $createdat;?></p>
         </div>
       </div>
        <div class="row col-md-10 base-style">

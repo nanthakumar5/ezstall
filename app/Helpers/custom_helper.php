@@ -220,9 +220,14 @@ function getUsersList()
 }
 
 function formatdate($date, $type=''){
-    $date = explode('-', $date);
-    if($type=='') return $date[2].'-'.$date[0].'-'.$date[1]; //m-d-Y to Y-m-d
-    elseif($type=='1') return $date[1].'-'.$date[2].'-'.$date[0]; //Y-m-d to m-d-Y
+    if($type==''){
+		$date = explode('-', $date);
+		return $date[2].'-'.$date[0].'-'.$date[1]; //m-d-Y to Y-m-d
+	}elseif($type=='1'){
+		return date("m-d-Y", strtotime($date)); //Y-m-d to m-d-Y
+	}elseif($type=='2'){
+		return date('m-d-Y h:i A',strtotime($result['created_at'])); //Y-m-d H:i:s to m-d-Y h:i A
+	}
 }
 
 function getCart(){ 

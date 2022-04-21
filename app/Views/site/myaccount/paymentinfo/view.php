@@ -7,11 +7,9 @@
       $email          = isset($result['payer_email']) ? $result['payer_email'] : '';
       $type           = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
       $amount         = isset($result['amount']) ? $result['amount'] : '';
-      $plan_start     = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
-      $plan_start     = date("m-d-Y", strtotime($plan_start));
-      $plan_end       = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
-      $plan_end       = date("m-d-Y", strtotime($plan_end));
-      $created        = date("m-d-Y h:i A", strtotime($result['created']));
+      $plan_start     = isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
+      $plan_end       = isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
+      $created        = isset($result['created']) ? formatdate($result['created'], 2) : '';
 ?>
 <div class="row">
   <div class="col">

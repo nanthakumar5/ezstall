@@ -43,11 +43,11 @@
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> Start Date: </p>
 						<p class="ucDAte mb-0">
-							<?php  echo date("m-d-Y", strtotime($detail['start_date']));?></p>
+							<?php  echo formatdate($detail['start_date'], 1);?></p>
 					</span>
 					<span class="col-3 border-end">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> End Date: </p>
-						<p class="ucDAte mb-0"><?php echo date("m-d-Y", strtotime($detail['end_date'])); ?></p>
+						<p class="ucDAte mb-0"><?php echo formatdate($detail['end_date'], 1); ?></p>
 					</span>
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> Start Time: </p>

@@ -38,8 +38,8 @@
 		<section class="maxWidth marFiveRes eventPagePanel">
 			<?php if(count($list) > 0) { ?>  
 				<?php foreach ($list as $data) {  
-					$startdate 		= date("m-d-Y", strtotime($data['start_date']));
-					$enddate 		= date("m-d-Y", strtotime($data['end_date']));
+					$startdate 		= formatdate($data['start_date'], 1);
+					$enddate 		= formatdate($data['end_date'], 1);
 					$booknowBtn 	= checkEvent($data);
 				?>
 				<div class="ucEventInfo">
