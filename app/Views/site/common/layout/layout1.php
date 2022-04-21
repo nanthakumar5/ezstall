@@ -59,7 +59,7 @@
 			</div>
 			<?php if($segment1==''){ ?>
 				<div class="bannerItems">
-					<form method="get" autocomplete="off" action="<?php echo base_url();?>/events">
+					<form method="get" autocomplete="off" action="<?php echo base_url();?>/events" class="homeeventsearch">
 						<div class="infoPanel">
 							<span class="mx-auto infoSection">
 								<span class="iconProperty">
@@ -216,6 +216,14 @@
 			}else if(newselettertoast=='0'){
 				toastr.success('Email ID already Subscribed..', {timeOut: 5000});
 			}
+			
+			$('.homeeventsearch').submit(function (e) {
+				e.preventDefault();
+				var query = $(this).serializeArray().filter(function (i) {
+					return i.value;
+				});
+				window.location.href = $(this).attr('action') + (query ? '?' + $.param(query) : '');
+			});
 		</script>
 	</body>
 </html>
