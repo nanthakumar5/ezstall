@@ -36,7 +36,6 @@ class Cart extends BaseModel
 		if(in_array('barn', $querydata)) $query->join('barn b', 'b.id=c.barn_id', 'left');
 		if(in_array('stall', $querydata)) $query->join('stall s', 's.id=c.stall_id', 'left');
 
-
 		if(isset($extras['select'])) 					        $query->select($extras['select']);
 		else											        $query->select(implode(',', $select));
 		
@@ -84,8 +83,7 @@ class Cart extends BaseModel
 			$cart = $this->db->table('cart')->insert($request);
 			$insertid = $this->db->insertID();
 		}else{
-			if(isset($data['stall_ids'])) $this->db->table('cart')->whereIn('stall_id', $data['stall_ids'])->update($request);
-			else $this->db->table('cart')->where(['user_id' => 0])->update($request, ['ip' => $ip]);
+			$this->db->table('cart')->update($request, ['ip' => $ip, 'user_id' => 0]);
 			$insertid = $this->db->insertID();
 		}
 		
@@ -103,12 +101,12 @@ class Cart extends BaseModel
 		$this->db->transStart();
 		
 		$request = [];
-		if(isset($data['user_id']))            	$request['user_id']    	= $data['user_id'];
 		if(isset($data['ip']))            	 	$request['ip']    		= $data['ip'];
+		if(isset($data['user_id']))            	$request['user_id']    	= $data['user_id'];
 		if(isset($data['stall_id']))            $request['stall_id'] 	= $data['stall_id'];
 		
 		if(count($request)){
-			$cart 			= $this->db->table('cart')->delete($request);
+			$cart = $this->db->table('cart')->delete($request);
 		}
 
 		if(isset($cart) && $this->db->transStatus() === FALSE){

@@ -14,16 +14,17 @@ class Index extends BaseController
 
     public function action(){ 
     	if($this->request->getMethod()=='post'){ 
-    		$requestdata       	= $this->request->getPost();
 			$userid 			= getSiteUserID();
 			
-			if(!isset($requestdata['cart'])){
-	    		if($userid) $requestdata['user_id'] = $userid;
-	    		$requestdata['ip']  = $this->request->getIPAddress();
-    			
+    		$requestdata       		= $this->request->getPost();
+			$requestdata['ip']  	= $this->request->getIPAddress();
+			$requestdata['user_id'] = $userid ? $userid : 0;
+			
+			if(!isset($requestdata['cart'])){    			
     			if($requestdata['checked']==1){
 	    			$requestdata['startdate'] 		= formatdate($requestdata['startdate']);
     				$requestdata['enddate'] 		= formatdate($requestdata['enddate']);
+					
 	               	$result = $this->cart->action($requestdata);  
 	            }else{
 	            	$result = $this->cart->delete($requestdata);

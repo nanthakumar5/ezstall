@@ -213,6 +213,7 @@
 		var enddate   	= $("#enddate").val(); 
 		
 		if(startdate!='' && enddate!=''){
+			cart({checked : 0}); 
 			$('.stallid').prop('checked', false).removeAttr('disabled');
 			$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
 			
@@ -222,24 +223,12 @@
 				{
 					success : function(data){
 						$(data.success).each(function(i,v){ 
-							console.log(v);
 							$('.stallid[value='+v+']').prop('checked', true).attr('disabled', 'disabled');
 							$('.stallavailability[data-stallid='+v+']').removeClass("green-box").addClass("red-box");
 						});
 					}
 				}
 			)
-		}
-		
-		cart();
-		
-		if(startdate!='' && enddate!='' && $(".form-check-input:checked:not(:disabled)").length){
-			var stallids = [];
-			$(".form-check-input:checked:not(:disabled)").each(function(){
-				stallids.push($(this).val())
-			})
-			
-			cart({stall_ids : stallids, startdate : startdate, enddate : enddate, checked : 1, actionid : 1}); 
 		}
 	})
 
