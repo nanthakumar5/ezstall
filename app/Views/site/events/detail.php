@@ -3,7 +3,6 @@
 <?php 
 	$userid 	= getSiteUserID() ? getSiteUserID() : 0;
 	$getcart 	= getCart();
-	//echo '<pre>';print_r($getcart);
 	$cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 ?>
 <section class="maxWidth">
@@ -202,26 +201,6 @@
 		uidatepicker('#enddate', { 'mindate' : eventstartdate, 'maxdate' : eventenddateadd });
 	});
 
-	function checkdate(){
-		var startdate 	= $("#startdate").val(); 
-		var enddate   	= $("#enddate").val(); 
-		
-		if($(".form-check-input:checked").length > 0){			
-			if(startdate=='' || enddate==''){
-				if(startdate==''){
-					$("#startdate").focus();
-					toastr.warning('Please select the Check-In Date.', {timeOut: 5000});
-				}else if(enddate==''){
-					$("#enddate").focus();
-					toastr.warning('Please select the Check-Out Date.', {timeOut: 5000});
-				}
-				
-				$(".form-check-input:not(:disabled)").prop('checked', false);
-				return false;
-			}
-		}
-	}
-	
 	$("#enddate").click(function(){
 		var startdate 	= $("#startdate").val();
 		if(startdate==''){
@@ -263,6 +242,26 @@
 		}
 	});
 
+	function checkdate(){
+		var startdate 	= $("#startdate").val(); 
+		var enddate   	= $("#enddate").val(); 
+		
+		if($(".form-check-input:checked").length > 0){			
+			if(startdate=='' || enddate==''){
+				if(startdate==''){
+					$("#startdate").focus();
+					toastr.warning('Please select the Check-In Date.', {timeOut: 5000});
+				}else if(enddate==''){
+					$("#enddate").focus();
+					toastr.warning('Please select the Check-Out Date.', {timeOut: 5000});
+				}
+				
+				$(".form-check-input:not(:disabled)").prop('checked', false);
+				return false;
+			}
+		}
+	}
+	
 	function cart(data={cart:1}){	 	
 	    ajax(
 		    '<?php echo base_url()."/cart"; ?>',

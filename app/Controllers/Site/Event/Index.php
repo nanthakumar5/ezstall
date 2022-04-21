@@ -48,12 +48,7 @@ class Index extends BaseController
 	
 	public function detail($id)
     {  	
-    	$userid = getSiteUserID();
-
 		$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
-		
-		$data['occupied'] 	= getOccupied($id);
-		$data['reserved'] 	= getReserved($id);
 		$data['checkevent'] = checkEvent($event);
 		$data['detail']  	= $event;
 		

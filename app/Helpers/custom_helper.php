@@ -235,8 +235,8 @@ function getCart(){
     $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['user_id' => 0, 'ip' =>$request->getIPAddress()] ;
 	$cart 		    = new \App\Models\Cart;
 	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], $condition);
+	
 	if($result){
-
 		$barnstall = [];
 		foreach ($result as $res) {
 			$barnstall[] = [
