@@ -28,10 +28,9 @@ class Event extends BaseModel
 		if(isset($requestdata['location'])) 			$query->like('e.location', $requestdata['location']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', date('Y-m-d', strtotime($requestdata['start_date'])));
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', date('Y-m-d', strtotime($requestdata['end_date'])));
-		if(isset($requestdata['search_start_date'])) 	$query->where("'".$requestdata['search_start_date']."' BETWEEN e.start_date AND e.end_date");
-		if(isset($requestdata['search_end_date'])) 		$query->where("'".$requestdata['search_end_date']."' BETWEEN e.start_date AND e.end_date");
-		if(isset($requestdata['istart_date'])) 			$query->where('e.start_date <=', date('Y-m-d', strtotime($requestdata['istart_date'])));
-		if(isset($requestdata['iend_date'])) 			$query->where('e.end_date >=', date('Y-m-d', strtotime($requestdata['iend_date'])));
+		if(isset($requestdata['btw_start_date'])) 		$query->where("'".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date");
+		if(isset($requestdata['btw_end_date'])) 		$query->where("'".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date");
+		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', $requestdata['gtenddate']);
 		if(isset($requestdata['stalls'])) 				$query->where('e.stall_available >=', $requestdata['stalls']);
 			
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
@@ -61,6 +60,7 @@ class Event extends BaseModel
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);		
 		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby']);
+		if(isset($extras['limit'])) 	$query->limit($extras['limit']);
 
 		if($type=='count'){
 			$result = $query->countAllResults();

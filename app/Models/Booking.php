@@ -40,8 +40,8 @@ class Booking extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);
-		if(isset($requestdata['ienddate'])) 			$query->where('e.end_date >=', $requestdata['ienddate']);
-		if(isset($requestdata['oenddate'])) 			$query->where('e.end_date <', $requestdata['oenddate']);
+		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', $requestdata['gtenddate']);
+		if(isset($requestdata['ltenddate'])) 			$query->where('e.end_date <', $requestdata['ltenddate']);
 		if(isset($requestdata['userid'])) 				
 		{
 			$query->groupStart();
@@ -82,7 +82,7 @@ class Booking extends BaseModel
 		}
 		
 		if(isset($extras['groupby'])) 	$query->groupBy($extras['groupby']);
-		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby'], $extras['sort']);
+		if(isset($extras['orderby'])) 	$query->orderBy($extras['orderby']);
 
 		if($type=='count'){
 			$result = $query->countAllResults(); 

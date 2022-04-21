@@ -67,11 +67,11 @@
 									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="start_date" id="search_start_date" class="start_datepicker" placeholder="Check-In">
+									<input type="text" name="start_date" class="start_datepicker" placeholder="Check-In">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="end_date" class="end_datepicker" id="search_end_date" placeholder="Check-Out">
+									<input type="text" name="end_date" class="end_datepicker" placeholder="Check-Out">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<input type="text" name="stalls" placeholder="No.of stalls">

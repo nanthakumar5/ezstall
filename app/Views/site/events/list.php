@@ -36,45 +36,49 @@
 		  </span>
 		</div>
 		<section class="maxWidth marFiveRes eventPagePanel">
-			<?php foreach ($list as $data) {  
-				$startdate 		= date("m-d-Y", strtotime($data['start_date']));
-				$enddate 		= date("m-d-Y", strtotime($data['end_date']));
-				$booknowBtn 	= checkEvent($data);
-			?>
-			<div class="ucEventInfo">
-				<div class="EventFlex">
-					<span class="wi-50">
-						<div class="EventFlex leftdata">
-							<span class="wi-30">
-								<span class="ucimg">
-									<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
+			<?php if(count($list) > 0) { ?>  
+				<?php foreach ($list as $data) {  
+					$startdate 		= date("m-d-Y", strtotime($data['start_date']));
+					$enddate 		= date("m-d-Y", strtotime($data['end_date']));
+					$booknowBtn 	= checkEvent($data);
+				?>
+				<div class="ucEventInfo">
+					<div class="EventFlex">
+						<span class="wi-50">
+							<div class="EventFlex leftdata">
+								<span class="wi-30">
+									<span class="ucimg">
+										<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
+									</span>
 								</span>
-							</span>
-							<span class="wi-70"> 
-								<p class="topdate"> <?php echo $startdate; ?> - 
-									<?php echo $enddate; ?> -  
-									<?php echo $data['location']; ?></p>
-								<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
-							</span>
-						</div>
-					</span>
-					<div class="wi-50-2 justify-content-between">
-						<span class="m-left">
-							<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
-							<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
+								<span class="wi-70"> 
+									<p class="topdate"> <?php echo $startdate; ?> - 
+										<?php echo $enddate; ?> -  
+										<?php echo $data['location']; ?></p>
+									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a></h5>
+								</span>
+							</div>
 						</span>
-<!-- 						<span class="m-left">
-							<p><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-							<h6 class="ucprice">from $<?php //echo $data['rvspots_price'] ?> / night</h6>
-						</span> -->
-						<button class="ucEventBtn">
-							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn['btn'];?></a>
-						</button>
+						<div class="wi-50-2 justify-content-between">
+							<span class="m-left">
+								<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
+								<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
+							</span>
+	<!-- 						<span class="m-left">
+								<p><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
+								<h6 class="ucprice">from $<?php //echo $data['rvspots_price'] ?> / night</h6>
+							</span> -->
+							<button class="ucEventBtn">
+								<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn['btn'];?></a>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
-        <?php } ?>
-		<?php echo $pager; ?>
+			<?php } ?>
+			<?php echo $pager; ?>
+			<?php }else{ ?>
+				No Record Found
+			<?php } ?>
 		</section>
 	</section>
 <?php $this->endSection(); ?>

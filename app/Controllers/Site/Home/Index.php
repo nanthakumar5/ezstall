@@ -38,8 +38,8 @@ class Index extends BaseController
         }
 		
     	$date = date('Y-m-d');
-    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => $date], ['orderby' => 'start_date', 'sort'=>'ASC']);         
-    	$data['pastevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'end_date' => $date], ['orderby' => 'start_date', 'sort'=>'ASC']);
+    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => $date], ['orderby' => 'e.id desc', 'limit' => '5']);         
+    	$data['pastevents'] = $this->event->getEvent('all', ['event'],['status' => ['1'], 'end_date' => $date], ['orderby' => 'e.id desc', 'limit' => '5']);
         $data['banners'] = $this->cms->getCms('all', ['cms'], ['status' => ['1'], 'type' => ['3']]);
     	
      	return view('site/home/index', $data);

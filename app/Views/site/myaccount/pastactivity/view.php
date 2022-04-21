@@ -12,7 +12,7 @@
       $checkout           = isset($result['check_out']) ? $result['check_out'] : '';
       $checkout           = date("m-d-Y", strtotime($checkout));
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
-      $dateofformat       = isset($result['created_at']) ? date('m-d-Y h:i A',strtotime($result['created_at'])) : '';
+      $created       	  = isset($result['created_at']) ? date('m-d-Y h:i A',strtotime($result['created_at'])) : '';
 
   ?>
     <div class="row">
@@ -103,7 +103,7 @@
           <p class="my-2">Date of Booking</p>
         </div>
         <div class="col" align="left">
-          <p class="my-2"><?php echo $dateofformat;?></p>
+          <p class="my-2"><?php echo $created; ?></p>
         </div>
       </div>
     </section>

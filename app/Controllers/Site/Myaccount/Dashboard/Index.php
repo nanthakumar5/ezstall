@@ -28,7 +28,7 @@ class Index extends BaseController
 		$allids 			= getStallManagerIDS($userid);
 		array_push($allids, $userid);
       	
-      	$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'istart_date' => $date, 'iend_date' => $date]);
+      	$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'gtenddate' => $date]);
   		foreach ($currentreservation as $event) { 
   			foreach ($event['barn'] as $barn) {
 				$countcurrentstall += count(array_column($barn['stall'], 'id'));
@@ -43,7 +43,7 @@ class Index extends BaseController
 			}
       	}
 		
-      	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids, 'oenddate' => $date]);
+      	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids, 'ltenddate' => $date]);
 		foreach ($pastevent as $event) {  
   			$countpastevent[] = $event['event_id'];
   			$barnstall = $event['barnstall'];

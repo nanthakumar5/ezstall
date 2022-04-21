@@ -25,7 +25,7 @@ class Index extends BaseController
 		array_push($allids, $userid);
 
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid' => $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids,'oenddate' => $date, 'start' => $offset, 'length' => $perpage]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids,'ltenddate' => $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 
