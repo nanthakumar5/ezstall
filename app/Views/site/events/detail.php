@@ -268,7 +268,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 		if($(this).is(':checked')){
 			cart({stall_id : stallid, event_id : eventid, barn_id : barnid, price : price, startdate : startdate, enddate : enddate, checked : 1, actionid : ''});
 		}else{
-			$('.stallavailability[data-stallid='+stall_id+']').removeClass("yellow-box").addClass("green-box");
+			$('.stallavailability[data-stallid='+stallid+']').removeClass("yellow-box").addClass("green-box");
 			cart({stall_id : stallid, checked : 0}); 
 		}
 	});
