@@ -126,7 +126,7 @@ $barnstall = $cartdetail['barnstall'];
 
            <div class="checkout-complete-btn">
             <span>
-              <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent"> I confirm that I have read and accepted the <span class="redcolor">Agreement.</span></span>
+              <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent">I have read and accepted the <span class="redcolor">Terms and Conditions.</span></span>
               <button class="payment-btn " type="submit">Complete Payment</button>
             </div>
           </form>

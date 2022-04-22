@@ -2,8 +2,9 @@
 <?php $this->section('content') ?>
 <div class="welcome-content mb-5">
 	<h3 class="fw-bold d-flex flex-wrap">Welcome to EZStall, <p class="welcome-user"><?php echo $userdetail['name']; ?></p></h3>
+	
 	<p class="c-5">
-		We've glad you've decided to join us a EZStall Producer.
+		<?php echo "Thank you for begin an EZ stall"." ".$usertype[$userdetail['type']]?>
 	</p>
 	<div class="col-md-12 mt-4 p-4 bg-white rounded-sm">
 		<h5 class="font-w-600">Current Reservation</h5>

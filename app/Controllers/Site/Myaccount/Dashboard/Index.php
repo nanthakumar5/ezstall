@@ -24,6 +24,7 @@ class Index extends BaseController
      	$datetime			= date('Y-m-d H:i:s');
      	$date				= date('Y-m-d');
     	$userdetail 		= getSiteUserDetails();
+    	$data['usertype'] = $this->config->usertype;
     	$userid 			= $userdetail['id'];
 		$allids 			= getStallManagerIDS($userid);
 		array_push($allids, $userid);

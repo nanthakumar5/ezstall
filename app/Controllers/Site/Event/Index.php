@@ -30,7 +30,7 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
-		if($this->request->getGet('location')!="")   		$searchdata['location']    			= $this->request->getGet('location');
+		if($this->request->getGet('location')!="")   		$searchdata['llocation']    			= $this->request->getGet('location');
 		if($this->request->getGet('stalls')!="")   	 		$searchdata['stalls']    			= $this->request->getGet('stalls');
 		if($this->request->getGet('start_date')!="")   	 	$searchdata['btw_start_date']    	= formatdate($this->request->getGet('start_date'));
 		if($this->request->getGet('end_date')!="")   	 	$searchdata['btw_end_date']    		= formatdate($this->request->getGet('end_date'));

@@ -4,6 +4,7 @@ namespace App\Controllers\Site\Myaccount\Event;
 use App\Controllers\BaseController;
 use App\Models\Users;
 use App\Models\Event;
+use App\Models\Booking;
 use App\Models\Stripe;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -15,6 +16,7 @@ class Index extends BaseController
 		$this->event = new Event();
 		$this->users = new Users();
 		$this->stripe = new Stripe();
+		$this->booking = new Booking();
 	}
     
     public function index()
@@ -166,8 +168,8 @@ class Index extends BaseController
 		$sheet->setCellValue('D' . $rows, $data['mobile']);
 		$sheet->setCellValue('E' . $rows, $data['start_date']);
 		$sheet->setCellValue('F' . $rows, $data['end_date']);
-		$sheet->setCellValue('G' . $rows, $data['start_time']);
-		$sheet->setCellValue('H' . $rows, $data['end_time']);
+		$sheet->setCellValue('G' . $rows, formattime($data['start_time']));
+		$sheet->setCellValue('H' . $rows, formattime($data['end_time']));
 		$sheet->setCellValue('I' . $rows, $data['stalls_price']);
 		$sheet->setCellValue('J' . $rows, $data['rvspots_price']);
         

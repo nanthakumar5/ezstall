@@ -26,6 +26,7 @@ class Event extends BaseModel
 		if(isset($requestdata['userid'])) 				$query->where('e.user_id', $requestdata['userid']);
 		if(isset($requestdata['userids'])) 				$query->whereIn('e.user_id', $requestdata['userids']);
 		if(isset($requestdata['location'])) 			$query->like('e.location', $requestdata['location']);
+		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', date('Y-m-d', strtotime($requestdata['start_date'])));
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', date('Y-m-d', strtotime($requestdata['end_date'])));
 		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', $requestdata['gtenddate']);

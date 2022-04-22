@@ -51,11 +51,11 @@
 					</span>
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> Start Time: </p>
-						<p class="ucDAte mb-0"> after <?php echo $detail['start_time'] ?></p>
+						<p class="ucDAte mb-0"> after <?php echo formattime($detail['start_time']) ?></p>
 					</span>
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> End Time:</p>
-						<p class="ucDAte mb-0">by <?php echo $detail['end_time'] ?></p>
+						<p class="ucDAte mb-0">by <?php echo formattime($detail['end_time']) ?></p>
 					</span>
 				</div> 
 			</div>

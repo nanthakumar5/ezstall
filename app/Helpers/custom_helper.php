@@ -230,6 +230,16 @@ function formatdate($date, $type=''){
 	}
 }
 
+function formattime($time, $type=''){
+    if($type==''){
+    	return date('h:i:s', strtotime($time)); //24 hours to 12 hours
+	}elseif($type=='1'){
+		return date("H:i:s", strtotime($time));; //12 hours to 24 hours
+	}elseif($type=='2'){
+		return date("H:i:s A", strtotime($time));; //12 hours to 24 hours A
+	}
+}
+
 function getCart(){ 
 	$request 		= service('request');
     $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['user_id' => 0, 'ip' =>$request->getIPAddress()] ;

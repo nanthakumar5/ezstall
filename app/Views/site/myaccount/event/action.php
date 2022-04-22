@@ -207,7 +207,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					</div>	
 					<div class="col-md-12 my-2">
 						<div class="form-group">
-							<label>Total Number of Columns</label>
+							<label>Total Number of Stalls</label>
 							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
 						</div>
 					</div>
