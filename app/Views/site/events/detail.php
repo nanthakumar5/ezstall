@@ -215,16 +215,18 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 	});
 
 	$("#startdate, #enddate").change(function(){
-		var startdate 	= $("#startdate").val(); 
-		var enddate   	= $("#enddate").val(); 
+		setTimeout(function(){
+			var startdate 	= $("#startdate").val(); 
+			var enddate   	= $("#enddate").val(); 
 
-		if(startdate!='' && enddate!=''){
-			cart({checked : 0}); 
-			$('.stallid').prop('checked', false).removeAttr('disabled');
-			$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
-			
-			occupiedreserved(startdate, enddate);
-		}
+			if(startdate!='' && enddate!=''){
+				cart({checked : 0}); 
+				$('.stallid').prop('checked', false).removeAttr('disabled');
+				$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
+				
+				occupiedreserved(startdate, enddate);
+			}
+		}, 100);
 	})
 	
 	function occupiedreserved(startdate, enddate){
