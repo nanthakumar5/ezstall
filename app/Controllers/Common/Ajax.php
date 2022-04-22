@@ -30,4 +30,14 @@ class Ajax extends BaseController
 		
 		echo json_encode(['success' => $result]);
 	}
+	
+	public function ajaxreserved()
+	{
+		$eventid = $this->request->getPost('eventid');
+		$checkin = formatdate($this->request->getPost('checkin'));
+		$checkout = formatdate($this->request->getPost('checkout'));
+		$result = getReserved($eventid, ['checkin' => $checkin, 'checkout' => $checkout]);
+		
+		echo json_encode(['success' => $result]);
+	}
 }

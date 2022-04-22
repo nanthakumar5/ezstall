@@ -291,9 +291,12 @@ function getOccupied($eventid, $extras=[]){
 	return (count($occupied) > 0) ? explode(',', implode(',', $occupied)) : [];
 }
 
-function getReserved($eventid){
+function getReserved($eventid, $extras=[]){
+	$condition 	= ['eventid' => $eventid];
+	if(count($extras) > 0) $condition 	= $condition+$extras;
+	
 	$cart	= new \App\Models\Cart;
-	$cart	= $cart->getCart('all', ['cart'], ['event_id' => $eventid]);
+	$cart	= $cart->getCart('all', ['cart'], $condition);
 	
 	return (count($cart) > 0) ? array_column($cart, 'user_id', 'stall_id') : [];
 }
