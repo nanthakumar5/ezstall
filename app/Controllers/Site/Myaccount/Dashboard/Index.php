@@ -29,7 +29,7 @@ class Index extends BaseController
 		$allids 			= getStallManagerIDS($userid);
 		array_push($allids, $userid);
       	
-      	$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'gtenddate' => $date]);
+      	$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'gtenddate' => $date, 'type' => '1']);
   		foreach ($currentreservation as $event) { 
   			foreach ($event['barn'] as $barn) {
 				$countcurrentstall += count(array_column($barn['stall'], 'id'));
@@ -53,7 +53,7 @@ class Index extends BaseController
       	}
 
 		$data['monthlyincome'] = $this->booking->getBooking('all', ['booking', 'event', 'payment'],['userid'=> $allids], ['groupby' => 'DATE_FORMAT(b.created_at, "%M %Y")', 'select' => 'SUM(p.amount) as paymentamount, DATE_FORMAT(b.created_at, "%M %Y") AS month']);
-    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userids' => $allids, 'start_date' => $date, 'status' => ['1']]);
+    	$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userids' => $allids, 'start_date' => $date, 'status' => ['1'], 'type' => '1']);
       	
       	$data['userdetail'] 			= $userdetail;
       	$data['countcurrentstall'] 		= $countcurrentstall; 

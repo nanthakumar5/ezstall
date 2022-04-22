@@ -63,7 +63,7 @@
 						<div class="infoPanel">
 							<span class="mx-auto infoSection">
 								<span class="iconProperty">
-									<input type="text" name="location" placeholder="Location">
+									<input type="text" name="llocation" placeholder="Location">
 									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 								</span>
 								<span class="iconProperty">

@@ -66,8 +66,8 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 		
-		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid]);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid], ['orderby' => 'e.id desc']);
+		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1']);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid, 'type' => '1'], ['orderby' => 'e.id desc']);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
@@ -87,7 +87,7 @@ class Index extends BaseController
 		$checksubscriptionproducer = $checksubscription['producer'];
 		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
 
-		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid]);
+		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '1']);
 		
 		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
@@ -101,7 +101,7 @@ class Index extends BaseController
 		}
 		
 		if($id!=''){
-			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid]);
+			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid, 'type' => '1']);
 			if($result){				
 				$data['occupied'] 	= getOccupied($id);
 				$data['reserved'] 	= getReserved($id);
@@ -134,7 +134,7 @@ class Index extends BaseController
 	
 	public function view($id)
     {  
-		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
 		$data['occupied'] 	= getOccupied($id); 
 		$data['reserved'] 	= getReserved($id);
 		
@@ -143,7 +143,7 @@ class Index extends BaseController
 	
     public function export($id)
     {	
-    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id]);
+    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
 		$occupied 	= getOccupied($id); 
 
@@ -187,7 +187,7 @@ class Index extends BaseController
 		}
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="GeneratedFile.xlsx"');
+		header('Content-Disposition: attachment;filename="'.$data['name'].'.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$writer = new Xlsx($spreadsheet);
