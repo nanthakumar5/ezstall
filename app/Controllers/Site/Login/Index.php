@@ -21,7 +21,7 @@ class Index extends BaseController
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
 			
-			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['2', '3', '4', '5'],'status' => ['0','1']]);
+			$result = $this->users->getUsers('row', ['users'], ['email' => $email,'password' => $password, 'type' => ['2', '3', '4', '5'],'status' => ['1','2']]);
 			if($result){
 				if($result['status']=='1'){ 
 					if($result['email_status']=='0'){
@@ -32,7 +32,7 @@ class Index extends BaseController
 						$this->session->set('sitesession', ['userid' => $result['id']]);
 						return redirect()->to(base_url().'/myaccount/dashboard'); 
 					}
-				}elseif($result['status']=='0'){
+				}elseif($result['status']=='2'){
 					$this->session->setFlashdata('danger', 'User is inactive, contact admin.');
 					return redirect()->to(base_url().'/login'); 
 				} else {
