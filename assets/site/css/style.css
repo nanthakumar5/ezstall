@@ -1660,7 +1660,7 @@ span.num_btn button {
 
 .barn-nav .nav-tabs .nav-link {
     padding: 7px 20px !important;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd !important;
     margin-right: 10px;
     FONT-WEIGHT: 600;
     font-size: 18px !important;
@@ -3862,13 +3862,13 @@ a.ui-button:active,
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
     border: none !important;
-    background: #e00000 !important;
+    background: #424242 !important;
     font-weight: normal;
     color: #fff !important;
 }
 
 .ui-datepicker .ui-datepicker-prev {
-    margin: 7px;
+    margin: 9px 7px 7px 7px;
 }
 
 .ui-icon-circle-triangle-e {
@@ -3876,7 +3876,7 @@ a.ui-button:active,
 }
 
 .ui-datepicker .ui-datepicker-next {
-    margin: 7px;
+    margin: 9px 7px 7px 7px;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
