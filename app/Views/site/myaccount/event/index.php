@@ -14,6 +14,8 @@ $currentdate 	= date("Y-m-d");
 		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
 	<?php } ?>
 	<?php if(count($list) > 0){ ?>
+		<?php if($usertype != '2'){?>
+
 		<?php foreach ($list as $data) {  ?>
 			<div class="dashboard-box mt-4">
 				<div class="row align-items-center px-2">
@@ -64,8 +66,9 @@ $currentdate 	= date("Y-m-d");
 
 				</div>
 			</div>
-		<?php } ?>
-	<?php }else{ ?>
+			<?php } ?>
+	<?php } ?>
+	<?php } else{ ?>
 		<p class="mt-3">No Record Found</p>
 	<?php } ?>
 	<?php echo $pager; ?>

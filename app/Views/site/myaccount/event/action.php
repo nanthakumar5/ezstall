@@ -24,6 +24,8 @@ $bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $stall_available        = isset($result['stall_available']) ? $result['stall_available'] : '';
 $pageaction 			= $id=='' ? 'Add' : 'Update';
+$usertype               = $usertype ? $usertype : '';
+
 ?>
 
 
@@ -49,6 +51,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
 						</div>
+						<?php if($usertype != '2'){?>
 						<div class="col-md-6 my-2">
 							<div class="form-group">
 								<label>Location</label>								
@@ -143,7 +146,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							</div>
 						</div>	
 					</div>
-					
+					<?php } ?>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
 							<div class="col-md-2">
@@ -163,7 +166,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
+					<?php if($usertype == '3'){ ?>
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
+					<?php } ?>
+					<?php if($usertype == '2'){?>
+						<button class="btn btn-primary facilitypayment"  type="button" class="btn btn-primary">Submit</button>
+					<?php } ?>
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
 				</div>
@@ -224,6 +232,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
+<?php echo $stripe; ?>
+
 <script>
 	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
 	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
@@ -286,7 +296,25 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			});
 		}
 	});
+	$('.facilitypayment').click(function(){
+			if($('#form').valid()){
+			  $('#stripeFormModal').modal('show');
+			}
+		})
 
+		$('#stripeFormModal').on('shown.bs.modal', function () {
+			var eventdata = [];
+			var formdata = $('#form').serializeArray();
+			$.each(formdata, function(i, field){
+			    eventdata.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
+           });
+		$('.stripeextra').remove();
+        var price = $(document).find('.dash-stall-base').length * 20;
+		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
+
+		$('.stripepaybutton').append(data);
+	    })
+		
 	$('#eventSubmit').click(function(e){
 		var totalstall 		= $('.dash-stall-base').length
 		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);

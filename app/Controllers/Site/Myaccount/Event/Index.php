@@ -80,7 +80,9 @@ class Index extends BaseController
 
     public function action($id='')
 	{   
-		$userid = getSiteUserID();
+		$userdetails 	= getSiteUserDetails();
+		$userid         = $userdetails['id'];
+		$usertype       = $userdetails['type'];
 		$checksubscription = checkSubscription();
 		$checksubscriptiontype = $checksubscription['type'];
 		$checksubscriptionfacility = $checksubscription['facility'];
@@ -114,6 +116,9 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post'){
 			$requestData = $this->request->getPost();
+			$paymentresult= $this->stripe->stripepayment($requestData);
+			$requestData['type'] = $userdetails['type']=='2' ? '2' :'1';
+
 			$requestData['start_date'] 		= formatdate($requestData['start_date']);
     		$requestData['end_date'] 		= formatdate($requestData['end_date']);
             $result = $this->event->action($requestData);
@@ -128,7 +133,9 @@ class Index extends BaseController
         } 
 		
 		$data['userid'] = $userid;
+		$data['usertype'] = $usertype;
 		$data['statuslist'] = $this->config->status1;
+		$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
 		return view('site/myaccount/event/action', $data);
 	}
 	

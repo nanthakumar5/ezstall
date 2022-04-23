@@ -9,9 +9,8 @@
 	<?php  	 
 		$currentdate 	  		= date("Y-m-d"); 
 		$subscriptionenddate	= $userdetail['subscriptionenddate'];
-		$subscriptiondate 		= date("Y-m-d", strtotime($subscriptionenddate));
+		$subscriptiondate 		= $subscriptionenddate != NULL ? date("Y-m-d", strtotime($subscriptionenddate)) : '';
 	?>		
-
 	<?php if($subscriptionenddate=='' || $subscriptiondate=='0000-00-00' || $subscriptiondate < $currentdate){ ?>			
 		<?php if($subscriptionenddate!='' && $subscriptiondate < $currentdate){ ?>
 			<div class="">
