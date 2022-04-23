@@ -3880,3 +3880,7 @@ a.ui-button:active,
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.barntab li a p{
+	color : white;
+}

@@ -51,114 +51,114 @@ $usertype               = $usertype ? $usertype : '';
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
 						</div>
-						<?php if($usertype != '2'){?>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>Location</label>								
-								<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>Mobile</label>								
-								<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>Start Date</label>	
-								<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>End Date</label>	
-								<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>Start Time</label>	
-								<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>End Time</label>	
-								<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
-							</div>
-						</div>
-						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>Stalls Price</label>								
-								<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
-							</div>
-						</div>
-<!-- 						<div class="col-md-6 my-2">
-							<div class="form-group">
-								<label>RV Spots Price</label>								
-								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php //echo $rvspots_price;?>">								
-							</div>
-						</div> -->
-						<div class="col-md-12 my-2">
-							<div class="form-group">
-								<label>Event Description</label>
-								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
-							</div>
-						</div>
-						<div class="col-md-4 my-2">
-							<div class="form-group">
-								<label>Event Image</label>			
-								<div>
-									<a href="<?php echo $image[1];?>" target="_blank">
-										<img src="<?php echo $image[1];?>" class="image_source" width="100">
-									</a>
+						<?php if($usertype == '3'){ ?>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Location</label>								
+									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 								</div>
-								<input type="file" id="file" name="file" class="image_file">
-								<span class="image_msg messagenotify"></span>
-								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
 							</div>
-						</div>							
-						<div class="col-md-4 my-2">
-							<div class="form-group">
-								<label>Event Flyer</label>			
-								<div>
-									<a href="<?php echo $eventflyer[1];?>" target="_blank">
-										<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
-									</a>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Mobile</label>								
+									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 								</div>
-								<input type="file" id="" name="" class="eventflyer_file">
-								<span class="eventflyer_msg messagenotify"></span>
-								<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
 							</div>
-						</div>
-						<div class="col-md-4 my-2">
-							<div class="form-group">
-								<label>Stall Map (optional)</label>			
-								<div>
-									<a href="<?php echo $stallmap[1];?>" target="_blank">
-										<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
-									</a>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Start Date</label>	
+									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 								</div>
-								<input type="file" class="stallmap_file">
-								<span class="stallmap_msg messagenotify"></span>
-								<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
 							</div>
-						</div>	
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>End Date</label>	
+									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
+								</div>
+							</div>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Start Time</label>	
+									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
+								</div>
+							</div>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>End Time</label>	
+									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
+								</div>
+							</div>
+							<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>Stalls Price</label>								
+									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
+								</div>
+							</div>
+	<!-- 						<div class="col-md-6 my-2">
+								<div class="form-group">
+									<label>RV Spots Price</label>								
+									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php //echo $rvspots_price;?>">								
+								</div>
+							</div> -->
+							<div class="col-md-12 my-2">
+								<div class="form-group">
+									<label>Event Description</label>
+									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
+								</div>
+							</div>
+							<div class="col-md-4 my-2">
+								<div class="form-group">
+									<label>Event Image</label>			
+									<div>
+										<a href="<?php echo $image[1];?>" target="_blank">
+											<img src="<?php echo $image[1];?>" class="image_source" width="100">
+										</a>
+									</div>
+									<input type="file" id="file" name="file" class="image_file">
+									<span class="image_msg messagenotify"></span>
+									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+								</div>
+							</div>							
+							<div class="col-md-4 my-2">
+								<div class="form-group">
+									<label>Event Flyer</label>			
+									<div>
+										<a href="<?php echo $eventflyer[1];?>" target="_blank">
+											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
+										</a>
+									</div>
+									<input type="file" id="" name="" class="eventflyer_file">
+									<span class="eventflyer_msg messagenotify"></span>
+									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
+								</div>
+							</div>
+							<div class="col-md-4 my-2">
+								<div class="form-group">
+									<label>Stall Map (optional)</label>			
+									<div>
+										<a href="<?php echo $stallmap[1];?>" target="_blank">
+											<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
+										</a>
+									</div>
+									<input type="file" class="stallmap_file">
+									<span class="stallmap_msg messagenotify"></span>
+									<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+								</div>
+							</div>	
+						<?php } ?>
 					</div>
-					<?php } ?>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
 							<div class="col-md-2">
 								<p class="fs-2 fw-bold mb-0">Barn</p>
 							</div>
 							<div class="col-md-10 t-right p-0">
+								<input type="hidden" value="" name="barnvalidation" id="barnvalidation">
 								<a href="javascript:void(0);" class="btn btn-info addbulkbarnbtn">Add Bulk Barn</a>
 								<input type="file" class="bulkbarnfile" style="display:none;">
 								<button class="btn-stall barnbtn">Add Barn</button>
 							</div>
 						</div>
-						<input type="hidden" value="" name="barnvalidation" class="barnvalidation">
 						<ul class="nav nav-pills flex-column col-md-3 barntab" role="tablist"></ul>
 						<div class="tab-content col-md-9 stalltab"></div>
 					</div>
@@ -166,12 +166,12 @@ $usertype               = $usertype ? $usertype : '';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
-					<?php if($usertype == '3'){ ?>
-						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
-					<?php } ?>
-					<?php if($usertype == '2'){?>
-						<button class="btn btn-primary facilitypayment"  type="button" class="btn btn-primary">Submit</button>
-					<?php } ?>
+						<?php if($usertype == '3'){ ?>
+							<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
+						<?php } ?>
+						<?php if($usertype == '2'){?>
+							<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
+						<?php } ?>
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
 				</div>
@@ -233,7 +233,6 @@ $usertype               = $usertype ? $usertype : '';
 
 <?php $this->section('js') ?>
 <?php echo $stripe; ?>
-
 <script>
 	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
 	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
@@ -285,6 +284,7 @@ $usertype               = $usertype ? $usertype : '';
 					required 	: true
 				}
 			},
+			{},
 			{
 				ignore : []
 			}
@@ -296,30 +296,13 @@ $usertype               = $usertype ? $usertype : '';
 			});
 		}
 	});
-	$('.facilitypayment').click(function(){
-			if($('#form').valid()){
-			  $('#stripeFormModal').modal('show');
-			}
-		})
-
-		$('#stripeFormModal').on('shown.bs.modal', function () {
-			var eventdata = [];
-			var formdata = $('#form').serializeArray();
-			$.each(formdata, function(i, field){
-			    eventdata.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
-           });
-		$('.stripeextra').remove();
-        var price = $(document).find('.dash-stall-base').length * 20;
-		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
-
-		$('.stripepaybutton').append(data);
-	    })
-		
+	
 	$('#eventSubmit').click(function(e){
 		var totalstall 		= $('.dash-stall-base').length
 		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);
-		
-		$('#stall_available').val(result);
+		$('#stall_available').val(result);	
+
+		tabvalidation();
 	});
 	
 	$(document).on('click', '.barntab li a.active', function(e){ 
@@ -352,6 +335,7 @@ $usertype               = $usertype ? $usertype : '';
 		var stalltab = '\
 			<div id="barnstall'+barnIndex+'" class="container tab-pane p-0 mb-3 barn_wrapper_'+barnIndex+' '+activeclass+'">\
 				<div class="col-md-10 p-0 my-3 stallbtns">\
+					<input type="hidden" value="" name="stallvalidation'+barnIndex+'" id="stallvalidation'+barnIndex+'">\
 					<button class="btn-stall stallbtn" data-barnIndex="'+barnIndex+'" >Add Stall</button>\
 					<button class="btn-stall" data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add Bulk Stall</button>\
 					<button class="btn-stall barnremovebtn">Remove Barn and Stall</button>\
@@ -361,10 +345,11 @@ $usertype               = $usertype ? $usertype : '';
 
 		$('.barntab').append(barntab);
 		$('.stalltab').append(stalltab);
-		$('.barnvalidation').val('1');
-		$('.barnvalidation').valid();
+		$('#barnvalidation').val('1');
+		$('#barnvalidation').valid();
 
 		$(document).find('#barn'+barnIndex+'name').rules("add", {required: true, messages: {required: "Barn Name field is required."}});
+		$(document).find('#stallvalidation'+barnIndex).rules("add", {required: true, messages: {required: "Stall field is required."}});
 
 		if(stall.length > 0){
 			$(stall).each(function(i, v){
@@ -396,7 +381,7 @@ $usertype               = $usertype ? $usertype : '';
 			var stallImages   	= '<?php echo base_url()?>/assets/images/upload.png';
 		}
 		
-		var availability = '<a href="javascript:void(0);" class="dash-stall-remove fs-7 stallremovebtn"><i class="fas fa-times text-white"></i></a>';
+		var availability = '<a href="javascript:void(0);" class="dash-stall-remove fs-7 stallremovebtn" data-barnIndex="'+barnIndex+'"><i class="fas fa-times text-white"></i></a>';
 		if($.inArray(stallId, occupied) !== -1)	availability = '<span class="red-box"></span>';
 		if($.inArray(stallId, reserved) !== -1)	availability = '<span class="yellow-box"></span>';
 
@@ -424,7 +409,10 @@ $usertype               = $usertype ? $usertype : '';
 			</div>\
 		</div>\
 		';
-
+		
+		$(document).find('#stallvalidation'+barnIndex).val('1');
+		$(document).find('#stallvalidation'+barnIndex).valid();
+		
 		$(document).find('.barn_wrapper_'+barnIndex).find('.stallbtns').before(data); 
 
 		fileupload([".stall_image_file"+stallIndex], [".stall_image_input"+stallIndex, ".stall_image_source"+stallIndex, ".stall_image_msg"+stallIndex]);
@@ -440,6 +428,7 @@ $usertype               = $usertype ? $usertype : '';
 	
 	$(document).on('click', function(){
 		if (!$(event.target).is(".barnnametextbox, .barnametext")){
+			$(document).find('.requiredtab').show();
 			$(document).find('.barnametext').show();
 			$(document).find('.barnnametextbox').hide();
 		}
@@ -449,9 +438,11 @@ $usertype               = $usertype ? $usertype : '';
 		setTimeout(function () {
 			$(document).find('.barntab li').each(function(){
 				if($(this).find('.tab-link').hasClass('active')){
+					$(this).find('.tab-link .requiredtab').hide();
 					$(this).find('.tab-link .barnametext').hide();
 					$(this).find('.tab-link .barnnametextbox').show();
 				}else{
+					$(this).find('.tab-link .requiredtab').show();
 					$(this).find('.tab-link .barnametext').show();
 					$(this).find('.tab-link .barnnametextbox').hide();
 				}
@@ -472,13 +463,25 @@ $usertype               = $usertype ? $usertype : '';
 		$(document).find('[data-bs-target="#'+stalltabparent.attr('id')+'"]').parent().remove();
 		stalltabparent.remove();
 		
-		$(document).find('.barntab li:first a').addClass('active');
-		$(document).find('.stalltab div:first').addClass('active');
+		if($(document).find('.barntab li').length){
+			$(document).find('.barntab li:first a').addClass('active');
+			$(document).find('.stalltab div:first').addClass('active');
+		}else{
+			$('#barnvalidation').val('');
+			$('#barnvalidation').valid();
+		}
 	});
 
 	$(document).on('click', '.stallremovebtn', function(e){
 		e.preventDefault();
+		var stallparent = $(this).parent().parent().parent();
+		var bi = $(this).attr('data-barnIndex')
 		$(this).parent().parent().remove();
+		
+		if(stallparent.find('.dash-stall-base').length==0){
+			$(document).find('#stallvalidation'+bi).val('');
+			$(document).find('#stallvalidation'+bi).valid();
+		}
 	})
 
 	$('#myModal').on('shown.bs.modal', function (e) {
@@ -535,6 +538,41 @@ $usertype               = $usertype ? $usertype : '';
 			}
 		);
 	});
+	
+	$('.facilitypayment').click(function(){
+		tabvalidation();
+		
+		if($('#form').valid()){
+		  $('#stripeFormModal').modal('show');
+		}
+	})
+
+	$('#stripeFormModal').on('shown.bs.modal', function () {
+		var eventdata = [];
+		var formdata = $('#form').serializeArray();
+		$.each(formdata, function(i, field){
+			eventdata.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
+		});
+		
+		$('.stripeextra').remove();
+		var price = $(document).find('.dash-stall-base').length * 20;
+		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
+
+		$('.stripepaybutton').append(data);
+	})
+	
+	function tabvalidation(){
+		$(document).find('.requiredtab').remove();	
+		
+		setTimeout(function(){
+			$(document).find('.dash-stall-base').each(function(){;
+				if($(this).find('input.error_class_1').length){
+					var tabid = $(this).parent().attr('id');
+					$(document).find('a[data-bs-target="#'+tabid+'"] input').after('<span class="requiredtab">*</span>');
+				}
+			})
+		}, 100);
+	}	
 </script>
 <?php $this->endSection(); ?>
 

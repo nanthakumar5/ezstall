@@ -39,7 +39,7 @@ class Index extends BaseController
 					$this->session->setFlashdata('danger', 'Try Later.');
 				}
 				
-				return redirect()->to(base_url().'/myaccount/dashboard'); 
+				return redirect()->to(base_url().'/myaccount/events'); 
 			}else{
 				$result = $this->event->delete($requestData);
 				
@@ -55,7 +55,7 @@ class Index extends BaseController
 		
     	$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
-		$perpage =  5; 
+		$perpage =  10; 
 		$offset = $page * $perpage;
 		
 		if($this->request->getVar('q')!==null){
@@ -67,7 +67,7 @@ class Index extends BaseController
 		}
 		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1']);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'start' => $offset, 'length' => $perpage, 'userid' => $userid, 'type' => '1'], ['orderby' => 'e.id desc']);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
@@ -116,11 +116,11 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post'){
 			$requestData = $this->request->getPost();
-			$paymentresult= $this->stripe->stripepayment($requestData);
-			$requestData['type'] = $userdetails['type']=='2' ? '2' :'1';
+			$paymentresult = $this->stripe->stripepayment($requestData);
+			$requestData['type'] = $userdetails['type']=="2" ? "2" : "1";
 
-			$requestData['start_date'] 		= formatdate($requestData['start_date']);
-    		$requestData['end_date'] 		= formatdate($requestData['end_date']);
+			if(isset($requestData['start_date'])) $requestData['start_date'] 	= formatdate($requestData['start_date']);
+    		if(isset($requestData['start_date'])) $requestData['end_date'] 		= formatdate($requestData['end_date']);
             $result = $this->event->action($requestData);
 			
 			if($result){

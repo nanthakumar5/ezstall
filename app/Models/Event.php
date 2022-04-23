@@ -136,6 +136,7 @@ class Event extends BaseModel
 		if(isset($data['rvspots_price']) && $data['rvspots_price']!='') 		$request['rvspots_price'] 	= $data['rvspots_price'];
 		if(isset($data['status']) && $data['status']!='')      		    		$request['status'] 			= $data['status'];
 		if(isset($data['stall_available']) && $data['stall_available']!='')     $request['stall_available'] = $data['stall_available'];
+		if(isset($data['type']) && $data['type']!='')    		 				$request['type'] 			= $data['type'];
 		
 		if(isset($data['image']) && $data['image']!=''){
  			$request['image'] = $data['image'];		
