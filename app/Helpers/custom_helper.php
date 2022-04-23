@@ -227,7 +227,6 @@ function formatdate($date, $type=''){
 	}elseif($type=='1'){
 		return date("m-d-Y", strtotime($date)); //Y-m-d to m-d-Y
 	}elseif($type=='2'){
-		print_r($date['created_at']);die;
 		return date('m-d-Y h:i A',strtotime($date)); //Y-m-d H:i:s to m-d-Y h:i A
 	}
 }
