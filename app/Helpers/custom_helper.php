@@ -210,14 +210,15 @@ function send_mail($to,$subject,$message)
 
 } 
 
-function getUsersList()
-{	
-	$users 		= 	new \App\Models\Users;;	
-	$result		= 	$users->getUsers('all', ['users'], ['status' => ['1'], 'type' => ['2']]);
-	
-	if(count($result) > 0) return ['' => 'Select User']+array_column($result, 'name', 'id');
-	else return [];	
+function getUsersList($data=[])
+{    
+    $users         =     new \App\Models\Users;;    
+    $result        =     $users->getUsers('all', ['users'], ['status' => ['1']]+$data);
+    
+    if(count($result) > 0) return ['' => 'Select User']+array_column($result, 'name', 'id');
+    else return [];    
 }
+
 
 function formatdate($date, $type=''){
     if($type==''){
@@ -226,7 +227,8 @@ function formatdate($date, $type=''){
 	}elseif($type=='1'){
 		return date("m-d-Y", strtotime($date)); //Y-m-d to m-d-Y
 	}elseif($type=='2'){
-		return date('m-d-Y h:i A',strtotime($result['created_at'])); //Y-m-d H:i:s to m-d-Y h:i A
+		print_r($date['created_at']);die;
+		return date('m-d-Y h:i A',strtotime($date)); //Y-m-d H:i:s to m-d-Y h:i A
 	}
 }
 
