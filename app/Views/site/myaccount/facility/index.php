@@ -3,64 +3,48 @@
 <?php
 $checksubscription = checkSubscription();
 $checksubscriptiontype = $checksubscription['type'];
-$checksubscriptionproducer = $checksubscription['producer'];
+$checksubscriptionproducer = $checksubscription['facility'];
 $currentdate 	= date("Y-m-d");
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
-		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/facility/add'; ?>">Add Facility</a>
 	<?php } ?>
-	<?php if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
-		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
+	<?php if($checksubscriptiontype=='2' && $checksubscriptionproducer <= $eventcount){ ?>
+		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Facility</button>
 	<?php } ?>
 	<?php if(count($list) > 0){ ?>
 		<?php foreach ($list as $data) {  ?>
 			<div class="dashboard-box mt-4">
 				<div class="row align-items-center px-2">
-					<div class="col-md-2">
-						<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>" class="dash-event-image">
-					</div>
 					<div class="col-md-5">
-						<p class="topdate fs-7 mb-2"> <?php echo date('m-d-Y', strtotime($data['start_date'])); ?> - <?php echo date('m-d-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
 						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
-					</div>
-					<div class="col-md-5 d-flex">
-						<div class="m-left w-100 md-left">
-							<p class="fs-7 mb-2"><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
-							<p class="ucprice fs-7 fw-bold"> from $<?php echo $data['stalls_price'] ?> / night</p>
-						</div>
-						<!-- <div class="m-left w-100">
-							<p class="fs-7 mb-2"><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
-							<p class="ucprice fs-7 fw-bold">from $<?php //echo $data['rvspots_price'] ?> / night</p>
-						</div> -->
 					</div>
 				</div>
 				<div class="dash-event">
 				<?php if($usertype !='4'){ ?>
-					<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>" 
+					<a href="<?php echo base_url().'/myaccount/facility/export/'.$data['id']; ?>" 
 						class="dash-export-event fs-7 mx-2">
 						Export <i class="fas fa-file-export i-white-icon"></i>
 					</a>
 				<?php }?>
-				<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>" 
+				<a href="<?php echo base_url().'/myaccount/facility/view/'.$data['id']; ?>" 
 					class="dash-view-event fs-7 mx-2">
 					View <i class="far fa-eye i-white-icon"></i>
 				</a>
-				<?php if($currentdate <= $data['end_date']){ ?>
 				    <?php if($usertype !='4'){ ?>
-						<a href="<?php echo base_url().'/myaccount/events/edit/'.$data['id']; ?>" 
+						<a href="<?php echo base_url().'/myaccount/facility/edit/'.$data['id']; ?>" 
 							class="dash-edit-event fs-7 mx-2">
 							Edit <i class="far fa-edit i-white-icon"></i>
 						</a>
 						
 						<?php $occupied = getOccupied($data['id']); ?>
 						<?php if(count($occupied)==0){ ?>
-							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2">
+							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2 delete">
 								Delete <i class="far fa-trash-alt i-white-icon"></i>
 							</a>
 						<?php }?>
 				    <?php }?>
-				 <?php }?>
 
 				</div>
 			</div>
@@ -78,7 +62,7 @@ $currentdate 	= date("Y-m-d");
 	var userid = '<?php echo $userid; ?>';
 
 	$(document).on('click','.delete',function(){
-		var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
+		var action 	= 	'<?php echo base_url()."/myaccount/facility"; ?>';
 		var data   = '\
 		<input type="hidden" value="'+$(this).data('id')+'" name="id">\
 		<input type="hidden" value="'+userid+'" name="userid">\

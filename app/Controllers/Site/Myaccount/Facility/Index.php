@@ -1,5 +1,5 @@
 <?php 
-namespace App\Controllers\Site\Myaccount\Event;
+namespace App\Controllers\Site\Myaccount\Facility;
 
 use App\Controllers\BaseController;
 use App\Models\Users;
@@ -67,15 +67,15 @@ class Index extends BaseController
 		}
 		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1']);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
+		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '2', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
+
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
 		$data['usertype'] = $usertype;
 		$data['eventcount'] = $eventcount;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
-		
-		return view('site/myaccount/event/index', $data);
+		return view('site/myaccount/facility/index', $data);
     }
 
     public function action($id='')
@@ -85,21 +85,22 @@ class Index extends BaseController
 		$usertype       = $userdetails['type'];
 		$checksubscription = checkSubscription();
 		$checksubscriptiontype = $checksubscription['type'];
-		$checksubscriptionproducer = $checksubscription['producer'];
+		$checksubscriptionfacility = $checksubscription['facility'];
 		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
 
-		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '1']);
+		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '2']);
 		
-		if($checksubscriptiontype=='3' && (($id=='' && $checksubscriptionproducer <= $eventcount) || ($id!='' && $checksubscriptionproducer < $eventcount))){
-			$this->session->setFlashdata('danger', 'Please pay now for add more event');
-			return redirect()->to(base_url().'/myaccount/events'); 
-		}elseif($checksubscriptiontype=='4' && $checksubscriptionstallmanager!='4'){ 
+		if($checksubscriptiontype=='2' && $checksubscriptionfacility!='1'){
+			$this->session->setFlashdata('danger', 'Please subscribe the account.');
+			return redirect()->to(base_url().'/myaccount/subscription'); 
+		}
+		elseif($checksubscriptiontype=='4' && $checksubscriptionstallmanager!='4'){ 
 			$this->session->setFlashdata('danger', 'Please subscribe the account.');
 			return redirect()->to(base_url().'/myaccount/subscription'); 
 		}
 		
 		if($id!=''){
-			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid, 'type' => '1']);
+			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'status' => ['1'], 'userid' => $userid, 'type' => '2']);
 			if($result){				
 				$data['occupied'] 	= getOccupied($id);
 				$data['reserved'] 	= getReserved($id);
@@ -129,21 +130,21 @@ class Index extends BaseController
 		$data['usertype'] = $usertype;
 		$data['statuslist'] = $this->config->status1;
 		$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
-		return view('site/myaccount/event/action', $data);
+		return view('site/myaccount/facility/action', $data);
 	}
 	
 	public function view($id)
     {  
-		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
+		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '2']);
 		$data['occupied'] 	= getOccupied($id); 
 		$data['reserved'] 	= getReserved($id);
 		
-		return view('site/myaccount/event/view',$data);
+		return view('site/myaccount/facility/view',$data);
     }
 	
     public function export($id)
     {	
-    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
+    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '2']);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
 		$occupied 	= getOccupied($id); 
 
@@ -151,27 +152,9 @@ class Index extends BaseController
 		$sheet 		 = $spreadsheet->getActiveSheet();
 
 		$sheet->setCellValue('A1', 'Event Name');
-		$sheet->setCellValue('B1', 'Description');
-		$sheet->setCellValue('C1', 'Location');
-		$sheet->setCellValue('D1', 'Mobile');
-		$sheet->setCellValue('E1', 'start_date');
-		$sheet->setCellValue('F1', 'end_date');
-		$sheet->setCellValue('G1', 'start_time');
-		$sheet->setCellValue('H1', 'end_time');
-		$sheet->setCellValue('I1', 'stalls_price');
-		$sheet->setCellValue('J1', 'rvspots_price');
 
      	$rows = 2;
 		$sheet->setCellValue('A' . $rows, $data['name']);
-		$sheet->setCellValue('B' . $rows, $data['description']);
-		$sheet->setCellValue('C' . $rows, $data['location']);
-		$sheet->setCellValue('D' . $rows, $data['mobile']);
-		$sheet->setCellValue('E' . $rows, $data['start_date']);
-		$sheet->setCellValue('F' . $rows, $data['end_date']);
-		$sheet->setCellValue('G' . $rows, formattime($data['start_time']));
-		$sheet->setCellValue('H' . $rows, formattime($data['end_time']));
-		$sheet->setCellValue('I' . $rows, $data['stalls_price']);
-		$sheet->setCellValue('J' . $rows, $data['rvspots_price']);
         
          $row = 4;
          $col = 1;

@@ -77,6 +77,14 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->get('events/export/(:num)', 'Site\Myaccount\Event\Index::export/$1');
     $routes->post('events/importbarnstall', 'Site\Myaccount\Event\Index::importbarnstall');
 
+    $routes->match(['get','post'], 'facility', 'Site\Myaccount\Facility\Index::index');
+    $routes->match(['get','post'], 'facility/add', 'Site\Myaccount\Facility\Index::action'); 
+    $routes->match(['get','post'], 'facility/edit/(:num)', 'Site\Myaccount\Facility\Index::action/$1');
+    $routes->get('facility/view/(:num)', 'Site\Myaccount\Facility\Index::view/$1');
+    $routes->get('facility/export/(:num)', 'Site\Myaccount\Facility\Index::export/$1');
+    $routes->post('facility/importbarnstall', 'Site\Myaccount\Facility\Index::importbarnstall');
+
+
     $routes->match(['get','post'], 'stallmanager', 'Site\Myaccount\Stallmanager\Index::index');
     $routes->match(['get','post'], 'stallmanager/add', 'Site\Myaccount\Stallmanager\Index::action'); 
     $routes->match(['get','post'], 'stallmanager/edit/(:num)', 'Site\Myaccount\Stallmanager\Index::action/$1');
