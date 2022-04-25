@@ -51,99 +51,99 @@ $usertype               = $usertype ? $usertype : '';
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
 						</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Location</label>								
-									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
-								</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Location</label>								
+								<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Mobile</label>								
-									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Mobile</label>								
+								<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Start Date</label>	
-									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Start Date</label>	
+								<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>End Date</label>	
-									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>End Date</label>	
+								<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Start Time</label>	
-									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Start Time</label>	
+								<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>End Time</label>	
-									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>End Time</label>	
+								<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
 							</div>
-							<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>Stalls Price</label>								
-									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
-								</div>
+						</div>
+						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>Stalls Price</label>								
+								<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 							</div>
-	<!-- 						<div class="col-md-6 my-2">
-								<div class="form-group">
-									<label>RV Spots Price</label>								
-									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php //echo $rvspots_price;?>">								
-								</div>
-							</div> -->
-							<div class="col-md-12 my-2">
-								<div class="form-group">
-									<label>Event Description</label>
-									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
-								</div>
+						</div>
+<!-- 						<div class="col-md-6 my-2">
+							<div class="form-group">
+								<label>RV Spots Price</label>								
+								<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php //echo $rvspots_price;?>">								
 							</div>
-							<div class="col-md-4 my-2">
-								<div class="form-group">
-									<label>Event Image</label>			
-									<div>
-										<a href="<?php echo $image[1];?>" target="_blank">
-											<img src="<?php echo $image[1];?>" class="image_source" width="100">
-										</a>
-									</div>
-									<input type="file" id="file" name="file" class="image_file">
-									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
-								</div>
-							</div>							
-							<div class="col-md-4 my-2">
-								<div class="form-group">
-									<label>Event Flyer</label>			
-									<div>
-										<a href="<?php echo $eventflyer[1];?>" target="_blank">
-											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
-										</a>
-									</div>
-									<input type="file" id="" name="" class="eventflyer_file">
-									<span class="eventflyer_msg messagenotify"></span>
-									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
-								</div>
+						</div> -->
+						<div class="col-md-12 my-2">
+							<div class="form-group">
+								<label>Event Description</label>
+								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 							</div>
-							<div class="col-md-4 my-2">
-								<div class="form-group">
-									<label>Stall Map (optional)</label>			
-									<div>
-										<a href="<?php echo $stallmap[1];?>" target="_blank">
-											<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="stallmap_file">
-									<span class="stallmap_msg messagenotify"></span>
-									<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+						</div>
+						<div class="col-md-4 my-2">
+							<div class="form-group">
+								<label>Event Image</label>			
+								<div>
+									<a href="<?php echo $image[1];?>" target="_blank">
+										<img src="<?php echo $image[1];?>" class="image_source" width="100">
+									</a>
 								</div>
-							</div>	
+								<input type="file" id="file" name="file" class="image_file">
+								<span class="image_msg messagenotify"></span>
+								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+							</div>
+						</div>							
+						<div class="col-md-4 my-2">
+							<div class="form-group">
+								<label>Event Flyer</label>			
+								<div>
+									<a href="<?php echo $eventflyer[1];?>" target="_blank">
+										<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
+									</a>
+								</div>
+								<input type="file" id="" name="" class="eventflyer_file">
+								<span class="eventflyer_msg messagenotify"></span>
+								<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
+							</div>
+						</div>
+						<div class="col-md-4 my-2">
+							<div class="form-group">
+								<label>Stall Map (optional)</label>			
+								<div>
+									<a href="<?php echo $stallmap[1];?>" target="_blank">
+										<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
+									</a>
+								</div>
+								<input type="file" class="stallmap_file">
+								<span class="stallmap_msg messagenotify"></span>
+								<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+							</div>
+						</div>	
 					</div>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
@@ -225,6 +225,7 @@ $usertype               = $usertype ? $usertype : '';
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
+<?php echo $stripe; ?>
 
 <script>
 	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
