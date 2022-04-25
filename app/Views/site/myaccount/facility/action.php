@@ -55,9 +55,7 @@ $usertype               = $usertype ? $usertype : '';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
-						<?php if($usertype == '2'){?>
-							<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
-						<?php } ?>
+						<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
 						<a href="<?php echo base_url(); ?>/myaccount/facility" class="btn btn-dark">Back</a>
 					</div>
 				</div>
@@ -390,7 +388,7 @@ $usertype               = $usertype ? $usertype : '';
 		);
 	});
 	
-	$('.facilitypayment').click(function(){
+	$('.facilitypayment').click(function(){ 
 		tabvalidation();
 		
 		if($('#form').valid()){
@@ -398,7 +396,7 @@ $usertype               = $usertype ? $usertype : '';
 		}
 	})
 
-	$('#stripeFormModal').on('shown.bs.modal', function () {
+	$('#stripeFormModal').on('shown.bs.modal', function () { 
 		var eventdata = [];
 		var formdata = $('#form').serializeArray();
 		$.each(formdata, function(i, field){
@@ -412,7 +410,7 @@ $usertype               = $usertype ? $usertype : '';
 		$('.stripepaybutton').append(data);
 	})
 	
-	function tabvalidation(){
+	function tabvalidation(){ 
 		$(document).find('.requiredtab').remove();	
 		
 		setTimeout(function(){

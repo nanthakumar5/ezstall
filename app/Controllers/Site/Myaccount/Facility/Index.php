@@ -107,7 +107,7 @@ class Index extends BaseController
 				$data['result'] 	= $result;
 			}else{
 				$this->session->setFlashdata('danger', 'No Record Found.');
-				return redirect()->to(base_url().'/myaccount/events'); 
+				return redirect()->to(base_url().'/myaccount/facility'); 
 			}
 		}
 		
@@ -119,11 +119,11 @@ class Index extends BaseController
             $result = $this->event->action($requestData);
 			
 			if($result){
-				$this->session->setFlashdata('success', 'Event submitted successfully.');
-				return redirect()->to(base_url().'/myaccount/events'); 
+				$this->session->setFlashdata('success', 'Facility submitted successfully.');
+				return redirect()->to(base_url().'/myaccount/facility'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later.');
-				return redirect()->to(base_url().'/myaccount/events'); 
+				return redirect()->to(base_url().'/myaccount/facility'); 
 			}
         } 
 		

@@ -164,12 +164,7 @@ $usertype               = $usertype ? $usertype : '';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
-						<?php if($usertype == '3'){ ?>
-							<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
-						<?php } ?>
-						<?php if($usertype == '2'){?>
-							<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
-						<?php } ?>
+						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
 				</div>
@@ -230,7 +225,7 @@ $usertype               = $usertype ? $usertype : '';
 <?php $this->endSection(); ?>
 
 <?php $this->section('js') ?>
-<?php echo $stripe; ?>
+
 <script>
 	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
 	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
@@ -536,21 +531,7 @@ $usertype               = $usertype ? $usertype : '';
 			}
 		);
 	});
-	
-	$('#stripeFormModal').on('shown.bs.modal', function () {
-		var eventdata = [];
-		var formdata = $('#form').serializeArray();
-		$.each(formdata, function(i, field){
-			eventdata.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
-		});
-		
-		$('.stripeextra').remove();
-		var price = $(document).find('.dash-stall-base').length * 20;
-		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
 
-		$('.stripepaybutton').append(data);
-	})
-	
 	function tabvalidation(){
 		$(document).find('.requiredtab').remove();	
 		
