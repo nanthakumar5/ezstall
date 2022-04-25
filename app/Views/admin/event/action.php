@@ -56,7 +56,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>User</label>								
-									<?php echo form_dropdown('userid', getUsersList(), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
+									<?php echo form_dropdown('userid', getUsersList(['type'=>['3']]), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
 								</div>
 							</div>
 							<div class="col-md-12">

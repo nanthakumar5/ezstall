@@ -55,8 +55,7 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$result = $this->payments->getBooking('row', ['booking', 'event','stall'], ['id' => $id]);
-
+		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall'], ['id' => $id]);
 		if($result){
 			$data['result'] = $result;
 		}else{

@@ -10,8 +10,8 @@
 		$mobile 				= isset($result['mobile']) ? $result['mobile'] : '';
 		$start_date 		    = isset($result['start_date']) ? dateformat($result['start_date']) : '';
 		$end_date 				= isset($result['end_date']) ? dateformat($result['end_date']) : '';
-		$start_time 			= isset($result['start_time']) ? $result['start_time'] : '';
-		$end_time 			    = isset($result['end_time']) ? $result['end_time'] : '';
+		$start_time 			= isset($result['start_time']) ? formattime($result['start_time']) : '';
+		$end_time 			    = isset($result['end_time']) ? formattime($result['end_time']) : '';
 		$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
 		$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
 		$image      			= isset($result['image']) ? $result['image'] : '';

@@ -3,9 +3,11 @@
 <?php $this->section('content') ?>
 	<?php
 		$id 					= isset($result['id']) ? $result['id'] : '';
+		$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
 		$name 					= isset($result['name']) ? $result['name'] : '';
 		$email 					= isset($result['email']) ? $result['email'] : '';
 		$type 					= isset($result['type']) ? $result['type'] : '';
+		$parentid 				= isset($result['parent_id']) ? $result['parent_id'] : '';
 		$status 				= isset($result['status']) ? $result['status'] : '';
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
@@ -62,7 +64,14 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Type</label>	
-									<?php echo form_dropdown('type', ['' => 'Select Type']+$usertype, $type, ['id' => 'type', 'class' => 'form-control']); ?>						
+									<?php  echo form_dropdown('type', ['' => 'Select Type']+$usertype, $type, ['id' => 'type', 'class' => 'form-control usertype']); ?>	
+									<?php ?>
+								</div>
+							</div>
+							<div class="col-md-12 parentid">
+								<div class="form-group">
+									<label>Parent ID</label>
+									<?php echo form_dropdown('parentid', getUsersList(['type'=>['2','3']]), $parentid, ['id' => 'parentid', 'class' => 'form-control  ']); ?>						
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -86,9 +95,11 @@
 
 <?php $this->section('js') ?>
 	<script>
-		var id 	= '<?php echo $id; ?>';
-		
-		$(function(){
+		var id          = '<?php echo $id; ?>';
+        var type        = '<?php echo $type; ?>';
+
+		$(function(){ 
+			parentid(type);
 			validation(
 				'#form',
 				{
@@ -125,7 +136,19 @@
 					}
 				}
 			);
-		});		
+		});	
+
+		$('.usertype').change(function(){ 
+			parentid($(this).val());
+		});	
+
+		function parentid(val){ 
+            if(val=='4'){ 
+                $('.parentid').removeClass('displaynone');
+            }else{
+                $('.parentid').addClass('displaynone');
+            }           
+        }	
 	</script>
 <?php $this->endSection(); ?>
 

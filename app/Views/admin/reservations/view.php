@@ -7,12 +7,11 @@
 		$lastname 					= isset($result['lastname']) ? $result['lastname'] : '';
 		$mobile 					= isset($result['mobile']) ? $result['mobile'] : '';
 		$eventname 					= isset($result['eventname']) ? $result['eventname'] : '';
-		$stall 					    = isset($result['stall']) ? $result['stall'] : '';
-		$stalls                     = implode(',', $stall);
+		$barnstalls 				= isset($result['barnstall']) ? $result['barnstall'] : '';
 		$checkin 					= isset($result['check_in']) ? $result['check_in'] : '';
-		$checkin                    = date("d-m-Y", strtotime($checkin));
+		$checkin                    = formatdate($checkin, 1);
 		$checkout 					= isset($result['check_out']) ? $result['check_out'] : '';
-		$checkout                    = date("d-m-Y", strtotime($checkout));
+		$checkout                   = formatdate($checkout, 1);
 
 	?>
 	<section class="content-header">
@@ -60,8 +59,10 @@
 						<td><?php echo $eventname;?></td>
 					</tr>
 					<tr>
-						<th>Stall Name</th>
-						<td><?php echo $stalls;?></td>
+						<th>Barn & Stall Name</th>
+						<td> <?php foreach ($barnstalls as $barnstall) {
+              				echo ' <p class="my-2">'.$barnstall['barnname'].'-'.$barnstall['stallname'].'</p>';  } ?>
+              			</td>
 					</tr>
 					<tr>
 						<th>Check In</th>
