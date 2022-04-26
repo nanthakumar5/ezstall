@@ -1,18 +1,17 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-$checksubscription = checkSubscription();
-$checksubscriptiontype = $checksubscription['type'];
-$checksubscriptionproducer = $checksubscription['facility'];
-$currentdate 	= date("Y-m-d");
+$checksubscription 				= checkSubscription();
+$checksubscriptiontype 			= $checksubscription['type'];
+$checksubscriptionproducer 		= $checksubscription['facility'];
+$currentdate 					= date("Y-m-d");
+
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
 		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/facility/add'; ?>">Add Facility</a>
 	<?php } ?>
-	<?php if($checksubscriptiontype=='2' && $checksubscriptionproducer <= $eventcount){ ?>
-		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Facility</button>
-	<?php } ?>
+
 	<?php if(count($list) > 0){ ?>
 		<?php foreach ($list as $data) {  ?>
 			<div class="dashboard-box mt-4">
@@ -27,7 +26,7 @@ $currentdate 	= date("Y-m-d");
 						class="dash-export-event fs-7 mx-2">
 						Export <i class="fas fa-file-export i-white-icon"></i>
 					</a>
-				<?php }?>
+				<?php } ?>
 				<a href="<?php echo base_url().'/myaccount/facility/view/'.$data['id']; ?>" 
 					class="dash-view-event fs-7 mx-2">
 					View <i class="far fa-eye i-white-icon"></i>
@@ -43,21 +42,19 @@ $currentdate 	= date("Y-m-d");
 							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2 delete">
 								Delete <i class="far fa-trash-alt i-white-icon"></i>
 							</a>
-						<?php }?>
-				    <?php }?>
+						<?php } ?>
+				    <?php } ?>
 
 				</div>
 			</div>
-			<?php } ?>
+		<?php } ?>
 	<?php } else{ ?>
 		<p class="mt-3">No Record Found</p>
 	<?php } ?>
 	<?php echo $pager; ?>
 </section>
 <?php $this->endSection(); ?>
-
 <?php $this->section('js') ?>
-<?php echo $stripe; ?>
 <script>
 	var userid = '<?php echo $userid; ?>';
 
@@ -70,16 +67,5 @@ $currentdate 	= date("Y-m-d");
 		';
 		sweetalert2(action,data);
 	});	
-
-	$('#stripeFormModal').on('shown.bs.modal', function () {
-		$('.stripeextra').remove();
-
-		var data = 	'<div class="stripeextra">\
-			<input type="hidden" value="300" name="price">\
-		</div>';
-
-		$('.stripetotal').text(' (Total - 300)');
-		$('.stripepaybutton').append(data);
-	})
 </script>
 <?php $this->endSection(); ?>

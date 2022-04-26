@@ -13,22 +13,24 @@ class Index extends BaseController
 {
 	public function __construct()
 	{	
-		$this->event = new Event();
-		$this->users = new Users();
-		$this->stripe = new Stripe();
-		$this->booking = new Booking();
+		$this->users 	= new Users();
+		$this->event 	= new Event();
+		$this->booking 	= new Booking();
+		$this->stripe 	= new Stripe();
 	}
     
     public function index()
     { 			
-		$userdetail = getSiteUserDetails();
-		$userid = $userdetail['id'];
-		$usertype = $userdetail['type'];
+		$userdetail 					= getSiteUserDetails();
+		$userid 						= $userdetail['id'];
+		$usertype						= $userdetail['type'];
+
 		if($usertype == '4') $userid = $userdetail['parent_id'];
 		
 		if ($this->request->getMethod()=='post')
         {
 			$requestData = $this->request->getPost();
+
 			if(isset($requestData['stripepay'])){
 				$payment = $this->stripe->stripepayment($requestData);
 				if($payment){
@@ -68,6 +70,7 @@ class Index extends BaseController
 		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1']);
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
+
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
@@ -80,13 +83,13 @@ class Index extends BaseController
 
     public function action($id='')
 	{   
-		$userdetails 	= getSiteUserDetails();
-		$userid         = $userdetails['id'];
-		$usertype       = $userdetails['type'];
-		$checksubscription = checkSubscription();
-		$checksubscriptiontype = $checksubscription['type'];
-		$checksubscriptionproducer = $checksubscription['producer'];
-		$checksubscriptionstallmanager = $checksubscription['stallmanager'];
+		$userdetails 					= getSiteUserDetails();
+		$userid         				= $userdetails['id'];
+		$usertype       				= $userdetails['type'];
+		$checksubscription 				= checkSubscription();
+		$checksubscriptiontype 			= $checksubscription['type'];
+		$checksubscriptionproducer 		= $checksubscription['producer'];
+		$checksubscriptionstallmanager 	= $checksubscription['stallmanager'];
 
 		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '1']);
 		
@@ -111,7 +114,10 @@ class Index extends BaseController
 		}
 		
 		if ($this->request->getMethod()=='post'){
-			$requestData = $this->request->getPost();
+
+			$requestData 			= $this->request->getPost();
+			$requestData['type'] 	= '1';
+
 			if(isset($requestData['start_date'])) $requestData['start_date'] 	= formatdate($requestData['start_date']);
     		if(isset($requestData['start_date'])) $requestData['end_date'] 		= formatdate($requestData['end_date']);
             $result = $this->event->action($requestData);
@@ -125,10 +131,8 @@ class Index extends BaseController
 			}
         } 
 		
-		$data['userid'] = $userid;
-		$data['usertype'] = $usertype;
+		$data['userid'] 	= $userid;
 		$data['statuslist'] = $this->config->status1;
-		$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
 		return view('site/myaccount/event/action', $data);
 	}
 	
@@ -173,10 +177,10 @@ class Index extends BaseController
 		$sheet->setCellValue('I' . $rows, $data['stalls_price']);
 		$sheet->setCellValue('J' . $rows, $data['rvspots_price']);
         
-         $row = 4;
-         $col = 1;
-         foreach ($data['barn'] as $barn) {  
-				$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
+        $row = 4;
+        $col = 1;
+        foreach ($data['barn'] as $barn) {  
+			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
 
 			foreach($barn['stall'] as $key=> $stall){   
 				$stallname = $stall['name'];
@@ -198,10 +202,10 @@ class Index extends BaseController
     {	
 		$phpspreadsheet = new Spreadsheet();
 
-      	$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-      	$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
-		$sheetdata = $spreadsheet->getActiveSheet()->toArray();
-		$array = [];
+      	$reader 		= new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+      	$spreadsheet 	= $reader->load($_FILES['file']['tmp_name']);
+		$sheetdata 		= $spreadsheet->getActiveSheet()->toArray();
+		$array 			= [];
 		
 		foreach($sheetdata as $key1 => $data1){
 			if($key1=='0') continue;

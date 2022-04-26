@@ -2,17 +2,13 @@
 
 <?php $this->section('content') ?>
 <?php
+
 $id 					= isset($result['id']) ? $result['id'] : '';
 $name 					= isset($result['name']) ? $result['name'] : '';
-$bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
-$stall_available        = isset($result['stall_available']) ? $result['stall_available'] : '';
 $pageaction 			= $id=='' ? 'Add' : 'Update';
-$usertype               = $usertype ? $usertype : '';
 
 ?>
-
-
 <section class="content">
 	<div class="d-flex justify-content-between align-items-center flex-wrap">
 		<div align="left" class="m-0"><h3>Facility</h3></div>
@@ -54,7 +50,6 @@ $usertype               = $usertype ? $usertype : '';
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
 						<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
 						<a href="<?php echo base_url(); ?>/myaccount/facility" class="btn btn-dark">Back</a>
 					</div>
@@ -88,13 +83,13 @@ $usertype               = $usertype ? $usertype : '';
 						<div class="form-group">
 							<label>Stall Image</label>			
 							<div>
-								<a href="<?php echo $bulkstallimage[1];?>" target="_blank">
-									<img src="<?php echo $bulkstallimage[1];?>" class="stall_source" width="100">
+								<a href="" target="_blank">
+									<img src="" class="stall_source" width="100">
 								</a>
 							</div>
 							<input type="file" class="stall_file">
 							<span class="stall_msg"></span>
-							<input type="hidden" id="stall_image" class="stall_input" value="<?php echo $bulkstallimage[0];?>">
+							<input type="hidden" id="stall_image" class="stall_input" value="">
 						</div>
 					</div>	
 					<div class="col-md-12 my-2">
@@ -114,7 +109,6 @@ $usertype               = $usertype ? $usertype : '';
 	</div>
 </section>
 <?php $this->endSection(); ?>
-
 <?php $this->section('js') ?>
 <?php echo $stripe; ?>
 <script>

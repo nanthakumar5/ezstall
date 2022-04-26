@@ -1,16 +1,16 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-$checksubscription = checkSubscription();
-$checksubscriptiontype = $checksubscription['type'];
-$checksubscriptionproducer = $checksubscription['producer'];
+$checksubscription 			= checkSubscription();
+$checksubscriptiontype 		= $checksubscription['type'];
+$checksubscriptionproducer 	= $checksubscription['producer'];
 $currentdate 	= date("Y-m-d");
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
 		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
 	<?php } ?>
-	<?php if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
+	<?php  if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
 		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
 	<?php } ?>
 	<?php if(count($list) > 0){ ?>
@@ -41,7 +41,7 @@ $currentdate 	= date("Y-m-d");
 						class="dash-export-event fs-7 mx-2">
 						Export <i class="fas fa-file-export i-white-icon"></i>
 					</a>
-				<?php }?>
+				<?php } ?>
 				<a href="<?php echo base_url().'/myaccount/events/view/'.$data['id']; ?>" 
 					class="dash-view-event fs-7 mx-2">
 					View <i class="far fa-eye i-white-icon"></i>
@@ -55,7 +55,7 @@ $currentdate 	= date("Y-m-d");
 						
 						<?php $occupied = getOccupied($data['id']); ?>
 						<?php if(count($occupied)==0){ ?>
-							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2">
+							<a data-id="<?php echo $data['id']; ?>" href="javascript:void(0);" class="dash-delete-event fs-7 mx-2 delete">
 								Delete <i class="far fa-trash-alt i-white-icon"></i>
 							</a>
 						<?php }?>
@@ -71,7 +71,6 @@ $currentdate 	= date("Y-m-d");
 	<?php echo $pager; ?>
 </section>
 <?php $this->endSection(); ?>
-
 <?php $this->section('js') ?>
 <?php echo $stripe; ?>
 <script>

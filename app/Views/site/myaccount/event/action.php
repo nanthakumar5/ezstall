@@ -20,12 +20,8 @@ $eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
 $eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
 $stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
 $stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
-$bulkstallimage			= filedata('', '');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
-$stall_available        = isset($result['stall_available']) ? $result['stall_available'] : '';
 $pageaction 			= $id=='' ? 'Add' : 'Update';
-$usertype               = $usertype ? $usertype : '';
-
 ?>
 
 
@@ -163,7 +159,6 @@ $usertype               = $usertype ? $usertype : '';
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-						<input type="hidden" name="stall_available" id="stall_available" value="<?php echo $stall_available; ?>">
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
 					</div>
@@ -197,13 +192,13 @@ $usertype               = $usertype ? $usertype : '';
 						<div class="form-group">
 							<label>Stall Image</label>			
 							<div>
-								<a href="<?php echo $bulkstallimage[1];?>" target="_blank">
-									<img src="<?php echo $bulkstallimage[1];?>" class="stall_source" width="100">
+								<a href="" target="_blank">
+									<img src="" class="stall_source" width="100">
 								</a>
 							</div>
 							<input type="file" class="stall_file">
 							<span class="stall_msg"></span>
-							<input type="hidden" id="stall_image" class="stall_input" value="<?php echo $bulkstallimage[0];?>">
+							<input type="hidden" id="stall_image" class="stall_input" value="">
 						</div>
 					</div>	
 					<div class="col-md-12 my-2">
@@ -223,9 +218,7 @@ $usertype               = $usertype ? $usertype : '';
 	</div>
 </section>
 <?php $this->endSection(); ?>
-
 <?php $this->section('js') ?>
-<?php echo $stripe; ?>
 
 <script>
 	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
@@ -294,8 +287,6 @@ $usertype               = $usertype ? $usertype : '';
 	$('#eventSubmit').click(function(e){
 		var totalstall 		= $('.dash-stall-base').length
 		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);
-		$('#stall_available').val(result);	
-
 		tabvalidation();
 	});
 	
