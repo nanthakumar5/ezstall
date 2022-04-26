@@ -28,28 +28,13 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post')
         {
-			$requestData = $this->request->getPost();
-			if(isset($requestData['stripepay'])){
-				$payment = $this->stripe->stripepayment($requestData);
-				if($payment){
-					$usersubscriptioncount = $userdetail['producer_count'];
-					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'producercount' => $usersubscriptioncount+1]);
-					$this->session->setFlashdata('success', 'Successfully paid.');
-				}else{
-					$this->session->setFlashdata('danger', 'Try Later.');
-				}
-				
-				return redirect()->to(base_url().'/myaccount/events'); 
+			$result = $this->event->delete($this->request->getPost());
+			if($result){
+				$this->session->setFlashdata('success', 'Event deleted successfully.');
+				return redirect()->to(base_url().'/myaccount/facility'); 
 			}else{
-				$result = $this->event->delete($requestData);
-				
-				if($result){
-					$this->session->setFlashdata('success', 'Event deleted successfully.');
-					return redirect()->to(base_url().'/myaccount/events'); 
-				}else{
-					$this->session->setFlashdata('danger', 'Try Later');
-					return redirect()->to(base_url().'/myaccount/events'); 
-				}
+				$this->session->setFlashdata('danger', 'Try Later');
+				return redirect()->to(base_url().'/myaccount/facility'); 
 			}
         }
 		

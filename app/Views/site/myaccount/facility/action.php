@@ -127,7 +127,6 @@ $usertype               = $usertype ? $usertype : '';
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
 	
 	$(function(){
-		uidatepicker("#start_date, #end_date");
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(
@@ -374,7 +373,7 @@ $usertype               = $usertype ? $usertype : '';
 		formdata.append('file', $(this)[0].files[0]); 
 		
 		ajax(
-			'<?php echo base_url(); ?>/myaccount/events/importbarnstall', 
+			'<?php echo base_url(); ?>/myaccount/facility/importbarnstall', 
 			formdata, 
 			{
 				contenttype : 1,

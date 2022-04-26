@@ -74,7 +74,7 @@
                     email       : {
                         required  : "Email field is required.",
                         email     : "Enter valid email address.",
-                        remote    :  "Email Already Token"
+                        remote    :  "Email Already Taken"
                     },
                     password    : {
                         required  : "Password field is required."

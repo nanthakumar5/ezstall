@@ -1,8 +1,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
 <?php
-	$userdetail = getSiteUserDetails();
-	$role = $userdetail['type']; 
+	$userdetail 	 = getSiteUserDetails();
+	$role 				 = $userdetail['type']; 
+	$parent_id 		 = $userdetail['parent_id']; 
+	$parenttype 	 = getSiteUserDetails($parent_id);
+	$parent_type   = $parenttype['type'];
+	
 ?>
 <div class="navbar-header">
   <button type="button" id="sidebarCollapse" class="btn btn-info side-navbar-btn"><i class="side-nav-i bi bi-list"></i></button>
@@ -21,7 +25,7 @@
 				<p>Account Information</p>
 			</a>
 		</li>
-		<?php if($role=='3' || $role=='4'){ ?>
+		<?php if($role=='3' || ($role=='4' && $parent_type =='3')){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/events">
 					<i class="side-nav-i bi bi-calendar2-event"></i>
@@ -29,7 +33,7 @@
 				</a>
 			</li>
 		<?php } ?>
-		<?php if($role=='2'){ ?>
+		<?php if($role=='2' || ($role=='4' && $parent_type =='2')){ ?>
 			<li>
 				<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/facility">
 					<i class="side-nav-i bi bi-calendar2-event"></i>
