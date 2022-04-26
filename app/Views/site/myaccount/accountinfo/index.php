@@ -44,8 +44,8 @@ $(function(){
       },
        email      : {
         required    : "Please Enter Your Email.",
-        email     : "Enter valid email address.",
-        remote    :  "Email Already Token"
+        email     	: "Enter valid email address.",
+        remote    	: "Email Already Taken"
       },
     }
   );

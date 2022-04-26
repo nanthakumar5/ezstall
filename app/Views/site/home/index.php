@@ -1,5 +1,12 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
+	<?php
+		$userdetail  	= getSiteUserDetails();
+		$usertype  		= $userdetail ? $userdetail['usertype'] : '';
+		$liststall 		= base_url().'/login';
+		if($usertype=='2')  	$liststall	= base_url().'/myaccount/facility';
+		elseif($usertype=='3')  $liststall 	= base_url().'/myaccount/events';
+	?>
 	<div class="wi-1200">
 		<div class="displayFlex">
 			<div class="flexOneLeft beforeRound">
@@ -62,10 +69,10 @@
                 					<p><img class="eventFirstIcon" src="<?php echo base_url();?>/assets/site/img/horseShoe.svg">Stalls</p>
                 					<h6>from $<?php echo $row['stalls_price'];?> / night</h6>
                 				</span>
-                				<span class="m-left">
+                				<!--<span class="m-left">
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
-                				</span>
+                				</span>-->
                 				<button class="ucEventBtn"><a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">Book Now</a></button>
                 			</div>
                 		</div>
@@ -93,10 +100,10 @@
                 					<p><img class="eventFirstIcon" src="<?php echo base_url();?>/assets/site/img/horseShoe.svg">Stalls</p>
                 					<h6>from $<?php echo $row['stalls_price'];?> / night</h6>
                 				</span>
-                				<span class="m-left">
+                				<!--<span class="m-left">
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
-                				</span>
+                				</span>-->
                 				<button class="ucEventBtn"><a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">View</a></button>
                 			</div>
                 		</div>
@@ -142,7 +149,7 @@
                 Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
                 quam nihil molestiae consequatur.
               </p> -->
-              <button class="footaboveBtn">Search</button>
+              <button class="footaboveBtn footsearchbtn">Search</button>
             </div>
             <span class="footaboveLine"></span>
             <div class="facilities">
@@ -152,9 +159,15 @@
                 Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
                 quam nihil molestiae consequatur.
               </p> -->
-              <button class="footaboveBtn">List Your Stall</button>
+			  <?php  ?>
+              <a href="<?php echo $liststall; ?>" ><button class="footaboveBtn">List Your Stall</button></a>
             </div>
     </section>
-
-
+<?php $this->endSection(); ?>
+<?php $this->section('js') ?>
+    <script>
+        $('.footsearchbtn').click(function (e) {
+			$('input[name="llocation"]').focus();
+        });
+    </script>
 <?php $this->endSection(); ?>
