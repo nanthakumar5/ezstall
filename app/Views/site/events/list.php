@@ -13,13 +13,42 @@
 </style>
 
 <?php $this->section('content') ?>
+	<div class="infoPanel stallform container-lg">
+	    <form action="" method="GET" autocomplete="off" class="w-100">
+	        <span class="infoSection">
+	            <span class="iconProperty">
+	                <input type="text" name="llocation" placeholder="Location">
+	                <img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
+	            </span>
+	            <span class="iconProperty">
+	                <input type="text" name="start_date" class="event_search_start_date" placeholder="Check-In">
+					<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
+	                
+	            </span>
+	            <span class="iconProperty">
+	                <input type="text" name="end_date"  class="event_search_end_date" placeholder="Check-Out">
+					<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
+	            </span>
+	            <input
+	                  type="text" placeholder="No.of stalls" name="stalls" class="searchStalls" id="searchstalls"
+	                  value="<?php echo $search; ?>"
+	            />
+	            <span class="searchResult">
+	                <button type="submit"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+	                    <path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z">
+	                    </path>
+	                </svg></button>
+	            </span>
+	        </span>
+	    </form>
+	</div>
 	<section class="maxWidth">
-		<div class="pageInfo">
+		<!-- <div class="pageInfo">
 		  <span class="marFive">
 			<a href="<?php echo base_url(); ?>">Home</a> /
 			<a href="javascript:void(0);"> Events</a>
 		  </span>
-		</div>
+		</div> -->
 
 		<div class="marFive dFlexComBetween eventTP">
 		  <h1 class="eventPageTitle">Events</h1>
@@ -84,7 +113,8 @@
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 <script>
-var baseurl = "<?php echo base_url(); ?>";
+	uidatepicker(".event_search_start_date, .event_search_end_date");
+	var baseurl = "<?php echo base_url(); ?>";
 
 $(function() {
     $("#searchevent").autocomplete({
