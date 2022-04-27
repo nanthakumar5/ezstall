@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 	<?php
 		$userdetail  	= getSiteUserDetails();
-		$usertype  		= $userdetail ? $userdetail['usertype'] : '';
+		$usertype  		= $userdetail ? $userdetail['type'] : '';
 		$liststall 		= base_url().'/login';
 		if($usertype=='2')  	$liststall	= base_url().'/myaccount/facility';
 		elseif($usertype=='3')  $liststall 	= base_url().'/myaccount/events';
