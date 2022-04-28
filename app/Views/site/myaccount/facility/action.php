@@ -119,6 +119,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
 	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
+	var stallpercost 	 		= '<?php echo costsettings(2); ?>';
 	
 	$(function(){
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
@@ -397,7 +398,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		});
 		
 		$('.stripeextra').remove();
-		var price = $(document).find('.dash-stall-base').length * 20;
+		var price = $(document).find('.dash-stall-base').length * parseFloat(stallpercost);
 		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
 
 		$('.stripepaybutton').append(data);

@@ -1,7 +1,17 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-$barnstall = $cartdetail['barnstall'];
+	$barnstall = $cartdetail['barnstall'];
+	
+	$paymode 		= $stripemode;
+	$firstname 		= $paymode=='sandbox' ? 'First Name Test' : '';
+	$lastname 		= $paymode=='sandbox' ? 'First Name Test' : '';
+	$mobile 		= $paymode=='sandbox' ? '987654321' : '';
+	$name 			= $paymode=='sandbox' ? 'test' : '';
+	$cardno 		= $paymode=='sandbox' ? '4242424242424242' : '';
+	$cvc 			= $paymode=='sandbox' ? '123' : '';
+	$expirymonth 	= $paymode=='sandbox' ? '12' : '';
+	$expiryyear 	= $paymode=='sandbox' ? '2027' : '';
 ?>
 <section class="maxWidth">
   <div class="pageInfo">
@@ -33,15 +43,15 @@ $barnstall = $cartdetail['barnstall'];
             <p>Changes to this information will be reflected on all of your existing reservations.</p>
             <div class="row">
               <div class="col-lg-6 mb-4">
-                <input placeholder="First Name" name="firstname" autocomplete='off'  value="adasd">
+                <input placeholder="First Name" name="firstname" autocomplete='off'  value="<?php echo $firstname; ?>">
               </div>
               <div class="col-lg-6 mb-4">
-                <input type="text" placeholder="Last Name" name="lastname" autocomplete='off'  value="xcvxcv">
+                <input type="text" placeholder="Last Name" name="lastname" autocomplete='off'  value="<?php echo $lastname; ?>">
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6  mb-4">
-                <input placeholder="Mobile Number" name="mobile" autocomplete='off'  value="123456789">
+                <input placeholder="Mobile Number" name="mobile" autocomplete='off'  value="<?php echo $mobile; ?>">
               </div>
               <div class="col-lg-6 mb-4">
                 <span class="info-box d-flex justify-content-between"><img class="dash-info-i" src="<?php echo base_url()?>/assets/site/img/chekout-info.png"><p>You may receive a text message with your stall assignment before your arrival.</p></span>
@@ -54,18 +64,18 @@ $barnstall = $cartdetail['barnstall'];
             <p class="fw-bold">Card Details</p>
             <div class="row checkout-payment-frist">
               <div class="col-lg-6 mb-4">
-               <input type='text' placeholder='Name on Card' name='payer_name' class='payer_name' autocomplete='off'  value="testt">
+               <input type='text' placeholder='Name on Card' name='payer_name' class='payer_name' autocomplete='off'  value="<?php echo $name; ?>">
              </div>
              <div class="col-lg-6 mb-4">
-              <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off' value="4242 4242 4242 4242">
+              <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off' value="<?php echo $cardno; ?>">
             </div>
           </div>
 
           <div class="row">
             <div class="col-lg-12  mb-4">
-              <input type='text' class='card-expiry-month' placeholder='MM'  name='card_exp_month' autocomplete='off' value="12">
-              <input type='text' class='card-expiry-year' placeholder='YYYY'  name='card_exp_year' autocomplete='off'  value="2022">
-              <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'  value="123">
+              <input type='text' class='card-expiry-month' placeholder='MM'  name='card_exp_month' autocomplete='off' value="<?php echo $expirymonth; ?>">
+              <input type='text' class='card-expiry-year' placeholder='YYYY'  name='card_exp_year' autocomplete='off'  value="<?php echo $expiryyear; ?>">
+              <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'  value="<?php echo $cvc; ?>">
             </div>
           </div>
         </div> 

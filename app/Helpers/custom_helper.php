@@ -233,9 +233,9 @@ function formatdate($date, $type=''){
 
 function formattime($time, $type=''){
     if($type==''){
-    	return date('h:i:s A', strtotime($time)); //24 hours to 12 hours
+    	return date('h:i A', strtotime($time)); //24 hours to 12 hours
 	}elseif($type=='1'){
-		return date("H:i:s A", strtotime($time));; //12 hours to 24 hours
+		return date("H:i A", strtotime($time));; //12 hours to 24 hours
 	}
 }
 
@@ -309,12 +309,17 @@ function getReserved($eventid, $extras=[]){
 	
 	return (count($cart) > 0) ? array_column($cart, 'user_id', 'stall_id') : [];
 }
+
 function upcomingevents()
 {
 	$event	= new \App\Models\Event;
-	$date = date('Y-m-d');
-	$data = $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => $date], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']); 
-	return $data;        
+	return $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => date('Y-m-d')], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']);
+}
+	
+function costsettings($type)
+{
+	if($type=='1') 		return '400'; // Producer Event Cost
+	elseif($type=='2') 	return '20'; // Stall Per Cost
 }
 	
 

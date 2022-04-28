@@ -76,6 +76,7 @@ class Index extends BaseController
 		$data['userid'] = $userid;
 		$data['usertype'] = $usertype;
 		$data['eventcount'] = $eventcount;
+		$data['currencysymbol'] = $this->config->currencysymbol;
     	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
 		
 		return view('site/myaccount/event/index', $data);
@@ -114,12 +115,11 @@ class Index extends BaseController
 		}
 		
 		if ($this->request->getMethod()=='post'){
-
 			$requestData 			= $this->request->getPost();
 			$requestData['type'] 	= '1';
 
 			if(isset($requestData['start_date'])) $requestData['start_date'] 	= formatdate($requestData['start_date']);
-    		if(isset($requestData['start_date'])) $requestData['end_date'] 		= formatdate($requestData['end_date']);
+    		if(isset($requestData['end_date'])) $requestData['end_date'] 		= formatdate($requestData['end_date']);
             $result = $this->event->action($requestData);
 			
 			if($result){

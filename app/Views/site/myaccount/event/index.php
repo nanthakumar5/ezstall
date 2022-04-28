@@ -75,6 +75,8 @@ $currentdate 	= date("Y-m-d");
 <?php echo $stripe; ?>
 <script>
 	var userid = '<?php echo $userid; ?>';
+	var eventcost = parseFloat('<?php echo costsettings(1); ?>');
+	var currencysymbol = '<?php echo $currencysymbol; ?>';
 
 	$(document).on('click','.delete',function(){
 		var action 	= 	'<?php echo base_url()."/myaccount/events"; ?>';
@@ -90,10 +92,10 @@ $currentdate 	= date("Y-m-d");
 		$('.stripeextra').remove();
 
 		var data = 	'<div class="stripeextra">\
-			<input type="hidden" value="300" name="price">\
+			<input type="hidden" value="'+eventcost+'" name="price">\
 		</div>';
 
-		$('.stripetotal').text(' (Total - 300)');
+		$('.stripetotal').text(' (Total - '+currencysymbol+eventcost+')');
 		$('.stripepaybutton').append(data);
 	})
 </script>

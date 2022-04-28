@@ -31,7 +31,7 @@ class Index extends BaseController
         {
 			$result = $this->event->delete($this->request->getPost());
 			if($result){
-				$this->session->setFlashdata('success', 'Event deleted successfully.');
+				$this->session->setFlashdata('success', 'Facility deleted successfully.');
 				return redirect()->to(base_url().'/myaccount/facility'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later');
@@ -44,21 +44,14 @@ class Index extends BaseController
 		$perpage =  10; 
 		$offset = $page * $perpage;
 		
-		if($this->request->getVar('q')!==null){
-			$searchdata = ['search' => ['value' => $this->request->getVar('q')], 'page' => 'events'];
-			$data['search'] = $this->request->getVar('q');
-		}else{
-			$searchdata = [];
-			$data['search'] = '';
-		}
-		
-		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '2']);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '2', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
+		$eventcount = $this->event->getEvent('count', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '2']);
+		$event = $this->event->getEvent('all', ['event'], ['status' => ['1'], 'userid' => $userid, 'type' => '2', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
 
         $data['list'] 		= $event;
         $data['pager'] 		= $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] 	= $userid;
 		$data['usertype'] 	= $usertype;
+		
 		return view('site/myaccount/facility/index', $data);
     }
 
@@ -115,6 +108,7 @@ class Index extends BaseController
 		$data['userid'] 	= $userid;
 		$data['statuslist'] = $this->config->status1;
 		$data['stripe'] 	= view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
+		
 		return view('site/myaccount/facility/action', $data);
 	}
 	

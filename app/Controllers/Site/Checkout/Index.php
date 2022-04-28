@@ -41,7 +41,7 @@ class Index extends BaseController
         $userdetail  = getSiteUserDetails();
         $cartdetail  = getCart();
  
-        return view('site/checkout/index', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
+        return view('site/checkout/index', ['stripemode' => $this->config->stripemode, 'stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
     }
 
     public function success(){
