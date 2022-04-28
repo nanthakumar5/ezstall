@@ -128,7 +128,7 @@
 			</div>
 			<div class="footerBottom">
 				<div class="panel1">
-					<img src=<?php echo base_url()?>/assets/site/img/logo.png />
+					<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src=<?php echo base_url()?>/assets/site/img/logo.png /></a>
 					<p class="footmainContent">
 						Nemo enim ipsam volutem quia volutas sit aspernatur aut odit aut
 						fugit, sed quia consntur magni dolores eos qui ratne voluptatem
@@ -139,39 +139,36 @@
 					<h5>Quick Menu</h5>
 					<ul>
 						<li>
-							<a href="#">Home</a>
+							<a href="<?php echo base_url() ?>">Home</a>
 						</li>
 						<li>
-							<a href="#">Events</a>
+							<a href="<?php echo base_url() ?>/events">Events</a>
 						</li>
 						<li>
-							<a href="#">Stalls</a>
+							<a href="<?php echo base_url() ?>/facility">Facility</a>
 						</li>
 						<li>
-							<a href="#">FAQ</a>
+							<a href="<?php echo base_url() ?>/faq">FAQ</a>
 						</li>
 						<li>
-							<a href="#">About</a>
+							<a href="<?php echo base_url() ?>/aboutus">About</a>
 						</li>
 						<li>
-							<a href="#">Contact Us</a>
+							<a href="<?php echo base_url() ?>/contactus">Contact Us</a>
 						</li>
 					</ul>
 				</div>
 				<div class="panel3">
 					<h5 class="mar-b-3vh">Upcoming Events</h5>
-					<span class="footerucEvents">
-						<h5>Excepteur sint occaecat</h5>
-						<p>Jan 26 2021</p>
-					</span>
-					<span class="footerucEvents">
-						<h5>Sed ut perspiciatis unde</h5>
-						<p>Jan 26 2021</p>
-					</span>
-					<span class="footerucEvents">
-						<h5>Quis autem vel eum</h5>
-						<p>Jan 26 2021</p>
-					</span>
+					<?php 
+						$upcoming = upcomingevents();
+						foreach($upcoming as $event){ ?>
+	                        <span class="footerucEvents">
+	                            <a style="text-decoration:none; color:white;" href="<?php echo base_url().'/events/detail/'.$event['id'];?>"><h5><?php echo $event['name']; ?></h5>
+	                            <p><?php echo date('M d Y', strtotime($event['start_date'])); ?></p></a>
+	                        </span>
+	                    <?php } ?>
+	                ?>
 				</div>
 				<div class="panel4">
 					<h5 class="mar-b-3vh">Contact Us</h5>
@@ -191,7 +188,7 @@
 			<div class="copyRight">
 				<p>
 					<span>
-						© Copyright 2022 - EZ Stall. All Rights Reserved. <a style="text-decoration:none" href="<?php echo base_url();?>/privacypolicy">Privacy Policy</a> | <a style="text-decoration:none" href="<?php echo base_url();?>/termsandconditions">
+						© Copyright 2022 - EZ Stall. All Rights Reserved. <a style="text-decoration:none;color:white" href="<?php echo base_url();?>/privacypolicy">Privacy Policy</a> | <a style="text-decoration:none;color:white" href="<?php echo base_url();?>/termsandconditions">
 						Terms and Conditions</a>
 					</span>
 				</p>

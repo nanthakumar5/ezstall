@@ -98,7 +98,7 @@ function checkEvent($data)
 
 function getStallManagerIDS($parentid)
 {	
-	$users 		= new \App\Models\Users;;	
+	$users 		= new \App\Models\Users;	
 	$result		= $users->getUsers('all', ['users'], ['parentid' => $parentid, 'status' => ['1']]);
 	return array_column($result, 'id');
 }
@@ -309,3 +309,12 @@ function getReserved($eventid, $extras=[]){
 	
 	return (count($cart) > 0) ? array_column($cart, 'user_id', 'stall_id') : [];
 }
+function upcomingevents()
+{
+	$event	= new \App\Models\Event;
+	$date = date('Y-m-d');
+	$data = $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => $date], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']); 
+	return $data;        
+}
+	
+

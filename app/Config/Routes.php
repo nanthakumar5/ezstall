@@ -54,12 +54,14 @@ $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filte
 $routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
-$routes->match(['get','post'], 'stalls', 'Site\Stall\Index::index');
+$routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
 $routes->get('faq', 'Site\Faq\Index::index');
 $routes->get('banner', 'Site\Banner\Index::index');
 $routes->get('contactus', 'Site\Contactus\Index::index');
+$routes->get('termsandconditions', 'Site\Termsandconditions\Index::index');
+$routes->get('privacypolicy', 'Site\Privacypolicy\Index::index');
 $routes->match(['get','post'], 'checkout', 'Site\Checkout\Index::index', ['filter' => 'siteauthentication2']);
 $routes->get('paymentsuccess', 'Site\Checkout\Index::success');
 $routes->match(['get','post'], 'cart', 'Site\Cart\Index::action');
@@ -134,6 +136,13 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'banner/action', 'Admin\Banner\Index::action');
     $routes->get('banner/action/(:num)', 'Admin\Banner\Index::action/$1');
     $routes->post('banner/DTbanner', 'Admin\Banner\Index::DTbanner');
+
+     // Terms and Conditions
+    $routes->match(['get', 'post'], 'termsandconditions', 'Admin\Termsandconditions\Index::index');
+
+    // Privacy Policy
+    $routes->match(['get', 'post'], 'privacypolicy', 'Admin\Privacypolicy\Index::index');
+
 
      //Contactus
     $routes->match(['get', 'post'], 'contactus', 'Admin\Contactus\Index::index');
