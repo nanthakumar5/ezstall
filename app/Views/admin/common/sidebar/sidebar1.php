@@ -55,6 +55,18 @@
 				<p>Banner</p>
 			</a>
 		</li>
+		<li class="nav-item">
+			<a href="<?php echo getAdminUrl().'/termsandconditions'; ?>" class="nav-link">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Terms and Conditions</p>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a href="<?php echo getAdminUrl().'/privacypolicy'; ?>" class="nav-link">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Privacy Policy</p>
+			</a>
+		</li>
 	</ul>
 </li>
 <li class="nav-item">

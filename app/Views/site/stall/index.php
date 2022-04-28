@@ -36,10 +36,10 @@
     <div class="row">
         <?php foreach ($stalllist as $value) { ?>
         <div class="col-lg-4 col-md-4 mb-3">
-            <a href="<?php echo base_url() ?>/stalls/detail/<?php echo $value['id']; ?>">
+            <a style="text-decoration:none;" href="<?php echo base_url() ?>/stalls/detail/<?php echo $value['id']; ?>">
                 <div class="stall-list">
                     <div class="stallimg">
-                        <img src="<?php echo base_url() ?>/assets/uploads/stallmap/<?php echo $value['image']?>">
+                        <img src="<?php echo base_url() ?>/assets/uploads/stall/<?php echo $value['image']?>">
                         <span class="stall-imgover"><?php echo $value['price']?></span>
                     </div>
                     <div class="stalltitle mt-3">

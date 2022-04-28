@@ -30,7 +30,7 @@
 							<div class="me-auto ml-auto navbar-nav">
 								<a href="<?php echo base_url() ?>" class="ml-2rem nav-link">Home</a>
 								<a href="<?php echo base_url() ?>/events" class="ml-2rem nav-link">Events</a>
-								<a href="<?php echo base_url() ?>/stalls" class="ml-2rem nav-link active">Stall</a>
+								<a href="<?php echo base_url() ?>/facility" class="ml-2rem nav-link active">Facility</a>
 								<a href="<?php echo base_url() ?>/faq" class="ml-2rem nav-link">FAQ</a>
 								<a href="<?php echo base_url() ?>/aboutus" class="ml-2rem nav-link">About</a>
 								<a href="<?php echo base_url() ?>/contactus" class="ml-2rem nav-link">Contact Us</a>
@@ -191,8 +191,8 @@
 			<div class="copyRight">
 				<p>
 					<span>
-						© Copyright 2022 - EZ Stall. All Rights Reserved. Privacy Policy |
-						Terms and Conditions
+						© Copyright 2022 - EZ Stall. All Rights Reserved. <a style="text-decoration:none" href="<?php echo base_url();?>/privacypolicy">Privacy Policy</a> | <a style="text-decoration:none" href="<?php echo base_url();?>/termsandconditions">
+						Terms and Conditions</a>
 					</span>
 				</p>
 			</div>
