@@ -31,7 +31,6 @@ class Event extends BaseModel
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date >=', date('Y-m-d', strtotime($requestdata['start_date'])));
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date <=', date('Y-m-d', strtotime($requestdata['end_date'])));
 		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', $requestdata['gtenddate']);
-		//if(isset($requestdata['stalls'])) 				$query->where('e.stall_available >=', $requestdata['stalls']);
 		if(isset($requestdata['btw_start_date']) && !isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date")->orWhere('e.start_date >=', $requestdata['btw_start_date'])->groupEnd();
 		if(!isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date")->orWhere('e.end_date <=', $requestdata['btw_end_date'])->groupEnd();
 		if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date")->orWhere("'".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date")->groupEnd();
@@ -117,7 +116,7 @@ class Event extends BaseModel
 	public function action($data)
 	{ 	
 		$this->db->transStart();
-		
+
 		$datetime			= date('Y-m-d H:i:s');
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		$userid				= $data['userid'];
@@ -128,8 +127,8 @@ class Event extends BaseModel
 		if(isset($data['description']) && $data['description']!='')     		$request['description']     = $data['description'];
 		if(isset($data['location']) && $data['location']!='')           		$request['location'] 		= $data['location'];
 		if(isset($data['mobile']) && $data['mobile']!='')      	        		$request['mobile'] 			= $data['mobile'];
-		if(isset($data['start_date']) && $data['start_date']!='')       		$request['start_date']		= date('Y-m-d', strtotime($data['start_date']));;
-		if(isset($data['end_date']) && $data['end_date']!='')           		$request['end_date'] 		= date('Y-m-d', strtotime($data['end_date']));		
+		if(isset($data['start_date']) && $data['start_date']!='')       		$request['start_date']		= date('Y-m-d', strtotime($data['start_date']));
+		if(isset($data['end_date']) && $data['end_date']!='')           		$request['end_date'] 		= date('Y-m-d', strtotime($data['end_date']));
 		if(isset($data['start_time']) && $data['start_time']!='')       		$request['start_time'] 		= $data['start_time'];
 		if(isset($data['end_time']) && $data['end_time']!='')           		$request['end_time'] 		= $data['end_time'];
 		if(isset($data['stalls_price']) && $data['stalls_price']!='')   		$request['stalls_price']	= $data['stalls_price'];
@@ -201,6 +200,7 @@ class Event extends BaseModel
         				$stall['name']       = $stalldata['name'];
         				$stall['price']      = $stalldata['price'];
         				$stall['status']     = $stalldata['status'];
+        				
 
         				if(isset($stalldata['image']) && $stalldata['image']!=''){
 				 			$stall['image'] = $stalldata['image'];		
@@ -208,6 +208,11 @@ class Event extends BaseModel
 						}
         				
         				if($stallid==''){
+        					if($data['type'] == '2'){ 
+								$stall['start_date']  	= date('Y-m-d');
+								$stall['end_date'] 	  	= date('Y-m-d', strtotime('+1 year', strtotime($stall['start_date'])));
+							}
+        					
         					$this->db->table('stall')->insert($stall);
         				}else {
         				   $this->db->table('stall')->update($stall, ['id' => $stallid]);

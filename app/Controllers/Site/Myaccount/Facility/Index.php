@@ -105,9 +105,10 @@ class Index extends BaseController
 			}
         } 
 		
-		$data['userid'] 	= $userid;
-		$data['statuslist'] = $this->config->status1;
-		$data['stripe'] 	= view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
+		$data['userid'] 		= $userid;
+		$data['statuslist'] 	= $this->config->status1;
+		$data['currencysymbol'] = $this->config->currencysymbol;
+		$data['stripe'] 		= view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
 		
 		return view('site/myaccount/facility/action', $data);
 	}
