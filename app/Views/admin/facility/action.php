@@ -2,170 +2,37 @@
 
 <?php $this->section('content') ?>
 <?php
-$id 					= isset($result['id']) ? $result['id'] : '';
-$userid 				= isset($result['user_id']) ? $result['user_id'] : '';
-$name 					= isset($result['name']) ? $result['name'] : '';
-$description 		    = isset($result['description']) ? $result['description'] : '';
-$location 				= isset($result['location']) ? $result['location'] : '';
-$mobile 				= isset($result['mobile']) ? $result['mobile'] : '';
-$start_date 		    = isset($result['start_date']) ? dateformat($result['start_date']) : '';
-$end_date 				= isset($result['end_date']) ? dateformat($result['end_date']) : '';
-$start_time 			= isset($result['start_time']) ? $result['start_time'] : '';
-$end_time 			    = isset($result['end_time']) ? $result['end_time'] : '';
-$stalls_price 			= isset($result['stalls_price']) ? $result['stalls_price'] : '';
-$rvspots_price 			= isset($result['rvspots_price']) ? $result['rvspots_price'] : '';
-$image      			= isset($result['image']) ? $result['image'] : '';
-$image 				    = filedata($image, base_url().'/assets/uploads/event/');
-$status 				= isset($result['status']) ? $result['status'] : '';
-$eventflyer      		= isset($result['eventflyer']) ? $result['eventflyer'] : '';
-$eventflyer 			= filedata($eventflyer, base_url().'/assets/uploads/eventflyer/');
-$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
-$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
+
+$id 							= isset($result['id']) ? $result['id'] : '';
+$userid  					= isset($result['userid']) ? $result['userid'] : '';
+$name 						= isset($result['name']) ? $result['name'] : '';
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
+
 ?>
-<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Events</h1>
-				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo getAdminUrl(); ?>/event">Events</a></li>
-						<li class="breadcrumb-item active"><?php echo $pageaction; ?> Event</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</section>
-
 <section class="content">
-	<div class="page-action">
-			<a href="<?php echo getAdminUrl(); ?>/event" class="btn btn-primary">Back</a>
+	<div class="d-flex justify-content-between align-items-center flex-wrap">
+		<div align="left" class="m-0"><h3>Facility</h3></div>
+		<div class="page-action mb-4 m-0" align="right">
+			<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-dark">Back</a>
 		</div>
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title"><?php echo $pageaction; ?> Event</h3>
-			</div>
-			<div class="card-body">
-				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/event/action" autocomplete="off">
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>User</label>								
-									<?php echo form_dropdown('userid', getUsersList(['type'=>['3']]), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
-								</div>
+	</div>
+	<div class="card">
+		<div class="card-header w-100">
+			<h3 class="card-title"><?php echo $pageaction; ?> Facility</h3>
+		</div>
+		<div class="card-body">
+			<form method="post" id="form" action="" autocomplete="off">
+				<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12 my-2">
+							<div class="form-group">
+								<label>Name</label>								
+								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Name</label>								
-									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Event Description</label>
-									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Location</label>								
-									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Mobile</label>								
-									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Start Date</label>	
-									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>End Date</label>	
-									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Start Time</label>	
-									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>End Time</label>	
-									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Stalls Price</label>								
-									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>RV Spots Price</label>								
-									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Status</label>								
-									<?php echo form_dropdown('status', ['' => 'Select Status']+$statuslist, $status, ['id' => 'status', 'class' => 'form-control']); ?>
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>Upload Event Image</label>			
-									<div>
-										<a href="<?php echo $image[1];?>" target="_blank">
-											<img src="<?php echo $image[1];?>" class="image_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="image_file">
-									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
-								</div>
-							</div>							
-							
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>Upload Event Flyer</label>			
-									<div>
-										<a href="<?php echo $eventflyer[1];?>" target="_blank">
-											<img src="<?php echo $eventflyer[1];?>" class="eventflyer_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="eventflyer_file">
-									<span class="eventflyer_msg messagenotify"></span>
-									<input type="hidden" id="eventflyer" name="eventflyer" class="eventflyer_input" value="<?php echo $eventflyer[0];?>">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>Upload Stall Map (optional)</label>			
-									<div>
-										<a href="<?php echo $stallmap[1];?>" target="_blank">
-											<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="stallmap_file">
-									<span class="stallmap_msg messagenotify"></span>
-									<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
-								</div>
-							</div>	
+						</div>
+					</div>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
 							<div class="col-md-2">
@@ -183,9 +50,10 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					</div>
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="type" value="">
-						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
-						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
+						<button class="btn btn-danger facilitypayment"  type="submit">Submit</button>
+						<a href="<?php echo base_url(); ?>/facility" class="btn btn-dark">Back</a>
 					</div>
 				</div>
 			</form>
@@ -241,41 +109,20 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			</div>
 		</div>
 	</div>
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 </section>
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
-
 <script>
-	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
-	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
+	var barn				 				= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
+	var statuslist		 			= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	var barnIndex        		= '0';
 	var stallIndex       		= '0';
-	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
-	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
+	var occupied 	 					= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
+	var reserved 	 					= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
+
 	
 	$(function(){
-		dateformat('#start_date, #end_date');
-		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
-		fileupload([".eventflyer_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.eventflyer_input', '.eventflyer_source','.eventflyer_msg']);
-		fileupload([".stallmap_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(
@@ -284,31 +131,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				name 	     : {
 					required	: 	true
 				},
-				description  : {	
-					required	: 	true
-				},
-				location 	 : {
-					required	: 	true
-				},					
-				mobile       : {
-					required	: 	true,
-					number      :   true
-				},
-				start_date   : {
-					required	: 	true
-				},
-				end_date     : {
-					required	: 	true
-				},
-				start_time   : {
-					required	: 	true
-				},
-				end_time     : {
-					required	: 	true
-				},
-				status        : {  
-					required	: 	true
-				},
+				
 				barnvalidation : {
 					required 	: true
 				}
@@ -324,12 +147,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				barndata(v);
 			});
 		}
-	});
-	
-	$('#eventSubmit').click(function(e){
-		var totalstall 		= $('.dash-stall-base').length
-		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);
-		tabvalidation();
 	});
 	
 	$(document).on('click', '.barntab li a.active', function(e){ 
@@ -511,14 +328,14 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}
 	})
 
-	$('#myModal').on('shown.bs.modal', function (e) { 
+	$('#myModal').on('shown.bs.modal', function (e) {
 		$('#stall_name, #stall_price, #stall_image, #stall_file, #stall').val('');
 		$('#stall_status').val('1');
 		$('.stall_source').attr('src', '<?php echo base_url()?>/assets/images/upload.png');
 		$('.stall_source').parent().attr('href', '<?php echo base_url()?>/assets/images/upload.png');
 	})
 
-	$(document).on('click','#addbulkstallbtn', function (e) { 
+	$(document).on('click','#addbulkstallbtn', function (e) {
 		e.preventDefault();
 		$('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	});
@@ -552,7 +369,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		formdata.append('file', $(this)[0].files[0]); 
 		
 		ajax(
-			'<?php echo base_url(); ?>/myaccount/events/importbarnstall', 
+			'<?php echo base_url(); ?>/facility/importbarnstall', 
 			formdata, 
 			{
 				contenttype : 1,
@@ -565,8 +382,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			}
 		);
 	});
+	
+	$('.facilitypayment').click(function(){ 
+		tabvalidation();
+	})
 
-	function tabvalidation(){
+	function tabvalidation(){ 
 		$(document).find('.requiredtab').remove();	
 		
 		setTimeout(function(){

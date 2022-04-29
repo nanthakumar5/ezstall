@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin\Event;
+namespace App\Controllers\Admin\Facility;
 
 use App\Controllers\BaseController;
 
@@ -16,43 +16,42 @@ class Index extends BaseController
 	public function index()
 	{		
 		if ($this->request->getMethod()=='post')
-        {	
+        {
         	$requestData 				= $this->request->getPost();
         	$requestData['userid'] 		= getSiteUserID();
 
             $result = $this->event->delete($requestData);
 			
 			if($result){
-				$this->session->setFlashdata('success', 'Event deleted successfully.');
-				return redirect()->to(getAdminUrl().'/event'); 
+				$this->session->setFlashdata('success', 'Facility deleted successfully.');
+				return redirect()->to(getAdminUrl().'/facility'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later');
-				return redirect()->to(getAdminUrl().'/event'); 
+				return redirect()->to(getAdminUrl().'/facility'); 
 			}
         }
 		
-		return view('admin/event/index');
+		return view('admin/facility/index');
 	}
 		
-	public function DTevent()
+	public function DTfacility()
 	{
 		$post 			= $this->request->getPost();
-		$totalcount 	= $this->event->getEvent('count', ['event'], ['status' => ['1', '2'], 'type' => '1']+$post);
-		$results 		= $this->event->getEvent('all', ['event'], ['status' => ['1', '2'], 'type' => '1']+$post);
+		$totalcount 	= $this->event->getEvent('count', ['event'], ['status' => ['1', '2'], 'type' => '2']+$post);
+		$results 		= $this->event->getEvent('all', ['event'], ['status' => ['1', '2'] ,'type' => '2']+$post);
+
 		$totalrecord 	= [];
 				
 		if(count($results) > 0){
 			$action = '';
 			foreach($results as $key => $result){
-				$action = 	'<a href="'.getAdminUrl().'/event/action/'.$result['id'].'">Edit</a> / 
+				$action = 	'<a href="'.getAdminUrl().'/facility/action/'.$result['id'].'">Edit</a> / 
 							<a href="javascript:void(0);" data-id="'.$result['id'].'" class="delete">Delete</a> /
-							<a href="'.getAdminUrl().'/event/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>
+							<a href="'.getAdminUrl().'/facility/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>
 							';
 				
 				$totalrecord[] = 	[
 										'name' 				=> 	$result['name'],
-										'location'          =>  $result['location'],
-										'mobile'            =>  $result['mobile'],
 										'action'			=> 	'
 																	<div class="table-action">
 																		'.$action.'
@@ -75,12 +74,12 @@ class Index extends BaseController
 	public function action($id='')
 	{
 		if($id!=''){
-			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2'], 'type' => '1']);
+			$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2'], 'type' => '2']);
 			if($result){
 				$data['result'] = $result;
 			}else{
 				$this->session->setFlashdata('danger', 'No Record Found.');
-				return redirect()->to(getAdminUrl().'/event'); 
+				return redirect()->to(getAdminUrl().'/facility'); 
 			}
 		}
 		
@@ -94,31 +93,31 @@ class Index extends BaseController
             $result = $this->event->action($requestData);
 			
 			if($result){
-				$this->session->setFlashdata('success', 'Event saved successfully.');
-				return redirect()->to(getAdminUrl().'/event'); 
+				$this->session->setFlashdata('success', 'Facility saved successfully.');
+				return redirect()->to(getAdminUrl().'/facility'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later.');
-				return redirect()->to(getAdminUrl().'/event'); 
+				return redirect()->to(getAdminUrl().'/facility'); 
 			}
         }
 		
 		$data['statuslist'] = $this->config->status1;
 		
-		return view('admin/event/action', $data);
+		return view('admin/facility/action', $data);
 	}	
 	
 	public function view($id)
 	{
-		$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2'], 'type' => '1']);
+		$result = $this->event->getEvent('row', ['event', 'barn', 'stall'], ['id' => $id, 'status' => ['1', '2'], 'type' => '2']);
 		if($result){
 			$data['result'] = $result;
 		}else{
 			$this->session->setFlashdata('danger', 'No Record Found.');
-			return redirect()->to(getAdminUrl().'/event'); 
+			return redirect()->to(getAdminUrl().'/facility'); 
 		}
 		
 		$data['stallstatus'] = $this->config->status1;
-		return view('admin/event/view', $data);
+		return view('admin/facility/view', $data);
 	}
 	public function importbarnstall()
     {	

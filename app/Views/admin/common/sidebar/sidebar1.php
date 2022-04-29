@@ -11,6 +11,12 @@
 	</a>
 </li>
 <li class="nav-item">
+	<a href="<?php echo getAdminUrl().'/facility'; ?>" class="nav-link">
+		<i class="nav-icon far fa-calendar"></i>
+		<p>Facility</p>
+	</a>
+</li>
+<li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/reservations'; ?>" class="nav-link">
 		<i class="nav-icon fas fa-ticket-alt"></i>
 		<p>Reservations</p>

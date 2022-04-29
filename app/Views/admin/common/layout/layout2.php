@@ -11,8 +11,10 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/adminlte.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables/css/dataTables.bootstrap4.min.css"  />		
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables/css/responsive.bootstrap4.min.css"  />		
-	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.min.css"  />		
+	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.min.css"  />
+	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">		
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/custom.css">
+	
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -26,7 +28,7 @@
 		</nav>
 
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<a href="<?php echo getAdminUrl(); ?>" class="brand-link">
+			<a href="<?php echo getAdminUrl(); ?>" class="brand-link text-decoration-none">
 				<span class="brand-text font-weight-light">Ezstall Management</span>
 			</a>
 			<div class="sidebar">
@@ -47,7 +49,6 @@
 			<strong>Copyright &copy; 2022.</strong> All rights reserved.
 		</footer>
     </div>
-
     <script src="<?php echo base_url();?>/assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
@@ -59,6 +60,8 @@
 	<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/tinymce/tinymce.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/js/adminlte.min.js"></script>
+	<!-- bootstrap 5 cdn-->
+	<script src="<?php echo base_url();?>/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 	<?php $this->renderSection('js') ?>
 </body>

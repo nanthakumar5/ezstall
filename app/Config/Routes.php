@@ -121,6 +121,15 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('event/action/(:num)', 'Admin\Event\Index::action/$1');
     $routes->post('event/DTevent', 'Admin\Event\Index::DTevent');
     $routes->get('event/view/(:num)', 'Admin\Event\Index::view/$1');
+    $routes->post('events/importbarnstall', 'Admin\Event\Index::importbarnstall');
+
+    // Facility
+    $routes->match(['get', 'post'], 'facility', 'Admin\Facility\Index::index');
+    $routes->match(['get', 'post'], 'facility/action', 'Admin\Facility\Index::action');
+    $routes->get('facility/action/(:num)', 'Admin\Facility\Index::action/$1');
+    $routes->post('facility/DTfacility', 'Admin\Facility\Index::DTfacility');
+    $routes->get('facility/view/(:num)', 'Admin\Facility\Index::view/$1');
+    $routes->post('facility/importbarnstall', 'Admin\Facility\Index::importbarnstall');
 
     // About US
     $routes->match(['get', 'post'], 'aboutus', 'Admin\Aboutus\Index::index');
