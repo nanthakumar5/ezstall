@@ -13,7 +13,7 @@
 		<div class="wi-1200">
 			<div class="row d-flex justify-content-between">
 				<div class="col-md-5 beforeRound">
-					<img class="about-img" src="<?php echo base_url();?>/assets/site/img/what-we-do.jpg" />
+					<img class="about-img" src="<?php echo base_url().'/assets/uploads/aboutus/'.$aboutus['image']?>" />
 				</div>
 				<div class="col-md-6 afterHorse">
 					<p class="commonContent mt-0">

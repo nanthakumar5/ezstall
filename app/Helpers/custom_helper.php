@@ -319,7 +319,7 @@ function upcomingEvents()
 function getSettings()
 {
 	$settings = new \App\Models\Settings;
-    return = $settings->getSettings('row', ['settings'], ['id' => '1']);
+    return $settings->getSettings('row', ['settings'], ['id' => '1']);
 }
 	
 function costsettings($type)

@@ -26,7 +26,7 @@
 			<div class="top-nav">
 				<nav class="navbar navbar-expand-lg <?php if($segment1!=''){ echo 'bg-dark'; } ?> navbar-dark">
 					<div class="container-lg m-1rem-sm">
-						<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo base_url()?>/assets/site/img/logo.png" class="logo" alt="Logo"></a>
+						<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo base_url().'/assets/uploads/settings/'.$settings['logo'] ?>" class="logo" alt="Logo"></a>
 						<button aria-controls="responsive-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
 						<div class="navbar-collapse collapse" id="responsive-navbar-nav">
 							<div class="me-auto ml-auto navbar-nav">
@@ -130,7 +130,7 @@
 			</div>
 			<div class="footerBottom">
 				<div class="panel1">
-					<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src=<?php echo base_url().'/assets/uploads/settings/'.$settings['logo'] ?>></a>
+					<a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo base_url().'/assets/uploads/settings/'.$settings['logo'] ?>"></a>
 					<p class="footmainContent"><?php echo $settings['description'];?>			
 					</p>
 				</div>
@@ -199,7 +199,7 @@
 		<script src="<?php echo base_url();?>/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/site/js/bootstrap.bundle.min.js"></script>
-			<script src="<?php echo base_url();?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/toastr/toastr.min.js"></script>
