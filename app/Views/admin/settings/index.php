@@ -14,6 +14,12 @@
 		$instagram 		    = isset($result['instagram']) ? $result['instagram'] : '';
 		$logo 		    	= isset($result['logo']) ? $result['logo'] : '';
 		$logo 				= filedata($logo, base_url().'/assets/uploads/settings/');
+		$pay 				= isset($result['paymentmethod']) ? $result['paymentmethod'] : '';
+		$stripekey 			= isset($result['stripekey']) ? $result['stripekey'] : '';
+		$stripesecret 		= isset($result['stripesecret']) ? $result['stripesecret'] : '';
+		$transactionfee 	= isset($result['transactionfee']) ? $result['transactionfee'] : '';
+		$producerfee 		= isset($result['producerfee']) ? $result['producerfee'] : '';
+		$facilityfee 		= isset($result['facilityfee']) ? $result['facilityfee'] : '';
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -107,6 +113,82 @@
 									<input type="hidden" id="image" name="image" class="logo_input" value="<?php echo $logo[0];?>">
 								</div>
 							</div>						
+							<div class="col-md-12">
+								<input type="hidden" name="actionid" value="1">
+								<input type="submit" class="btn btn-primary" value="Submit">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Payment</h3>
+			</div>
+			<div class="card-body">
+				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Status</label>								
+									<?php echo form_dropdown('paymentmethod', ['' => 'Select Payment']+$paymentmethod, $pay, ['id' => 'paymentmethod', 'class' => 'form-control']); ?>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Stript Key</label>								
+									<input type="text" name="stripekey" class="form-control" id="stripekey" placeholder="Enter Stripe Key " value="<?php echo $stripekey; ?>">
+								</div>
+							</div>	
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Stripe Secret </label>								
+									<input type="text" name="stripesecret" class="form-control" id="stripesecret" placeholder="Enter Stripe Secret " value="<?php echo $stripesecret; ?>">
+								</div>
+							</div>			
+							<div class="col-md-12">
+								<input type="hidden" name="actionid" value="1">
+								<input type="submit" class="btn btn-primary" value="Submit">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Fee</h3>
+			</div>
+			<div class="card-body">
+				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Transaction Fee</label>
+									<input type="text" class="form-control" id="transaction" name="transaction" placeholder="Transaction Fee" rows="3" value="<?php echo $transactionfee; ?>">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Producer Fee</label>								
+									<input type="text" class="form-control" name="producer"  id="producer" placeholder="Enter Producer Fee " value="<?php echo $producerfee; ?>">
+								</div>
+							</div>	
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Facility Fee</label>								
+									<input type="text" class="form-control" name="facility"  id="facility" placeholder="Enter Facility Fee" value="<?php echo $facilityfee; ?>">
+								</div>
+							</div>			
 							<div class="col-md-12">
 								<input type="hidden" name="actionid" value="1">
 								<input type="submit" class="btn btn-primary" value="Submit">
