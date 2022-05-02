@@ -2,8 +2,8 @@
 	$userdetail  	= getSiteUserDetails();
 	$uri 			= service('uri');
 	$segment1 		= $uri->getSegment(1);
-	$upcoming 		= upcomingevents(); 
-	$settings 		= $upcoming['settings'];
+	$upcoming 		= upcomingEvents(); 
+	$settings 		= getSettings();
 ?>
 
 <!DOCTYPE html>
@@ -160,7 +160,7 @@
 				</div>
 				<div class="panel3">
 					<h5 class="mar-b-3vh">Upcoming Events</h5>
-					<?php foreach($upcoming['upcomingevents'] as $event){ ?>
+					<?php foreach($upcoming as $event){ ?>
                         <span class="footerucEvents"
                             <a style="text-decoration:none; color:white;" href="<?php echo base_url().'/events/detail/'.$event['id'];?>"><h5><?php echo $event['name']; ?></h5>
                             <p><?php echo date('M d Y', strtotime($event['start_date'])); ?></p></a>

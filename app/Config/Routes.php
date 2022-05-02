@@ -57,8 +57,7 @@ $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail
 $routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
-$routes->get('aboutus/detail', 'Site\Aboutus\Index::index');
-$routes->get('aboutus/detail/(:num)', 'Site\Aboutus\Index::index/$1');
+$routes->get('aboutus/detail/(:num)', 'Site\Aboutus\Index::detail/$1');
 $routes->get('faq', 'Site\Faq\Index::index');
 $routes->get('banner', 'Site\Banner\Index::index');
 $routes->get('contactus', 'Site\Contactus\Index::index');
