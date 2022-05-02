@@ -14,9 +14,22 @@ class Event extends BaseModel
 			$data		= 	['e.*'];							
 			$select[] 	= 	implode(',', $data);
 		}
+
+		if(in_array('stallavailable', $querydata)){
+			$condition = '';
+			if(isset($requestdata['btw_start_date']) && !isset($requestdata['btw_end_date'])) 	$condition .= " and '".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date";
+			if(!isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) 	$condition .= " and '".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date";
+			if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) 	$condition .= " and ('".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date or '".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date)";
+			
+			if($condition!=''){
+				$select[] = '(select  count("*") from  stall as s where s.event_id = e.id) - (select  count("*") from  booking as b left join booking_details as bd on bd.booking_id = b.id where b.event_id = e.id '.$condition.') as stallavailable';							
+			}else{
+				$select[] = '(select  count("*") from  stall as s where s.event_id = e.id)';							
+			}
+		}
 		
 		$query = $this->db->table('event e');
-
+		
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
@@ -34,7 +47,8 @@ class Event extends BaseModel
 		if(isset($requestdata['btw_start_date']) && !isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date")->orWhere('e.start_date >=', $requestdata['btw_start_date'])->groupEnd();
 		if(!isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date")->orWhere('e.end_date <=', $requestdata['btw_end_date'])->groupEnd();
 		if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date")->orWhere("'".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date")->groupEnd();
-			
+		if(isset($requestdata['stalls']) && !isset($requestdata['stalls'])) $query->groupStart()->having("stallavailable", "'".$requestdata['stalls']."'")->groupEnd();
+
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
@@ -68,7 +82,6 @@ class Event extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get(); 
-			
 			if($type=='all'){
 				$result = $query->getResultArray();
 				

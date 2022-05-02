@@ -35,9 +35,10 @@ class Index extends BaseController
 		if($this->request->getGet('start_date')!="")   	 	$searchdata['btw_start_date']    	= formatdate($this->request->getGet('start_date'));
 		if($this->request->getGet('end_date')!="")   	 	$searchdata['btw_end_date']    		= formatdate($this->request->getGet('end_date'));
 		
-		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status'=> ['1'], 'type' => '1']);
-		$event = $this->event->getEvent('all', ['event'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage, 'type' => '1'], ['orderby' =>'e.id desc']);
+		$eventcount = $this->event->getEvent('count', ['event','stallavailable'], $searchdata+['status'=> ['1'], 'type' => '1']);
+		$event = $this->event->getEvent('all', ['event','stallavailable'], $searchdata+['status'=> ['1'], 'start' => $offset, 'length' => $perpage, 'type' => '1'], ['orderby' =>'e.id desc', 'groupby' => 'e.id']);
 
+		$data['eventdetail'] = $userdetail;
 		$data['userdetail'] = $userdetail;
 		$data['usertype'] = $this->config->usertype;
 		$data['list'] = $event;
