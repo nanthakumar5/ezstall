@@ -75,12 +75,20 @@ class Cms extends BaseModel
 		if(isset($data['content']) && $data['content']!='') 	 						$request['content'] 				= $data['content'];
 		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
 		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
-		
-		if(isset($data['image']) && $data['image']!=''){
- 			$request['image'] = $data['image'];		
-			filemove($data['image'], './assets/uploads/banner');		
+		if($data['type']== '1'){ 
+			if(isset($data['image']) && $data['image']!=''){
+	 			$request['image'] = $data['image'];		
+				filemove($data['image'], './assets/uploads/aboutus');		
+			}
+		}else{ 
+			if(isset($data['image']) && $data['image']!=''){
+	 			$request['image'] = $data['image'];		
+				filemove($data['image'], './assets/uploads/banner');		
+			}
 		}
 		
+		
+
 		if(isset($request)){				
 			$request['updated_at'] 	= $datetime;
 			$request['updated_by'] 	= $userid;						

@@ -77,9 +77,9 @@ a.btn.btn-info.stallbtn.mb-3{
   transition: 0.4s;
 }
 
-.active, .accordionstall:hover {
+/*.active, .accordionstall:hover {
   background-color: #f1eded; 
-}
+}*/
 
 .panel {
   padding: 0 18px;
@@ -172,10 +172,10 @@ p.stall_error{
     transition: all 0.5s ease;
 }
 
-.nav-link:focus,
+/*.nav-link:focus,
 .nav-link:hover {
     color: #fff !important;
-}
+}*/
 
 .tab-link {
     padding: 0 !important;
@@ -277,3 +277,15 @@ p.stall_error{
 
 
 /*25-03-2022 styles end here*/
+
+select.custom-select.custom-select-sm.form-control.form-control-sm {
+    padding: 0 20px 0 15px;
+}
+
+.nav-pills .nav-link:not(.active):hover{
+    color: #000;
+}
+
+a.nav-link.nav-hov:not(.active):hover {
+    color: #fff;
+}

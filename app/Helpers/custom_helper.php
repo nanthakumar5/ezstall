@@ -312,8 +312,13 @@ function getReserved($eventid, $extras=[]){
 
 function upcomingevents()
 {
-	$event	= new \App\Models\Event;
-	return $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => date('Y-m-d')], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']);
+	$event		= new \App\Models\Event;
+	$settings	= new \App\Models\Settings;
+
+	$result['upcomingevents'] = $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => date('Y-m-d')], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']);
+
+    $result['settings'] = $settings->getSettings('row', ['settings']);
+    return $result;
 }
 	
 function costsettings($type)

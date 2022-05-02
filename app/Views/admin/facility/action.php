@@ -3,19 +3,32 @@
 <?php $this->section('content') ?>
 <?php
 
-$id 							= isset($result['id']) ? $result['id'] : '';
-$userid  					= isset($result['userid']) ? $result['userid'] : '';
-$name 						= isset($result['name']) ? $result['name'] : '';
+$id 					= isset($result['id']) ? $result['id'] : '';
+$userid  				= isset($result['userid']) ? $result['userid'] : '';
+$name 					= isset($result['name']) ? $result['name'] : '';
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 
 ?>
-<section class="content">
-	<div class="d-flex justify-content-between align-items-center flex-wrap">
-		<div align="left" class="m-0"><h3>Facility</h3></div>
-		<div class="page-action mb-4 m-0" align="right">
-			<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-dark">Back</a>
+<section class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>Facility</h1>
+			</div>
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+					<li class="breadcrumb-item"><a href="<?php echo getAdminUrl(); ?>/facility">Facility</a></li>
+					<li class="breadcrumb-item active"><?php echo $pageaction; ?> Facility</li>
+				</ol>		
+			</div>
 		</div>
+	</div>
+</section>
+<section class="content">
+	<div class="page-action">
+		<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-primary">Back</a>
 	</div>
 	<div class="card">
 		<div class="card-header w-100">
@@ -53,7 +66,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="type" value="">
 						<button class="btn btn-danger facilitypayment"  type="submit">Submit</button>
-						<a href="<?php echo base_url(); ?>/facility" class="btn btn-dark">Back</a>
+						<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-dark">Back</a>
 					</div>
 				</div>
 			</form>

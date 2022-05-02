@@ -8,34 +8,32 @@
 		elseif($usertype=='3')  $liststall 	= base_url().'/myaccount/events';
 	?>
 	<div class="wi-1200">
+			<?php foreach ($aboutus as $key => $about) { if($key%2==0){?>
 		<div class="displayFlex">
 			<div class="flexOneLeft beforeRound">
-				<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/what-we-do.jpg" />
+				<img class="flexoneImage" src="<?php echo base_url().'/assets/uploads/aboutus/'.$about['image']?>" />
 			</div>
-			<div class="flexOneRight afterHorse">
-			<h1 class="commonTitle">What We Do</h1>
-				<p class="commonContent">
-				Our mission is to connect horses with stalls! Whether you're a
-				rodeo athlete, dressage enthusiast, or trail riding adventurer;
-				our goal is to identify the facilities you can keep your horses
-				while on the road.
-				</p>
-				<button class="greyButton">Read More</button>
-			</div>
-		</div>
-
-		<div class="displayFlex flexReverse">
+				<div class="flexOneRight afterHorse">
+					<h1 class="commonTitle"><?php echo $about['title']; ?></h1>
+					<p class="commonContent"><?php echo substr($about['content'], 0, 250); ?>
+					</p>
+					<button class="greyButton"><a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>">Read More</a></button>
+				</div>
+				</div>
+			<?php } else { ?>
+					<div class="displayFlex flexReverse">
 			<div class="flexOneRight">
-			<h1 class="commonTitle">Who We Are</h1>
+			<h1 class="commonTitle"><?php echo $about['title']; ?></h1>
 				<p class="commonContent">
-				We are horse owners. We are the people who have arrived on site, only to find a full barn and no manager in site. We are also the people who have called the secretary ahead of time and cruised by the long line leading out of the facility office. We want everyone to experience that second feeling.
+				<?php  echo substr($about['content'], 0, 250); ?>
 				</p>
-				<button class="greyButton">Read More</button>
+				<button class="greyButton"><a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>">Read More</a></button>
 			</div>
 			<div class="flexOneLeft afterRound">
-				<img class="flexoneImage" src="<?php echo base_url();?>/assets/site/img/Who.png" />
+				<img class="flexoneImage" src="<?php echo base_url().'/assets/uploads/aboutus/'.$about['image']?>" />
 			</div>
 		</div>
+			<?php } } ?>
 	</div>
 
 	<section class="homeEventsPanel">

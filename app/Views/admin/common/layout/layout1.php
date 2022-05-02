@@ -16,7 +16,7 @@
 	<div class="login-box">
 		<?php echo $this->include('admin/common/notification/notification1') ?>
 		<div class="login-logo">
-		   <a href="javascript:void(0);"><b>Ezstall</b> Management</a>
+		   <a href="javascript:void(0);" class="text-decoration-none"><b>Ezstall</b> Management</a>
 		</div>
 		<?php echo $this->renderSection('content') ?>
 	</div>

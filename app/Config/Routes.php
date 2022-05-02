@@ -57,6 +57,8 @@ $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail
 $routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
+$routes->get('aboutus/detail', 'Site\Aboutus\Index::index');
+$routes->get('aboutus/detail/(:num)', 'Site\Aboutus\Index::index/$1');
 $routes->get('faq', 'Site\Faq\Index::index');
 $routes->get('banner', 'Site\Banner\Index::index');
 $routes->get('contactus', 'Site\Contactus\Index::index');
@@ -131,8 +133,8 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('facility/view/(:num)', 'Admin\Facility\Index::view/$1');
     $routes->post('facility/importbarnstall', 'Admin\Facility\Index::importbarnstall');
 
-    // About US
-    $routes->match(['get', 'post'], 'aboutus', 'Admin\Aboutus\Index::index');
+    // Settings
+    $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');
 
     // Faq
     $routes->match(['get', 'post'], 'faq', 'Admin\Faq\Index::index');
@@ -145,6 +147,12 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'banner/action', 'Admin\Banner\Index::action');
     $routes->get('banner/action/(:num)', 'Admin\Banner\Index::action/$1');
     $routes->post('banner/DTbanner', 'Admin\Banner\Index::DTbanner');
+
+    // Abouts Us
+    $routes->match(['get', 'post'], 'aboutus', 'Admin\Aboutus\Index::index');
+    $routes->match(['get', 'post'], 'aboutus/action', 'Admin\Aboutus\Index::action');
+    $routes->get('aboutus/action/(:num)', 'Admin\Aboutus\Index::action/$1');
+    $routes->post('aboutus/DTaboutus', 'Admin\Aboutus\Index::DTaboutus');
 
      // Terms and Conditions
     $routes->match(['get', 'post'], 'termsandconditions', 'Admin\Termsandconditions\Index::index');

@@ -53,73 +53,73 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/event/action" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>User</label>								
 									<?php echo form_dropdown('userid', getUsersList(['type'=>['3']]), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Name</label>								
 									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Event Description</label>
 									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Location</label>								
 									<input type="text" name="location" class="form-control" id="location" placeholder="Enter Location" value="<?php echo $location; ?>">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Mobile</label>								
 									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Start Date</label>	
 									<input type="text" class="form-control" name="start_date" value="<?php echo $start_date;?>" id="start_date">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>End Date</label>	
 									<input type="text" class="form-control" name="end_date" value="<?php echo $end_date;?>" id="end_date">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Start Time</label>	
 									<input type="time" class="form-control" name="start_time" value="<?php echo $start_time;?>" id="start_time">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>End Time</label>	
 									<input type="time" class="form-control" name="end_time" value="<?php echo $end_time;?>" id="end_time">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Stalls Price</label>								
 									<input type="text" name="stalls_price" class="form-control" id="stalls_price" placeholder="Enter Stalls Price" value="<?php echo $stalls_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>RV Spots Price</label>								
 									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label>Status</label>								
 									<?php echo form_dropdown('status', ['' => 'Select Status']+$statuslist, $status, ['id' => 'status', 'class' => 'form-control']); ?>
@@ -185,7 +185,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="type" value="">
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
-						<a href="<?php echo base_url(); ?>/myaccount/events" class="btn btn-dark">Back</a>
+						<a href="<?php echo base_url(); ?>/events" class="btn btn-dark">Back</a>
 					</div>
 				</div>
 			</form>
@@ -552,7 +552,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		formdata.append('file', $(this)[0].files[0]); 
 		
 		ajax(
-			'<?php echo base_url(); ?>/myaccount/events/importbarnstall', 
+			'<?php echo base_url(); ?>/events/importbarnstall', 
 			formdata, 
 			{
 				contenttype : 1,

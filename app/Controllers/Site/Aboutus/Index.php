@@ -12,9 +12,14 @@ class Index extends BaseController
 		$this->cms = new Cms;
 	}
     
-    public function index()
+    public function index($id='')
     { 
-    	$data['result'] = $this->cms->getCms('row', ['cms'], ['id' => '1', 'status' => ['1'], 'type' => ['1']]);
+    	if($id==''){
+	    	$data['aboutus'] = $this->cms->getCms('all', ['cms'], ['status' => ['1'], 'type' => ['1']]);
+		}else{
+			$data['aboutus'] = $this->cms->getCms('row', ['cms'], ['id' => $id,'status' => ['1'], 'type' => ['1']]);
+			return view('site/aboutus/detail', $data);
+		}
 		return view('site/aboutus/index', $data);
     }
 }
