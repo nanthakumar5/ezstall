@@ -6,7 +6,6 @@ class Stripe extends BaseModel
 {	
 	function stripepayment($requestData)
 	{
-		
 		$token = $requestData['stripe_token'];
 		$payer_id = $requestData['payer_id'];
 		$payer_name = $requestData['payer_name'];

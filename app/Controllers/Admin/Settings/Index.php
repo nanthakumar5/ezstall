@@ -15,9 +15,7 @@ class Index extends BaseController
 	
 	public function index()
 	{		
-		$data = [];
-
-		$result = $this->settings->getsettings('row', ['settings']);
+		$result = $this->settings->getsettings('row', ['settings'], ['id' => '1']);
 		
 		if($result){
 			$data['result'] = $result;
@@ -32,13 +30,14 @@ class Index extends BaseController
             $result = $this->settings->action($requestdata);
 			
 			if($result){
-				$this->session->setFlashdata('success', 'Settings content saved successfully.');
+				$this->session->setFlashdata('success', 'Settings saved successfully.');
 				return redirect()->to(getAdminUrl().'/settings'); 
 			}else{
 				$this->session->setFlashdata('danger', 'Try Later.');
 				return redirect()->to(getAdminUrl().'/settings'); 
 			}
         }
+		
         $data['paymentmethod'] = $this->config->paymentmethod;
         
 		return view('admin/settings/index', $data);

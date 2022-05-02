@@ -310,15 +310,16 @@ function getReserved($eventid, $extras=[]){
 	return (count($cart) > 0) ? array_column($cart, 'user_id', 'stall_id') : [];
 }
 
-function upcomingevents()
+function upcomingEvents()
 {
-	$event		= new \App\Models\Event;
-	$settings	= new \App\Models\Settings;
+	$event	= new \App\Models\Event;
+	return $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => date('Y-m-d')], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']);
+}
 
-	$result['upcomingevents'] = $event->getEvent('all', ['event'],['status' => ['1'], 'start_date' => date('Y-m-d')], ['orderby' => 'e.id desc', 'limit' => '3', 'type' => '1']);
-
-    $result['settings'] = $settings->getSettings('row', ['settings']);
-    return $result;
+function getSettings()
+{
+	$settings = new \App\Models\Settings;
+    return = $settings->getSettings('row', ['settings'], ['id' => '1']);
 }
 	
 function costsettings($type)
