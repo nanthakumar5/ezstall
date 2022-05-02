@@ -28,7 +28,7 @@ class Index extends BaseController
 		
 		if ($this->request->getMethod()=='post')
         {
-			$requestdata = $this->request->getPost();
+			$requestdata = $this->request->getPost();  
             $result = $this->settings->action($requestdata);
 			
 			if($result){
@@ -39,6 +39,7 @@ class Index extends BaseController
 				return redirect()->to(getAdminUrl().'/settings'); 
 			}
         }
+        $data['paymentmethod'] = $this->config->paymentmethod;
         
 		return view('admin/settings/index', $data);
 	}	
