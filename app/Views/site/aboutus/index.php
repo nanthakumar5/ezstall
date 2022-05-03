@@ -38,7 +38,7 @@
 					<button class="greyButton"><a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$aboutus['id']?>">Read More</a></button>
 				</div>
 				<div class="col-md-6 afterHorse">
-					<img class="about-img" src="<?php echo base_url();?>/assets/site/img/what-we-do.jpg" />
+					<img class="about-img" src="<?php echo base_url().'/assets/uploads/aboutus/'.$aboutus['image']?>" />
 
 				</div>
 			</div>

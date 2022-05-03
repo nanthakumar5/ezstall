@@ -319,7 +319,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 						});
 
 						$('#stallcount').val(result.barnstall.length);
-						var total = (result.price+transactionfee);
+						var total = (parseFloat(result.price)+parseFloat(transactionfee));
 						var result ='\
 						<div class="w-100">\
 						<div class="border rounded pt-4 ps-3 pe-3 mb-5">\

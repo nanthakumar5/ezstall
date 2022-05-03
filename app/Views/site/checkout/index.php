@@ -169,7 +169,7 @@
               Total Due
             </div>
             <div class="col-lg-4 fw-bold">
-              <?php echo $currencysymbol.$cartdetail['price']+$settings['transactionfee']; ?>
+              <?php echo $currencysymbol.($cartdetail['price']+$settings['transactionfee']); ?>
             </div>  
           </div>
         </div>
