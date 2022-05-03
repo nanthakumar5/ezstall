@@ -4,14 +4,9 @@ use App\Models\BaseModel;
 
 class Stripe extends BaseModel
 {	
-	function __construct()
-	{
-		$settings = getSettings();
-		$this->stripeprivatekey = $settings['stripeprivatekey'];
-	}
-	
 	function stripepayment($requestData)
 	{
+		$settings = getSettings();
 		$token = $requestData['stripe_token'];
 		$payer_id = $requestData['payer_id'];
 		$payer_name = $requestData['payer_name'];
@@ -20,7 +15,7 @@ class Stripe extends BaseModel
 		$price = ($requestData['price'] * 100);
         $currency = "inr";
 		
-		\Stripe\Stripe::setApiKey($this->stripeprivatekey);
+		\Stripe\Stripe::setApiKey($settings['stripeprivatekey']);
 		
 		$customer = $this->addCustomer($payer_name, $payer_email, $token);
 	  
@@ -106,8 +101,9 @@ class Stripe extends BaseModel
 		
 	}
     function addCustomer($payer_name, $payer_email, $token)
-    {        
-        \Stripe\Stripe::setApiKey($this->stripeprivatekey);
+    {
+		$settings = getSettings();
+        \Stripe\Stripe::setApiKey($settings['stripeprivatekey']);
         
         try
         {
