@@ -38,10 +38,11 @@ class Index extends BaseController
             }
         }
 
-        $userdetail  = getSiteUserDetails();
-        $cartdetail  = getCart();
- 
-        return view('site/checkout/index', ['stripemode' => $this->config->stripemode, 'stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
+        $userdetail  	= getSiteUserDetails();
+        $cartdetail  	= getCart();		
+		$settings		= getSettings();
+		
+        return view('site/checkout/index', ['settings' => $settings, 'currencysymbol' => $this->config->currencysymbol, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
     }
 
     public function success(){

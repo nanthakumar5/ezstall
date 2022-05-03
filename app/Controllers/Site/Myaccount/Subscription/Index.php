@@ -38,7 +38,7 @@ class Index extends BaseController
 
 		$data['userdetail']     = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;
-    	$data['stripe']         = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
+    	$data['stripe']         = view('site/common/stripe/stripe1');
 		return view('site/myaccount/subscription/index', $data);
 	}
 }

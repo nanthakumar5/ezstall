@@ -42,23 +42,23 @@ class Settings extends BaseModel
 		$datetime			= date('Y-m-d H:i:s');	
 		$actionid 			= (isset($data['actionid'])) ? $data['actionid'] : '';
 		
-		if(isset($data['name']) && $data['name']!='')      					$request['name'] 						= $data['name'];
-		if(isset($data['description']) && $data['description']!='') 		$request['description'] 				= $data['description'];
-		if(isset($data['address']) && $data['address']!='') 	  			$request['address'] 					= $data['address'];
-		if(isset($data['email']) && $data['email']!='') 	  				$request['email'] 						= $data['email'];
-		if(isset($data['phone']) && $data['phone']!='')      				$request['phone'] 						= $data['phone'];
-		if(isset($data['facebook']) && $data['facebook']!='') 	 			$request['facebook'] 					= $data['facebook'];
-		if(isset($data['google']) && $data['google']!='') 	  				$request['google'] 						= $data['google'];
-		if(isset($data['twitter']) && $data['twitter']!='') 	  			$request['twitter'] 					= $data['twitter'];
-		if(isset($data['instagram']) && $data['instagram']!='') 	  		$request['instagram']               	= $data['instagram'];
+		if(isset($data['name']) && $data['name']!='')      							$request['name'] 						= $data['name'];
+		if(isset($data['description']) && $data['description']!='') 				$request['description'] 				= $data['description'];
+		if(isset($data['address']) && $data['address']!='') 	  					$request['address'] 					= $data['address'];
+		if(isset($data['email']) && $data['email']!='') 	  						$request['email'] 						= $data['email'];
+		if(isset($data['phone']) && $data['phone']!='')      						$request['phone'] 						= $data['phone'];
+		if(isset($data['facebook']) && $data['facebook']!='') 	 					$request['facebook'] 					= $data['facebook'];
+		if(isset($data['google']) && $data['google']!='') 	  						$request['google'] 						= $data['google'];
+		if(isset($data['twitter']) && $data['twitter']!='') 	  					$request['twitter'] 					= $data['twitter'];
+		if(isset($data['instagram']) && $data['instagram']!='') 	  				$request['instagram']               	= $data['instagram'];
 
-		if(isset($data['paymentmethod']) && $data['paymentmethod']!='') 	$request['paymentmethod'] 				= $data['paymentmethod'];
-		if(isset($data['stripekey']) && $data['stripekey']!='') 			$request['stripekey'] 					= $data['stripekey'];
-		if(isset($data['stripesecret']) && $data['stripesecret']!='') 		$request['stripesecret'] 				= $data['stripesecret'];
+		if(isset($data['stripemode']) && $data['stripemode']!='') 					$request['stripemode'] 					= $data['stripemode'];
+		if(isset($data['stripepublickey']) && $data['stripepublickey']!='') 		$request['stripepublickey'] 			= $data['stripepublickey'];
+		if(isset($data['stripeprivatekey']) && $data['stripeprivatekey']!='') 		$request['stripeprivatekey'] 			= $data['stripeprivatekey'];
 
-		if(isset($data['transaction']) && $data['transaction']!='') 		$request['transactionfee'] 				= $data['transaction'];
-		if(isset($data['producer']) && $data['producer']!='') 	  			$request['producerfee']               	= $data['producer'];
-		if(isset($data['facility']) && $data['facility']!='') 	  			$request['facilityfee']              	 = $data['facility'];
+		if(isset($data['transactionfee']) && $data['transactionfee']!='') 			$request['transactionfee'] 				= $data['transactionfee'];
+		if(isset($data['producereventfee']) && $data['producereventfee']!='') 	  	$request['producereventfee']            = $data['producereventfee'];
+		if(isset($data['facilitystallfee']) && $data['facilitystallfee']!='') 	  	$request['facilitystallfee']            = $data['facilitystallfee'];
 	
 		if(isset($data['image']) && $data['image']!=''){
 			$request['logo'] = $data['image'];		

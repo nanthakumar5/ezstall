@@ -57,6 +57,7 @@ class Index extends BaseController
 
     public function action($id='')
 	{   
+		$settings 						= getSettings();
 		$userdetails 					= getSiteUserDetails();
 		$userid         				= $userdetails['id'];
 		$usertype       				= $userdetails['type'];
@@ -108,7 +109,8 @@ class Index extends BaseController
 		$data['userid'] 		= $userid;
 		$data['statuslist'] 	= $this->config->status1;
 		$data['currencysymbol'] = $this->config->currencysymbol;
-		$data['stripe'] 		= view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetails]);
+		$data['stripe'] 		= view('site/common/stripe/stripe1');
+		$data['settings'] 		= $settings;
 		
 		return view('site/myaccount/facility/action', $data);
 	}

@@ -38,7 +38,7 @@ class Index extends BaseController
 			}
         }
 		
-        $data['paymentmethod'] = $this->config->paymentmethod;
+        $data['stripemodelist'] = $this->config->stripemode;
         
 		return view('admin/settings/index', $data);
 	}	

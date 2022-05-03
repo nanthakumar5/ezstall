@@ -14,12 +14,12 @@
 		$instagram 		    = isset($result['instagram']) ? $result['instagram'] : '';
 		$logo 		    	= isset($result['logo']) ? $result['logo'] : '';
 		$logo 				= filedata($logo, base_url().'/assets/uploads/settings/');
-		$pay 				= isset($result['paymentmethod']) ? $result['paymentmethod'] : '';
-		$stripekey 			= isset($result['stripekey']) ? $result['stripekey'] : '';
-		$stripesecret 		= isset($result['stripesecret']) ? $result['stripesecret'] : '';
+		$stripemode 		= isset($result['stripemode']) ? $result['stripemode'] : '';
+		$stripepublickey 	= isset($result['stripepublickey']) ? $result['stripepublickey'] : '';
+		$stripeprivatekey 	= isset($result['stripeprivatekey']) ? $result['stripeprivatekey'] : '';
 		$transactionfee 	= isset($result['transactionfee']) ? $result['transactionfee'] : '';
-		$producerfee 		= isset($result['producerfee']) ? $result['producerfee'] : '';
-		$facilityfee 		= isset($result['facilityfee']) ? $result['facilityfee'] : '';
+		$producereventfee 	= isset($result['producereventfee']) ? $result['producereventfee'] : '';
+		$facilitystallfee 	= isset($result['facilitystallfee']) ? $result['facilitystallfee'] : '';
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -43,7 +43,7 @@
 				<h3 class="card-title">Settings</h3>
 			</div>
 			<div class="card-body">
-				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
+				<form method="post" id="form1" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-12">
@@ -130,25 +130,25 @@
 				<h3 class="card-title">Payment</h3>
 			</div>
 			<div class="card-body">
-				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
+				<form method="post" id="form2" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Status</label>								
-									<?php echo form_dropdown('paymentmethod', ['' => 'Select Payment']+$paymentmethod, $pay, ['id' => 'paymentmethod', 'class' => 'form-control']); ?>
+									<label>Stripe Mode</label>								
+									<?php echo form_dropdown('stripemode', ['' => 'Select Mode']+$stripemodelist, $stripemode, ['id' => 'stripemode', 'class' => 'form-control']); ?>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Stript Key</label>								
-									<input type="text" name="stripekey" class="form-control" id="stripekey" placeholder="Enter Stripe Key " value="<?php echo $stripekey; ?>">
+									<label>Stript Public Key</label>								
+									<input type="text" name="stripepublickey" class="form-control" id="stripepublickey" placeholder="Enter Stripe Public Key " value="<?php echo $stripepublickey; ?>">
 								</div>
 							</div>	
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Stripe Secret </label>								
-									<input type="text" name="stripesecret" class="form-control" id="stripesecret" placeholder="Enter Stripe Secret " value="<?php echo $stripesecret; ?>">
+									<label>Stripe Private Key </label>								
+									<input type="text" name="stripeprivatekey" class="form-control" id="stripeprivatekey" placeholder="Enter Stripe Private Key" value="<?php echo $stripeprivatekey; ?>">
 								</div>
 							</div>			
 							<div class="col-md-12">
@@ -168,25 +168,25 @@
 				<h3 class="card-title">Fee</h3>
 			</div>
 			<div class="card-body">
-				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
+				<form method="post" id="form3" action="<?php echo getAdminUrl(); ?>/settings" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Transaction Fee</label>
-									<input type="text" class="form-control" id="transaction" name="transaction" placeholder="Transaction Fee" rows="3" value="<?php echo $transactionfee; ?>">
+									<input type="text" class="form-control" name="transactionfee" placeholder="Transaction Fee" value="<?php echo $transactionfee; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Producer Fee</label>								
-									<input type="text" class="form-control" name="producer"  id="producer" placeholder="Enter Producer Fee " value="<?php echo $producerfee; ?>">
+									<label>Producer Event Fee</label>								
+									<input type="text" class="form-control" name="producereventfee" placeholder="Enter Producer Event Fee" value="<?php echo $producereventfee; ?>">
 								</div>
 							</div>	
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Facility Fee</label>								
-									<input type="text" class="form-control" name="facility"  id="facility" placeholder="Enter Facility Fee" value="<?php echo $facilityfee; ?>">
+									<label>Facility Stall Fee</label>								
+									<input type="text" class="form-control" name="facilitystallfee" placeholder="Enter Facility Stall Fee" value="<?php echo $facilitystallfee; ?>">
 								</div>
 							</div>			
 							<div class="col-md-12">
@@ -207,7 +207,7 @@
 			fileupload([".logo_file"], ['.logo_input', '.logo_source','.logo_msg']);
 			
 			validation(
-				'#form',
+				'#form1',
 				{
 					title 	     : {
 						required	: 	true

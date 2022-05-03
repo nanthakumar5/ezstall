@@ -83,13 +83,13 @@
 </li>
 <li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/newsletter'; ?>" class="nav-link nav-hov">
-		<i class="nav-icon far fa-address-book"></i>
+		<i class="nav-icon far fa-newspaper"></i>
 		<p>Newsletter</p>
 	</a>
 </li>
 <li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/settings'; ?>" class="nav-link nav-hov">
-		<i class="nav-icon far fa-address-book"></i>
+		<i class="nav-icon fa fa-cog"></i>
 		<p>Settings</p>
 	</a>
 </li>

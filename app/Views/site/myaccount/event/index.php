@@ -75,7 +75,7 @@ $currentdate 	= date("Y-m-d");
 <?php echo $stripe; ?>
 <script>
 	var userid = '<?php echo $userid; ?>';
-	var eventcost = parseFloat('<?php echo costsettings(1); ?>');
+	var eventcost = parseFloat('<?php echo $settings["producereventfee"]; ?>');
 	var currencysymbol = '<?php echo $currencysymbol; ?>';
 
 	$(document).on('click','.delete',function(){

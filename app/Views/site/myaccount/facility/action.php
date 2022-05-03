@@ -119,7 +119,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
 	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
-	var stallpercost 	 		= '<?php echo costsettings(2); ?>';
+	var stallpercost 	 		= '<?php echo $settings["facilitystallfee"]; ?>';
 	var currencysymbol 			= '<?php echo $currencysymbol; ?>';
 
 	

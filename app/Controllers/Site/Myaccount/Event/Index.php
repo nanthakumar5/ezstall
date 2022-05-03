@@ -70,14 +70,16 @@ class Index extends BaseController
 		
 		$eventcount = $this->event->getEvent('count', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1']);
 		$event = $this->event->getEvent('all', ['event'], $searchdata+['status' => ['1'], 'userid' => $userid, 'type' => '1', 'start' => $offset, 'length' => $perpage], ['orderby' => 'e.id desc']);
-
+		$settings = getSettings();
+		
         $data['list'] = $event;
         $data['pager'] = $pager->makeLinks($page, $perpage, $eventcount);
 		$data['userid'] = $userid;
 		$data['usertype'] = $usertype;
 		$data['eventcount'] = $eventcount;
 		$data['currencysymbol'] = $this->config->currencysymbol;
-    	$data['stripe'] = view('site/common/stripe/stripe1', ['stripepublishkey' => $this->config->stripepublishkey, 'userdetail' => $userdetail]);
+    	$data['stripe'] = view('site/common/stripe/stripe1');
+    	$data['settings'] = $settings;
 		
 		return view('site/myaccount/event/index', $data);
     }

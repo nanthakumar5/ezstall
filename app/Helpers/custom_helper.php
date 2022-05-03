@@ -321,11 +321,3 @@ function getSettings()
 	$settings = new \App\Models\Settings;
     return $settings->getSettings('row', ['settings'], ['id' => '1']);
 }
-	
-function costsettings($type)
-{
-	if($type=='1') 		return '400'; // Producer Event Cost
-	elseif($type=='2') 	return '20'; // Stall Per Cost
-}
-	
-

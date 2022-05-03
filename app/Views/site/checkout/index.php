@@ -3,21 +3,22 @@
 <?php
 	$barnstall = $cartdetail['barnstall'];
 	
-	$paymode 		= $stripemode;
-	$firstname 		= $paymode=='sandbox' ? 'First Name Test' : '';
-	$lastname 		= $paymode=='sandbox' ? 'First Name Test' : '';
-	$mobile 		= $paymode=='sandbox' ? '987654321' : '';
-	$name 			= $paymode=='sandbox' ? 'test' : '';
-	$cardno 		= $paymode=='sandbox' ? '4242424242424242' : '';
-	$cvc 			= $paymode=='sandbox' ? '123' : '';
-	$expirymonth 	= $paymode=='sandbox' ? '12' : '';
-	$expiryyear 	= $paymode=='sandbox' ? '2027' : '';
+	$stripemode 		= $settings['stripemode'];
+	$stripepublickey 	= $settings['stripepublickey'];
+	$firstname 			= $stripemode=='2' ? 'First Name Test' : '';
+	$lastname 			= $stripemode=='2' ? 'Last Name Test' : '';
+	$mobile 			= $stripemode=='2' ? '987654321' : '';
+	$name 				= $stripemode=='2' ? 'test' : '';
+	$cardno 			= $stripemode=='2' ? '4242424242424242' : '';
+	$cvc 				= $stripemode=='2' ? '123' : '';
+	$expirymonth 		= $stripemode=='2' ? '12' : '';
+	$expiryyear 		= $stripemode=='2' ? '2027' : '';
 ?>
 <section class="maxWidth">
   <div class="pageInfo">
     <span class="marFive">
       <a href="<?php echo base_url(); ?>">Home /</a>
-      <a href="<?php echo base_url().'/events'; ?>"> Checkout</a>
+      <a href="javascript:void(0);"> Checkout</a>
     </span>
   </div>
 
@@ -43,10 +44,10 @@
             <p>Changes to this information will be reflected on all of your existing reservations.</p>
             <div class="row">
               <div class="col-lg-6 mb-4">
-                <input placeholder="First Name" name="firstname" autocomplete='off'  value="<?php echo $firstname; ?>">
+                <input placeholder="First Name" name="firstname" autocomplete='off' value="<?php echo $firstname; ?>">
               </div>
               <div class="col-lg-6 mb-4">
-                <input type="text" placeholder="Last Name" name="lastname" autocomplete='off'  value="<?php echo $lastname; ?>">
+                <input type="text" placeholder="Last Name" name="lastname" autocomplete='off' value="<?php echo $lastname; ?>">
               </div>
             </div>
             <div class="row">
@@ -152,7 +153,7 @@
               <?php echo count($barnstall); ?> Stalls x <?php echo $cartdetail['interval']; ?> Nights
             </div>
             <div class="col-lg-4">
-              $<?php echo $cartdetail['price']; ?>
+              <?php echo $currencysymbol.$cartdetail['price']; ?>
             </div>
           </div> 
           <div class="row mb-2">
@@ -160,7 +161,7 @@
               Transaction Fees
             </div>
             <div class="col-lg-4">
-              $8.50
+              <?php echo $currencysymbol.$settings['transactionfee']; ?>
             </div>
           </div> 
           <div class="row mb-2 border-top mt-3 mb-3 pt-3">
@@ -168,7 +169,7 @@
               Total Due
             </div>
             <div class="col-lg-4 fw-bold">
-              $<?php echo $cartdetail['price']+8.50; ?>
+              <?php echo $currencysymbol.$cartdetail['price']+$settings['transactionfee']; ?>
             </div>  
           </div>
         </div>
@@ -251,7 +252,7 @@
         }
 
         e.preventDefault();
-        Stripe.setPublishableKey('<?php echo $stripepublishkey; ?>');
+        Stripe.setPublishableKey('<?php echo $stripepublickey; ?>');
         Stripe.createToken({
           number: $('.card-number').val(),
           cvc: $('.card-cvc').val(),

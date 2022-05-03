@@ -1,13 +1,14 @@
 <?php
-	use Config\Custom;
-	$mode = new Custom;
-		
-	$paymode 		= $mode->stripemode;
-	$name 			= $paymode=='sandbox' ? 'test' : '';
-	$cardno 		= $paymode=='sandbox' ? '4242424242424242' : '';
-	$cvc 			= $paymode=='sandbox' ? '123' : '';
-	$expirymonth 	= $paymode=='sandbox' ? '12' : '';
-	$expiryyear 	= $paymode=='sandbox' ? '2027' : '';
+	$settings 			= getSettings();
+	$userdetails 		= getSiteUserDetails();	
+	
+	$stripemode 		= $settings['stripemode'];
+	$stripepublickey 	= $settings['stripepublickey'];
+	$name 				= $stripemode=='2' ? 'test' : '';
+	$cardno 			= $stripemode=='2' ? '4242424242424242' : '';
+	$cvc 				= $stripemode=='2' ? '123' : '';
+	$expirymonth 		= $stripemode=='2' ? '12' : '';
+	$expiryyear 		= $stripemode=='2' ? '2027' : '';
 ?>
 <style>
 * { margin : 0; }
@@ -43,8 +44,8 @@
 					</div>
 					<div class='error hide'><div class='alert' style="color: red;"></div></div> 
 				   	<div class="mb-3 stripepaybutton">
-						<input type="hidden" value="<?php echo $userdetail['id']; ?>" name="payer_id">
-						<input type="hidden" value="<?php echo $userdetail['email']; ?>" name="payer_email">
+						<input type="hidden" value="<?php echo $userdetails['id']; ?>" name="payer_id">
+						<input type="hidden" value="<?php echo $userdetails['email']; ?>" name="payer_email">
 						<input type="hidden" value="1" name="stripepay">
 						<button class="btn btn-primary btn-lg btn-block" type="submit" >Pay Now</button>
 				   	</div>
@@ -102,7 +103,7 @@ $(function(){
 		}
 		
 		e.preventDefault();
-		Stripe.setPublishableKey('<?php echo $stripepublishkey; ?>');
+		Stripe.setPublishableKey('<?php echo $stripepublickey; ?>');
 		Stripe.createToken({
 			number: $('.card-number').val(),
 			cvc: $('.card-cvc').val(),
