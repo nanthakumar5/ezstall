@@ -65,7 +65,7 @@
 						<div class="infoPanel">
 							<span class="mx-auto infoSection">
 								<span class="iconProperty">
-									<input type="text" name="llocation" placeholder="Location">
+									<input type="text" name="location" placeholder="Location">
 									<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 								</span>
 								<span class="iconProperty">
@@ -76,7 +76,7 @@
 									<input type="text" name="end_date" class="event_search_end_date" placeholder="Check-Out">
 									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
-								<input type="text" name="stalls" placeholder="No.of stalls">
+								<input type="text" name="no_of_stalls" placeholder="No.of stalls">
 								<span class="searchResult">
 									<button type="submit">
 										<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
