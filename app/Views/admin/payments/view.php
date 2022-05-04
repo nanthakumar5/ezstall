@@ -1,15 +1,16 @@
 <?= $this->extend("admin/common/layout/layout2") ?>
 <?php $this->section('content') ?>
 	<?php
+	//echo "<pre>";print_r($result);die;
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$name 					= isset($result['payer_name']) ? $result['payer_name'] : '';
 		$email 					= isset($result['payer_email']) ? $result['payer_email'] : '';
 		$type                   = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
 		$amount 				= isset($result['amount']) ? $result['amount'] : '';
 		$plan_start 		    = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
-		$plan_start             = date("d-m-Y", strtotime($plan_start));
+		$plan_start             = formatdate($plan_start, 1);
 		$plan_end 		        = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
-		$plan_end               = date("d-m-Y", strtotime($plan_end));
+		$plan_end               = formatdate($plan_end, 1);
 
 	?>
 	<section class="content-header">
