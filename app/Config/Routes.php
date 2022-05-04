@@ -127,7 +127,7 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     // Facility
     $routes->match(['get', 'post'], 'facility', 'Admin\Facility\Index::index');
     $routes->match(['get', 'post'], 'facility/action', 'Admin\Facility\Index::action');
-    $routes->get('facility/action/(:num)', 'Admin\Facility\Index::action/$1');
+    $routes->match(['get', 'post'],'facility/action/(:num)', 'Admin\Facility\Index::action/$1');
     $routes->post('facility/DTfacility', 'Admin\Facility\Index::DTfacility');
     $routes->get('facility/view/(:num)', 'Admin\Facility\Index::view/$1');
     $routes->post('facility/importbarnstall', 'Admin\Facility\Index::importbarnstall');

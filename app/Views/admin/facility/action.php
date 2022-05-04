@@ -160,7 +160,10 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		validation(
 			'#form',
 			{
-				name 	     : {
+				name 	        : {
+					required	: 	true
+				},
+				description     : {
 					required	: 	true
 				},
 				
