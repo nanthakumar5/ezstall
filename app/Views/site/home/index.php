@@ -17,7 +17,7 @@
 					<h1 class="commonTitle"><?php echo $about['title']; ?></h1>
 					<p class="commonContent"><?php echo substr($about['content'], 0, 250); ?>
 					</p>
-					<button class="greyButton"><a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>">Read More</a></button>
+					<a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>"><button class="greyButton">Read More</button></a>
 				</div>
 				</div>
 			<?php } else { ?>
@@ -27,7 +27,7 @@
 				<p class="commonContent">
 				<?php  echo substr($about['content'], 0, 250); ?>
 				</p>
-				<button class="greyButton"><a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>">Read More</a></button>
+				<a class="text-white text-decoration-none" href="<?php echo base_url().'/aboutus/detail/'.$about['id']?>"><button class="greyButton">Read More</button></a>
 			</div>
 			<div class="flexOneLeft afterRound">
 				<img class="flexoneImage" src="<?php echo base_url().'/assets/uploads/aboutus/'.$about['image']?>" />
@@ -71,7 +71,7 @@
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
                 				</span>-->
-                				<button class="ucEventBtn"><a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">Book Now</a></button>
+                				<a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>"><button class="ucEventBtn">Book Now</button></a>
                 			</div>
                 		</div>
                 	</div>
@@ -102,7 +102,7 @@
                 					<p><img class="eventSecondIcon" src="<?php echo base_url();?>/assets/site/img/rvSpot.svg">RV Spot</p>
                 					<h6>from $<?php echo $row['rvspots_price'];?> / night</h6>
                 				</span>-->
-                				<button class="ucEventBtn"><a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>">View</a></button>
+                				<a class="text-decoration-none text-white" href="<?php echo base_url()?>/events/detail/<?php echo $row['id']?>"><button class="ucEventBtn">View</button></a>
                 			</div>
                 		</div>
                 	</div>
