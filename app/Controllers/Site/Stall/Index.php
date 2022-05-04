@@ -42,6 +42,8 @@ class Index extends BaseController
     public function detail($id)
     {
     	$data['detail'] = $this->stall->getStall('row', ['stall'],['id' => $id]);
+		$data['currencysymbol'] = $this->config->currencysymbol;
+
     	return view('site/stall/detail',$data);
     }
 }

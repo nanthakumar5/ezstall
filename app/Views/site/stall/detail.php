@@ -1,5 +1,9 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
+<?php 
+// print_r($details);
+// exit;
+?>
  <div class="infoPanel stallform container-lg">
     <span class="infoSection">
         <span class="iconProperty">
@@ -30,7 +34,6 @@
                 </div>
                 </div>
              </div>
-
              <section class="container-lg">
                  <div class="row">
                      <div class="col-lg-8">
@@ -69,26 +72,41 @@
                             <div class="stall-price">
                                 <b>$15</b> per day
                             </div>
-                            <div class="stall-date">
+                            <div class="choose-stall-date">
                                 <p class="fw-bold">Dates</p>
-                                <p class="float-left">07-01-2022</p> -<p class="float-end">07-01-2022</p>
+                                <div class="col-md-12 col-md-12 px-3">
+                                    <div class="mb-3">
+                                        <label>Check In</label>-
+                                        <input type="text" name="startdate" id="startdate" class ="checkdate checkin form-control" autocomplete = "off" placeholder = "Check-In"/>                                   
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Check Out</label>-
+                                        <input type="text" name="enddate" id="enddate" class = "checkdate checkout form-control" autocomplete = "off" placeholder = "Check-Out"/>                       
+                                    </div>
+                                </div>
                             </div>
-                            <div class="stall-number">
-                                <p class="fw-bold">Number of Stalls</p>
-                                <p>2 Stalls</p>
+                            <div class="stall-date" style="display: none;">
+                                <p class="fw-bold">Dates</p>                                 
+                                <p class="float-left" id="startdatetxt" ></p> - <p class="float-end" id="enddatetxt"></p>
                             </div>
-                            <div class="stall-total">
-                                <p class="float-start fw-bold">Total</p>
-                                <p class="float-end  fw-bold">$30.00<span class="redcolor">+Fees</span></p>
+                            <div class="stall-total" style="display: none;">
+                                <p class="float-start fw-bold tot">Total</p>
+                                <!-- <p class="float-end  fw-bold" id="stallfees" >$30.00<span class="redcolor">Fees</span></p> -->
                             </div>
-                            <div class="stall-points">
+                             <div class="stall-points" style="display: none;">
                                 <ul>
                                     <li>You can cancel at any point of time.</li>
                                     <li>You will not be charged without your approval.</li>
                                 </ul>
+                            </div> 
+                            <div class="stall-msg" style="display: none;">
+                               <p class="text-center">You cannot book!.</p>
                             </div>
                             <div class="stall-btn">
-                                <button class="stalldetail-btn">Check Availability</button>
+                                <button class="stalldetail-btn" id="checkavailability">Check Availability</button>
+                            </div>
+                            <div class="book-now" style="display: none;">
+                                <button class="stallbooknow-btn"  id="bookstall"><a href ="<?php echo base_url().'/checkout'?>">Book Now</a></button>
                             </div>
                         </div>
                      </div>
@@ -96,3 +114,95 @@
              </section>
 
 <?php $this->endSection() ?>
+
+<?php $this->section('js') ?>
+<script> 
+
+var eventid = '<?php echo $detail["event_id"]; ?>';
+var currencysymbol = '<?php echo $currencysymbol; ?>';
+
+	$(document).ready(function (){
+
+		uidatepicker(
+			'#startdate', 
+			{ 
+                dateFormat : 'mm-dd-yy',
+			    'close'    : function(selecteddate){
+					var date = new Date(selecteddate)
+					date.setDate(date.getDate() + 1);
+					$("#enddate").datepicker( "option", "minDate", date );
+				}
+			}
+		);
+
+		uidatepicker('#enddate', { dateFormat: 'mm-dd-yy' });
+	});
+
+    $( "#checkavailability" ).on( "click", function() {
+
+		setTimeout(function(){
+			var startdate 	= $("#startdate").val(); 
+			var enddate   	= $("#enddate").val(); 
+      
+			if(startdate!='' && enddate!=''){
+                var dt1 = new Date(startdate);
+                var dt2 = new Date(enddate);
+                var time_difference = dt2.getTime() - dt1.getTime();
+                var datediff        = time_difference / (1000 * 60 * 60 * 24);
+                var totalfees       = datediff * 15;
+                var stallamount     = currencysymbol+totalfees
+                var amounthtml ='<p class="float-end  fw-bold" id="stallfees">'+stallamount+'<span class="redcolor">Fees</span></p>';
+
+                $(".choose-stall-date").css("display", "none");
+                $(".stall-date").css("display", "block");
+                $(".stall-total").css("display", "block");
+                $(".stall-points").css("display", "block");
+                $(".book-now").css("display", "block");
+
+                $('#startdatetxt').append(startdate);
+                $('#enddatetxt').append(enddate);
+                $(amounthtml).insertAfter('.tot');
+
+				occupiedreserved(startdate, enddate);
+			}
+		}, 100);
+	
+    });
+
+    function occupiedreserved(startdate, enddate){
+
+        ajax(
+			'<?php echo base_url()."/ajax/ajaxoccupied"; ?>',
+			{ eventid : eventid, checkin : startdate, checkout : enddate },
+			{
+				success : function(data){
+                    if (data == undefined || data == null || data.length == 0 || (data.length == 1 && data[0] == "")){
+                       $(".stall-total").css("display", "none");
+                       $("#bookstall").css("display", "none");
+                       $(".stall-msg").css("display", "none");
+                    }
+
+				}
+			}
+		)
+        ajax(
+			'<?php echo base_url()."/ajax/ajaxreserved"; ?>',
+			{ eventid : eventid, checkin : startdate, checkout : enddate },
+			{
+				asynchronous : 1,
+				success : function(data){
+                    if (data == undefined || data == null || data.length == 0 || (data.length == 1 && data[0] == "")){
+                       $(".stall-total").css("display", "none");
+                       $("#bookstall").css("display", "none");
+                       $(".stall-msg").css("display", "none");
+                    }
+
+				}
+			}
+		)
+	}
+
+
+</script>
+
+<?php echo $this->endSection() ?>

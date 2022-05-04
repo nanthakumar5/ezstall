@@ -1929,7 +1929,7 @@ p.float-left {
     margin: 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+    padding-bottom: 64px;
 }
 
 span.redcolor {
@@ -1947,6 +1947,17 @@ button.stalldetail-btn {
     border: transparent;
     padding: 10px 20px;
     color: #fff;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 7px;
+    transition: 2s;
+}
+button.stallbooknow-btn{
+    background: #e00;
+    border: transparent;
+    padding: 10px 20px;
+    color: #ffffff;
     text-align: center;
     width: 100%;
     font-weight: bold;
