@@ -101,9 +101,9 @@
 								<p><img class="eventSecondIcon" src="<?php //echo base_url()?>/assets/site/img/rvSpot.svg">RV Spots</p>
 								<h6 class="ucprice">from $<?php //echo $data['rvspots_price'] ?> / night</h6>
 							</span> -->
-							<button class="ucEventBtn">
-								<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><?php echo $booknowBtn['btn'];?></a>
-							</button>
+							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><button class="ucEventBtn">
+								<?php echo $booknowBtn['btn'];?>
+							</button></a>
 						</div>
 					</div>
 				</div>

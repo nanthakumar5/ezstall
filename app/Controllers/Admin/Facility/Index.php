@@ -86,7 +86,8 @@ class Index extends BaseController
 		if ($this->request->getMethod()=='post')
         { 
         	$requestData = $this->request->getPost();
-        	
+			$requestData['userid'] 		= getSiteUserID();
+
         	if(isset($requestData['start_date'])) $requestData['start_date'] 	= formatdate($requestData['start_date']);
     		if(isset($requestData['end_date'])) $requestData['end_date'] 		= formatdate($requestData['end_date']);
 
@@ -102,7 +103,6 @@ class Index extends BaseController
         }
 		
 		$data['statuslist'] = $this->config->status1;
-		
 		return view('admin/facility/action', $data);
 	}	
 	

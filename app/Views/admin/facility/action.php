@@ -6,6 +6,7 @@
 $id 					= isset($result['id']) ? $result['id'] : '';
 $userid  				= isset($result['userid']) ? $result['userid'] : '';
 $name 					= isset($result['name']) ? $result['name'] : '';
+$description 		    = isset($result['description']) ? $result['description'] : '';
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 
@@ -39,10 +40,22 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<input type="hidden" id="id" name="id" value="<?php echo $id;?>" >
 				<div class="col-md-12">
 					<div class="row">
+					<div class="col-md-12 my-2">
+						  <div class="form-group">
+							       <label>Facility Users</label>								
+								   <?php echo form_dropdown('userid', getUsersList(['type'=>['2']]), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
+							</div>
+						</div>
 						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Name</label>								
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
+							</div>
+						</div>
+						<div class="col-md-12 my-2">
+						    <div class="form-group">
+									<label>Stall Description</label>
+									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 							</div>
 						</div>
 					</div>
@@ -64,7 +77,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-						<input type="hidden" name="type" value="">
+						<input type="hidden" name="type" value="2">
 						<button class="btn btn-danger facilitypayment"  type="submit">Submit</button>
 						<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-dark">Back</a>
 					</div>

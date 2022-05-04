@@ -1,17 +1,19 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 	<?php
-		$getcart 	= getCart('2');
-		$cartevent 	= ($getcart && $getcart['barnstall'][0]['stall_id'] != $detail['id']) ? 1 : 0;
+	    $currentdate = date("m-d-Y");
+		$getcart 	 = getCart('2');
+		$cartevent 	 = ($getcart && $getcart['barnstall'][0]['stall_id'] != $detail['id']) ? 1 : 0;
 
-		$name 		= $detail['name'];
-		$image 		= base_url().'/assets/uploads/stall/'.$detail['image'];
-		$price 		= $detail['price'];
-		$startdate 	= $detail['start_date'];
-		$enddate 	= $detail['end_date'];
-		$eventid 	= $detail['event_id'];
-		$barnid 	= $detail['barn_id'];
-		$stallid 	= $detail['id'];
+		$name 		 = $detail['name'];
+		$description = $detail['description'];
+		$image 		 = base_url().'/assets/uploads/stall/'.$detail['image'];
+		$price 		 = $detail['price'];
+		$startdate 	 = $detail['start_date'];
+		$enddate 	 = $detail['end_date'];
+		$eventid 	 = $detail['event_id'];
+		$barnid 	 = $detail['barn_id'];
+		$stallid 	 = $detail['id'];
 	?>
 	<div class="infoPanel stallform container-lg">
 		<span class="infoSection">
@@ -65,10 +67,7 @@
 				</div>
 				<div class="stall-description">
 					<h4 class="fw-bold">Description</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					<p>
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloreme laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-					</p>
+					<p><?php echo $description;?> </p>
 				</div>
 				<div class="stall-riding">
 					<h4 class="fw-bold">Riding Disciplines</h4>
@@ -134,11 +133,12 @@
 
 <?php $this->section('js') ?>
 <script> 
+    var currentdate         = '<?php echo $currentdate;?>';
 	var cartevent 			= '<?php echo $cartevent; ?>';
 	var eventid 			= '<?php echo $eventid; ?>';
 	var barnid 				= '<?php echo $barnid; ?>';
 	var stallid 			= '<?php echo $stallid; ?>';
-	var eventstartdate  	= '<?php echo $startdate > date("Y-m-d") ? formatdate($startdate, 1) : 0; ?>';
+	var eventstartdate  	= '<?php echo $startdate > $currentdate ? formatdate($startdate, 1) : 0; ?>';
 	var eventenddate 		= '<?php echo formatdate($enddate, 1); ?>';
 	var eventenddateadd 	= '<?php echo formatdate(date("Y-m-d", strtotime($enddate." +1 day")), 1); ?>';
 	var price 				= '<?php echo $price; ?>';
@@ -147,10 +147,15 @@
 	$(document).ready(function (){
 		if(cartevent == 0 ){
 			cart();
-		}else{
-			$("#startdate, #enddate, #checkavailability").attr('disabled', 'disabled');
 		}
+		else{
+			$("#startdate, #enddate, #checkavailability").attr('disabled', 'disabled');
+        }
 		
+		if(currentdate > eventenddate){
+			$("#startdate, #enddate, #checkavailability").attr('disabled', 'disabled');
+        }
+
 		uidatepicker(
 			'#startdate', 
 			{ 

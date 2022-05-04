@@ -27,13 +27,14 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
-        if($this->request->getGet('location')!="")   		$searchdata['llocation']    = $this->request->getGet('location');
-		if($this->request->getGet('start_date')!="")   	 	$searchdata['start_date']   = formatdate($this->request->getGet('start_date'));
-		if($this->request->getGet('end_date')!="")   	 	$searchdata['end_date']    	= formatdate($this->request->getGet('end_date'));
-		
+        if($this->request->getGet('name')!="")   		    $searchdata['stallname']        = $this->request->getGet('name');
+		if($this->request->getGet('start_date')!="")   	 	$searchdata['btw_start_date']   = formatdate($this->request->getGet('start_date'));
+		if($this->request->getGet('end_date')!="")   	 	$searchdata['btw_end_date']    	= formatdate($this->request->getGet('end_date'));
 		$stallcount = $this->stall->getStall('count', ['stall','event'], $searchdata+['status'=> ['1'],'type' => '2']);
     	$stalls 	= $this->stall->getStall('all', ['stall','event'], $searchdata+['status'=> ['1'],'type' => '2', 'start' => $offset, 'length' => $perpage]);
+
         $data['stalllist'] 	= $stalls; 
+		$data['currencysymbol'] = $this->config->currencysymbol;
         $data['pager'] 		= $pager->makeLinks($page, $perpage, $stallcount);
         
     	return view('site/stall/index',$data);
@@ -41,7 +42,7 @@ class Index extends BaseController
 	
     public function detail($id)
     {
-    	$data['detail'] = $this->stall->getStall('row', ['stall'],['id' => $id]);
+    	$data['detail'] = $this->stall->getStall('row', ['stall','event'],['id' => $id]);
 		$data['currencysymbol'] = $this->config->currencysymbol;
 
     	return view('site/stall/detail',$data);

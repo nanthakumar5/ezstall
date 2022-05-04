@@ -14,6 +14,10 @@ class Stall extends BaseModel
 			$data		= 	['s.*'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		if(in_array('event', $querydata)){
+			$data		= 	['e.description'];							
+			$select[] 	= 	implode(',', $data);
+		}
 
 		$query = $this->db->table('stall s');  
 		if(in_array('event', $querydata))	$query->join('event e','e.id=s.event_id', 'LEFT');
@@ -27,10 +31,12 @@ class Stall extends BaseModel
 		if(isset($requestdata['barn_id'])) 			    $query->where('s.barn_id', $requestdata['barn_id']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date', $requestdata['start_date']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date', $requestdata['end_date']);
-		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
 		if(isset($requestdata['type'])) 				$query->where('e.type', $requestdata['type']);
 		if(isset($requestdata['status'])) 				$query->whereIn('s.status', $requestdata['status']);
-
+		if(isset($requestdata['stallname'])) 			$query->like('s.name', $requestdata['stallname']);
+        if(isset($requestdata['btw_start_date']) && !isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN s.start_date AND s.end_date")->orWhere('s.start_date >=', $requestdata['btw_start_date'])->groupEnd();
+		if(!isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_end_date']."' BETWEEN s.start_date AND s.end_date")->orWhere('s.end_date <=', $requestdata['btw_end_date'])->groupEnd();
+		if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN s.start_date AND s.end_date")->orWhere("'".$requestdata['btw_end_date']."' BETWEEN s.start_date AND s.end_date")->groupEnd();
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
 		}
@@ -46,9 +52,12 @@ class Stall extends BaseModel
 			if(isset($requestdata['page'])){ 
 				$page = $requestdata['page'];
 				$query->groupStart();
-					if($page=='stalls'){ 		
+					// if($page=='stalls'){ 		
+					// 	$query->like('s.name', $searchvalue);
+					// 	$query->orLike('s.price', $searchvalue);
+					// }
+					if($page=='facility'){				
 						$query->like('s.name', $searchvalue);
-						$query->orLike('s.price', $searchvalue);
 					}
 				$query->groupEnd();
 			}			
