@@ -22,9 +22,9 @@ class Event extends BaseModel
 			if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) 	$condition .= " and ('".$requestdata['btw_start_date']."' BETWEEN e.start_date AND e.end_date or '".$requestdata['btw_end_date']."' BETWEEN e.start_date AND e.end_date)";
 			
 			if($condition!=''){
-				$select[] = '((select  count("*") from  stall as s where s.event_id = e.id) - (select  count("*") from  booking as b left join booking_details as bd on bd.booking_id = b.id where b.event_id = e.id '.$condition.')) as stallavailable';							
+				$select[] = '((select count("*") from  stall as s where s.event_id = e.id and s.status="1") - (select  count("*") from  booking as b left join booking_details as bd on bd.booking_id = b.id where b.event_id = e.id '.$condition.')) as stallavailable';							
 			}else{
-				$select[] = '(select  count("*") from  stall as s where s.event_id = e.id) as stallavailable';							
+				$select[] = '(select count("*") from  stall as s where s.event_id = e.id and s.status="1") as stallavailable';							
 			}
 		}
 		
@@ -254,6 +254,8 @@ class Event extends BaseModel
 		$id 			= $data['id'];
 		
 		$event 			= $this->db->table('event')->update(['updated_at' => $datetime, 'updated_by' => $userid, 'status' => '0'], ['id' => $id]);
+		$this->db->table('barn')->update(['status' => '0'], ['event_id' => $id]);
+		$this->db->table('stall')->update(['status' => '0'], ['event_id' => $id]);
 		
 		if($event && $this->db->transStatus() === FALSE){
 			$this->db->transRollback();

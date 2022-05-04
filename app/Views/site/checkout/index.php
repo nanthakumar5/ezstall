@@ -79,6 +79,7 @@
               <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'  value="<?php echo $cvc; ?>">
             </div>
           </div>
+		  <div class='error hide'><div class='alert' style="color: red;"></div></div> 
         </div> 
         <input type="hidden" name="payer_id" value="<?php echo $userdetail['id']; ?>">
         <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
@@ -87,6 +88,7 @@
         <input type="hidden" name="checkout" value="<?php echo formatdate($cartdetail['check_out']); ?>" >
         <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
         <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
+        <input type="hidden" name="type" value="<?php echo $cartdetail['type']; ?>" >
         <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
 
         <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
@@ -106,7 +108,6 @@
                 <b>Location</b>
                 <p><?php echo $cartdetail['event_location'];?><br>
                 </div>
-
                 <div class="col-lg-6 mb-4">
                   <b>Venue</b>
                   <p><?php echo $cartdetail['event_description'];?></p>

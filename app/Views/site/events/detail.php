@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 <?php 
 $userid 	= getSiteUserID() ? getSiteUserID() : 0;
-$getcart 	= getCart();
+$getcart 	= getCart('1');
 $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 ?>
 <body style="overflow: initial;">
@@ -226,7 +226,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 			var enddate   	= $("#enddate").val(); 
 
 			if(startdate!='' && enddate!=''){
-				cart({checked : 0}); 
+				cart({type : '1', checked : 0}); 
 				$('.stallid').prop('checked', false).removeAttr('disabled');
 				$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
 				
@@ -247,7 +247,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 					});
 				}
 			}
-			)
+		)
 		
 		ajax(
 			'<?php echo base_url()."/ajax/ajaxreserved"; ?>',
@@ -261,7 +261,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 					});
 				}
 			}
-			)
+		)
 	}
 	
 	$(".form-check-input").on("click", function() {
@@ -274,10 +274,10 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 		var price 		= $(this).attr('data-price');
 
 		if($(this).is(':checked')){
-			cart({stall_id : stallid, event_id : eventid, barn_id : barnid, price : price, startdate : startdate, enddate : enddate, checked : 1, actionid : ''});
+			cart({stall_id : stallid, event_id : eventid, barn_id : barnid, price : price, startdate : startdate, enddate : enddate, type : '1',  checked : 1, actionid : ''});
 		}else{
 			$('.stallavailability[data-stallid='+stallid+']').removeClass("yellow-box").addClass("green-box");
-			cart({stall_id : stallid, checked : 0}); 
+			cart({stall_id : stallid, type : '1', checked : 0}); 
 		}
 	});
 
@@ -301,7 +301,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 		}
 	}
 
-	function cart(data={cart:1}){	 	
+	function cart(data={cart:1, type:1}){	 	
 		ajax(
 			'<?php echo base_url()."/cart"; ?>',
 			data,
