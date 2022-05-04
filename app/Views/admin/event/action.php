@@ -543,11 +543,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var stallcount    	= $('#stall').val();
 		var stallstarting   = $('#stallstarting').val();
 		var barnIndex     	= $('#barnIndexValue').val();
-
-		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name+stallstarting,price:price,status:1,bulkimage:image});
-			stallstarting++;
-		}
+		
+			for(var i=0; i<stallcount; i++){ 
+				stalldata(barnIndex, {name:name+ ' ' +stallstarting,price:price,status:1,bulkimage:image});
+				stallstarting!='' ? stallstarting++ : '';
+			}
 
 		$('#myModal').modal('hide');
 	});

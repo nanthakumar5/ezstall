@@ -374,8 +374,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var barnIndex     = $('#barnIndexValue').val();
 
 		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name+stallstarting,price:price,status:1,bulkimage:image});
-			stallstarting++;
+			stalldata(barnIndex, {name:name+ ' ' +stallstarting,price:price,status:1,bulkimage:image});
+			stallstarting!='' ? stallstarting++ : '';
 		}
 
 		$('#myModal').modal('hide');
