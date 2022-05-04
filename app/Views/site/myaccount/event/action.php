@@ -207,6 +207,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
 						</div>
 					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Starting stall number</label>
+							<input type="text" id="stallstarting"  name="stallstarting" class="form-control" placeholder="Enter Stall Name" min="1" required>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
@@ -469,14 +475,14 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		}
 	})
 
-	$('#myModal').on('shown.bs.modal', function (e) {
+	$('#myModal').on('shown.bs.modal', function (e) { 
 		$('#stall_name, #stall_price, #stall_image, #stall_file, #stall').val('');
 		$('#stall_status').val('1');
 		$('.stall_source').attr('src', '<?php echo base_url()?>/assets/images/upload.png');
 		$('.stall_source').parent().attr('href', '<?php echo base_url()?>/assets/images/upload.png');
 	})
 
-	$(document).on('click','#addbulkstallbtn', function (e) {
+	$(document).on('click','#addbulkstallbtn', function (e) { 
 		e.preventDefault();
 		$('#barnIndexValue').val($(this).attr('data-barnIndex'));
 	});
@@ -492,10 +498,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var price         = $('#stall_price').val();
 		var image         = $('#stall_image').val();
 		var stallcount    = $('#stall').val();
+		var stallstarting = $('#stallstarting').val();
 		var barnIndex     = $('#barnIndexValue').val();
 
 		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name,price:price,status:1,bulkimage:image});
+			stalldata(barnIndex, {name:name+stallstarting,price:price,status:1,bulkimage:image});
+			stallstarting++;
 		}
 
 		$('#myModal').modal('hide');

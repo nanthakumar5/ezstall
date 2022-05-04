@@ -53,19 +53,19 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<form method="post" id="form" action="<?php echo getAdminUrl(); ?>/event/action" autocomplete="off">
 					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label>User</label>								
 									<?php echo form_dropdown('userid', getUsersList(['type'=>['3']]), $userid, ['id' => 'userid', 'class' => 'form-control']); ?>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label>Name</label>								
 									<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label>Event Description</label>
 									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
@@ -119,12 +119,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 									<input type="text" name="rvspots_price" class="form-control" id="rvspots_price" placeholder="Enter RV Spots Price" value="<?php echo $rvspots_price;?>">								
 								</div>
 							</div>
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 								<div class="form-group">
 									<label>Status</label>								
 									<?php echo form_dropdown('status', ['' => 'Select Status']+$statuslist, $status, ['id' => 'status', 'class' => 'form-control']); ?>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="col-md-4">
 								<div class="form-group">
@@ -183,6 +183,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					</div>
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
+						<input type="hidden" name="status" value="1">
 						<input type="hidden" name="type" value="">
 						<input type="submit" id ="eventSubmit" class="btn btn-danger" value="Submit">
 						<a href="<?php echo base_url(); ?>/events" class="btn btn-dark">Back</a>
@@ -232,6 +233,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
 						</div>
 					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Starting stall number</label>
+							<input type="text" id="stallstarting"  name="stallstarting" class="form-control" placeholder="Enter Starting Stall Name" required>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
@@ -263,10 +270,10 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 <?php $this->section('js') ?>
 
 <script>
-	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
-	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
-	var barnIndex        		= '0';
-	var stallIndex       		= '0';
+	var barn				 		= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
+	var statuslist			= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
+	var barnIndex      	= '0';
+	var stallIndex      = '0';
 	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
 	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
@@ -328,7 +335,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	
 	$('#eventSubmit').click(function(e){
 		var totalstall 		= $('.dash-stall-base').length
-		var result 			= parseInt(totalstall) - parseInt(occupiedstallcount);
+		var result 				= parseInt(totalstall) - parseInt(occupiedstallcount);
 		tabvalidation();
 	});
 	
@@ -345,7 +352,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	function barndata(result=[], type=''){ 
 		var barnId   	= result['id'] ? result['id'] : '';
 		var barnName 	= result['name'] ? result['name'] : 'Barn';
-		var stall		= result['stall'] ? result['stall'] : [];
+		var stall			= result['stall'] ? result['stall'] : [];
 		
 		var activeclass = $.trim($(".barntab").html())=='' ? 'active' : '';
 		
@@ -530,14 +537,16 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			return false;
 		}
 
-		var name          = $('#stall_name').val();
-		var price         = $('#stall_price').val();
-		var image         = $('#stall_image').val();
-		var stallcount    = $('#stall').val();
-		var barnIndex     = $('#barnIndexValue').val();
+		var name          	= $('#stall_name').val();
+		var price         	= $('#stall_price').val();
+		var image         	= $('#stall_image').val();
+		var stallcount    	= $('#stall').val();
+		var stallstarting   = $('#stallstarting').val();
+		var barnIndex     	= $('#barnIndexValue').val();
 
 		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name,price:price,status:1,bulkimage:image});
+			stalldata(barnIndex, {name:name+stallstarting,price:price,status:1,bulkimage:image});
+			stallstarting++;
 		}
 
 		$('#myModal').modal('hide');

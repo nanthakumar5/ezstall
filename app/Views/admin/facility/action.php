@@ -113,6 +113,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
 						</div>
 					</div>
+					<div class="col-md-12 my-2">
+						<div class="form-group">
+							<label>Starting stall number</label>
+							<input type="text" id="stallstarting"  name="stallstarting" class="form-control" placeholder="Enter Starting Stall Name" required>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" id="barnIndexValue" name="barnIndexValue" value="0">
@@ -126,12 +132,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 <script>
-	var barn				 				= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
-	var statuslist		 			= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
+	var barn				 	= $.parseJSON('<?php echo addslashes(json_encode($barn)); ?>'); 
+	var statuslist		 		= $.parseJSON('<?php echo addslashes(json_encode($statuslist)); ?>');
 	var barnIndex        		= '0';
 	var stallIndex       		= '0';
-	var occupied 	 					= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
-	var reserved 	 					= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
+	var occupied 	 			= $.parseJSON('<?php echo json_encode((isset($occupied)) ? $occupied : []); ?>');
+	var reserved 	 			= $.parseJSON('<?php echo json_encode((isset($reserved)) ? explode(",", implode(",", array_keys($reserved))) : []); ?>');
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
 
 	
@@ -364,10 +370,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var price         = $('#stall_price').val();
 		var image         = $('#stall_image').val();
 		var stallcount    = $('#stall').val();
+		var stallstarting = $('#stallstarting').val();
 		var barnIndex     = $('#barnIndexValue').val();
 
 		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name,price:price,status:1,bulkimage:image});
+			stalldata(barnIndex, {name:name+stallstarting,price:price,status:1,bulkimage:image});
+			stallstarting++;
 		}
 
 		$('#myModal').modal('hide');
