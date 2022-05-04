@@ -28,7 +28,8 @@ class Stall extends BaseModel
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date', $requestdata['start_date']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date', $requestdata['end_date']);
 		if(isset($requestdata['llocation'])) 			$query->like('e.location', $requestdata['llocation']);
-		if(isset($requestdata['type'])) 			$query->where('e.type', $requestdata['type']);
+		if(isset($requestdata['type'])) 				$query->where('e.type', $requestdata['type']);
+		if(isset($requestdata['status'])) 				$query->whereIn('s.status', $requestdata['status']);
 
 		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
 			$query->limit($requestdata['length'], $requestdata['start']);
@@ -61,7 +62,7 @@ class Stall extends BaseModel
 		if($type=='count'){
 			$result = $query->countAllResults();
 		}else{
-			$query = $query->get(); //echo $this->db->getLastQuery();die;
+			$query = $query->get();
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
