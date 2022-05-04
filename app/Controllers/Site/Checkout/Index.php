@@ -31,7 +31,7 @@ class Index extends BaseController
             $requestData['paymentid'] 	= $paymentresult;
 			
             $booking = $this->booking->action($requestData);
-            $this->cart->delete(['user_id' => $userid]);
+            $this->cart->delete(['user_id' => $userid, 'type' => $requestData['type']]);
             
             if($booking){
               return redirect()->to(base_url().'/paymentsuccess'); 

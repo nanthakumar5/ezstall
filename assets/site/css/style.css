@@ -9,7 +9,13 @@ body {
     overflow-x: hidden;
 }
 
-
+.displaynone{
+	display:none;
+}
+.tagline{
+	color : red;
+	font-size:14px;
+}
 /*Top navbar Styles start*/
 
 .logo {
@@ -1909,6 +1915,7 @@ span.stall-imgover {
 .stall-date {
     margin: 20px 20px 0px 20px;
     display: block;
+    border-bottom: 1px solid #ddd;
 }
 
 .stall-number {
@@ -1929,7 +1936,7 @@ p.float-left {
     margin: 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 64px;
+    padding-bottom: 10px;
 }
 
 span.redcolor {

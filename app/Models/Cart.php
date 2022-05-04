@@ -44,6 +44,7 @@ class Cart extends BaseModel
 		if(isset($requestdata['barn_id'])) 				    	$query->where('c.barn_id', $requestdata['barn_id']);
 		if(isset($requestdata['stall_id'])) 				    $query->where('c.stall_id', $requestdata['stall_id']);
 		if(isset($requestdata['ip'])) 				    		$query->where('c.ip', $requestdata['ip']);
+		if(isset($requestdata['type'])) 				    	$query->where('c.type', $requestdata['type']);
 		
 		if(isset($requestdata['checkin']) && isset($requestdata['checkout'])){
 			$query->groupStart();
@@ -69,7 +70,7 @@ class Cart extends BaseModel
 
 		$ip = $data['ip'];
 		$request['ip'] = $ip;
-
+		
 		if(isset($data['user_id'])&& $data['user_id']!='') 	 	       	$request['user_id'] 		= $data['user_id'];
 		if(isset($data['stall_id'])&& $data['stall_id']!='')           	$request['stall_id'] 	    = $data['stall_id'];
 		if(isset($data['event_id'])&& $data['event_id']!='')           	$request['event_id'] 	    = $data['event_id'];
@@ -77,8 +78,12 @@ class Cart extends BaseModel
 		if(isset($data['price'])&& $data['price']!='')     				$request['price'] 	        = $data['price'];
 		if(isset($data['startdate'])&& $data['startdate']!='')         	$request['check_in'] 	    = date('Y-m-d', strtotime($data['startdate']));
 		if(isset($data['enddate'])&& $data['enddate']!='')             	$request['check_out'] 	    = date('Y-m-d', strtotime($data['enddate']));
+		if(isset($data['type'])&& $data['type']!='')             		$request['type'] 	    	= $data['type'];
 
-		if($data['actionid']==""){   
+		if($data['actionid']==""){
+			$this->db->table('cart')->delete(['ip' => $ip, 'type' => '2']);
+			if($request['type']=='2') $this->db->table('cart')->delete(['ip' => $ip, 'type' => '1']);
+			
 			$request['datetime'] = date('Y-m-d H:i:s');
 			$cart = $this->db->table('cart')->insert($request);
 			$insertid = $this->db->insertID();
@@ -101,6 +106,7 @@ class Cart extends BaseModel
 		$this->db->transStart();
 		
 		$request = [];
+		$request['type'] = $data['type'];
 		if(isset($data['ip']))            	 	$request['ip']    		= $data['ip'];
 		if(isset($data['user_id']))            	$request['user_id']    	= $data['user_id'];
 		if(isset($data['stall_id']))            $request['stall_id'] 	= $data['stall_id'];

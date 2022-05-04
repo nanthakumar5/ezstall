@@ -239,9 +239,10 @@ function formattime($time, $type=''){
 	}
 }
 
-function getCart(){ 
+function getCart($type=''){ 
 	$request 		= service('request');
     $condition 		= getSiteUserID() ? ['user_id' => getSiteUserID(), 'ip' => $request->getIPAddress()] : ['user_id' => 0, 'ip' =>$request->getIPAddress()] ;
+	if($type!='') $condition['type'] = $type;
 	$cart 		    = new \App\Models\Cart;
 	$result         = $cart->getCart('all', ['cart', 'event', 'barn', 'stall'], $condition);
 	
@@ -267,6 +268,7 @@ function getCart(){
 		$daydiff           		= ceil(abs($start - $end) / 86400);
 		$interval           	= $daydiff==0 ? 1 : $daydiff;
 		$price          		= array_sum(array_column($result, 'price'));
+		$type          			= array_unique(array_column($result, 'type'))[0];
 		
 		return [
 			'event_id' => $event_id, 
@@ -277,7 +279,8 @@ function getCart(){
 			'price' => $price * $interval, 
 			'interval' => $interval, 
 			'check_in' => $check_in,
-			'check_out' => $check_out
+			'check_out' => $check_out,
+			'type' => $type
 		];	
 	}else{
 		return false;
