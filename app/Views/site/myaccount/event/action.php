@@ -502,8 +502,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var barnIndex     = $('#barnIndexValue').val();
 
 		for(var i=0; i<stallcount; i++){ 
-			stalldata(barnIndex, {name:name+ ' ' +stallstarting,price:price,status:1,bulkimage:image});
-			stallstarting!='' ? stallstarting++ : '';
+			var names = stallstarting!='' ? name+' '+stallstarting : name;
+			stalldata(barnIndex, {name:names,price:price,status:1,bulkimage:image});
+			if(stallstarting!='') stallstarting++ ;
 		}
 
 		$('#myModal').modal('hide');
