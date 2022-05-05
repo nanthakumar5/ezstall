@@ -4,7 +4,7 @@
 <?php
 
 $id 					= isset($result['id']) ? $result['id'] : '';
-$userid  				= isset($result['userid']) ? $result['userid'] : '';
+$userid  				= isset($result['user_id']) ? $result['user_id'] : '';
 $name 					= isset($result['name']) ? $result['name'] : '';
 $description 		    = isset($result['description']) ? $result['description'] : '';
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
@@ -76,7 +76,6 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					</div>
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
-						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
 						<input type="hidden" name="type" value="2">
 						<button class="btn btn-danger facilitypayment"  type="submit">Submit</button>
 						<a href="<?php echo getAdminUrl(); ?>/facility" class="btn btn-dark">Back</a>

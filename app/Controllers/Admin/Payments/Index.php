@@ -33,6 +33,7 @@ class Index extends BaseController
 							';
 				
 				$totalrecord[] = 	[
+										'id' 	=> 	$result['id'],
 										'payer_name' 	=> 	$result['payer_name'],
 										'payer_email'  	=>  $result['payer_email'],
 										'action'		=> 	'<div class="table-action">
@@ -54,7 +55,7 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$result = $this->payments->getPayments('row', ['payment'], ['id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment','users'], ['id' => $id]);
 
 		if($result){
 			$data['result'] = $result;
@@ -62,7 +63,8 @@ class Index extends BaseController
 			$this->session->setFlashdata('danger', 'No Record Found.');
 			return redirect()->to(getAdminUrl().'/payments'); 
 		}
-		
+
+		$data['usertype']        = $this->config->usertype;
 		return view('admin/payments/view', $data);
 	}	
 }

@@ -21,8 +21,9 @@ class Index extends BaseController
 	public function DTcontactus()
 	{		
 		$post 			= $this->request->getPost(); 
-		$totalcount 	= $this->contactus->getContactus('count', ['contactus'],['status' => [1]]+$post);
-		$results 		= $this->contactus->getContactus('all', ['contactus'],['status' => [1]]+$post);
+		$totalcount 	= $this->contactus->getContactus('count', ['contactus'],['status' => ['1']]+$post);
+		$results 		= $this->contactus->getContactus('all', ['contactus'],['status' => ['1']]+$post);
+
 		$totalrecord 	= [];
 				
 		if(count($results) > 0){

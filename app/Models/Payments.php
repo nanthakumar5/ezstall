@@ -58,7 +58,7 @@ class Payments extends BaseModel
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='adminpayments'){
-				$column = ['p.payer_name', 'p.payer_email'];
+				$column = ['p.id','p.payer_name', 'p.payer_email'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}

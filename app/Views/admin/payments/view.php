@@ -1,17 +1,17 @@
 <?= $this->extend("admin/common/layout/layout2") ?>
 <?php $this->section('content') ?>
 	<?php
-	//echo "<pre>";print_r($result);die;
 		$id 					= isset($result['id']) ? $result['id'] : '';
+		$username       		= isset($result['username']) ? $result['username'] : '';
 		$name 					= isset($result['payer_name']) ? $result['payer_name'] : '';
 		$email 					= isset($result['payer_email']) ? $result['payer_email'] : '';
-		$type                   = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
+		$type           		= isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
 		$amount 				= isset($result['amount']) ? $result['amount'] : '';
 		$plan_start 		    = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';
 		$plan_start             = formatdate($plan_start, 1);
 		$plan_end 		        = isset($result['plan_period_start']) ? $result['plan_period_end'] : '';
 		$plan_end               = formatdate($plan_end, 1);
-
+		$created        		= isset($result['created']) ? formatdate($result['created'], 2) : '';
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -41,33 +41,51 @@
 			<div class="card-body">
 				<table class="table">
 				  <tbody>
-				    <tr>
-					      <th>Name</th>
-					      <td><?php echo $name;?></td>
-				    </tr>
-				    <tr>
-					      <th>Email</th>
-					      <td><?php echo $email;?></td>
-					</tr>
-					<tr>
-						<th>Payment Type</th>
-						<td><?php echo $type;?></td>
-					</tr>
-					<tr>
-						<th>Amount</th>
-						<td><?php echo $amount;?></td>
-					</tr>
-					<tr>
-						<th>Plan Date</th>
-						<td><?php echo $plan_start;?></td>
-					</tr>
-					<tr>
-						<th>Plan End</th>
-						<td><?php echo $plan_end;?></td>
-					</tr>
+						<tr>
+							<th>Transaction ID</th>
+							<td><?php echo $id;?></td>
+						</tr>
+						<tr>
+							<th>Name</th>
+							<td><?php echo $username;?></td>
+						</tr>
+						<tr>
+							<th>Name On Card</th>
+							<td><?php echo $name;?></td>
+						</tr>
+						<tr>
+							<th>Email</th>
+							<td><?php echo $email;?></td>
+						</tr>
+						<tr>
+							<th>Payment Type</th>
+							<td><?php echo $type;?></td>
+						</tr>
+						<tr>
+							<th>Amount</th>
+							<td><?php echo $amount;?></td>
+						</tr>
+						<?php if($type == 2 ){?>
+						<tr>
+							<th>Plan Date</th>
+							<td><?php echo $plan_start;?></td>
+						</tr>
+						<tr>
+							<th>Plan End</th>
+							<td><?php echo $plan_end;?></td>
+						</tr>
+						<?php } else{ ?>
+						<tr>
+							<th>Payed Date</th>
+							<td><?php echo $created;?></td>
+						</tr>
+						<?php } ?>
+						<tr>
+							<th>Paid By</th>
+							<td><?php echo $usertype[$result['usertype']]; ?></td>
+						</tr>
 				  </tbody>
 				</table>
-
 			</div>
 		</div>
 	</section>

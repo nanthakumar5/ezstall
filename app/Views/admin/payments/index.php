@@ -23,6 +23,7 @@
 				<div class="card-body">	
 					<table class="table table-striped table-hover datatables">
 						<thead>
+							<th>Transaction ID</th>
 							<th>Name</th>
 							<th>Email</th>	
 							<th>Action</th>
@@ -40,6 +41,7 @@
 				url 		: 	'<?php echo getAdminUrl()."/payments/DTpayments"; ?>',	
 				data		:	{ 'page' : 'adminpayments' },				
 				columns 	: 	[
+									{ 'data' : 'id' },
     				                { 'data' : 'payer_name' },
                     				{ 'data' : 'payer_email' },					
                     				{ 'data' : 'action' }								

@@ -68,7 +68,7 @@
       <p class="my-2"><?php echo $amount;?></p>
     </div>
   </div>  
-  <?php if($result == 2 ){?>
+  <?php if($type == 2 ){?>
   <div class="row col-md-10 base-style">
     <div class="col fw-600">
       <p class="my-2">Plan Date</p>

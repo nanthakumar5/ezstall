@@ -207,16 +207,69 @@
 			fileupload([".logo_file"], ['.logo_input', '.logo_source','.logo_msg']);
 			
 			validation(
-				'#form1',
-				{
-					title 	     : {
-						required	: 	true
-					},
-					content  : {	
-						required	: 	true
-					}
-				}
+                '#form1',
+                {
+                    name        : {
+                        required  : true
+                    },
+					description   : {
+                        required  : true
+                    },
+                    email       : {
+                        required  : true,
+                        email     : true   
+                    },
+					phone    	: {
+                        required  : true
+                    },
+					facebook    : {
+                        required  : true
+                    },                  
+					google    : {
+                        required  : true
+                    },
+					twitter    : {
+                        required  : true
+                    },				
+					instagram    : {
+                        required  : true
+                    }
+                },
+                { 
+                    email       : {
+                        required  : "This field is required.",
+                        email     : "Enter valid email address."
+                    }
+                }
 			);
+			validation(
+				'#form2',
+                {
+                    stripepublickey       : {
+                        required  : true
+                    },
+					stripeprivatekey      : {
+                        required  : true
+                    }
+                    
+                }
+			);
+			validation(
+				'#form3',
+                {
+                    transactionfee        : {
+                        required  : true
+                    },
+					producereventfee       : {
+                        required  : true
+                    },
+					facilitystallfee        : {
+                        required  : true
+                    }
+                    
+                },
+
+            );
 			
 		});
 

@@ -33,9 +33,10 @@ class Index extends BaseController
 							';
 				
 				$totalrecord[] = 	[
+										'id' 			=> 	$result['id'],
 										'firstname' 	=> 	$result['firstname'],
 										'lastname'  	=>  $result['lastname'],
-										'mobile'  	=>  $result['mobile'],
+										'mobile'  		=>  $result['mobile'],
 										'action'		=> 	'<div class="table-action">
 																'.$action.
 															'</div>'
@@ -55,14 +56,17 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall'], ['id' => $id]);
+		$userid = getSiteUserID();
+
+		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall','users'], ['id' => $id]);
 		if($result){
 			$data['result'] = $result;
 		}else{
 			$this->session->setFlashdata('danger', 'No Record Found.');
 			return redirect()->to(getAdminUrl().'/reservations'); 
 		}
-		
+		$data['usertype'] = $this->config->usertype;
+
 		return view('admin/reservations/view', $data);
 	}	
 }

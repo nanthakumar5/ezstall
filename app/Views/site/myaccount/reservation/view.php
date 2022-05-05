@@ -64,7 +64,7 @@
       </div>
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
-          <p class="my-2">Barn Name</p>
+          <p class="my-2">Barn & Stall Name	</p>
         </div>
         <div class="col" align="left">
           <?php foreach ($barnstalls as $barnstall) {

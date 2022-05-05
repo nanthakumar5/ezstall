@@ -23,6 +23,7 @@
 				<div class="card-body">	
 					<table class="table table-striped table-hover datatables">
 						<thead>
+							<th>Booking ID</th>
 							<th>Firstname</th>
 							<th>Lastname</th>
 							<th>Mobile</th>	
@@ -41,6 +42,7 @@
 				url 		: 	'<?php echo getAdminUrl()."/reservations/DTreservations"; ?>',	
 				data		:	{ 'page' : 'adminreservations' },				
 				columns 	: 	[
+									{ 'data' : 'id' },
     				                { 'data' : 'firstname' },
                     				{ 'data' : 'lastname' },
                     				{ 'data' : 'mobile' },					

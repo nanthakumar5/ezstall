@@ -12,7 +12,7 @@
 		$checkin                    = formatdate($checkin, 1);
 		$checkout 					= isset($result['check_out']) ? $result['check_out'] : '';
 		$checkout                   = formatdate($checkout, 1);
-
+		$createdat       	  		= isset($result['created_at']) ? formatdate($result['created_at'], 2) : '';
 	?>
 	<section class="content-header">
 		<div class="container-fluid">
@@ -42,6 +42,10 @@
 			<div class="card-body">
 				<table class="table">
 				  <tbody>
+				  <tr>
+				      <th>Booking ID</th>
+				      <td><?php echo $id;?></td>
+				    </tr>
 				    <tr>
 				      <th>First Name</th>
 				      <td><?php echo $firstname;?></td>
@@ -71,6 +75,14 @@
 					<tr>
 						<th>Check Out</th>
 						<td><?php echo $checkout;?></td>
+					</tr>
+					<tr>
+						<th>Date of Booking</th>
+						<td><?php echo $createdat;?></td>
+					</tr>
+					<tr>
+						<th>Booked By</th>
+						<td><?php echo $usertype[$result['usertype']];?></td>
 					</tr>
 				  </tbody>
 				</table>

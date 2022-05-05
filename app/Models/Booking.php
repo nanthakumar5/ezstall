@@ -63,7 +63,7 @@ class Booking extends BaseModel
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='adminreservations'){
-				$column = ['b.firstname', 'b.lastname','b.mobile'];
+				$column = ['b.id','b.firstname', 'b.lastname','b.mobile'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
@@ -74,7 +74,7 @@ class Booking extends BaseModel
 				$page = $requestdata['page'];
 				
 				$query->groupStart();
-					if($page=='adminreservations'){				
+					if($page=='adminreservations'){
 						$query->like('b.firstname', $searchvalue);
 						$query->orLike('b.lastname', $searchvalue);
 						$query->orLike('b.mobile', $searchvalue);
