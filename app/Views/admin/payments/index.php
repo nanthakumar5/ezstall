@@ -46,7 +46,7 @@
                     				{ 'data' : 'payer_email' },					
                     				{ 'data' : 'action' }								
                 				],
-				columndefs	:	[{"sortable": false, "targets": [2]}]											
+				columndefs	:	[{"sortable": false, "targets": [3]}]											
 			};				
 			
 			ajaxdatatables('.datatables', options);		

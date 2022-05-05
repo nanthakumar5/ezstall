@@ -48,7 +48,7 @@
                     				{ 'data' : 'mobile' },					
                     				{ 'data' : 'action' }								
                 				],
-				columndefs	:	[{"sortable": false, "targets": [3]}]											
+				columndefs	:	[{"sortable": false, "targets": [4]}]											
 			};				
 			
 			ajaxdatatables('.datatables', options);		

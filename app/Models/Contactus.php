@@ -28,7 +28,7 @@ class Contactus extends BaseModel
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='contactus'){
-				$column = ['c.name', 'c.email', 'c.subject', 'c.message'];
+				$column = ['c.id','c.name', 'c.email', 'c.subject', 'c.message'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
