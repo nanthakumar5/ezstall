@@ -97,7 +97,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					<div class="col-md-12 my-2">
 						<div class="form-group">
 							<label>Stall Name</label>
-							<input type="text" id="stall_name" class="form-control" placeholder="Enter Stall Name">
+							<input type="text" id="stall_name" class="form-control" placeholder="Enter Your Stall Name">
 						</div>
 					</div>
 					<div class="col-md-12 my-2">
@@ -122,13 +122,13 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					<div class="col-md-12 my-2">
 						<div class="form-group">
 							<label>Total Number of Stalls</label>
-							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Stall Name" min="1" required>
+							<input type="number" id="stall"  name="stall" class="form-control" placeholder="Enter Total Number of Stalls" min="1" required>
 						</div>
 					</div>
 					<div class="col-md-12 my-2">
 						<div class="form-group">
-							<label>Starting stall number</label>
-							<input type="text" id="stallstarting"  name="stallstarting" class="form-control" placeholder="Enter Starting Stall Name" required>
+							<label>First Stall Number</label>
+							<input type="text" id="stallstarting"  name="stallstarting" class="form-control" placeholder="Enter First Stall Number" required>
 						</div>
 					</div>
 				</div>

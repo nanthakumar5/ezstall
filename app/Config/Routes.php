@@ -104,6 +104,8 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'payments','Site\Myaccount\PaymentInfo\Index::index');
     $routes->get('payments/view/(:num)', 'Site\Myaccount\PaymentInfo\Index::view/$1');
 
+    $routes->match(['get', 'post'], 'stripe/(:any)', 'Site\Myaccount\Reservation\Index::striperefunds/$1'); 
+
 });
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	

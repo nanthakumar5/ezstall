@@ -32,7 +32,7 @@ class Stripe extends BaseModel
 			]);
 			
 			$stripe = $stripe->jsonSerialize();
-			
+
 			if($stripe){
 				$amount = ($price / 100);
 				$subscrID = $stripe['id'];
@@ -62,6 +62,15 @@ class Stripe extends BaseModel
 		}else{
 			return false;
 		}
+	}
+	function striperefunds($data){
+        $settings = getSettings();
+        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+		$stripe->refunds->create(
+				['payment_intent' => $data]
+		);
+		$this->db->table('booking')->update(['status' => '2']);
+		return $this->db->insertID();
 	}
 	
 	function striperecurringpayment($requestData)

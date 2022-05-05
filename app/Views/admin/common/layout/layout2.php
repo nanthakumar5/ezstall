@@ -52,7 +52,6 @@
     <script src="<?php echo base_url();?>/assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-	<script src="<?php echo base_url();?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/plugins/datatables/js/dataTables.responsive.min.js"></script>

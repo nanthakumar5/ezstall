@@ -3,12 +3,14 @@ namespace App\Controllers\Site\Myaccount\Reservation;
 
 use App\Controllers\BaseController;
 use App\Models\Booking;
+use App\Models\Stripe;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
 		$this->booking = new Booking();	
+		$this->stripe  = new Stripe();
 	}
 
 	public function index()
@@ -24,10 +26,9 @@ class Index extends BaseController
 		array_push($allids, $userid);
 		
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids, 'gtenddate'=> $date]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users', 'barnstall', 'payment'], ['userid'=> $allids, 'gtenddate'=> $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);		
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users', 'barnstall', 'payment'], ['userid'=> $allids, 'gtenddate'=> $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
-
     	return view('site/myaccount/reservation/index', $data);
     }
 
@@ -61,5 +62,11 @@ class Index extends BaseController
 		$response['data'] = $result;
 
 		return $this->response->setJSON($result);
+	}
+
+	public function striperefunds($data)
+	{
+        $paymentresult	= $this->stripe->striperefunds($data);
+        return view('site/myaccount/reservation/index');
 	}
 }

@@ -47,31 +47,34 @@
 							<div>
 								<p class="mb-0 fs-7 fw-600">Booked Event</p>
 								<p class="mb-0 fs-7"><?php echo $data['eventname'];?> (
-								<?php 
-								$stallname = [];
-								foreach ($data['barnstall'] as $stalls) {
-								$stallname[] = $stalls['stallname'];
-								}
-								echo implode(',', $stallname);
+									<?php 
+									$stallname = [];
+									foreach ($data['barnstall'] as $stalls) {
+										$stallname[] = $stalls['stallname'];
+									}
+									echo implode(',', $stallname);
 								?>)
-								</p>
-							</div>
+							</p>
 						</div>
-						<div class="col-md-3">
-							<div>
-								<p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
-								<p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
-							</div>
+					</div>
+					<div class="col-md-3">
+						<div>
+							<p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
+							<p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
 						</div>
-						<div class="col-md-3">
-							<div>
-								<p class="mb-0 fs-7 fw-600">Cost</p>
-								<p class="mb-0 fs-7"><?php echo $data['amount'];?></p>
-							</div>
+					</div>
+					<div class="col-md-3">
+						<div>
+							<p class="mb-0 fs-7 fw-600">Cost</p>
+							<p class="mb-0 fs-7"><?php echo $data['amount'];?></p>
 						</div>
-						<div class="col-md-1">
-							<div class="d-flex justify-content-end">
-								<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="view-res">View</a>
+					</div>
+					<div class="col-md-1">
+						<div class="d-flex justify-content-end align-items-center">
+							<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" 
+								class="mt-0 mx-3 view-res">View</a>
+							<a href="<?php echo base_url().'/myaccount/stripe/'.$data['stripe_subscription_id']?>" style='align: right;' class="">
+								<i class="fas fa-times-circle" style="font-size: 30px;"></i> </a>
 							</div>
 						</div>
 					</div>
@@ -90,31 +93,31 @@
 	var baseurl = "<?php echo base_url(); ?>";
 
 	$(document).ready(function() {
-	$("#bookedby").autocomplete({
-	source: function(request, response) {
-	ajax(baseurl+'/myaccount/bookings/searchbookeduser', {search: request.term}, {
-	success: function(result) {
-	response(result);
-	}
+		$("#bookedby").autocomplete({
+			source: function(request, response) {
+				ajax(baseurl+'/myaccount/bookings/searchbookeduser', {search: request.term}, {
+					success: function(result) {
+						response(result);
+					}
+				});
+			},
+			html: true, 
+			select: function(event, ui) {
+				var name = ui.item.firstname+ui.item.lastname
+				$('#bookedby').val(name); 
+				window.location.href = baseurl+'/myaccount/bookings/view/'+ui.item.id;
+				return false;
+			},
+			focus: function(event, ui) {
+				$("#bookedby").val(name);
+				return false;
+			}
+		})
+		.autocomplete("instance")
+		._renderItem = function( ul, item ) {
+			var name = item.firstname+item.lastname
+			return $( "<li><div>"+name+"</div></li>" ).appendTo( ul );
+		};
 	});
-	},
-	html: true, 
-	select: function(event, ui) {
-	var name = ui.item.firstname+ui.item.lastname
-	$('#bookedby').val(name); 
-	window.location.href = baseurl+'/myaccount/bookings/view/'+ui.item.id;
-	return false;
-	},
-	focus: function(event, ui) {
-	$("#bookedby").val(name);
-	return false;
-	}
-	})
-	.autocomplete("instance")
-	._renderItem = function( ul, item ) {
-	var name = item.firstname+item.lastname
-	return $( "<li><div>"+name+"</div></li>" ).appendTo( ul );
-	};
-});
 </script>
 <?php $this->endSection(); ?>
