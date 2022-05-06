@@ -20,7 +20,7 @@ class Validation extends BaseController
 		$id 				= isset($data['id']) ? $data['id'] : '';
 		$email 				= $data['email'];
 		
-		$result = $this->users->getUsers('count', ['users'], ['email' => $email]+($id!='' ? ['neqid' => $id] : []));
+		$result = $this->users->getUsers('count', ['users'], ['email' => $email,'status' =>['1','2']]+($id!='' ? ['neqid' => $id] : []));
 		
 		if($result=='0'){
 			echo 'true';
