@@ -54,8 +54,8 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Desription</label>
-									<textarea class="form-control" id="description" name="description" placeholder="Enter Desription" rows="3"><?php echo $description;?></textarea>
+									<label>Description</label>
+									<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -141,7 +141,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Stript Public Key</label>								
+									<label>Stripe Public Key</label>								
 									<input type="text" name="stripepublickey" class="form-control" id="stripepublickey" placeholder="Enter Stripe Public Key " value="<?php echo $stripepublickey; ?>">
 								</div>
 							</div>	
