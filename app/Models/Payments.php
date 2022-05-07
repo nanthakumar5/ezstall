@@ -35,7 +35,7 @@ class Payments extends BaseModel
 		}
 		
 		$query = $this->db->table('payment p');
-		if(in_array('users', $querydata)) $query->join('users u', 'u.id=p.payer_id', 'left');
+		if(in_array('users', $querydata)) $query->join('users u', 'u.id=p.user_id', 'left');
 		if(in_array('booking', $querydata)) $query->join('booking b', 'b.payment_id=p.id', 'left');
 		if(in_array('event', $querydata)) $query->join('event e', 'e.id=b.event_id', 'left');
 		if(in_array('plan', $querydata)) $query->join('plan pl', 'pl.id=p.plan_id', 'left');
@@ -45,10 +45,11 @@ class Payments extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('p.id', $requestdata['id']);
 		if(isset($requestdata['paymenttype'])) 			$query->where('p.type', $requestdata['paymenttype']);
+		if(isset($requestdata['ninstatus'])) 			$query->whereNotIn('p.status', $requestdata['ninstatus']);
 
 		if(isset($requestdata['userid'])){
 			$query->groupStart();
-				$query->whereIn('p.payer_id', $requestdata['userid']);
+				$query->whereIn('p.user_id', $requestdata['userid']);
 				$query->orWhereIn('e.user_id', $requestdata['userid']);
 			$query->groupEnd();
 		}
@@ -58,7 +59,7 @@ class Payments extends BaseModel
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='adminpayments'){
-				$column = ['p.id','p.payer_name', 'p.payer_email'];
+				$column = ['p.id','p.name', 'p.email'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
@@ -70,8 +71,8 @@ class Payments extends BaseModel
 				
 				$query->groupStart();
 					if($page=='adminpayments'){				
-						$query->like('p.payer_name', $searchvalue);
-						$query->orLike('p.payer_email', $searchvalue);
+						$query->like('p.name', $searchvalue);
+						$query->orLike('p.email', $searchvalue);
 					}
 				$query->groupEnd();
 			}			

@@ -40,4 +40,18 @@ class Ajax extends BaseController
 		
 		echo json_encode(['success' => $result]);
 	}
+	
+	public function ajaxstripepayment()
+	{
+		$requestData = $this->request->getPost();		
+		$stripeModel = new \App\Models\Stripe();
+		
+		if($requestData['type']=='1'){
+			$result = $stripeModel->stripepayment($requestData);
+		}elseif($requestData['type']=='2'){
+			$result = $stripeModel->striperecurringpayment($requestData);
+		}
+		
+		echo json_encode(['success' => $result]);
+	}
 }

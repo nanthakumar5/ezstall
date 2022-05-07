@@ -3,8 +3,8 @@
 	<?php
 		$id 					= isset($result['id']) ? $result['id'] : '';
 		$username       		= isset($result['username']) ? $result['username'] : '';
-		$name 					= isset($result['payer_name']) ? $result['payer_name'] : '';
-		$email 					= isset($result['payer_email']) ? $result['payer_email'] : '';
+		$name 					= isset($result['name']) ? $result['name'] : '';
+		$email 					= isset($result['email']) ? $result['email'] : '';
 		$type           		= isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
 		$amount 				= isset($result['amount']) ? $result['amount'] : '';
 		$plan_start 		    = isset($result['plan_period_start']) ? $result['plan_period_start'] : '';

@@ -19,8 +19,7 @@ class Index extends BaseController
     {
     	if ($this->request->getMethod() == 'post'){
 	        $requestData = $this->request->getPost();
-
-            $payment = $this->stripe->striperecurringpayment($requestData);
+			$payment = $this->stripe->action(['id' => $requestData['stripepayid']]);
 			if($payment){
 				$this->session->setFlashdata('success', 'Successfully paid.');
 			}else{
@@ -34,11 +33,11 @@ class Index extends BaseController
 		$subscriptionid = $userdetail['subscription_id'];
 
 		$data['plans']          = $this->plan->getPlan('all', ['plan'], ['type' => [$type]]);
-		$data['subscriptions']  = $this->payments->getPayments('row', ['payment', 'plan'], ['id' => $subscriptionid]);
+		$data['subscriptions']  = $this->payments->getPayments('row', ['payment', 'plan'], ['ninstatus' => ['0'], 'id' => $subscriptionid]);
 
 		$data['userdetail']     = $userdetail;
     	$data['currencysymbol'] = $this->config->currencysymbol;
-    	$data['stripe']         = view('site/common/stripe/stripe1');
+    	$data['stripe']         = view('site/common/stripe/stripe1', ['pagetype' => '1']);
 		return view('site/myaccount/subscription/index', $data);
 	}
 }

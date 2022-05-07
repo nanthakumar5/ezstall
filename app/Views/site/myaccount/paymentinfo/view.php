@@ -1,15 +1,15 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-      $transactionid  = isset($result['id']) ? $result['id'] : '';
-      $username       = isset($result['username']) ? $result['username'] : '';
-      $nameoncard     = isset($result['payer_name']) ? $result['payer_name'] : '';
-      $email          = isset($result['payer_email']) ? $result['payer_email'] : '';
-      $type           = isset($result['type']) && $result['type']=='1' ? 'Payment' : 'Subscription';
-      $amount         = isset($result['amount']) ? $result['amount'] : '';
-      $plan_start     = isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
-      $plan_end       = isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
-      $created        = isset($result['created']) ? formatdate($result['created'], 2) : '';
+      $transactionid  	= isset($result['id']) ? $result['id'] : '';
+      $username       	= isset($result['username']) ? $result['username'] : '';
+      $name     		= isset($result['name']) ? $result['name'] : '';
+      $email          	= isset($result['email']) ? $result['email'] : '';
+      $type           	= isset($result['type']) ? $paymenttype[$result['type']] : '';
+      $amount         	= isset($result['amount']) ? $result['amount'] : '';
+      $plan_start     	= isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
+      $plan_end       	= isset($result['plan_period_start']) ? formatdate($result['plan_period_start'], 1) : '';
+      $created        	= isset($result['created']) ? formatdate($result['created'], 2) : '';
 ?>
 <div class="row">
   <div class="col">
@@ -41,7 +41,7 @@
       <p class="my-2">Name On Card</p>
     </div>
     <div class="col" align="left">
-      <p class="my-2"><?php echo $nameoncard;?></p>
+      <p class="my-2"><?php echo $name;?></p>
     </div>
   </div>
   <div class="row col-md-10 base-style">

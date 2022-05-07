@@ -32,7 +32,7 @@ class Index extends BaseController
 			$requestData = $this->request->getPost();
 
 			if(isset($requestData['stripepay'])){
-				$payment = $this->stripe->stripepayment($requestData);
+				$payment = $this->stripe->action(['status' => '1', 'id' => $requestData['stripepayid']]);
 				if($payment){
 					$usersubscriptioncount = $userdetail['producer_count'];
 					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'producercount' => $usersubscriptioncount+1]);
@@ -78,7 +78,7 @@ class Index extends BaseController
 		$data['usertype'] = $usertype;
 		$data['eventcount'] = $eventcount;
 		$data['currencysymbol'] = $this->config->currencysymbol;
-    	$data['stripe'] = view('site/common/stripe/stripe1');
+    	$data['stripe'] = view('site/common/stripe/stripe1', ['pagetype' => '1']);
     	$data['settings'] = $settings;
 		
 		return view('site/myaccount/event/index', $data);

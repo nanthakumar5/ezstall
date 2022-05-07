@@ -4,237 +4,350 @@ use App\Models\BaseModel;
 
 class Stripe extends BaseModel
 {	
+	public function action($data)
+	{
+		$this->db->transStart();
+		
+		$id = $data['id'];
+		
+		$payment = $this->db->table('payment')->where('id', $id)->get()->getRowArray();
+		if($payment['type']=='1'){
+			$data = $this->retrievePaymentIntents($payment['stripe_paymentintent_id']);
+			if($data->status=='succeeded'){
+				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
+			}
+		}elseif($payment['type']=='2'){
+			$data = $this->retrieveSubscription($payment['stripe_subscription_id']);
+			if($data->status=='succeeded'){
+				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
+				$this->db->table('users')->where(['id' => $payment['user_id']])->update(['subscription_id' => $id]);
+			}
+		}
+			
+		if($this->db->transStatus() === FALSE){
+			$this->db->transRollback();
+			return false;
+		}else{
+			$this->db->transCommit();
+			return $id;
+		}
+	}
+	
 	function stripepayment($requestData)
 	{
-		$settings = getSettings();
-		$token = $requestData['stripe_token'];
-		$payer_id = $requestData['payer_id'];
-		$payer_name = $requestData['payer_name'];
-		$payer_email = $requestData['payer_email'];
+		$userid 		= $requestData['userid'];
+		$name 			= $requestData['name'];
+		$email 			= $requestData['email'];
+		$cardno 		= $requestData['card_number'];
+		$cardexpmonth 	= $requestData['card_exp_month'];
+		$cardexpyear 	= $requestData['card_exp_year'];
+		$cardcvc 		= $requestData['card_cvc'];
+		$price 			= $requestData['price'] * 100;
+        $currency 		= "inr";
 		
-		$price = ($requestData['price'] * 100);
-        $currency = "inr";
-		
-		\Stripe\Stripe::setApiKey($settings['stripeprivatekey']);
-		
-		$customer = $this->addCustomer($payer_name, $payer_email, $token);
-	  
-		if ($customer)
+		$paymentmethods = $this->createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc);
+		if($paymentmethods)
 		{
-			$stripe = \Stripe\PaymentIntent::create([
-					"customer" => $customer->id,
-					"amount" => $price,
-					"currency" => $currency,
-					"description" => "",
-					"payment_method_types" => [ 
-						"card" 
-					] 
-			]);
-			
-			$stripe = $stripe->jsonSerialize();
-
-			if($stripe){
-				$amount = ($price / 100);
-				$subscrID = $stripe['id'];
-				$custID = $stripe['customer'];
-				$status = $stripe['status'];
-				$created = date("Y-m-d H:i:s", $stripe['created']);
-				
-				$paymentData = array(
-					'payer_id' => $payer_id,
-					'payer_name' => $payer_name,
-					'payer_email' => $payer_email,
-					'amount' => $amount,
-					'currency' => $currency,
-					'payment_method' => 'stripe',
-					'stripe_subscription_id' => $subscrID,
-					'stripe_customer_id' => $custID,
-					'type' => '1',
-					'status' => $status,
-					'created' => $created
-				);
-
-				$this->db->table('payment')->insert($paymentData);
-				return $this->db->insertID();
+			$customer = $this->createCustomer($name, $email, $paymentmethods->id);
+			if($customer)
+			{
+				$paymentintents = $this->createPaymentIntents($customer->id, $price, $currency);				
+				if($paymentintents)
+				{
+					$confirm = $this->confirmPaymentIntents($paymentintents->id, $paymentmethods);
+					
+					$paymentData = array(
+						'user_id' 					=> $userid,
+						'name' 						=> $name,
+						'email' 					=> $email,
+						'amount' 					=> $price/100,
+						'currency' 					=> $currency,
+						'stripe_customer_id' 		=> $confirm->customer,
+						'stripe_paymentintent_id' 	=> $confirm->id,
+						'type' 						=> '1',
+						'status' 					=> '0',
+						'created' 					=> date("Y-m-d H:i:s")
+					);
+					
+					$this->db->table('payment')->insert($paymentData);
+					$paymentinsertid = $this->db->insertID();
+					
+					$paymentstatus = $confirm->status;
+					if($paymentstatus=='requires_action' && $confirm->next_action->type == 'redirect_to_url' && $confirm->next_action->redirect_to_url->url){
+						return ['status' => '1', 'url' => $confirm->next_action->redirect_to_url->url, 'id' => $paymentinsertid];
+					}else if ($confirm->status == 'succeeded') {
+						return ['status' => '1', 'url' => '', 'id' => $paymentinsertid];
+					}else{
+						return ['status' => '0', 'url' => '', 'id' => $paymentinsertid];
+					}
+				}
 			}else{
 				return false;
 			}
-		}else{
-			return false;
 		}
 	}
-	function striperefunds($data){
-        $settings = getSettings();
-        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
-		$stripe->refunds->create(
-				['payment_intent' => $data]
-		);
-		$this->db->table('booking')->update(['status' => '2']);
-		return $this->db->insertID();
-	}
+	
 	
 	function striperecurringpayment($requestData)
 	{
-		$token = $requestData['stripe_token'];
-		$payer_id = $requestData['payer_id'];
-		$payer_name = $requestData['payer_name'];
-		$payer_email = $requestData['payer_email'];
-		$plan_id = $requestData['plan_id'];
-		$planName = $requestData['plan_name'];
-		$planPrice = $requestData['price'];
-		$planInterval = $requestData['plan_interval'];
-		$planIntervalCount = $requestData['plan_interval_count'];
+		$userid 		= $requestData['userid'];
+		$name 			= $requestData['name'];
+		$email 			= $requestData['email'];
+		$cardno 		= $requestData['card_number'];
+		$cardexpmonth 	= $requestData['card_exp_month'];
+		$cardexpyear 	= $requestData['card_exp_year'];
+		$cardcvc 		= $requestData['card_cvc'];
+		$planid 		= $requestData['plan_id'];
+		$planname 		= $requestData['plan_name'];
+		$planprice 		= $requestData['plan_price'];
+		$planinterval 	= $requestData['plan_interval'];
 		
-		$customer = $this->addCustomer($payer_name, $payer_email, $token);
-	  
-		if ($customer)
-		{
-			$plan = $this->createPlan($planName, $planPrice, $planInterval, $planIntervalCount);
-
-			if ($plan)
+		$paymentmethods = $this->createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc);			
+		if($paymentmethods)
+		{	
+			$customer = $this->createCustomer($name, $email, $paymentmethods->id);
+			if($customer)
 			{
-				$subscription = $this->createSubscription($customer->id, $plan->id, $plan_id, $payer_id, $payer_name, $payer_email);
-				if($subscription){
-					return true;
-				}else{
-					return false;
+				$product = $this->createProduct($planname);
+				if($product)
+				{
+					$price = $this->createPrice($product->id, $planprice, $planinterval);
+					if ($price)
+					{
+						$subscription = $this->createSubscription($customer->id, $price->id);
+						if($subscription){
+							$paymentintentsid = $subscription->latest_invoice->payment_intent->id;
+							$confirm = $this->confirmPaymentIntents($paymentintentsid, $paymentmethods);
+							
+							$paymentData = array(
+								'user_id' 					=> $userid,
+								'name' 						=> $name,
+								'email' 					=> $email,
+								'amount' 					=> $subscription->plan->amount/100,
+								'currency' 					=> $subscription->plan->currency,
+								'stripe_customer_id' 		=> $subscription->customer,
+								'stripe_paymentintent_id' 	=> $paymentintentsid,
+								'stripe_subscription_id' 	=> $subscription->id,
+								'stripe_plan_id' 			=> $subscription->plan->id,
+								'plan_id'					=> $planid,
+								'plan_interval' 			=> $subscription->plan->interval,
+								'plan_period_start' 		=> date("Y-m-d H:i:s", $subscription->current_period_start),
+								'plan_period_end' 			=> date("Y-m-d H:i:s", $subscription->current_period_end),
+								'type' 						=> '2',
+								'status' 					=> '0',
+								'created' 					=> date("Y-m-d H:i:s")
+							);
+
+							$this->db->table('payment')->insert($paymentData);
+							$paymentinsertid = $this->db->insertID();
+					   
+							$paymentstatus = $confirm->status;
+							if($paymentstatus=='requires_action' && $confirm->next_action->type == 'redirect_to_url' && $confirm->next_action->redirect_to_url->url){
+								return ['status' => '1', 'url' => $confirm->next_action->redirect_to_url->url, 'id' => $paymentinsertid];
+							}else if ($confirm->status == 'succeeded') {
+								return ['status' => '1', 'url' => '', 'id' => $paymentinsertid];
+							}else{
+								return ['status' => '0', 'url' => '', 'id' => $paymentinsertid];
+							}
+						}
+					}
 				}
 			}
 			else{
 				return false;
 			}
 		}
-		else{
-			return false;
-		}
 		
 	}
-    function addCustomer($payer_name, $payer_email, $token)
+	
+	function createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc)
     {
-		$settings = getSettings();
-        \Stripe\Stripe::setApiKey($settings['stripeprivatekey']);
-        
-        try
-        {
-            $customer = \Stripe\Customer::create(array(
-                'name' => $payer_name,
-                'email' => $payer_email,
-                'source' => $token
-            ));
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->paymentMethods->create([
+				'type' => 'card',
+				'card' => [
+					'number' 	=> $cardno,
+					'exp_month' => $cardexpmonth,
+					'exp_year' 	=> $cardexpyear,
+					'cvc' 		=> $cardcvc
+				]
+			]);
 
-            return $customer;
-        }
-        catch(Exception $e)
-        {
-            print_r($e->getMessage());
-            die;
+            return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
         }
     }
-
-    function createPlan($planName, $planPrice, $planInterval, $planIntervalCount)
+	
+    function createCustomer($name, $email, $paymentmethodid)
     {
-        $priceCents = ($planPrice * 100);
-        $currency = "usd";
-
-        try
-        {
-            $plan = \Stripe\Plan::create(array(
-                "product" 			=> ["name" => $planName],
-                "amount" 			=> $priceCents,
-                "currency" 			=> $currency,
-                "interval" 			=> $planInterval,
-                "interval_count"	=> $planIntervalCount
-            ));
-
-            return $plan;
-        }
-        catch(Exception $e)
-        {
-            print_r($e->getMessage());
-            die;
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->customers->create([
+				'name' 				=> $name,
+				'email' 			=> $email,
+				'payment_method'	=> $paymentmethodid
+			]);
+			
+			return $data;
+		}catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
         }
     }
-
-    function createSubscription($customerID, $stripePlanID, $localPlanID, $payerID, $payerName, $payerEmail)
+	
+	function createPaymentIntents($customerid, $price, $currency)
     {
-        try
-        {
-            $subscription = \Stripe\Subscription::create(array(
-                "customer" => $customerID,
-                "items" => array(
-                    array(
-                        "plan" => $stripePlanID
-                    )
-                )
-            ));
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->paymentIntents->create([
+				"customer" => $customerid,
+				'amount' => $price,
+				'currency' => $currency,
+				'payment_method_types' => ['card'],
+			]);
 
-            $subscription = $subscription->jsonSerialize();
-
-            if ($subscription)
-	        {
-	            if ($subscription['status'] == 'incomplete'|| $subscription['status'] == 'active')
-	            {
-	                $subscrID = $subscription['id'];
-	                $custID = $subscription['customer'];
-	                $planID = $subscription['plan']['id'];
-	                $planAmount = ($subscription['plan']['amount'] / 100);
-	                $planCurrency = $subscription['plan']['currency'];
-	                $planInterval = $subscription['plan']['interval'];
-	                $planIntervalCount = $subscription['plan']['interval_count'];
-	                $created = date("Y-m-d H:i:s", $subscription['created']);
-	                $current_period_start = date("Y-m-d H:i:s", $subscription['current_period_start']);
-	                $current_period_end = date("Y-m-d H:i:s", $subscription['current_period_end']);
-	                $status = $subscription['status'];
-
-	                $paymentData = array(
-	                    'payer_id' => $payerID,
-	                    'payer_name' => $payerName,
-	                    'payer_email' => $payerEmail,
-	                    'amount' => $planAmount,
-	                    'currency' => $planCurrency,
-	                    'payment_method' => 'stripe',
-	                    'stripe_subscription_id' => $subscrID,
-	                    'stripe_customer_id' => $custID,
-	                    'stripe_plan_id' => $planID,
-	                    'plan_id'=> $localPlanID,
-	                    'plan_interval' => $planInterval,
-	                    'plan_interval_count' => $planIntervalCount,
-	                    'plan_period_start' => $current_period_start,
-	                    'plan_period_end' => $current_period_end,
-	                    'type' => '2',
-	                    'status' => $status,
-	                    'created' => $created
-	                );
-
-	                $this->db->table('payment')->insert($paymentData);
-        			$subscription_id = $this->db->insertID();
-       
-	                if ($subscription_id)
-	                {
-						$this->db->table('users')->where(['id' => $payerID])->update(['subscription_id' => $subscription_id]);
-						
-	                    return $subscription_id;
-	                }
-			        else
-			        {
-			        	return false;
-			        }
-
-	            }
-				else
-				{
-					return false;
-				}
-	        }
-	        else
-	        {
-	        	return false;
-	        }
+            return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
         }
-        catch(Exception $e)
-        {
+    }
+	
+    function retrievePaymentIntents($paymentintentsid)
+    {
+        try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->paymentIntents->retrieve(
+				$paymentintentsid,
+				[]
+			);
+			
+			return $data;
+        }catch(Exception $e){
             print_r($e->getMessage());
             die;
         }
     } 
+	
+	function confirmPaymentIntents($paymentintentsID, $paymentmethod)
+    {
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->paymentIntents->confirm(
+				$paymentintentsID,
+				[
+					'payment_method' => $paymentmethod,
+					'return_url' => base_url().'/stripe3d'
+				]
+			);
+
+            return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
+        }
+    }
+	
+    function createProduct($planname)
+    {
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->products->create([
+				'name' => $planname
+			]);
+			
+			return $data;
+		}catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
+        }
+    }
+
+    function createPrice($productid, $planprice, $planinterval)
+    {
+		try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$amount = ($planprice * 100);
+			$currency = "inr";
+			
+			$data = $stripe->prices->create([
+				'unit_amount' => $amount,
+				'currency' => $currency,
+				'recurring' => ['interval' => $planinterval],
+				'product' => $productid
+			]);
+			
+			return $data;
+		}catch(Exception $e){
+            print_r($e->getMessage());die;
+			return false;
+        }
+    }
+
+    function createSubscription($customerid, $priceid)
+    {
+        try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+            $data = $stripe->subscriptions->create([
+                "customer" => $customerid,
+				"items" => [
+					["price" => $priceid]
+				],
+				'payment_behavior' => 'default_incomplete', 
+                'expand' => ['latest_invoice.payment_intent']
+            ]);
+			
+			return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());
+            die;
+        }
+    } 
+	
+    function retrieveSubscription($subscriptionid)
+    {
+        try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+			$data = $stripe->subscriptions->retrieve(
+				$subscriptionid,
+				[]
+			);
+			
+			return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());
+            die;
+        }
+    } 
+	
+	function striperefunds($data){
+        $settings = getSettings();
+        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+		$stripe->refunds->create(
+			['payment_intent' => $data]
+		);
+		$this->db->table('booking')->update(['status' => '2']);
+		return $this->db->insertID();
+	}
 }

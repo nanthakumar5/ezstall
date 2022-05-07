@@ -92,8 +92,9 @@ $currentdate 	= date("Y-m-d");
 		$('.stripeextra').remove();
 
 		var data = 	'<div class="stripeextra">\
-			<input type="hidden" value="'+eventcost+'" name="price">\
-		</div>';
+						<input type="hidden" value="'+eventcost+'" name="price">\
+						<input type="hidden" value="1" name="type">\
+					</div>';
 
 		$('.stripetotal').text(' (Total - '+currencysymbol+eventcost+')');
 		$('.stripepaybutton').append(data);

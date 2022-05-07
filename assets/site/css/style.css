@@ -3902,3 +3902,47 @@ a.ui-button:active,
 .barntab li a p{
 	color : white;
 }
+
+.stripeiframe{
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+	z-index: 9999;
+}
+
+.stripeiframe a{
+	position: absolute;
+    left: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+	top: 100px;
+}
+
+.stripeiframe iframe{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-200px, -200px);
+}
+
+.loader_wrapper{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+	background: rgba(0,0,0,0.5);
+}
+
+.loader_wrapper img{
+	width: 120px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-60px);
+}

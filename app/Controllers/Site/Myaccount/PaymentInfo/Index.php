@@ -26,8 +26,8 @@ class Index extends BaseController
 		$allids = getStallManagerIDS($userid);
 		array_push($allids, $userid);
 
-		$paymentcount = $this->payments->getPayments('count', ['payment','event', 'users','booking'],['userid' => $allids]);
-		$data['payments'] = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['userid' => $allids, 'start' => $offset, 'length' => $perpage], ['orderby' => 'p.id desc']);
+		$paymentcount = $this->payments->getPayments('count', ['payment','event', 'users','booking'],['ninstatus' => ['0'], 'userid' => $allids]);
+		$data['payments'] = $this->payments->getPayments('all', ['payment','event', 'users','booking'], ['ninstatus' => ['0'], 'userid' => $allids, 'start' => $offset, 'length' => $perpage], ['orderby' => 'p.id desc']);
 
 	    $data['pager'] 			 = $pager->makeLinks($page, $perpage, $paymentcount);
 		$data['paymentinterval'] = $this->config->paymentinterval;
@@ -43,7 +43,7 @@ class Index extends BaseController
 	{
     	$userid = getSiteUserID();
 
-		$result = $this->payments->getPayments('row', ['payment','event', 'users','booking'], ['userid' => [$userid],'id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment','event', 'users','booking'], ['ninstatus' => ['0'], 'userid' => [$userid],'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;
@@ -53,6 +53,7 @@ class Index extends BaseController
 		}
 
 		$data['usertype']        = $this->config->usertype;
+		$data['paymenttype']     = $this->config->paymenttype;
 		return view('site/myaccount/paymentinfo/view', $data);
 	}	
 }

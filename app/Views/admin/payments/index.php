@@ -42,8 +42,8 @@
 				data		:	{ 'page' : 'adminpayments' },				
 				columns 	: 	[
 									{ 'data' : 'id' },
-    				                { 'data' : 'payer_name' },
-                    				{ 'data' : 'payer_email' },					
+    				                { 'data' : 'name' },
+                    				{ 'data' : 'email' },					
                     				{ 'data' : 'action' }								
                 				],
 				columndefs	:	[{"sortable": false, "targets": [3]}]											

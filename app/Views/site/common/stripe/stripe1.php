@@ -24,7 +24,7 @@
 		    	<form role="form" action="" method="post" class="stripeform">
 					<div class="mb-3">
 						<label class='control-label'>Name on Card:</label> 
-						<input autocomplete='off' class='form-control' size='4' placeholder='Name on Card' type='text' name='payer_name' value="<?php echo $name; ?>">
+						<input autocomplete='off' class='form-control' size='4' placeholder='Name on Card' type='text' name='name' value="<?php echo $name; ?>">
 					</div>
 					<div class="mb-3">
 						<label class='control-label'>Card Number:</label> 
@@ -44,9 +44,8 @@
 					</div>
 					<div class='error hide'><div class='alert' style="color: red;"></div></div> 
 				   	<div class="mb-3 stripepaybutton">
-						<input type="hidden" value="<?php echo $userdetails['id']; ?>" name="payer_id">
-						<input type="hidden" value="<?php echo $userdetails['email']; ?>" name="payer_email">
-						<input type="hidden" value="1" name="stripepay">
+						<input type="hidden" value="<?php echo $userdetails['id']; ?>" name="userid">
+						<input type="hidden" value="<?php echo $userdetails['email']; ?>" name="email">
 						<button class="btn btn-primary btn-lg btn-block" type="submit" >Pay Now</button>
 				   	</div>
 		        </form>
@@ -55,13 +54,25 @@
   	</div>
 </div>
 
+<form action="" method="post" class="stripeconfirm">
+	<div class="mb-3 stripepaybutton">
+		<input type="hidden" value="<?php echo $userdetails['id']; ?>" name="id">
+		<input type="hidden" value="1" name="stripepay">
+		<input type="hidden" value="" name="stripepayid" class="stripepayid">
+	</div>
+</form>
+
+<div class="stripeiframe displaynone">
+	<a href="javascript:void(0);" class="stripeiframeremove">Close</a>
+	<div></div>
+</div>
 
 <script>
 $(function(){
 	validation(
 		'.stripeform',
 		{
-			payer_name 	    : {
+			name 	    : {
 				required	: 	true
 			},
 			card_number     : {	
@@ -78,7 +89,7 @@ $(function(){
 			}
 		},
 		{   
-			payer_name      : {
+			name      : {
 				required    : "Name field is required."
 			},
 			card_number     : {
@@ -97,7 +108,7 @@ $(function(){
 	);
 
 	var $form = $(".stripeform");
-	$('.stripeform').bind('submit', function(e) {
+	$form.bind('submit', function(e) {
 		if(!$form.valid()){
 			return false;
 		}
@@ -116,11 +127,45 @@ $(function(){
 		if (response.error) {
 			$('.error').removeClass('hide').find('.alert').text(response.error.message);
 		} else {
-			var token = response['id'];
-			$form.find('input[type=text]').empty();
-			$form.append("<input type='hidden' name='stripe_token' value='" + token + "'/>");
-			$form.get(0).submit();
+			$('.loader_wrapper').remove();
+			
+			ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
+				beforesend: function() {
+					$('.modal-content').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+				},
+				success: function(data){
+					if(data.success.status=='1'){
+						$('.stripepayid').val(data.success.id);
+						if(data.success.url==''){
+							$('.loader_wrapper').remove();
+							$(".stripeconfirm").submit();
+						}else{
+							$('.stripeiframe').removeClass('displaynone');
+							$('.stripeiframe div').html('<iframe src="'+data.success.url+'" width="400" height="400"></iframe>');
+							$('.loader_wrapper').remove();
+						}
+					}else{
+						$('.stripeiframe').find('iframe').remove();
+						$(".stripeform").find('input[type=text]').empty();
+						$('.stripeiframe').addClass('displaynone');
+						$("#stripeFormModal").modal('hide');
+					}
+				}
+			});
 		}
 	}
+	
+	window.addEventListener('message', function(ev) {
+		if (ev.data === '3DS-authentication-complete') {
+			$(".stripeconfirm").submit();
+		}
+	}, false);
+
+	$(document).on('click', '.stripeiframeremove', function(){
+		$(this).parent().find('iframe').remove();
+		$(".stripeform").find('input[type=text]').empty();
+		$('.stripeiframe').addClass('displaynone');
+		$("#stripeFormModal").modal('hide');
+	})
 });
 </script>

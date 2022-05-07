@@ -21,8 +21,8 @@ class Index extends BaseController
 	public function DTpayments()
 	{		
 		$post 			= $this->request->getPost();
-		$totalcount 	= $this->payments->getPayments('count', ['payment'], $post);
-		$results 		= $this->payments->getPayments('all', ['payment'], $post);
+		$totalcount 	= $this->payments->getPayments('count', ['payment'], ['ninstatus' => ['0']]+$post);
+		$results 		= $this->payments->getPayments('all', ['payment'], ['ninstatus' => ['0']]+$post);
 	
 		$totalrecord 	= [];
 				
@@ -33,9 +33,9 @@ class Index extends BaseController
 							';
 				
 				$totalrecord[] = 	[
-										'id' 	=> 	$result['id'],
-										'payer_name' 	=> 	$result['payer_name'],
-										'payer_email'  	=>  $result['payer_email'],
+										'id' 			=> 	$result['id'],
+										'name' 			=> 	$result['name'],
+										'email'  		=>  $result['email'],
 										'action'		=> 	'<div class="table-action">
 																'.$action.
 															'</div>'
@@ -55,7 +55,7 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$result = $this->payments->getPayments('row', ['payment','users'], ['id' => $id]);
+		$result = $this->payments->getPayments('row', ['payment','users'], ['ninstatus' => ['0'], 'id' => $id]);
 
 		if($result){
 			$data['result'] = $result;

@@ -17,7 +17,7 @@
 	<div class="col-md-10">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Name</p>
-	<p class="mb-0 fs-7"><?php echo $data['payer_name'];?></p>
+	<p class="mb-0 fs-7"><?php echo $data['name'];?></p>
 	</div>
 	</div>
 	<div class="col-md-2">

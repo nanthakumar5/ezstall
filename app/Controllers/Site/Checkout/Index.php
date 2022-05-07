@@ -22,27 +22,31 @@ class Index extends BaseController
             return redirect()->to(base_url().'/'); 
         }
         
+        $userdetail  	= getSiteUserDetails();
+		$cartdetail  	= getCart();		
+		$settings		= getSettings();
+		
     	if ($this->request->getMethod()=='post')
     	{  
             $requestData 				= $this->request->getPost();
-            $userdetail         		= getSiteUserDetails();
             $userid             		= $userdetail['id'];
-            $paymentresult				= $this->stripe->stripepayment($requestData);
-            $requestData['paymentid'] 	= $paymentresult;
+            $payment 					= $this->stripe->action(['id' => $requestData['stripepayid']]);
+            $requestData['paymentid'] 	= $payment;
 			
             $booking = $this->booking->action($requestData);
             $this->cart->delete(['user_id' => $userid, 'type' => $requestData['type']]);
             
             if($booking){
-              return redirect()->to(base_url().'/paymentsuccess'); 
+				return redirect()->to(base_url().'/paymentsuccess'); 
             }
         }
 
-        $userdetail  	= getSiteUserDetails();
-        $cartdetail  	= getCart();		
-		$settings		= getSettings();
-		
-        return view('site/checkout/index', ['settings' => $settings, 'currencysymbol' => $this->config->currencysymbol, 'userdetail' => $userdetail, 'cartdetail' => $cartdetail]);
+        return view('site/checkout/index', [
+			'currencysymbol' => $this->config->currencysymbol, 
+			'settings' => $settings, 
+			'userdetail' => $userdetail, 
+			'cartdetail' => $cartdetail
+		]);
     }
 
     public function success(){

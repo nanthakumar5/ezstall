@@ -65,7 +65,7 @@
             <p class="fw-bold">Card Details</p>
             <div class="row checkout-payment-frist">
               <div class="col-lg-6 mb-4">
-               <input type='text' placeholder='Name on Card' name='payer_name' class='payer_name' autocomplete='off'  value="<?php echo $name; ?>">
+               <input type='text' placeholder='Name on Card' name='name' class='name' autocomplete='off'  value="<?php echo $name; ?>">
              </div>
              <div class="col-lg-6 mb-4">
               <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off' value="<?php echo $cardno; ?>">
@@ -81,12 +81,11 @@
           </div>
 		  <div class='error hide'><div class='alert' style="color: red;"></div></div> 
         </div> 
-        <input type="hidden" name="payer_id" value="<?php echo $userdetail['id']; ?>">
         <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
-        <input type="hidden" name="payer_email" value="<?php echo $userdetail['email']; ?>" >
+        <input type="hidden" name="email" value="<?php echo $userdetail['email']; ?>" >
         <input type="hidden" name="checkin" value="<?php echo formatdate($cartdetail['check_in']); ?>" >
         <input type="hidden" name="checkout" value="<?php echo formatdate($cartdetail['check_out']); ?>" >
-        <input type="hidden" name="price" value="<?php echo $cartdetail['price']+8.50; ?>" >
+        <input type="hidden" name="price" value="<?php echo $cartdetail['price']+$settings['transactionfee']; ?>" >
         <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
         <input type="hidden" name="type" value="<?php echo $cartdetail['type']; ?>" >
         <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
@@ -139,6 +138,7 @@
            <div class="checkout-complete-btn">
             <span>
               <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent">I have read and accepted the <span class="redcolor">Terms and Conditions.</span></span>
+              <input type="hidden" name="stripepayid" class="stripepayid">
               <button class="payment-btn " type="submit">Complete Payment</button>
             </div>
           </form>
@@ -180,98 +180,136 @@
     </div>
   </section>
 
+	<div class="stripeiframe displaynone">
+		<a href="javascript:void(0);" class="stripeiframeremove">Close</a>
+		<div></div>
+	</div>
   <?php $this->endSection(); ?>
   <?php $this->section('js') ?>
   <script>
     $(function(){
-      validation(
-        '.stripeform',
-        {
-          firstname      : {
-            required  :   true
-          },
-          lastname      : {
-            required  :   true
-          },
-          mobile      : {
-            required  :   true
-          },
-          payer_name      : {
-            required  :   true
-          },
-          card_number     : { 
-            required  :   true
-          },
-          card_cvc      : {
-            required  :   true
-          },          
-          card_exp_month  : {
-            required  :   true
-          },
-          card_exp_year   : {
-            required  :   true
-          },
-          tc   : {
-            required  :   true
-          }
-        },
-        { 
-         firstname      : {
-          required    : "Please Enter Your Firstname."
-        },
-        lastname      : {
-          required    : "Please Enter Your Lastname."
-        },
-        mobile      : {
-          required    : "Please Enter Mobile Number."
-        },  
-        payer_name      : {
-          required    : "Name field is required."
-        },
-        card_number     : {
-          required    : "Card number field is required."
-        },
-        card_cvc        : {
-          required    : "Card CVC field is required."
-        },
-        card_exp_month  : {
-          required    : "Card Expiry Month field is required."
-        },
-        card_exp_year   : {
-          required    : "Card Expiry Year field is required."
-        },
-        tc   : {
-          required    : "Please check the checkbox."
-        },
-      }
-      );
-      var $form = $(".stripeform");
+		validation(
+		'.stripeform',
+		{
+		firstname      : {
+		required  :   true
+		},
+		lastname      : {
+		required  :   true
+		},
+		mobile      : {
+		required  :   true
+		},
+		payer_name      : {
+		required  :   true
+		},
+		card_number     : { 
+		required  :   true
+		},
+		card_cvc      : {
+		required  :   true
+		},          
+		card_exp_month  : {
+		required  :   true
+		},
+		card_exp_year   : {
+		required  :   true
+		},
+		tc   : {
+		required  :   true
+		}
+		},
+		{ 
+		firstname      : {
+		required    : "Please Enter Your Firstname."
+		},
+		lastname      : {
+		required    : "Please Enter Your Lastname."
+		},
+		mobile      : {
+		required    : "Please Enter Mobile Number."
+		},  
+		payer_name      : {
+		required    : "Name field is required."
+		},
+		card_number     : {
+		required    : "Card number field is required."
+		},
+		card_cvc        : {
+		required    : "Card CVC field is required."
+		},
+		card_exp_month  : {
+		required    : "Card Expiry Month field is required."
+		},
+		card_exp_year   : {
+		required    : "Card Expiry Year field is required."
+		},
+		tc   : {
+		required    : "Please check the checkbox."
+		},
+		}
+		);
+	  
+		var $form = $(".stripeform");
+		$form.bind('submit', function(e) {
+			if(!$form.valid()){
+				return false;
+			}
+			
+			if($('.stripepayid').val()!=''){
+				return true;
+			}
+			
+			e.preventDefault();
+			Stripe.setPublishableKey('<?php echo $stripepublickey; ?>');
+			Stripe.createToken({
+				number: $('.card-number').val(),
+				cvc: $('.card-cvc').val(),
+				exp_month: $('.card-expiry-month').val(),
+				exp_year: $('.card-expiry-year').val()
+			}, stripeResponseHandler);
+		});
 
-      $('.stripeform').bind('submit', function(e) {
-        if(!$form.valid()){
-          return false;
-        }
+		function stripeResponseHandler(status, response) {
+			if (response.error) {
+				$('.error').removeClass('hide').find('.alert').text(response.error.message);
+			} else {
+				$('.loader_wrapper').remove();
+				
+				ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
+					beforesend: function() {
+						$('.modal-content').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+					},
+					success: function(data){
+						if(data.success.status=='1'){
+							$('.stripepayid').val(data.success.id);
+							if(data.success.url==''){
+								$('.loader_wrapper').remove();
+								$(".stripeform").submit();
+							}else{
+								$('.stripeiframe').removeClass('displaynone');
+								$('.stripeiframe div').html('<iframe src="'+data.success.url+'" width="400" height="400"></iframe>');
+								$('.loader_wrapper').remove();
+							}
+						}else{
+							$('.stripeiframe').find('iframe').remove();
+							$('.stripeiframe').addClass('displaynone');
+						}
+					}
+				});
+			}
+		}
+		
+		window.addEventListener('message', function(ev) {
+			if (ev.data === '3DS-authentication-complete') {
+				$(".stripeform").submit();
+			}
+		}, false);
 
-        e.preventDefault();
-        Stripe.setPublishableKey('<?php echo $stripepublickey; ?>');
-        Stripe.createToken({
-          number: $('.card-number').val(),
-          cvc: $('.card-cvc').val(),
-          exp_month: $('.card-expiry-month').val(),
-          exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
-      });
-
-      function stripeResponseHandler(status, response) {
-        if (response.error) {
-          $('.error').removeClass('hide').find('.alert').text(response.error.message);
-        } else {
-          var token = response['id'];
-          $form.find('input[type=text]').empty();
-          $form.append("<input type='hidden' name='stripe_token' value='" + token + "'/>");
-          $form.get(0).submit();
-        }
-      }
+		$(document).on('click', '.stripeiframeremove', function(){
+			$(this).parent().find('iframe').remove();
+			$('.stripeiframe').addClass('displaynone');
+		})
     });
   </script>
   <?php $this->endSection() ?>
