@@ -3944,5 +3944,5 @@ a.ui-button:active,
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translateX(-60px);
+    transform: translate(-50%, -50%)
 }

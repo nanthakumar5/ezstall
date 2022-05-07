@@ -10,10 +10,10 @@
 
 .loader_wrapper img{
 	width: 120px;
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-200px, -200px);
+    transform: translate(-50%, -50%);
 }
 </style>
 <div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>
