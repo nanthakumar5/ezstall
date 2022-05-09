@@ -56,7 +56,9 @@ $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filte
 $routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
-$routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
+//$routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
+$routes->match(['get','post'], 'facility', 'Site\Facility\Index::lists');
+$routes->match(['get','post'], 'facility/detail/(:num)', 'Site\Facility\Index::detail/$1');
 $routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
 $routes->get('aboutus/detail/(:num)', 'Site\Aboutus\Index::detail/$1');

@@ -1708,6 +1708,15 @@ span.red-box {
     border-radius: 5px;
 }
 
+span.brown-box {
+    width: 22px;
+    height: 22px;
+    background: #9b7c5d;
+    display: block;
+    float: right;
+    border-radius: 5px;
+}
+
 span.yellow-box {
     width: 22px;
     height: 22px;
@@ -1752,6 +1761,17 @@ span.red-circle {
     width: 14px;
     height: 14px;
     background: #e00000;
+    border-radius: 100%;
+    display: block;
+    float: left;
+    margin-right: 6px;
+    margin-top: 4px;
+}
+
+span.brown-circle {
+    width: 14px;
+    height: 14px;
+    background: #9b7c5d;
     border-radius: 100%;
     display: block;
     float: left;
