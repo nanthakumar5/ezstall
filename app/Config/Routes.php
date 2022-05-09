@@ -113,7 +113,8 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
 $routes->group('administrator', ['filter' => 'adminauthentication2'], function($routes){    
 	$routes->get('logout', 'Admin\Logout\Index::index');
-	
+    $routes->match(['get', 'post'], 'profile', 'Admin\Profile\Index::index');
+
 	// Users
     $routes->match(['get', 'post'], 'users', 'Admin\Users\Index::index');
     $routes->match(['get', 'post'], 'users/action', 'Admin\Users\Index::action');

@@ -29,7 +29,7 @@ function getUserID($id)
 
 function getAdminUserID($id='')
 {
-	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;
+	if($id=='' && !isset(session()->get('adminsession')['userid'])) return false;
 	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
 	return getUserID($id);
 }
@@ -43,7 +43,7 @@ function getSiteUserID($id='')
 
 function getAdminUserDetails($id='')
 {
-	if($id=='' && !isset(session()->get('sitesession')['userid'])) return false;	
+	if($id=='' && !isset(session()->get('adminsession')['userid'])) return false;	
 	$id = ($id=='') ? session()->get('adminsession')['userid'] : $id;
 	return getUserDetails($id);
 }

@@ -82,7 +82,6 @@ class Event extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get(); 
-			
 			if($type=='all'){
 				$result = $query->getResultArray();
 
@@ -110,16 +109,32 @@ class Event extends BaseModel
 					if(in_array('barn', $querydata)){
 						$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $result['id'])->get()->getResultArray();
 						$result['barn'] = $barndatas;
-						
+		
 						if(in_array('stall', $querydata)){ 
 							if(count($barndatas) > 0){
 								foreach($barndatas as $barnkey => $barndata){
-									$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
+									$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();	
 									$result['barn'][$barnkey]['stall'] = $stalldata;
+
+									foreach($stalldata as $stallkey => $stalldatas){
+										if(in_array('bookedstall', $querydata)){ 
+											$bookedstall = $this->db->table('booking_details bd')
+															->join('booking bk', 'bd.booking_id = bk.id', 'left')
+															->select('bk.firstname,,bk.lastname,bk.check_in bookedcheckin,bk.check_out bookedcheckout')
+															->where('bd.status', '1')
+															->where('bd.stall_id', $stalldatas['id'])
+															->where('bd.barn_id', $barndata['id'])
+															->get()
+															->getResultArray();
+											$result['barn'][$barnkey]['stall'][$stallkey]['bookedstall'] = $bookedstall;
+										}
+									}
 								}
 							}
 						}
+						
 					}
+
 				}
 			}
 		}
@@ -181,7 +196,7 @@ class Event extends BaseModel
 			}
 		}
 		 
-		if(isset($data['barn']) && count($data['barn']) > 0){
+		if(isset($data['barn']) && count($data['barn']) > '0'){
 			$barnidcolumn = array_filter(array_column($data['barn'], 'id'));
 			if(count($barnidcolumn)){
 				$this->db->table('barn')->whereNotIn('id', $barnidcolumn)->update(['status' => '0'], ['event_id' => $eventinsertid]);

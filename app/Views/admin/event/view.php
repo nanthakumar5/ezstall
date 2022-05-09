@@ -86,23 +86,48 @@
 					<?php 
 						$tabbtn = '';
 						$tabcontent = '';
+					
 						foreach ($barn as $barnkey => $barndata) {
 							$barnid = $barndata['id'];
 							$barnname = $barndata['name'];
 							$barnactive = $barnkey=='0' ? ' show active' : '';
 							$tabbtn .= '<li class="nav-item"><a class="nav-link'.$barnactive.'" data-toggle="tab" href="#barn'.$barnid.'">'.$barnname.'</a></li>';
 							
-							$tabcontent .= '<div class="tab-pane container'.$barnactive.'" id="barn'.$barnid.'">
+							$tabcontent .= '<div class="tab-pane '.$barnactive.'" id="barn'.$barnid.'">
 												<ul class="list-group">';
+
 							foreach($barndata['stall'] as $stalldata){
-									$tabcontent .= 	'<li class="list-group-item">
-														<input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-														'.$stalldata['name'].'
-														<span class="red-box"></span>
-													</li>';
+
+								$stallbookedstatus = '';
+								if (!empty($stalldata['bookedstall'])) {
+
+									foreach($stalldata['bookedstall'] as $stallkey => $bookedstalls){
+
+										if(in_array($stalldata['id'], $occupied)){
+
+											$stallbookedstatus = '<div class="row"><div class="col-md-4 p-2 border rounded ad-stall-base">
+																	<table>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Name</p></td>
+																			<td>'.$bookedstalls['firstname'].$bookedstalls['lastname'].'</td>
+																		</tr>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Date</p></td>
+																			<td>'.$bookedstalls['bookedcheckin'].' - '.$bookedstalls['bookedcheckout'].'</td>
+																		</tr>
+																	</table>
+																</div></div>';
+										}
+									}
+								}
+											$tabcontent .= 	'<li class="list-group-item px-4 py-3">
+																<p class="px-2 text-bold">
+																<input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+																'.$stalldata['name'].''.$stallbookedstatus.'
+																</p>
+															</li>';
 							}
-							
-							$tabcontent .= '</ul></div>';
+											$tabcontent .= '</ul></div>';
 						}
 					?>
 					<ul class="nav nav-tabs"><?php echo $tabbtn; ?></ul>
@@ -114,7 +139,6 @@
 
 <?php $this->section('js') ?>
 	<script>
-		
 		$(function(){
 			var initialtab=$(".barntab").first().attr('data-barn');
 			$(".barntab").first().addClass('active');

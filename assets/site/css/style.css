@@ -3946,3 +3946,26 @@ a.ui-button:active,
     left: 50%;
     transform: translate(-50%, -50%)
 }
+.ad-stall-data{
+        font-weight: 500;
+        letter-spacing: 0.5px;
+}
+
+.col-md-32{
+    width: 32%;
+}
+
+.col-md-32.p-2.border.rounded.ad-stall-base:hover {
+    transition: 0.8s ease all;
+    background-color: #e5e5e5;
+    cursor: pointer;
+    border-left: 3.5px solid #3c3c3c !important;
+}
+
+.col-md-32.p-2.border.rounded.ad-stall-base {
+    background-color: #efefef;
+}
+
+.fs-8{
+    font-size: 13px;
+}

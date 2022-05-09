@@ -289,3 +289,7 @@ select.custom-select.custom-select-sm.form-control.form-control-sm {
 a.nav-link.nav-hov:not(.active):hover {
     color: #fff;
 }
+
+.ad-stall-base{
+    background-color: #f7f7f7;
+}

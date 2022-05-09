@@ -70,20 +70,39 @@
 					
 						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
 											<ul class="list-group">';
-						foreach($barndata['stall'] as $stalldata){
-							$boxcolor  = 'green-box';
-							if(in_array($stalldata['id'], $occupied)){
-								$boxcolor  = 'red-box';
-							}elseif(in_array($stalldata['id'], array_keys($reserved))){
-								$boxcolor  = 'yellow-box';
+
+							foreach($barndata['stall'] as $stalldata){
+
+								$stallbookedstatus = '';
+								if (!empty($stalldata['bookedstall'])) {
+	
+									foreach($stalldata['bookedstall'] as $stallkey => $bookedstalls){
+	
+										if(in_array($stalldata['id'], $occupied)){
+
+											$stallbookedstatus = '<div class="row"><div class="col-md-4 p-2 border rounded ad-stall-base">
+																	<table>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Name</p></td>
+																			<td>'.$bookedstalls['firstname'].$bookedstalls['lastname'].'</td>
+																		</tr>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Date</p></td>
+																			<td>'.$bookedstalls['bookedcheckin'].' - '.$bookedstalls['bookedcheckout'].'</td>
+																		</tr>
+																	</table>
+																</div></div>';
+										}
+									}
+								}
+											$tabcontent .= 	'<li class="list-group-item px-4 py-3">
+																<p class="px-2 text-bold">
+																<input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+																'.$stalldata['name'].''.$stallbookedstatus.'
+																</p>
+															</li>';
 							}
-							
-							$tabcontent .= 	'<li class="list-group-item">
-							'.$stalldata['name'].'
-							<span class="'.$boxcolor.' stall-avail stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
-							</li>';
-						}
-						$tabcontent .= '</ul></div>';
+											$tabcontent .= '</ul></div>';
 					}
 				?>
 				<div class="barn-nav mt-4">
