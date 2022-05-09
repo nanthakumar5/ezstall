@@ -113,20 +113,21 @@ class Event extends BaseModel
 						if(in_array('stall', $querydata)){ 
 							if(count($barndatas) > 0){
 								foreach($barndatas as $barnkey => $barndata){
-									$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();	
-									$result['barn'][$barnkey]['stall'] = $stalldata;
-
-									foreach($stalldata as $stallkey => $stalldatas){
-										if(in_array('bookedstall', $querydata)){ 
-											$bookedstall = $this->db->table('booking_details bd')
-															->join('booking bk', 'bd.booking_id = bk.id', 'left')
-															->select('bk.firstname,,bk.lastname,bk.check_in bookedcheckin,bk.check_out bookedcheckout')
-															->where('bd.status', '1')
-															->where('bd.stall_id', $stalldatas['id'])
-															->where('bd.barn_id', $barndata['id'])
-															->get()
-															->getResultArray();
-											$result['barn'][$barnkey]['stall'][$stallkey]['bookedstall'] = $bookedstall;
+									$stalldatas = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();	
+									$result['barn'][$barnkey]['stall'] = $stalldatas;
+									
+									if(in_array('bookedstall', $querydata)){
+										foreach($stalldatas as $stallkey => $stalldata){
+											if(in_array('bookedstall', $querydata)){ 
+												$bookedstall = 	$this->db->table('booking_details bd')
+																->join('booking bk', 'bd.booking_id = bk.id', 'left')
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out')
+																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $result['id']])
+																->get()
+																->getResultArray();
+																
+												$result['barn'][$barnkey]['stall'][$stallkey]['bookedstall'] = $bookedstall;
+											}
 										}
 									}
 								}

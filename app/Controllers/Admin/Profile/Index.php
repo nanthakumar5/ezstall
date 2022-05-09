@@ -16,13 +16,15 @@ class Index extends BaseController
     	if ($this->request->getMethod()=='post')
 		{ 
 			$requestData = $this->request->getPost();
-			$userid = $this->users->action($requestData); 
-			if($userid){ 
+			$requestData['userid'] = getAdminUserID();
+			$result = $this->users->action($requestData); 
+			if($result){ 
 				$this->session->setFlashdata('success', 'Your Account Updated Successfully'); 
 			}else{ 
 				$this->session->setFlashdata('danger', 'Try again Later.');
 			}
 		}
+		
 		$data['userdetail'] 	= getAdminUserDetails();
     	return view('admin/profile/index',$data);
     }

@@ -1,12 +1,6 @@
 <li class="nav-item">
-	<a href="<?php echo getAdminUrl().'/profile'; ?>" class="nav-link nav-hov">
-		<i class="nav-icon far fa-user"></i>
-		<p>Profile</p>
-	</a>
-</li>
-<li class="nav-item">
 	<a href="<?php echo getAdminUrl().'/users'; ?>" class="nav-link nav-hov">
-		<i class="nav-icon far fa-user"></i>
+		<i class="nav-icon fa fa-users"></i>
 		<p>Users</p>
 	</a>
 </li>
@@ -97,6 +91,12 @@
 	<a href="<?php echo getAdminUrl().'/settings'; ?>" class="nav-link nav-hov">
 		<i class="nav-icon fa fa-cog"></i>
 		<p>Settings</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a href="<?php echo getAdminUrl().'/profile'; ?>" class="nav-link nav-hov">
+		<i class="nav-icon far fa-user"></i>
+		<p>Profile</p>
 	</a>
 </li>
 <li class="nav-item">
