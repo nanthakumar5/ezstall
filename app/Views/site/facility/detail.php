@@ -36,24 +36,8 @@
 						<h4 class="fw-bold"><?php echo $name; ?></h4>
 					</div>
 				</div>
-				<div class="stall-description">
-					<h4 class="fw-bold">Description</h4>
-					<p><?php echo $description;?> </p>
-				</div>
-				<div class="stall-riding">
-					<h4 class="fw-bold">Riding Disciplines</h4>
-					<ul>
-						<li>Ut pharetra sem vehicula pulvinar bibendum.</li>
-						<li>Aenean convallis turpis nec turpis consequat aliquam.</li>
-						<li>In ullamcorper velit lobortis quam pretium, et malesuada dolor rutrum.</li>
-						<li>Fusce quis mauris vitae metus mattis convallis sed at nulla.</li>
-					</ul>
-				</div>
-				<div class="stall-cancel">
-					<h4 class="fw-bold">Cancellation Policy</h4>
-					<p>Quis autem vel eum iure reprehenderit qui in ea volute velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
-				</div>
-			</div>
+				<?php echo $description;?>
+				
 			
 			<!-- <div class="col-lg-4">
 				<div class="stall-right">

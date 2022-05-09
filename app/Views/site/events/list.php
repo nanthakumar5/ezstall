@@ -123,7 +123,7 @@ var baseurl = "<?php echo base_url(); ?>";
 $(function() {
     $("#searchevent").autocomplete({
         source: function(request, response) {
-        	ajax(baseurl+'/searchevents', {search: request.term}, {
+        	ajax(baseurl+'/ajaxsearchevents', {search: request.term}, {
         		success: function(result) {
                     response(result);
                 }
@@ -131,12 +131,12 @@ $(function() {
         },
         html: true, 
         select: function(event, ui) {
-        	$('#searchevent').val(ui.item.name); 
+        	$('#ajaxsearchevents').val(ui.item.name); 
             window.location.href = baseurl+'/events/detail/'+ui.item.id;
             return false;
         },
         focus: function(event, ui) {
-            $("#searchevent").val(ui.item.name);
+            $("#ajaxsearchevents").val(ui.item.name);
             return false;
         }
     })

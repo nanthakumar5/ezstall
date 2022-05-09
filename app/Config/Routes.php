@@ -40,8 +40,10 @@ $routes->post('ajax/fileupload', 'Common\Ajax::fileupload');
 $routes->post('ajax/ajaxoccupied', 'Common\Ajax::ajaxoccupied');
 $routes->post('ajax/ajaxreserved', 'Common\Ajax::ajaxreserved');
 $routes->post('ajax/ajaxstripepayment', 'Common\Ajax::ajaxstripepayment');
-$routes->post('searchevents', 'Site\Event\Index::searchevents');
 $routes->get('stripe3d', 'Site\Stripe\Index::index');
+
+$routes->post('ajaxsearchevents', 'Common\Ajax::ajaxsearchevents');
+$routes->post('ajaxsearchfacility', 'Common\Ajax::ajaxsearchfacility');
 
 // Cron
 $routes->get('cartremoval', 'Common\Cron::cartremoval');	

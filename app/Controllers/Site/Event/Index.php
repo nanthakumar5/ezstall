@@ -58,18 +58,6 @@ class Index extends BaseController
 		
 		return view('site/events/detail',$data);
     }
-
- 	public function searchevents()
-	{
-		$requestData = $this->request->getPost(); 
-		$result = array();
-		
-		if (isset($requestData['search'])) {
-			$result = $this->event->getEvent('all', ['event'], ['status'=> ['1'], 'page' => 'events', 'search' => ['value' => $requestData['search']], 'type' =>'1']);
-		}
-
-		return $this->response->setJSON($result);
-	}
 	
 	public function downloadeventflyer($filename)
 	{  

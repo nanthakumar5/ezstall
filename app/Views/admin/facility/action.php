@@ -167,7 +167,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var occupiedstallcount 	 	= '<?php echo (isset($occupied)) ? count($occupied) : 0; ?>';
 
 	
-	$(function(){
+	$(function(){ 
+		editor('#description');
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 

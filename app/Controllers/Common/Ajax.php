@@ -54,4 +54,30 @@ class Ajax extends BaseController
 		
 		echo json_encode(['success' => $result]);
 	}
+
+	public function ajaxsearchevents()
+	{ 
+		$requestData = $this->request->getPost(); 
+		$event = new \App\Models\Event();
+		$result = array();
+		
+		if (isset($requestData['search'])) {
+			$result = $event->getEvent('all', ['event'], ['status'=> ['1'], 'page' => 'events', 'search' => ['value' => $requestData['search']], 'type' =>'1']);
+		}
+
+		return $this->response->setJSON($result);
+	}
+
+	public function ajaxsearchfacility()
+	{
+		$requestData = $this->request->getPost(); 
+		$event = new \App\Models\Event();
+		$result = array();
+		
+		if (isset($requestData['search'])) {
+			$result = $event->getEvent('all', ['event'], ['status'=> ['1'], 'page' => 'events', 'search' => ['value' => $requestData['search']], 'type' =>'2']);
+		}
+
+		return $this->response->setJSON($result);
+	}
 }

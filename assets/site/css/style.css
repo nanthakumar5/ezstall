@@ -440,6 +440,37 @@ button.ucEventBtn.closeBtn:hover {
     border-radius: 50vw;
 }
 
+.searchResult_ button {
+    border: none;
+    background: #e00000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50vw;
+}
+
+span.searchResult_ svg {
+    fill: white;
+    font-size: 20px;
+}
+
+.iconPlace_ {
+    position: absolute;
+    right: 20px;
+    height: 25px;
+}
+
+.nb-right{
+    border-right: none !important;
+}
+
+.facility_info{
+    box-shadow: 1px 1px 5px 1px #ddd;
+}
+
+.pr-f2{
+    padding-right: 2.5%;
+}
+
 .infoPanel span input:nth-child(1) {
     border: none;
     border-right: 1px solid #dfdfdf;
