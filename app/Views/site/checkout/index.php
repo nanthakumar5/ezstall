@@ -89,6 +89,7 @@
         <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
         <input type="hidden" name="type" value="<?php echo $cartdetail['type']; ?>" >
         <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
+        <input type="hidden" name="page" value="checkout" >
 
         <div class="checkout-special border rounded pt-4 ps-4 pe-4 mb-5">
           <h2 class="checkout-fw-6">Special Requests</h2>

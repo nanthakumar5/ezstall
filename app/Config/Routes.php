@@ -56,10 +56,8 @@ $routes->match(['get','post'], 'register', 'Site\Register\Index::index', ['filte
 $routes->get('verification/(:any)', 'Site\Register\Index::verification/$1');
 $routes->match(['get','post'], 'events', 'Site\Event\Index::lists');
 $routes->match(['get','post'], 'events/detail/(:num)', 'Site\Event\Index::detail/$1');
-//$routes->match(['get','post'], 'facility', 'Site\Stall\Index::index');
 $routes->match(['get','post'], 'facility', 'Site\Facility\Index::lists');
 $routes->match(['get','post'], 'facility/detail/(:num)', 'Site\Facility\Index::detail/$1');
-$routes->match(['get','post'], 'stalls/detail/(:num)', 'Site\Stall\Index::detail/$1');
 $routes->get('aboutus', 'Site\Aboutus\Index::index');
 $routes->get('aboutus/detail/(:num)', 'Site\Aboutus\Index::detail/$1');
 $routes->get('faq', 'Site\Faq\Index::index');
@@ -91,7 +89,6 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->get('facility/export/(:num)', 'Site\Myaccount\Facility\Index::export/$1');
     $routes->post('facility/importbarnstall', 'Site\Myaccount\Facility\Index::importbarnstall');
 
-
     $routes->match(['get','post'], 'stallmanager', 'Site\Myaccount\Stallmanager\Index::index');
     $routes->match(['get','post'], 'stallmanager/add', 'Site\Myaccount\Stallmanager\Index::action'); 
     $routes->match(['get','post'], 'stallmanager/edit/(:num)', 'Site\Myaccount\Stallmanager\Index::action/$1');
@@ -109,7 +106,6 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->get('payments/view/(:num)', 'Site\Myaccount\PaymentInfo\Index::view/$1');
 
     $routes->match(['get', 'post'], 'stripe/(:any)', 'Site\Myaccount\Reservation\Index::striperefunds/$1'); 
-
 });
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	
@@ -193,31 +189,6 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
 
 	// Settings
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');
-});
-
-//Api route
-$routes->group('api', ['filter' => 'apiauthentication'], function($routes){    
-    $routes->post('verification/(:any)', 'Api\Register\Index::verification/$1');
-    
-    //Register table api
-    $routes->post('register', 'Api\Register\Index::action');
-    $routes->post('login','Api\Login\Index::index');
-    
-    //Users table api
-    $routes->post('listUser', 'Api\Users\Index::index');
-    $routes->post('getUserById', 'Api\Users\Index::index/1');
-    $routes->post('addUser', 'Api\Users\Index::action');
-    $routes->post('editUser', 'Api\Users\Index::action/1');
-    $routes->post('deleteUser', 'Api\Users\Index::delete');
-    
-    //Event table api
-    $routes->post('addEvent', 'Api\Event\Index::action');
-    $routes->post('listEvent', 'Api\Event\Index::Index');
-    $routes->post('getEventById', 'Api\Event\Index::Index/1');
-    
-    //Barn table api
-    $routes->post('addBarn', 'Api\Barn\Index::action');
-    $routes->post('listBarn', 'Api\Barn\Index::index');
 });
 
 /*

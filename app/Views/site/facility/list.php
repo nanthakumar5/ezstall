@@ -70,30 +70,31 @@
 		</div>
 		<section class="maxWidth marFiveRes eventPagePanel">
 			<?php if(count($list) > 0) { ?>  
-				<?php foreach ($list as $data) { 
-				?>
-				<div class="ucEventInfo">
-					<div class="EventFlex">
-						<span class="wi-50">
-							<div class="EventFlex leftdata">
-								<span class="wi-30">
-									<span class="ucimg">
-										<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
+				<?php foreach ($list as $data) { ?>
+					<div class="ucEventInfo">
+						<div class="EventFlex">
+							<span class="wi-50">
+								<div class="EventFlex leftdata">
+									<span class="wi-30">
+										<span class="ucimg">
+											<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
+										</span>
 									</span>
-								</span>
-								<span class="wi-70"> <h5><?php echo $data['name']; ?><h5>
-								</span>
+									<span class="wi-70"> <h5><?php echo $data['name']; ?><h5>
+									</span>
+								</div>
+							</span>
+							<div class="wi-50-2 justify-content-between">
+								<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/facility/detail/<?php echo $data['id']?>">
+									<button class="ucEventBtn">
+										Book Now
+									</button>
+								</a>
 							</div>
-						</span>
-						<div class="wi-50-2 justify-content-between">
-							<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/facility/detail/<?php echo $data['id']?>"><button class="ucEventBtn">
-								Booking Now
-							</button></a>
 						</div>
 					</div>
-				</div>
-			<?php } ?>
-			<?php echo $pager; ?>
+				<?php } ?>
+				<?php echo $pager; ?>
 			<?php }else{ ?>
 				No Record Found
 			<?php } ?>

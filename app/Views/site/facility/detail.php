@@ -1,19 +1,18 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 	<?php
-
-		$userid 	= getSiteUserID() ? getSiteUserID() : 0;
-	    $currentdate = date("m-d-Y");
-		$getcart 	 = getCart('2');
-		$cartevent 	 = ($getcart && $getcart['barnstall'][0]['stall_id'] != $detail['id']) ? 1 : 0;
-		$name 		 = $detail['name'];
-		$description = $detail['description'];
-		$image 		 = base_url().'/assets/uploads/event/'.$detail['image'];
+		$userid 		= getSiteUserID() ? getSiteUserID() : 0;
+	    $currentdate 	= date("m-d-Y");
+		$getcart 	 	= getCart('2');
+		$cartevent 	 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
+		$name 		 	= $detail['name'];
+		$description 	= $detail['description'];
+		$image 		 	= base_url().'/assets/uploads/event/'.$detail['image'];
 	?>
 	
 	<?php if($cartevent==1){?>
 		<div class="alert alert-success alert-dismissible fade show m-2" role="alert">
-			For booking this stall remove other stalls from the cart <a href="<?php echo base_url().'/stalls/detail/'.$getcart['barnstall'][0]['stall_id']; ?>">Go To Stall</a>
+			For booking this stall remove other stalls from the cart <a href="<?php echo base_url().'/facility/detail/'.$getcart['event_id']; ?>">Go To Facility</a>
 			<!--<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>-->
 		</div>
 	<?php } ?>
@@ -99,6 +98,7 @@
 					</div>
 				</div>
 			</div> -->
+			
 			<div class="row m-0 p-0">
 				<div class="col-md-9">
 					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5">
@@ -128,22 +128,15 @@
 							$tabbtn .= '<button class="nav-link'.$barnactive.'" data-bs-toggle="tab" data-bs-target="#barn'.$barnid.'" type="button" role="tab" aria-controls="barn'.$barnid.'" aria-selected="true">'.$barnname.'</button>';
 
 							$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
-							<ul class="list-group">';
+												<ul class="list-group">';
 							foreach($barndata['stall'] as $stalldata){ 
-								$validcurrentdate = (strtotime($stalldata['end_date']) >= strtotime($currentdate)) ? '' :'hidden="hidden"';
-
-								$boxcolor  = 'green-box';
-								$checkboxstatus = '';
-
-								/*if($cartevent=='1' || $checkevent['status']=='0'){
-									$checkboxstatus = 'disabled';
-								}*/
-
-								$tabcontent .= 	'<li class="list-group-item" '.$validcurrentdate.'>
-								<input class="form-check-input stallid me-1" data-stallstartdate="'.$stalldata['start_date'].'" data-stallenddate="'.$stalldata['end_date'].'" data-price="'.$stalldata['price'].'" data-barnid="'.$stalldata['barn_id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox"  '.$checkboxstatus.' >
-								'.$stalldata['name'].'
-								<span class="'.$boxcolor.' stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
-								</li>';
+								$stallenddate = $stalldata['end_date'];
+								
+								$tabcontent .= 	'<li class="list-group-item">
+													<input class="form-check-input stallid me-1" data-stallenddate="'.$stallenddate.'" data-price="'.$stalldata['price'].'" data-barnid="'.$stalldata['barn_id'].'" value="'.$stalldata['id'].'" name="checkbox"  type="checkbox">
+													'.$stalldata['name'].'
+													<span class="green-box stallavailability" data-stallid="'.$stalldata['id'].'" ></span>
+												</li>';
 							}
 							$tabcontent .= '</ul></div>';
 						}
@@ -162,7 +155,7 @@
 										<p><span class="green-circle"></span>Available</p>
 										<p><span class="yellow-circle"></span>Reserved</p>
 										<p><span class="red-circle"></span>Occupied</p>
-										<p><span class="brown-circle"></span>End Date Expired</p>
+										<p><span class="brown-circle"></span>Expired</p>
 									</div>
 								</div>
 							</div>    
@@ -182,9 +175,21 @@
 	var eventid 			= '<?php echo $detail["id"]; ?>';
 	var stallid 			= '<?php echo $stalldata["id"]; ?>';
 	var cartevent 			= '<?php echo $cartevent; ?>';
-	//alert(stallid);
 	
-	uidatepicker('#startdate , #enddate'); 
+	uidatepicker(
+		'#startdate', 
+		{ 
+			'mindate' 	: '0',
+			'close' 	: function(selecteddate){
+				var date = new Date(selecteddate)
+				date.setDate(date.getDate() + 1);
+				$("#enddate").datepicker( "option", "minDate", date );
+			}
+		}
+	);
+
+	uidatepicker('#enddate', { 'mindate' : '0' });
+	
 	$(document).ready(function (){ 
 		if(cartevent == 0 ){ 
 			cart();
@@ -192,24 +197,31 @@
 			$("#startdate, #enddate").attr('disabled', 'disabled');
 		}
 	});
-
+	
+	$("#enddate").click(function(){
+		var startdate 	= $("#startdate").val();
+		if(startdate==''){
+			$("#startdate").focus();
+		}
+	});
+	
 	$("#startdate, #enddate").change(function(){  
 		setTimeout(function(){
 			var startdate 	= $("#startdate").val(); 
 			var enddate   	= $("#enddate").val(); 
 
 			if(startdate!='' && enddate!=''){
-				cart({type : '1', checked : 0}); 
+				cart({type : '2', checked : 0}); 
 				$('.stallid').prop('checked', false).removeAttr('disabled');
 				$('.stallavailability').removeClass("yellow-box").removeClass("red-box").addClass("green-box");
 				
-				validateStallDates(enddate);
+				validatestalldates(enddate);
 				occupiedreserved(startdate, enddate);
 			}
 		}, 100);
 	})
 
-	function validateStallDates(enddate){ 
+	function validatestalldates(enddate){ 
 		$('.stallid').each(function(){
 			var stallenddate		= $(this).attr('data-stallenddate');
 			var stallid	 			= $(this).val();
@@ -296,12 +308,11 @@
 			{ 
 				asynchronous : 1,
 				success  : function(result){
-
-					console.log(result);
 					if(Object.keys(result).length){  
 						$("#startdate").val(result.check_in); 
 						$("#enddate").val(result.check_out); 
 						
+						validatestalldates($("#enddate").val());
 						occupiedreserved($("#startdate").val(), $("#enddate").val());
 						
 						$(result.barnstall).each(function(i,v){ 
@@ -344,7 +355,7 @@
 					}
 				}
 			}
-			);
+		);
 	}
 </script>
 <?php echo $this->endSection() ?>

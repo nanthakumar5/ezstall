@@ -208,7 +208,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 					$("#enddate").datepicker( "option", "minDate", date );
 				}
 			}
-			);
+		);
 
 		uidatepicker('#enddate', { 'mindate' : eventstartdate, 'maxdate' : eventenddateadd });
 	});

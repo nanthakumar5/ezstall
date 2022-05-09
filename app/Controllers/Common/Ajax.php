@@ -46,7 +46,7 @@ class Ajax extends BaseController
 		$requestData = $this->request->getPost();		
 		$stripeModel = new \App\Models\Stripe();
 		
-		if($requestData['type']=='1'){
+		if($requestData['type']=='1' || (isset($requestData['page']) && $requestData['page']=='checkout')){
 			$result = $stripeModel->stripepayment($requestData);
 		}elseif($requestData['type']=='2'){
 			$result = $stripeModel->striperecurringpayment($requestData);
