@@ -75,22 +75,20 @@
 							$bookedstalldata = [];
 							if (!empty($stalldata['bookedstall'])) {
 								foreach($stalldata['bookedstall'] as $bookedstall){
-									if(in_array($stalldata['id'], $occupied)){
-										$bookedstalldata[] = 	'<div class="row">
-																	<div class="col-md-4 p-2 border rounded ad-stall-base">
-																		<table>
-																			<tr>
-																				<td><p class="mb-0 text-bold px-2">Name</p></td>
-																				<td>'.$bookedstall['name'].'</td>
-																			</tr>
-																			<tr>
-																				<td><p class="mb-0 text-bold px-2">Date</p></td>
-																				<td>'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</td>
-																			</tr>
-																		</table>
-																	</div>
-																</div>';
-									}
+									$bookedstalldata[] = 	'<div class="row">
+																<div class="col-md-4 p-2 border rounded ad-stall-base">
+																	<table>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Name</p></td>
+																			<td>'.$bookedstall['name'].'</td>
+																		</tr>
+																		<tr>
+																			<td><p class="mb-0 text-bold px-2">Date</p></td>
+																			<td>'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</td>
+																		</tr>
+																	</table>
+																</div>
+															</div>';
 								}
 							}
 							

@@ -141,9 +141,6 @@ class Index extends BaseController
 	public function view($id)
     {  
 		$data['detail']  	= $this->event->getEvent('row', ['event', 'barn', 'stall', 'bookedstall'], ['id' => $id, 'type' => '1']);
-		$data['occupied'] 	= getOccupied($id); 
-		$data['reserved'] 	= getReserved($id);
-		
 		return view('site/myaccount/event/view',$data);
     }
 	
@@ -151,7 +148,6 @@ class Index extends BaseController
     {	
     	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$occupied 	= getOccupied($id); 
 
 		$spreadsheet = new Spreadsheet();
 		$sheet 		 = $spreadsheet->getActiveSheet();
@@ -186,7 +182,7 @@ class Index extends BaseController
 
 			foreach($barn['stall'] as $key=> $stall){   
 				$stallname = $stall['name'];
-				$status = in_array($stall['id'], $occupied)? 'Occupied' : 'Available'; 
+				$status = 'Available'; 
 				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname. '- ' .$status);
 			}
 			$col++;
