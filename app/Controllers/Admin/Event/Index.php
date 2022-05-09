@@ -111,7 +111,6 @@ class Index extends BaseController
 	{
 		$result = $this->event->getEvent('row', ['event', 'barn', 'stall','bookedstall'], ['id' => $id, 'status' => ['1', '2'], 'type' => '1']);
 		if($result){
-			$data['occupied'] 	= getOccupied($id);
 			$data['result'] = $result;
 		}else{
 			$this->session->setFlashdata('danger', 'No Record Found.');

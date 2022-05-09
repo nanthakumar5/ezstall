@@ -84,76 +84,59 @@
 					</div>
 					<h3 class="event_heading"> Barn and stalls </h3>
 					<?php 
-						$tabbtn = '';
-						$tabcontent = '';
+					$tabbtn = '';
+					$tabcontent = '';
+					foreach ($barn as $barnkey => $barndata) {
+						$barnid = $barndata['id'];
+						$barnname = $barndata['name'];
+						$barnactive = $barnkey=='0' ? ' show active' : '';
+						$tabbtn .= '<button class="nav-link'.$barnactive.'" data-bs-toggle="tab" data-bs-target="#barn'.$barnid.'" type="button" role="tab" aria-controls="barn'.$barnid.'" aria-selected="true">'.$barnname.'</button>';
 					
-						foreach ($barn as $barnkey => $barndata) {
-							$barnid = $barndata['id'];
-							$barnname = $barndata['name'];
-							$barnactive = $barnkey=='0' ? ' show active' : '';
-							$tabbtn .= '<li class="nav-item"><a class="nav-link'.$barnactive.'" data-toggle="tab" href="#barn'.$barnid.'">'.$barnname.'</a></li>';
-							
-							$tabcontent .= '<div class="tab-pane '.$barnactive.'" id="barn'.$barnid.'">
-												<ul class="list-group">';
+						$tabcontent .= '<div class="tab-pane fade'.$barnactive.'" id="barn'.$barnid.'" role="tabpanel" aria-labelledby="nav-home-tab">
+											<ul class="list-group">';
 
-							foreach($barndata['stall'] as $stalldata){
-
-								$stallbookedstatus = '';
-								if (!empty($stalldata['bookedstall'])) {
-
-									foreach($stalldata['bookedstall'] as $stallkey => $bookedstalls){
-
-										if(in_array($stalldata['id'], $occupied)){
-
-											$stallbookedstatus = '<div class="row"><div class="col-md-4 p-2 border rounded ad-stall-base">
+						foreach($barndata['stall'] as $stalldata){
+							$bookedstalldata = [];
+							if (!empty($stalldata['bookedstall'])) {
+								foreach($stalldata['bookedstall'] as $bookedstall){
+									$bookedstalldata[] = 	'<div class="col-md-4 p-2 border rounded ad-stall-base">
 																	<table>
 																		<tr>
 																			<td><p class="mb-0 text-bold px-2">Name</p></td>
-																			<td>'.$bookedstalls['firstname'].$bookedstalls['lastname'].'</td>
+																			<td>'.$bookedstall['name'].'</td>
 																		</tr>
 																		<tr>
 																			<td><p class="mb-0 text-bold px-2">Date</p></td>
-																			<td>'.$bookedstalls['bookedcheckin'].' - '.$bookedstalls['bookedcheckout'].'</td>
+																			<td>'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</td>
 																		</tr>
 																	</table>
-																</div></div>';
-										}
-									}
+																</div>
+															';
 								}
-											$tabcontent .= 	'<li class="list-group-item px-4 py-3">
-																<p class="px-2 text-bold">
-																<input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-																'.$stalldata['name'].''.$stallbookedstatus.'
-																</p>
-															</li>';
 							}
-											$tabcontent .= '</ul></div>';
+							
+							$tabcontent .= 	'<li class="list-group-item px-4 py-3">
+												<p class="px-2 text-bold">
+												'.$stalldata['name'].'<div class="row">'.implode('', $bookedstalldata).'</div>
+												</p>
+											</li>';
 						}
-					?>
-					<ul class="nav nav-tabs"><?php echo $tabbtn; ?></ul>
-					<div class="tab-content"><?php echo $tabcontent; ?></div>
+						
+						$tabcontent .= '</ul></div>';
+					}
+				?>
+				<div class="barn-nav mt-4">
+					<nav>
+						<div class="nav nav-tabs" id="nav-tab" role="tablist">
+							<?php echo $tabbtn; ?>
+						</div>
+					</nav>
+					<div class="tab-content" id="nav-tabContent">
+						<?php echo $tabcontent; ?>
+					</div>    
+				</div>
 			</div>
 		</div>
 	</section>
-<?php $this->endSection(); ?>
-
-<?php $this->section('js') ?>
-	<script>
-		$(function(){
-			var initialtab=$(".barntab").first().attr('data-barn');
-			$(".barntab").first().addClass('active');
-			$('.'+initialtab).addClass("active show");
-			
-			$(".barntab").click(function () {
-				var tab=$(this).attr('data-barn');
-				$(".barntab").removeClass("active");
-				$(".tab-pane").removeClass("active");
-				$(".barntab").attr('aria-selected',false);
-				$(this).addClass("active");  
-				$('.'+tab).addClass("active show");
-				$(this).attr('aria-selected',true);			
-			});
-		});		
-	</script>
 <?php $this->endSection(); ?>
 
