@@ -16,7 +16,7 @@
     transform: translate(-50%, -50%);
 }
 </style>
-<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>
+<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.svg"; ?>"></div>
 <script>
 	window.parent.top.postMessage('3DS-authentication-complete');
 </script>

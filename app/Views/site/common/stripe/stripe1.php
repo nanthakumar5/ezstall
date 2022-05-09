@@ -131,7 +131,7 @@ $(function(){
 			
 			ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
 				beforesend: function() {
-					$('.modal-content').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+					$('.modal-content').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.svg"; ?>"></div>');
 				},
 				success: function(data){
 					if(data.success.status=='1'){
