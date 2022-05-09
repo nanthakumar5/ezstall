@@ -29,6 +29,7 @@ class Index extends BaseController
 		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users', 'barnstall', 'payment'], ['userid'=> $allids, 'gtenddate'=> $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
+		$data['currencysymbol'] = $this->config->currencysymbol;
     	return view('site/myaccount/reservation/index', $data);
     }
 

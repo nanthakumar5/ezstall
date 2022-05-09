@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 
 <div class="dFlexComBetween eventTP flex-wrap">
-  <h2 class="fw-bold mb-4">Past Month Acivity</h2>
+  <h2 class="fw-bold mb-4">Past Reservation</h2>
 </div>
 <section class="maxWidth eventPagePanel">
  <?php if(!empty($bookings)) {  ?>
@@ -60,7 +60,7 @@
           <div class="col-md-3">
             <div>
               <p class="mb-0 fs-7 fw-600">Cost</p>
-              <p class="mb-0 fs-7"><?php echo $data['amount'];?></p>
+              <p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
             </div>
           </div>
           <div class="col-md-1">

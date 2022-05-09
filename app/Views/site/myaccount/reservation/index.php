@@ -66,7 +66,7 @@
 					<div class="col-md-3">
 						<div>
 							<p class="mb-0 fs-7 fw-600">Cost</p>
-							<p class="mb-0 fs-7"><?php echo $data['amount'];?></p>
+							<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
 						</div>
 					</div>
 					<div class="col-md-1">

@@ -14,7 +14,7 @@
   ?>
     <div class="row">
       <div class="col">
-        <h2 class="fw-bold mb-4">View Past Month Activity</h2>
+        <h2 class="fw-bold mb-4">View Past Reservation</h2>
       </div>
       <div class="col" align="right">
         <a href="<?php echo base_url().'/myaccount/pastactivity';?>" class="btn back-btn">Back</a>

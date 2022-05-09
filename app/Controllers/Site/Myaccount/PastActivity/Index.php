@@ -24,11 +24,12 @@ class Index extends BaseController
 		$allids = getStallManagerIDS($userid);
 		array_push($allids, $userid);
 
-		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid' => $allids]);
-		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids,'ltenddate' => $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
+		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid' => $allids, 'ltenddate' => $date]);
+		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users','barnstall','payment'], ['userid' => $allids, 'ltenddate' => $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
-
+		$data['currencysymbol'] = $this->config->currencysymbol;
+		
     	return view('site/myaccount/pastactivity/index',$data);
 
     }

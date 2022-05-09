@@ -29,8 +29,7 @@ class Index extends BaseController
 		if(count($results) > 0){
 			$action = '';
 			foreach($results as $key => $result){
-				$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>
-							';
+				$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>';
 				
 				$totalrecord[] = 	[
 										'id' 			=> 	$result['id'],
@@ -56,8 +55,6 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$userid = getSiteUserID();
-
 		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall','users'], ['id' => $id]);
 		if($result){
 			$data['result'] = $result;

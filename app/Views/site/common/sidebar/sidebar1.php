@@ -59,7 +59,7 @@
 		<li>
 			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/pastactivity">
 				<i class="side-nav-i bi bi-calendar3"></i>
-				<p>Past Month Activity</p>
+				<p>Past Reservation</p>
 			</a>
 		</li>
 		<li>

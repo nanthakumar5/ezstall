@@ -39,9 +39,7 @@ class Booking extends BaseModel
 		else											$query->select(implode(',', $select));
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
-		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);
-		if(isset($requestdata['gtenddate'])) 			$query->where('e.end_date >=', date('Y-m-d', strtotime($requestdata['gtenddate'])));
-		if(isset($requestdata['ltenddate'])) 			$query->where('e.end_date <', date('Y-m-d', strtotime($requestdata['ltenddate'])));
+		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);		
 		
 		if(isset($requestdata['userid'])) 				
 		{
@@ -50,6 +48,20 @@ class Booking extends BaseModel
 				$query->orWhereIn('e.user_id', $requestdata['userid']);
 			$query->groupEnd();
 		} 		
+		
+		if(isset($requestdata['gtenddate'])){
+			$query->groupStart();
+				$query->groupStart()->where(['b.type' => '1', 'e.type' => '1', 'e.end_date >=' => date('Y-m-d', strtotime($requestdata['gtenddate']))])->groupEnd();
+				$query->orGroupStart()->where(['b.type' => '2', 'e.type' => '2', 'b.check_out >=' => date('Y-m-d', strtotime($requestdata['gtenddate']))])->groupEnd();
+			$query->groupEnd();
+		}
+		
+		if(isset($requestdata['ltenddate'])){
+			$query->groupStart();
+				$query->groupStart()->where(['b.type' => '1', 'e.type' => '1', 'e.end_date <' => date('Y-m-d', strtotime($requestdata['ltenddate']))])->groupEnd();
+				$query->orGroupStart()->where(['b.type' => '2', 'e.type' => '2', 'b.check_out <' => date('Y-m-d', strtotime($requestdata['ltenddate']))])->groupEnd();
+			$query->groupEnd();
+		}
 		
 		if(isset($requestdata['checkin']) && isset($requestdata['checkout'])){
 			$query->groupStart();
@@ -96,6 +108,7 @@ class Booking extends BaseModel
 			$result = $query->countAllResults(); 
 		}else{
 			$query = $query->get();
+		
 			if($type=='all'){
 				$result = $query->getResultArray();
 				
