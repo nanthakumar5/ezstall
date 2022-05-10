@@ -4046,3 +4046,10 @@ a.ui-button:active,
 }
 
 /*10-05-2022 SM*/
+
+
+.col-custom-3 {
+    width: 30%;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}

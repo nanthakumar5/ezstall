@@ -99,7 +99,7 @@
 							$bookedstalldata = [];
 							if (!empty($stalldata['bookedstall'])) {
 								foreach($stalldata['bookedstall'] as $bookedstall){
-									$bookedstalldata[] = 	'<div class="col-md-4 p-2 border rounded ad-stall-base">
+									$bookedstalldata[] = 	'<div class="col-custom-3 p-2 border rounded ad-stall-base">
 																	<table>
 																		<tr>
 																			<td><p class="mb-0 text-bold px-2">Name</p></td>

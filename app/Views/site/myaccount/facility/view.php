@@ -33,7 +33,7 @@
 								$bookedstalldata = [];
 								if (!empty($stalldata['bookedstall'])) {
 									foreach($stalldata['bookedstall'] as $bookedstall){
-										$bookedstalldata[] ='<div class="col-md-4 p-2 border rounded ad-stall-base mx-3">
+										$bookedstalldata[] ='<div class="col-custom-3 p-2 border rounded ad-stall-base mx-2">
 																<table>
 																	<tr>
 																		<td class="p-0"><p class="fs-7 mb-0 text-bold px-2">Name</p></td>
@@ -49,7 +49,7 @@
 									}
 								}
 									$tabcontent .= 	'<li class="list-group-item px-4 py-3">
-														<p class="px-2 text-bold mb-1">
+														<p class="text-bold mb-1">
 														'.$stalldata['name'].'<div class="row">'.implode('', $bookedstalldata).'</div>
 														</p>
 													</li>';

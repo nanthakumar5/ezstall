@@ -314,3 +314,9 @@ a.nav-link.nav-hov:not(.active):hover {
 .mx-07{
   margin-left: 0.7rem;
 }
+
+.col-custom-3 {
+    width: 30%;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
