@@ -98,6 +98,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'account','Site\Myaccount\AccountInfo\Index::index');
 
     $routes->match(['get','post'], 'bookings','Site\Myaccount\Reservation\Index::index');
+    $routes->match(['get', 'post'], 'stripe/(:any)', 'Site\Myaccount\Reservation\Index::index/$1'); 
     $routes->get('bookings/view/(:num)', 'Site\Myaccount\Reservation\Index::view/$1');
     $routes->post('bookings/searchbookeduser', 'Site\Myaccount\Reservation\Index::bookeduser');
 
@@ -106,8 +107,6 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
 
     $routes->match(['get','post'], 'payments','Site\Myaccount\PaymentInfo\Index::index');
     $routes->get('payments/view/(:num)', 'Site\Myaccount\PaymentInfo\Index::view/$1');
-
-    $routes->match(['get', 'post'], 'stripe/(:any)', 'Site\Myaccount\Reservation\Index::striperefunds/$1'); 
 });
 
 $routes->match(['get', 'post'], '/administrator', 'Admin\Login\Index::index', ['filter' => 'adminauthentication1']);	

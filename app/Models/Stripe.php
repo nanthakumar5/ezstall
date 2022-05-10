@@ -32,7 +32,7 @@ class Stripe extends BaseModel
 			return $id;
 		}
 	}
-	
+
 	function stripepayment($requestData)
 	{
 		$userid 		= $requestData['userid'];
@@ -158,6 +158,23 @@ class Stripe extends BaseModel
 			}
 		}
 		
+	}
+
+	function striperefunds($data){
+
+        $settings = getSettings();
+        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+
+		$charges = $this->createCharges(30, 'inr', $data['customerid']);
+		echo "<pre>";print_r($charges);die;
+		if($charges)
+		{
+			$refunds = $this->createRefunds($charges->id);
+			if($refunds)
+			{
+
+			}
+		}
 	}
 	
 	function createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc)
@@ -340,14 +357,40 @@ class Stripe extends BaseModel
             die;
         }
     } 
-	
-	function striperefunds($data){
-        $settings = getSettings();
-        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
-		$stripe->refunds->create(
-			['payment_intent' => $data]
-		);
-		$this->db->table('booking')->update(['status' => '2']);
-		return $this->db->insertID();
-	}
+    
+    function createCharges($amount, $currency, $customerid)
+    {
+        try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+            $data = $stripe->charges->create([
+                'amount' => $amount,
+  				'currency' => $currency,
+  				'customer' => $customerid
+            ]);
+            
+			return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());
+            die;
+        }
+    }
+
+    function createRefunds($chargeid)
+    {
+        try{
+			$settings = getSettings();
+			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
+			
+            $data = $stripe->refunds->create([
+                'charge' => $chargeid
+            ]);
+
+			return $data;
+        }catch(Exception $e){
+            print_r($e->getMessage());
+            die;
+        }
+    }  
 }

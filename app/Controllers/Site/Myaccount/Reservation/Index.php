@@ -14,7 +14,12 @@ class Index extends BaseController
 	}
 
 	public function index()
-    {
+    { 
+    	if($this->request->getMethod()=='post'){ 
+			$this->stripe->striperefunds($this->request->getPost());
+			return redirect()->to(base_url().'/myaccount/bookings'); 
+        }
+
     	$pager = service('pager'); 
 		$page = (int)(($this->request->getVar('page')!==null) ? $this->request->getVar('page') :1)-1;
 		$perpage =  5; 
@@ -27,6 +32,7 @@ class Index extends BaseController
 		
 		$bookingcount = $this->booking->getBooking('count', ['booking', 'event', 'users'], ['userid'=> $allids, 'gtenddate'=> $date]);
 		$data['bookings'] = $this->booking->getBooking('all', ['booking', 'event', 'users', 'barnstall', 'payment'], ['userid'=> $allids, 'gtenddate'=> $date, 'start' => $offset, 'length' => $perpage], ['orderby' => 'b.id desc']);
+		//echo "<pre>";print_r($data['bookings']);die;
 		$data['pager'] = $pager->makeLinks($page, $perpage, $bookingcount);
 		$data['usertype'] = $this->config->usertype;
 		$data['currencysymbol'] = $this->config->currencysymbol;
@@ -63,11 +69,5 @@ class Index extends BaseController
 		$response['data'] = $result;
 
 		return $this->response->setJSON($result);
-	}
-
-	public function striperefunds($data)
-	{
-        $paymentresult	= $this->stripe->striperefunds($data);
-        return view('site/myaccount/reservation/index');
 	}
 }

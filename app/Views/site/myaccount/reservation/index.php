@@ -73,7 +73,7 @@
 						<div class="d-flex justify-content-end align-items-center">
 							<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" 
 								class="mt-0 mx-3 view-res">View</a>
-							<a href="<?php echo base_url().'/myaccount/stripe/'.$data['stripe_subscription_id']?>" style='align: right;' class="">
+							<a href="javascript:void(0);" style='align: right;' data-paymentintentid='<?php echo $data['stripe_paymentintent_id']; ?>' data-customerid='<?php echo $data['stripe_customer_id']; ?>' class="striperefunds">
 								<i class="fas fa-times-circle" style="font-size: 30px;"></i> </a>
 							</div>
 						</div>
@@ -118,6 +118,11 @@
 			var name = item.firstname+item.lastname
 			return $( "<li><div>"+name+"</div></li>" ).appendTo( ul );
 		};
+	});
+
+	$('.striperefunds').click(function(){
+		var data = '<input type="hidden" name="paymentintentid" value="'+$(this).attr("data-paymentintentid")+'"><input type="hidden" name="customerid" value="'+$(this).attr("data-customerid")+'">';
+		formsubmit("<?php echo base_url().'/myaccount/bookings'; ?>", data);
 	});
 </script>
 <?php $this->endSection(); ?>
