@@ -14,7 +14,7 @@
 
 <?php $this->section('content') ?>
 <?php
-$searchlocation = isset($searchdata['llocation']) ? $searchdata['llocation'] : '';
+$searchname = isset($searchdata['name']) ? $searchdata['name'] : '';
 $searchstartdate = isset($searchdata['btw_start_date']) ? formatdate($searchdata['btw_start_date'], 1) : '';
 $searchenddate = isset($searchdata['btw_end_date']) ? formatdate($searchdata['btw_end_date'], 1) : '';
 $searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stalls'] : '';
@@ -23,7 +23,7 @@ $searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stal
 	<form action="<?php echo base_url();?>/facility" method="get" autocomplete="off" class="w-100 listeventsearch">
 		<span class="row facility_info align-items-center">
 			<span class="col-md-6 iconProperty">
-				<input type="text" name="location" placeholder="Location" value="<?php echo $searchlocation; ?>">
+				<input type="text" name="name" placeholder="Event Name" value="<?php echo $searchname; ?>">
 				<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace_" alt="Map Icon">
 			</span>
 			<span class="col-md-5 iconProperty">
