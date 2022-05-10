@@ -29,11 +29,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Name</label>								
-								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
+								<input type="text" name="facility_name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
 						</div>
 						<div class="col-md-12 my-2">
-							<div class="form-group">
+						    <div class="form-group">
 								<label>Description</label>
 								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
 							</div>
@@ -70,6 +70,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 					<div class="col-md-12 mt-4">
 						<input type="hidden" name="actionid" value="<?php echo $id; ?>">
 						<input type="hidden" name="userid" value="<?php echo $userid; ?>">
+						<input type="hidden" name="type" value="1">
 						<button class="btn btn-danger facilitypayment"  type="button">Submit</button>
 						<a href="<?php echo base_url(); ?>/myaccount/facility" class="btn btn-dark">Back</a>
 					</div>
@@ -157,7 +158,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		validation(
 			'#form',
 			{
-				name 	     : {
+				facility_name  	: {
 					required	: 	true
 				},
 				description     : {

@@ -94,6 +94,7 @@ class Index extends BaseController
 			$requestData 			= $this->request->getPost();
 			$paymentresult 			= $this->stripe->stripepayment($requestData);
     		$requestData['type'] 	= '2';
+    		$requestData['name'] 	= $requestData['facility_name'];
 
             $result = $this->event->action($requestData);
 			

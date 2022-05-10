@@ -75,8 +75,8 @@ $searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stal
 								</span>
 
 								<span class="wi-70"> 
-									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a>
-										<p class=""><?php echo strip_tags(substr($data['description'],64,74)) ; ?></p>
+									<a class="text-decoration-none" href="<?php echo base_url() ?>/facility/detail/<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a>
+										<p class=""><?php echo strip_tags(substr($data['description'],0,30)) ; ?></p>
 								</span>
 							
 							</div>
