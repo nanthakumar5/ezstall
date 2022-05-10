@@ -279,7 +279,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallImage+'">\
 			</div>\
 			<div class="col-md-1 mb-3">\
-				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
+				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'" class="stall_id">\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" value="1">\
 				'+availability+'\
 			</div>\
@@ -422,7 +422,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		tabvalidation();
 		
 		if($('#form').valid()){
-		  $('#stripeFormModal').modal('show');
+			if($(document).find('.stall_id[value=""]').length==0){
+				$('#form').submit();
+			}else{
+				$('#stripeFormModal').modal('show');
+			}
 		}
 	})
 
@@ -430,11 +434,12 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		var eventdata = [];
 		var formdata = $('#form').serializeArray();
 		$.each(formdata, function(i, field){
+			if(field.name=='description'){ field.value = tinymce.get("description").getContent(); }
 			eventdata.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
 		});
 		
 		$('.stripeextra').remove();
-		var price = $(document).find('.dash-stall-base').length * parseFloat(stallpercost);
+		var price = $(document).find('.stall_id[value=""]').length * parseFloat(stallpercost);
 		var data = 	'<div class="stripeextra"><input type="hidden" value="'+price+'" name="price">'+eventdata.join("")+'</div>';
 		$('.stripetotal').text('(Total - '+currencysymbol+price+')');
 

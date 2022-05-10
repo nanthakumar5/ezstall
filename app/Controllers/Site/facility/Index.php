@@ -32,9 +32,7 @@ class Index extends BaseController
 			$data['search'] = '';
 		}
 
-		if($this->request->getGet('name')!="")   		$searchdata['name']    		= $this->request->getGet('name');
-		if($this->request->getGet('start_date')!="")   	 	$searchdata['btw_start_date']    	= formatdate($this->request->getGet('start_date'));
-		if($this->request->getGet('end_date')!="")   	 	$searchdata['btw_end_date']    		= formatdate($this->request->getGet('end_date'));
+		if($this->request->getGet('name')!="")   			$searchdata['lname']    			= $this->request->getGet('name');
 		if($this->request->getGet('no_of_stalls')!="")   	$searchdata['no_of_stalls']    		= $this->request->getGet('no_of_stalls');
 		
 		$facilitycount = count($this->event->getEvent('all', ['event', 'stallavailable'], $searchdata+['status'=> ['1'], 'type' => '2']));
@@ -52,11 +50,6 @@ class Index extends BaseController
 	
 	public function detail($id)
     {  
-		/*$event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' =>'2']);
-		$data['detail']  			= $event;
-		$data['settings']  			= getSettings();
-		$data['currencysymbol']  	= $this->config->currencysymbol;
-		return view('site/facility/detail',$data);*/
 		$currentdate = date("Y-m-d");
 		$data['detail'] = $event = $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' =>'2']);
 
@@ -66,16 +59,4 @@ class Index extends BaseController
 
     	return view('site/facility/detail',$data);
     }
-
- 	public function searchevents()
-	{
-		$requestData = $this->request->getPost(); 
-		$result = array();
-		
-		if (isset($requestData['search'])) {
-			$result = $this->event->getEvent('all', ['event'], ['status'=> ['1'], 'page' => 'events', 'search' => ['value' => $requestData['search']], 'type' =>'2']);
-		}
-
-		return $this->response->setJSON($result);
-	}
 }
