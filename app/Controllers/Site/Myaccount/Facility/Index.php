@@ -92,7 +92,7 @@ class Index extends BaseController
 		if ($this->request->getMethod()=='post')
 		{
 			$requestData 			= $this->request->getPost();
-			$paymentresult 			= $this->stripe->stripepayment($requestData);
+			$paymentresult 			= $this->stripe->action(['id' => $requestData['stripepayid']]);
     		$requestData['type'] 	= '2';
     		$requestData['name'] 	= $requestData['facility_name'];
 

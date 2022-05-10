@@ -161,9 +161,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				facility_name  	: {
 					required	: 	true
 				},
-				description     : {
+				/*description     : {
 					required	: 	true
-				},
+				},*/
 				barnvalidation : {
 					required 	: true
 				}

@@ -32,7 +32,7 @@ class Index extends BaseController
 			$requestData = $this->request->getPost();
 
 			if(isset($requestData['stripepay'])){
-				$payment = $this->stripe->action(['status' => '1', 'id' => $requestData['stripepayid']]);
+				$payment = $this->stripe->action(['id' => $requestData['stripepayid']]);
 				if($payment){
 					$usersubscriptioncount = $userdetail['producer_count'];
 					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'producercount' => $usersubscriptioncount+1]);
