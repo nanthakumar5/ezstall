@@ -13,6 +13,12 @@
           <div class="row row m-0 p-0 dash-booking">
             <div class="col-md-2 mb-2">
               <div>
+                <p class="mb-0 text-sm fs-7 fw-600">Status</p>
+                <p class="mb-0 fs-7"><?php echo $bookingstatus[$data['status']];?></p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div>
                 <p class="mb-0 text-sm fs-7 fw-600">Booking ID</p>
                 <p class="mb-0 fs-7"><?php echo $data['id'];?></p>
               </div>
@@ -23,7 +29,7 @@
                 <p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
               </div>
             </div>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-2 mb-2">
                 <div>
                   <p class="mb-0 fs-7 fw-600">Date of booking</p>
                   <p class="mb-0 fs-7"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>

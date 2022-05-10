@@ -10,11 +10,17 @@
 	<div class="wi-30 row w-100 align-items-center">
 	<div class="col-md-2">
 	<div>
+	<p class="mb-0 text-sm fs-7 fw-600">Status</p>
+	<p class="mb-0 fs-7"><?php echo $paymentstatus[$data['status']];?></p>
+	</div>
+	</div>
+	<div class="col-md-2">
+	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Transaction ID</p>
 	<p class="mb-0 fs-7"><?php echo $data['id'];?></p>
 	</div>
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-8">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Name</p>
 	<p class="mb-0 fs-7"><?php echo $data['name'];?></p>
@@ -23,7 +29,7 @@
 	<div class="col-md-2">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Amout:</p>
-	<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
+	<p class="mb-0 fs-7"><?php echo $currencysymbol.($data['status']=='1' ? $data['amount'] : $data['refund_amount']);?></p>
 	</div>
 	</div>
 	<div class="col-md-2">

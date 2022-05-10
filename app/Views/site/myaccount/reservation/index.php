@@ -19,6 +19,12 @@
 						<div class="row row m-0 p-0 dash-booking">
 							<div class="col-md-2 mb-2">
 								<div>
+									<p class="mb-0 text-sm fs-7 fw-600">Status</p>
+									<p class="mb-0 fs-7"><?php echo $bookingstatus[$data['status']];?></p>
+								</div>
+							</div>
+							<div class="col-md-3 mb-2">
+								<div>
 									<p class="mb-0 text-sm fs-7 fw-600">Booking ID</p>
 									<p class="mb-0 fs-7"><?php echo $data['id'];?></p>
 								</div>
@@ -29,7 +35,7 @@
 									<p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
 								</div>
 							</div>
-							<div class="col-md-3 mb-2">
+							<div class="col-md-2 mb-2">
 								<div>
 									<p class="mb-0 fs-7 fw-600">Date of booking</p>
 									<p class="mb-0 fs-7"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
@@ -44,37 +50,40 @@
 							</div>
 						</div>
 						<div class="col-md-3">
+								<div>
+									<p class="mb-0 fs-7 fw-600">Booked Event</p>
+									<p class="mb-0 fs-7"><?php echo $data['eventname'];?> (
+										<?php 
+										$stallname = [];
+										foreach ($data['barnstall'] as $stalls) {
+											$stallname[] = $stalls['stallname'];
+										}
+										echo implode(',', $stallname);
+									?>)
+								</p>
+							</div>
+						</div>
+						<div class="col-md-3">
 							<div>
-								<p class="mb-0 fs-7 fw-600">Booked Event</p>
-								<p class="mb-0 fs-7"><?php echo $data['eventname'];?> (
-									<?php 
-									$stallname = [];
-									foreach ($data['barnstall'] as $stalls) {
-										$stallname[] = $stalls['stallname'];
-									}
-									echo implode(',', $stallname);
-								?>)
-							</p>
+								<p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
+								<p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<div>
-							<p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
-							<p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
+						<div class="col-md-3">
+							<div>
+								<p class="mb-0 fs-7 fw-600">Cost</p>
+								<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<div>
-							<p class="mb-0 fs-7 fw-600">Cost</p>
-							<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
-						</div>
-					</div>
-					<div class="col-md-1">
-						<div class="d-flex justify-content-end align-items-center">
-							<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" 
-								class="mt-0 mx-3 view-res">View</a>
-							<a href="javascript:void(0);" style='align: right;' data-paymentintentid='<?php echo $data['stripe_paymentintent_id']; ?>' data-customerid='<?php echo $data['stripe_customer_id']; ?>' class="striperefunds">
-								<i class="fas fa-times-circle" style="font-size: 30px;"></i> </a>
+						<div class="col-md-1">
+							<div class="d-flex justify-content-end align-items-center">
+								<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="mt-0 mx-3 view-res">View</a>
+								<?php if($data['status']=='1'){ ?>
+									<?php $amount = $data['amount']-($data['amount'] * 10/100); ?>
+									<a href="javascript:void(0);" style='align: right;' data-id='<?php echo $data['id']; ?>' data-paymentid='<?php echo $data['paymentid']; ?>' data-paymentintentid='<?php echo $data['stripe_paymentintent_id']; ?>' data-amount='<?php echo $amount; ?>' class="striperefunds">
+										<i class="fas fa-times-circle" style="font-size: 30px;"></i> 
+									</a>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -119,10 +128,16 @@
 			return $( "<li><div>"+name+"</div></li>" ).appendTo( ul );
 		};
 	});
-
-	$('.striperefunds').click(function(){
-		var data = '<input type="hidden" name="paymentintentid" value="'+$(this).attr("data-paymentintentid")+'"><input type="hidden" name="customerid" value="'+$(this).attr("data-customerid")+'">';
-		formsubmit("<?php echo base_url().'/myaccount/bookings'; ?>", data);
-	});
+	
+	$(document).on('click','.striperefunds', function(){
+		var action 	= 	'<?php echo base_url()."/myaccount/bookings"; ?>';
+		var data   = '\
+		<input type="hidden" name="id" value="'+$(this).attr("data-id")+'">\
+		<input type="hidden" name="paymentid" value="'+$(this).attr("data-paymentid")+'">\
+		<input type="hidden" name="paymentintentid" value="'+$(this).attr("data-paymentintentid")+'">\
+		<input type="hidden" name="amount" value="'+$(this).attr("data-amount")+'">\
+		';
+		sweetalert2(action,data);
+	});	
 </script>
 <?php $this->endSection(); ?>

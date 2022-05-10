@@ -11,6 +11,8 @@ class Custom extends BaseConfig
 	public $paymentinterval 	= ['week' => 'Weekly Subscription', 'month' => 'Monthly Subscription', 'year' => 'Yearly Subscription'];
 	public $paymenttype 		= ['1' => 'Payment', '2' => 'Subscription'];
 	public $paymentuser 		= ['2' => 'Facility', '5' => 'Horse Owner'];
+	public $paymentstatus 		= ['1' => 'Paid', '2' => 'Refunded'];
+	public $bookingstatus 		= ['1' => 'Active', '2' => 'Cancelled'];
 	public $stripemode 			= ['1' => 'Live', '2' => 'Sandbox'];
 	public $currencysymbol 		= "$";
 }

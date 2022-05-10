@@ -18,7 +18,7 @@ class Stripe extends BaseModel
 			}
 		}elseif($payment['type']=='2'){
 			$data = $this->retrieveSubscription($payment['stripe_subscription_id']);
-			if($data->status=='succeeded'){
+			if($data->status=='active'){
 				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
 				$this->db->table('users')->where(['id' => $payment['user_id']])->update(['subscription_id' => $id]);
 			}
@@ -164,17 +164,15 @@ class Stripe extends BaseModel
 
         $settings = getSettings();
         $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
-
-		$charges = $this->createCharges(30, 'inr', $data['customerid']);
-		echo "<pre>";print_r($charges);die;
-		if($charges)
+		
+		$refunds = $this->createRefunds($data['paymentintentid'], ($data['amount']*100));
+		if($refunds)
 		{
-			$refunds = $this->createRefunds($charges->id);
-			if($refunds)
-			{
-
-			}
+			$this->db->table('booking')->update(['status' => '2'], ['id' => $data['id']]);
+			$this->db->table('payment')->update(['status' => '2', 'refund_amount' => $data['amount']], ['id' => $data['paymentid']]);
 		}
+		
+		return false;
 	}
 	
 	function createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc)
@@ -358,33 +356,15 @@ class Stripe extends BaseModel
         }
     } 
     
-    function createCharges($amount, $currency, $customerid)
-    {
-        try{
-			$settings = getSettings();
-			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
-			
-            $data = $stripe->charges->create([
-                'amount' => $amount,
-  				'currency' => $currency,
-  				'customer' => $customerid
-            ]);
-            
-			return $data;
-        }catch(Exception $e){
-            print_r($e->getMessage());
-            die;
-        }
-    }
-
-    function createRefunds($chargeid)
+    function createRefunds($paymentintentid, $amount)
     {
         try{
 			$settings = getSettings();
 			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
 			
             $data = $stripe->refunds->create([
-                'charge' => $chargeid
+                'payment_intent' => $paymentintentid,
+                'amount' => $amount
             ]);
 
 			return $data;
