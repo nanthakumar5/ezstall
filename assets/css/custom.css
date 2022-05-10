@@ -301,11 +301,16 @@ a.nav-link.nav-hov:not(.active):hover {
     background: #222 !important;
 }
 
-/* .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+ .nav-tabs .nav-link:focus, .nav-tabs .nav-link{
     padding: 7px 20px !important;
     border: 1px solid #ddd !important;
     margin-right: 10px;
-    FONT-WEIGHT: 600;
+    font-weight: 600;
     font-size: 18px !important;
     background: #f7f7f7;
-} */
+    color: #171717;
+} 
+
+.mx-07{
+  margin-left: 0.7rem;
+}

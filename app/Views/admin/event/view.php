@@ -32,14 +32,14 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right"> 
 						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo getAdminUrl(); ?>/view">View</a></li>
+						<li class="breadcrumb-item"><a href="<?php echo getAdminUrl(); ?>/event">Events</a></li>
 						<li class="breadcrumb-item active">View Event</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="content">
 		<div class="page-action">
 			<a href="<?php echo getAdminUrl(); ?>/event" class="btn btn-primary">Back</a>
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 					</div>
-					<h3 class="event_heading"> Barn and stalls </h3>
+					<h3 class="text-bold mt-3"> Barn and stalls </h3>
 					<?php 
 					$tabbtn = '';
 					$tabcontent = '';
@@ -117,7 +117,7 @@
 							
 							$tabcontent .= 	'<li class="list-group-item px-4 py-3">
 												<p class="px-2 text-bold">
-												'.$stalldata['name'].'<div class="row">'.implode('', $bookedstalldata).'</div>
+												'.$stalldata['name'].'<div class="row px-3">'.implode('', $bookedstalldata).'</div>
 												</p>
 											</li>';
 						}

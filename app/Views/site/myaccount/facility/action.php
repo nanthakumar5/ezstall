@@ -2,12 +2,13 @@
 
 <?php $this->section('content') ?>
 <?php
-
 $id 					= isset($result['id']) ? $result['id'] : '';
 $name 					= isset($result['name']) ? $result['name'] : '';
+$description 		    = isset($result['description']) ? $result['description'] : '';
+$image      			= isset($result['image']) ? $result['image'] : '';
+$image 				    = filedata($image, base_url().'/assets/uploads/event/');
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $pageaction 			= $id=='' ? 'Add' : 'Update';
-
 ?>
 <section class="content">
 	<div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -31,6 +32,25 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 								<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="<?php echo $name; ?>">
 							</div>
 						</div>
+						<div class="col-md-12 my-2">
+							<div class="form-group">
+								<label>Description</label>
+								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Upload Facility Image</label>			
+								<div>
+									<a href="<?php echo $image[1];?>" target="_blank">
+										<img src="<?php echo $image[1];?>" class="image_source" width="100">
+									</a>
+								</div>
+								<input type="file" class="image_file">
+								<span class="image_msg messagenotify"></span>
+								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+							</div>
+						</div>	
 					</div>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
@@ -129,7 +149,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	var currencysymbol 			= '<?php echo $currencysymbol; ?>';
 
 	
-	$(function(){
+	$(function(){ 
+		editor('#description');
+		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(
@@ -138,7 +160,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				name 	     : {
 					required	: 	true
 				},
-				
+				description     : {
+					required	: 	true
+				},
 				barnvalidation : {
 					required 	: true
 				}

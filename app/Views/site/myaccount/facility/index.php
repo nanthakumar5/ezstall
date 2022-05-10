@@ -5,7 +5,6 @@ $checksubscription 				= checkSubscription();
 $checksubscriptiontype 			= $checksubscription['type'];
 $checksubscriptionproducer 		= $checksubscription['facility'];
 $currentdate 					= date("Y-m-d");
-
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
@@ -16,6 +15,9 @@ $currentdate 					= date("Y-m-d");
 		<?php foreach ($list as $data) {  ?>
 			<div class="dashboard-box mt-4">
 				<div class="row align-items-center px-2">
+					<div class="col-md-2">
+						<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>" class="dash-event-image">
+					</div>
 					<div class="col-md-5">
 						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
 					</div>

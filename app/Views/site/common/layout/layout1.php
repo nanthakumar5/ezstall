@@ -204,6 +204,7 @@
 		<script src="<?php echo base_url();?>/assets/site/js/stripe.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/toastr/toastr.min.js"></script>
 	    <script src="<?php echo base_url();?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    	<script src="<?php echo base_url();?>/assets/plugins/tinymce/tinymce.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 		<?php $this->renderSection('js') ?>
 		<script>
