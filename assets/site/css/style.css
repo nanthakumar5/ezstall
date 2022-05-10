@@ -2555,7 +2555,7 @@ p.error_class_1 {
 /*15-03-2022 styles start here*/
 
 .ui-widget.ui-widget-content {
-    padding: 0.5rem;
+    /*padding: 0.5rem;*/
 }
 
 .ui-state-active,
@@ -2589,6 +2589,8 @@ a.ui-button:active,
 .ui-menu .ui-menu-item-wrapper {
     display: flex;
     align-items: center;
+   /* padding: 0.5rem;*/
+
 }
 
 
@@ -3797,9 +3799,13 @@ html .ui-button.ui-state-disabled:active {
 a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover {
-    background: #000 !important;
+   /* background: #f00 !important;
     color: #fff;
-    padding: .2em !important;
+    padding: .2em !important;*/
+    background: #f3f3f3 !important;
+    color: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 
@@ -4020,3 +4026,23 @@ a.ui-button:active,
 .fs-8{
     font-size: 13px;
 }
+
+/*10-05-2022 SM*/
+
+.ui-menu .ui-menu-item-wrapper {
+    padding: 0 !important;
+}
+
+.EventFlex.facility {
+    justify-content: space-between;
+}
+
+.EventFlex.leftdata.facility {
+    justify-content: flex-start;
+}
+
+.sticky-top {
+    z-index: 1 !important;
+}
+
+/*10-05-2022 SM*/

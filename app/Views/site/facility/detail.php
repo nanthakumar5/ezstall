@@ -82,9 +82,9 @@
 					</div>
 				</div>
 			</div> -->
-			
+			</div>
 			<div class="row m-0 p-0">
-				<div class="col-md-12">
+				<div class="col-md-9">
 					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5">
 						<h3 class="fw-bold mb-4">Book Your Stalls</h3>
 						<div class="infoPanel form_check">

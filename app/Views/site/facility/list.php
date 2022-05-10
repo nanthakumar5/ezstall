@@ -64,40 +64,38 @@ $searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stal
 		<section class="maxWidth marFiveRes eventPagePanel">
 			<?php if(count($list) > 0) { ?>  
 				<?php foreach ($list as $data) { ?>
-					<div class="ucEventInfo">
-						<div class="EventFlex justify-content-between align-items-center">
-							<div class="wi-50">
-								<div class="EventFlex leftdata">
-									<span class="wi-30">
-										<span class="ucimg">
-											<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
-										</span>
+				<div class="ucEventInfo">
+					<div class="EventFlex facility">
+						<span class="wi-50">
+							<div class="EventFlex leftdata facility">
+								<span class="wi-30">
+									<span class="ucimg">
+										<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>">
 									</span>
-									<span class="wi-70">
-										<h5><?php echo $data['name']; ?></h5>
-									</span>
-									<span class="wi-70">
-										<h5><?php echo substr($data['description'], 0,30); ?>
-									</h5>
 								</span>
-							</div>
-						</div>
 
-					</div>
+								<span class="wi-70"> 
+									<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail<?php echo $data['id']?>"><h5><?php echo $data['name']; ?><h5></a>
+										<p class=""><?php echo strip_tags(substr($data['description'],64,74)) ; ?></p>
+								</span>
+							
+							</div>
+						</span>
 					<div class="pr-f2">
-						<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/facility/detail/<?php echo $data['id']?>">
-							<button class="ucEventBtn">
-								Book Now
-							</button>
-						</a>
+								<a class="text-decoration-none text-white" id="booknow_link" href="<?php echo base_url() ?>/facility/detail/<?php echo $data['id']?>">
+									<button class="ucEventBtn">
+										Book Now
+									</button>
+								</a>
+							</div>
 					</div>
 				</div>
 			<?php } ?>
+			<?php echo $pager; ?>
 			<?php }else{ ?>
 				No Record Found
 			<?php } ?>
-	</section>
-	<?php echo $pager; ?>
+		</section>
 </section>
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
