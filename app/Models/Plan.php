@@ -29,7 +29,7 @@ class Plan extends BaseModel
 		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='plan'){
-				$column = ['p.name', 'p.price', 'p.interval','p.interval_count'];
+				$column = ['p.name', 'p.price', 'p.interval'];
 				$query->orderBy($column[$requestdata['order']['0']['column']], $requestdata['order']['0']['dir']);
 			}
 		}
@@ -43,7 +43,6 @@ class Plan extends BaseModel
 						$query->like('p.name', $searchvalue);
 						$query->orLike('p.price', $searchvalue);
 						$query->orLike('p.interval', $searchvalue);
-						$query->orLike('p.interval_count', $searchvalue);
 					}
 				$query->groupEnd();
 			}			
@@ -75,7 +74,6 @@ class Plan extends BaseModel
 		if(isset($data['name']) && $data['name']!='')      								$request['name'] 					= $data['name'];
 		if(isset($data['price']) && $data['price']!='') 	 							$request['price'] 					= $data['price'];
 		if(isset($data['interval']) && $data['interval']!='')							$request['interval'] 				= $data['interval'];	
-		if(isset($data['interval_count']) && $data['interval_count']!='') 	  			$request['interval_count'] 			= $data['interval_count'];
 		if(isset($data['type']) && $data['type']!='') 	  								$request['type'] 					= $data['type'];
 		if(isset($data['status']) && $data['status']!='') 	  							$request['status'] 					= $data['status'];
 		

@@ -7,7 +7,6 @@
 		$name 					= isset($result['name']) ? $result['name'] : '';
 		$price 		    		= isset($result['price']) ? $result['price'] : '';
 		$interval 		    	= isset($result['interval']) ? $result['interval'] : '';
-		$interval_count 		= isset($result['interval_count']) ? $result['interval_count'] : '';
 		$type 					= isset($result['type']) ? $result['type'] : '';
 		$pageaction 			= $id=='' ? 'Add' : 'Update';
 	?>
@@ -61,12 +60,6 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Interval Count</label>								
-									<input type="number" name="interval_count" class="form-control" id="interval_count" placeholder="Enter Interval Count" value="<?php echo $interval_count; ?>">
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
 									<label>Type</label>	
 									<?php echo form_dropdown('type', $paymentuser, $type, ['class' => 'form-control']); ?>
 								</div>
@@ -97,9 +90,6 @@
 						required	: 	true
 					},
 					interval  : {	
-						required	: 	true
-					},
-					interval_count  : {	
 						required	: 	true
 					},
 					type  : {	

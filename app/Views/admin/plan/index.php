@@ -29,7 +29,6 @@
 							<th>Name</th>
 							<th>Price</th>	
 							<th>Interval</th>	
-							<th>Interval Count</th>	
 							<th>Action</th>	
 						</thead>
 					</table>
@@ -47,10 +46,9 @@
     				                { 'data' : 'name' },
                     				{ 'data' : 'price' },
                     				{ 'data' : 'interval' },
-                    				{ 'data' : 'interval_count' },
                     				{ 'data' : 'action' }								
                 				],
-				columndefs	:	[{"sortable": false, "targets": [4]}]											
+				columndefs	:	[{"sortable": false, "targets": [3]}]											
 			};				
 				ajaxdatatables('.datatables', options);		
 		});

@@ -15,16 +15,18 @@ class Stripe extends BaseModel
 			$data = $this->retrievePaymentIntents($payment['stripe_paymentintent_id']);
 			if($data->status=='succeeded'){
 				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
+				$insertid = $id;
 			}
 		}elseif($payment['type']=='2'){
 			$data = $this->retrieveSubscription($payment['stripe_subscription_id']);
 			if($data->status=='active'){
 				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
 				$this->db->table('users')->where(['id' => $payment['user_id']])->update(['subscription_id' => $id]);
+				$insertid = $id;
 			}
 		}
 			
-		if($this->db->transStatus() === FALSE){
+		if(!isset($insertid) || $this->db->transStatus() === FALSE){
 			$this->db->transRollback();
 			return false;
 		}else{
@@ -43,7 +45,7 @@ class Stripe extends BaseModel
 		$cardexpyear 	= $requestData['card_exp_year'];
 		$cardcvc 		= $requestData['card_cvc'];
 		$price 			= $requestData['price'] * 100;
-        $currency 		= "inr";
+        $currency 		= "usd";
 		
 		$paymentmethods = $this->createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc);
 		if($paymentmethods)
@@ -300,7 +302,7 @@ class Stripe extends BaseModel
 			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
 			
 			$amount = ($planprice * 100);
-			$currency = "inr";
+			$currency = "usd";
 			
 			$data = $stripe->prices->create([
 				'unit_amount' => $amount,

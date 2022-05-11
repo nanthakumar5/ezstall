@@ -12,7 +12,6 @@ class Index extends BaseController
         $this->stripe 	= new Stripe();
         $this->plan 	= new Plan();
 		$this->payments = new Payments();	
-
 	}
     
 	public function index()
@@ -21,11 +20,12 @@ class Index extends BaseController
 	        $requestData = $this->request->getPost();
 			$payment = $this->stripe->action(['id' => $requestData['stripepayid']]);
 			if($payment){
-				$this->session->setFlashdata('success', 'Successfully paid.');
+				$this->session->setFlashdata('success', 'Your payment is processed successfully.');
+				return redirect()->to(base_url().'/myaccount/dashboard'); 
 			}else{
-				$this->session->setFlashdata('danger', 'Try Later.');
+				$this->session->setFlashdata('danger', 'Your payment is not processed successfully.');
+				return redirect()->to(base_url().'/myaccount/dashboard'); 
 			}
-			return redirect()->to(base_url().'/myaccount/dashboard'); 
         }
 		
 		$userdetail     = getSiteUserDetails();

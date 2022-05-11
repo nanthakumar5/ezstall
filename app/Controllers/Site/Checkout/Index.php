@@ -30,15 +30,23 @@ class Index extends BaseController
     	{  
             $requestData 				= $this->request->getPost();
             $userid             		= $userdetail['id'];
-            $payment 					= $this->stripe->action(['id' => $requestData['stripepayid']]);
-            $requestData['paymentid'] 	= $payment;
 			
-            $booking = $this->booking->action($requestData);
-            $this->cart->delete(['user_id' => $userid, 'type' => $requestData['type']]);
-            
-            if($booking){
-				return redirect()->to(base_url().'/paymentsuccess'); 
-            }
+            $payment 					= $this->stripe->action(['id' => $requestData['stripepayid']]);			
+			if($payment){
+				$requestData['paymentid'] 	= $payment;			
+				$booking = $this->booking->action($requestData);
+				
+				if($booking){
+					$this->cart->delete(['user_id' => $userid, 'type' => $requestData['type']]);
+					return redirect()->to(base_url().'/paymentsuccess'); 
+				}else{
+					$this->session->setFlashdata('danger', 'Try Later.');
+					return redirect()->to(base_url().'/checkout'); 
+				}
+			}else{
+				$this->session->setFlashdata('danger', 'Your payment is not processed successfully.');
+				return redirect()->to(base_url().'/checkout'); 
+			}
         }
 
         return view('site/checkout/index', [

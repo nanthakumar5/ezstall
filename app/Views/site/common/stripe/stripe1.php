@@ -145,11 +145,16 @@ $(function(){
 							$('.loader_wrapper').remove();
 						}
 					}else{
+						$('.loader_wrapper').remove();
 						$('.stripeiframe').find('iframe').remove();
 						$(".stripeform").find('input[type=text]').empty();
 						$('.stripeiframe').addClass('displaynone');
 						$("#stripeFormModal").modal('hide');
 					}
+				},
+				error: function(data){
+					$('.loader_wrapper').remove();
+					$('.error').removeClass('hide').find('.alert').text(data.responseJSON.message);
 				}
 			});
 		}

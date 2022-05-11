@@ -279,7 +279,7 @@
 				
 				ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
 					beforesend: function() {
-						$('.modal-content').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+						$('body').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
 					},
 					success: function(data){
 						if(data.success.status=='1'){
@@ -296,6 +296,10 @@
 							$('.stripeiframe').find('iframe').remove();
 							$('.stripeiframe').addClass('displaynone');
 						}
+					},
+					error: function(data){
+						$('.loader_wrapper').remove();
+						$('.error').removeClass('hide').find('.alert').text(data.responseJSON.message);
 					}
 				});
 			}

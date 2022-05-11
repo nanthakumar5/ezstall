@@ -36,9 +36,9 @@ class Index extends BaseController
 				if($payment){
 					$usersubscriptioncount = $userdetail['producer_count'];
 					$this->users->action(['user_id' => $userid, 'actionid' => $userid, 'producercount' => $usersubscriptioncount+1]);
-					$this->session->setFlashdata('success', 'Successfully paid.');
+					$this->session->setFlashdata('success', 'Your payment is processed successfully');
 				}else{
-					$this->session->setFlashdata('danger', 'Try Later.');
+					$this->session->setFlashdata('danger', 'Your payment is not processed successfully.');
 				}
 				
 				return redirect()->to(base_url().'/myaccount/events'); 

@@ -92,17 +92,22 @@ class Index extends BaseController
 		if ($this->request->getMethod()=='post')
 		{
 			$requestData 			= $this->request->getPost();
-			if(isset($requestData['stripepayid'])) $this->stripe->action(['id' => $requestData['stripepayid']]);
-    		$requestData['type'] 	= '2';
-    		$requestData['name'] 	= $requestData['facility_name'];
-
-            $result = $this->event->action($requestData);
+			if(isset($requestData['stripepayid'])) $payment = $this->stripe->action(['id' => $requestData['stripepayid']]);
 			
-			if($result){
-				$this->session->setFlashdata('success', 'Facility submitted successfully.');
-				return redirect()->to(base_url().'/myaccount/facility'); 
+			if(!isset($requestData['stripepayid']) || (isset($requestData['stripepayid']) && isset($payment))){
+				$requestData['type'] 	= '2';
+				$requestData['name'] 	= $requestData['facility_name'];
+				
+				$result = $this->event->action($requestData);			
+				if($result){
+					$this->session->setFlashdata('success', 'Facility submitted successfully.');
+					return redirect()->to(base_url().'/myaccount/facility'); 
+				}else{
+					$this->session->setFlashdata('danger', 'Try Later.');
+					return redirect()->to(base_url().'/myaccount/facility'); 
+				}
 			}else{
-				$this->session->setFlashdata('danger', 'Try Later.');
+				$this->session->setFlashdata('danger', 'Your payment is not processed successfully.');
 				return redirect()->to(base_url().'/myaccount/facility'); 
 			}
         } 

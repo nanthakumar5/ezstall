@@ -52,7 +52,6 @@ class Index extends BaseController
 										'name' 				=> 	$result['name'],
 										'price'           	=>  $result['price'],
 										'interval'          =>  $this->config->paymentinterval[$result['interval']],
-										'interval_count'    =>  $result['interval_count'],
 										'action'			=> 	'
 																	<div class="table-action">
 																		'.$action.'
