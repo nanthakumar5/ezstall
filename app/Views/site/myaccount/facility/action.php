@@ -33,9 +33,9 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							</div>
 						</div>
 						<div class="col-md-12 my-2">
-						    <div class="form-group">
-								<label>Description</label>
-								<textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="3"><?php echo $description;?></textarea>
+							<div class="form-group">
+								<label>Facility Description</label>								
+								<textarea type="text" name="Description" class="form-control" id="description" placeholder="Enter Description" rows="3"><?php echo $description; ?></textarea>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -450,7 +450,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		$(document).find('.requiredtab').remove();	
 		
 		setTimeout(function(){
-			$(document).find('.dash-stall-base').each(function(){;
+			$(document).find('.dash-stall-base').each(function(){
 				if($(this).find('input.error_class_1').length){
 					var tabid = $(this).parent().attr('id');
 					$(document).find('a[data-bs-target="#'+tabid+'"] input').after('<span class="requiredtab">*</span>');
