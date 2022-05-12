@@ -3,16 +3,16 @@
 <?php
 	$barnstall = $cartdetail['barnstall'];
 	
-	$stripemode 		= $settings['stripemode'];
+	$stripemode 			= $settings['stripemode'];
 	$stripepublickey 	= $settings['stripepublickey'];
-	$firstname 			= $stripemode=='2' ? 'First Name Test' : '';
-	$lastname 			= $stripemode=='2' ? 'Last Name Test' : '';
-	$mobile 			= $stripemode=='2' ? '987654321' : '';
-	$name 				= $stripemode=='2' ? 'test' : '';
-	$cardno 			= $stripemode=='2' ? '4242424242424242' : '';
-	$cvc 				= $stripemode=='2' ? '123' : '';
-	$expirymonth 		= $stripemode=='2' ? '12' : '';
-	$expiryyear 		= $stripemode=='2' ? '2027' : '';
+	$firstname 				= $stripemode=='2' ? 'First Name Test' : '';
+	$lastname 				= $stripemode=='2' ? 'Last Name Test' : '';
+	$mobile 					= $stripemode=='2' ? '987654321' : '';
+	$name 						= $stripemode=='2' ? 'test' : '';
+	$cardno 					= $stripemode=='2' ? '4242424242424242' : '';
+	$cvc 							= $stripemode=='2' ? '123' : '';
+	$expirymonth 			= $stripemode=='2' ? '12' : '';
+	$expiryyear 			= $stripemode=='2' ? '2027' : '';
 ?>
 <section class="maxWidth">
   <div class="pageInfo">
@@ -135,7 +135,6 @@
                </div>
              </div>
            </div>
-
            <div class="checkout-complete-btn">
             <span>
               <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent">I have read and accepted the <span class="redcolor">Terms and Conditions.</span></span>
@@ -145,8 +144,6 @@
           </form>
         </div>
       </div>
-
-
 
       <div class="col-lg-3">
         <div class="border rounded pt-4 ps-3 pe-3 mb-5">
@@ -180,9 +177,8 @@
 
     </div>
   </section>
-
-	<div class="stripeiframe displaynone">
-		<a href="javascript:void(0);" class="stripeiframeremove">Close</a>
+  
+	<div class="stripeiframe displaynone completepayment">
 		<div></div>
 	</div>
   <?php $this->endSection(); ?>
@@ -279,7 +275,7 @@
 				
 				ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
 					beforesend: function() {
-						$('body').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+						$('completepayment').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
 					},
 					success: function(data){
 						if(data.success.status=='1'){
@@ -311,10 +307,5 @@
 			}
 		}, false);
 
-		$(document).on('click', '.stripeiframeremove', function(){
-			$(this).parent().find('iframe').remove();
-			$('.stripeiframe').addClass('displaynone');
-		})
-    });
   </script>
   <?php $this->endSection() ?>

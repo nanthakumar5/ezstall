@@ -63,7 +63,6 @@
 </form>
 
 <div class="stripeiframe displaynone">
-	<a href="javascript:void(0);" class="stripeiframeremove">Close</a>
 	<div></div>
 </div>
 
@@ -165,12 +164,6 @@ $(function(){
 			$(".stripeconfirm").submit();
 		}
 	}, false);
-
-	$(document).on('click', '.stripeiframeremove', function(){
-		$(this).parent().find('iframe').remove();
-		$(".stripeform").find('input[type=text]').empty();
-		$('.stripeiframe').addClass('displaynone');
-		$("#stripeFormModal").modal('hide');
-	})
+	
 });
 </script>
