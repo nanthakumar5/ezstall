@@ -189,8 +189,6 @@ class Booking extends BaseModel
 
 				$this->db->table('booking_details')->insert($bookingdetails);
 			}
-
-			$this->db->table('event')->where('id', $request['event_id'])->set('stall_available', 'stall_available-'.$count, FALSE)->update();
 		}
 
 		if(isset($insertid) && $this->db->transStatus() === FALSE){

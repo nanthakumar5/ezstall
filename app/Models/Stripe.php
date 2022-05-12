@@ -45,7 +45,7 @@ class Stripe extends BaseModel
 		$cardexpyear 	= $requestData['card_exp_year'];
 		$cardcvc 		= $requestData['card_cvc'];
 		$price 			= $requestData['price'] * 100;
-        $currency 		= "usd";
+        $currency 		= "inr";
 		
 		$paymentmethods = $this->createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc);
 		if($paymentmethods)
@@ -302,7 +302,7 @@ class Stripe extends BaseModel
 			$stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
 			
 			$amount = ($planprice * 100);
-			$currency = "usd";
+			$currency = "inr";
 			
 			$data = $stripe->prices->create([
 				'unit_amount' => $amount,
