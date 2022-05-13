@@ -18,7 +18,6 @@ class Cron extends BaseController
 		
 		$cart 		= 	$this->db->table('cart')
 						->select('max(datetime) as datetime, user_id')
-						->where('ip', $ip)
 						->groupBy('user_id', 'desc')
 						->having('DATE_ADD(datetime, INTERVAL 30 MINUTE) <=', $datetime)
 						->get()
