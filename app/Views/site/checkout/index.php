@@ -177,8 +177,8 @@
 
     </div>
   </section>
-  
-	<div class="stripeiframe displaynone completepayment">
+	
+	<div class="stripeiframe displaynone">
 		<div></div>
 	</div>
   <?php $this->endSection(); ?>
@@ -246,7 +246,8 @@
 		},
 		}
 		);
-	  
+	});
+	
 		var $form = $(".stripeform");
 		$form.bind('submit', function(e) {
 			if(!$form.valid()){
@@ -271,30 +272,31 @@
 			if (response.error) {
 				$('.error').removeClass('hide').find('.alert').text(response.error.message);
 			} else {
-				$('.loader_wrapper').remove();
+				$('.paymentloader').remove();
 				
 				ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
 					beforesend: function() {
-						$('completepayment').append('<div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.gif"; ?>"></div>');
+						$('body').append('<div class="paymentloader"><div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.svg"; ?>"></div></div>');
 					},
 					success: function(data){
 						if(data.success.status=='1'){
 							$('.stripepayid').val(data.success.id);
 							if(data.success.url==''){
-								$('.loader_wrapper').remove();
+								$('.paymentloader').remove();
 								$(".stripeform").submit();
 							}else{
 								$('.stripeiframe').removeClass('displaynone');
 								$('.stripeiframe div').html('<iframe src="'+data.success.url+'" width="400" height="400"></iframe>');
-								$('.loader_wrapper').remove();
+								$('.paymentloader').remove();
 							}
 						}else{
+							$('.paymentloader').remove();
 							$('.stripeiframe').find('iframe').remove();
 							$('.stripeiframe').addClass('displaynone');
 						}
 					},
 					error: function(data){
-						$('.loader_wrapper').remove();
+						$('.paymentloader').remove();
 						$('.error').removeClass('hide').find('.alert').text(data.responseJSON.message);
 					}
 				});
