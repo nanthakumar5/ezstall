@@ -5,7 +5,7 @@
 	$role 			= $userdetail['type']; 
 	$parentid 		= $userdetail['parent_id']; 
 	$parentdetails 	= getSiteUserDetails($parentid);
-	$parenttype   	= $parentdetails ? $parenttype['type'] : '';
+	$parenttype   	= $parentdetails ? $parentdetails['type'] : '';
 ?>
 
 <div class="navbar-header">
