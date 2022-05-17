@@ -39,7 +39,7 @@ class Index extends BaseController
 		$post 			= $this->request->getPost();
 		$totalcount 	= $this->plans->getPlan('count', ['plan'], ['status' => ['1']]+$post);
 		$results 		= $this->plans->getPlan('all', ['plan'], ['status' => ['1']]+$post);
-		
+		$currencysymbol = $this->config->currencysymbol;
 		$totalrecord 	= [];
 				
 		if(count($results) > 0){
@@ -50,7 +50,7 @@ class Index extends BaseController
 				
 				$totalrecord[] = 	[
 										'name' 				=> 	$result['name'],
-										'price'           	=>  $result['price'],
+										'price'           	=>  $currencysymbol.$result['price'],
 										'interval'          =>  $this->config->paymentinterval[$result['interval']],
 										'action'			=> 	'
 																	<div class="table-action">
@@ -100,8 +100,8 @@ class Index extends BaseController
 			}
         }
 		
-		$data['paymentinterval'] = $this->config->paymentinterval;
-		$data['paymentuser'] = $this->config->paymentuser;
+		$data['paymentinterval'] 	= $this->config->paymentinterval;
+		$data['paymentuser'] 		= $this->config->paymentuser;
 
 		return view('admin/plan/action', $data);
 	}	

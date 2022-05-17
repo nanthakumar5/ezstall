@@ -62,6 +62,7 @@
 	<!-- bootstrap 5 cdn-->
 	<script src="<?php echo base_url();?>/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/inputmask/inputmask.js"></script>
 	<?php $this->renderSection('js') ?>
 </body>
 </html>

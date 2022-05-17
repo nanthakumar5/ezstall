@@ -65,6 +65,7 @@ class Index extends BaseController
 		}
 
 		$data['usertype']        = $this->config->usertype;
+		$data['currencysymbol']	 =  $this->config->currencysymbol;
 		return view('admin/payments/view', $data);
 	}	
 }

@@ -20,6 +20,7 @@ $currentdate 					= date("Y-m-d");
 					</div>
 					<div class="col-md-5">
 						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
+						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo substr($data['description'], 0,50); ?><p></a></p>
 					</div>
 				</div>
 				<div class="dash-event">

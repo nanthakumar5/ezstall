@@ -35,7 +35,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						<div class="col-md-12 my-2">
 							<div class="form-group">
 								<label>Facility Description</label>								
-								<textarea type="text" name="Description" class="form-control" id="description" placeholder="Enter Description" rows="3"><?php echo $description; ?></textarea>
+								<textarea type="text" name="description" class="form-control" id="description" placeholder="Enter Description" rows="3"><?php echo $description; ?></textarea>
 							</div>
 						</div>
 						<div class="col-md-4">

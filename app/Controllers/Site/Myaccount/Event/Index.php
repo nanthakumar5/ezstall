@@ -146,8 +146,9 @@ class Index extends BaseController
 	
     public function export($id)
     {	
-    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '1']);
+    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall', 'bookedstall'],['id' => $id, 'type' => '1']);
 		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
+		$occupied 	= getOccupied($id);
 
 		$spreadsheet = new Spreadsheet();
 		$sheet 		 = $spreadsheet->getActiveSheet();
@@ -181,9 +182,15 @@ class Index extends BaseController
 			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
 
 			foreach($barn['stall'] as $key=> $stall){   
-				$stallname = $stall['name'];
-				$status = 'Available'; 
-				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname. '- ' .$status);
+				$stallname 	= $stall['name'];
+				$status 	= in_array($stall['id'], $occupied)? 'Occupied' : 'Available'; 
+				foreach($stall['bookedstall'] as $keys=> $booking){
+					$bookingname 	=   $booking['name'];
+					$checkin 		=   $booking['check_in'];
+					$checkout 	=   $booking['check_out'];
+					$data = ($booking!='') ? $stallname. '- ' .$bookingname.'--'.$checkin.'--'.$checkout : $stallname. '- ' .$status;
+					$sheet->setCellValueByColumnAndRow($col, $keys+$row+1, $data);
+				}
 			}
 			$col++;
 		}

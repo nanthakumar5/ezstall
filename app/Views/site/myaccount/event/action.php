@@ -256,7 +256,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				},					
 				mobile       : {
 					required	: 	true,
-					number      :   true
+					phoneUs     :   true
 				},
 				start_date   : {
 					required	: 	true
@@ -289,6 +289,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			});
 		}
 	});
+
 	
 	$('#eventSubmit').click(function(e){
 		var totalstall 		= $('.dash-stall-base').length
@@ -544,7 +545,13 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				}
 			})
 		}, 100);
-	}	
+	}
+
+	jQuery.validator.addMethod("phoneUS", function(mobile, element) {
+	    mobile = mobile.replace(/\s+/g, "");
+	    return this.optional(element) || mobile.length > 9 && 
+	    mobile.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+	}, "Please specify a valid phone number");	
 </script>
 <?php $this->endSection(); ?>
 

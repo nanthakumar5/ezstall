@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<th>Amount</th>
-							<td><?php echo $amount;?></td>
+							<td><?php echo $currencysymbol.$amount;?></td>
 						</tr>
 						<?php if($type == 2 ){?>
 						<tr>

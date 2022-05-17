@@ -80,7 +80,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Mobile</label>								
-									<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
+									<input type="text" name="mobile" class="form-control mobile" id="mobile" placeholder="Enter Mobile" value="<?php echo $mobile; ?>">								
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -299,7 +299,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				},					
 				mobile       : {
 					required	: 	true,
-					number      :   true
+					phoneUS  	: true
 				},
 				start_date   : {
 					required	: 	true
@@ -588,5 +588,16 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 			})
 		}, 100);
 	}	
+
+	$(function(){
+		$('#mobile').inputmask("(999) 999-9999");
+	});
+
+	jQuery.validator.addMethod("phoneUS", function(mobile, element) {
+    mobile = mobile.replace(/\s+/g, "");
+    return this.optional(element) || mobile.length > 9 && 
+    mobile.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+	}, "Please specify a valid phone number");
+
 </script>
 <?php $this->endSection(); ?>

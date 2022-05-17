@@ -174,7 +174,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Transaction Fee</label>
-									<input type="text" class="form-control" name="transactionfee" placeholder="Transaction Fee" value="<?php echo $transactionfee; ?>">
+									<input type="text" class="form-control" name="transactionfee" placeholder="Transaction Fee" value="<?php echo $transactionfee.'%'; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -220,7 +220,8 @@
                         email     : true   
                     },
 					phone    	: {
-                        required  : true
+                        required  : true,
+                        phoneUS	  : true
                     },
 					facebook    : {
                         required  : true
@@ -272,6 +273,15 @@
             );
 			
 		});
+		$(function(){
+			$('#phone').inputmask("(999) 999-9999");
+		});
+
+	jQuery.validator.addMethod("phoneUS", function(mobile, element) {
+	    mobile = mobile.replace(/\s+/g, "");
+	    return this.optional(element) || mobile.length > 9 && 
+	    mobile.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+	}, "Please specify a valid phone number");
 
 	</script>
 <?php $this->endSection(); ?>

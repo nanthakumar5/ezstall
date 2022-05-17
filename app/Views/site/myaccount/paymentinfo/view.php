@@ -65,7 +65,7 @@
       <p class="my-2">Amount</p>
     </div>
     <div class="col" align="left">
-      <p class="my-2"><?php echo $amount;?></p>
+      <p class="my-2"><?php echo $currencysymbol.$amount;?></p>
     </div>
   </div>  
   <?php if($type == 2 ){?>

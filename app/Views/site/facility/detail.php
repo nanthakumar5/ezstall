@@ -36,7 +36,7 @@
 						<h4 class="fw-bold"><?php echo $name; ?></h4>
 					</div>
 				</div>
-				<?php echo $description;?>
+				<?php echo ucfirst($description);?>
 				
 			
 			<!-- <div class="col-lg-4">
@@ -153,8 +153,7 @@
 <?php $this->endSection() ?>
 
 <?php $this->section('js') ?>
-<script> 
-	var transactionfee 		= '<?php echo $settings["transactionfee"]; ?>';
+<script>
 	var currencysymbol 		= '<?php echo $currencysymbol; ?>';
 	var eventid 			= '<?php echo $detail["id"]; ?>';
 	var stallid 			= '<?php echo $stalldata["id"]; ?>';
@@ -304,6 +303,7 @@
 						});
 
 						$('#stallcount').val(result.barnstall.length);
+						var transactionfee = (3 / 100) * result.price;
 						var total = (parseFloat(result.price)+parseFloat(transactionfee));
 						var result ='\
 						<div class="w-100">\

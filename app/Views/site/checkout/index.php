@@ -1,8 +1,8 @@
 <?php $this->extend('site/common/layout/layout1') ?>
 <?php $this->section('content') ?>
 <?php
-	$barnstall = $cartdetail['barnstall'];
-	
+	$barnstall				= $cartdetail['barnstall'];
+	$transactionfee 	= (3 / 100) * $cartdetail['price'];
 	$stripemode 			= $settings['stripemode'];
 	$stripepublickey 	= $settings['stripepublickey'];
 	$firstname 				= $stripemode=='2' ? 'First Name Test' : '';
@@ -13,6 +13,7 @@
 	$cvc 							= $stripemode=='2' ? '123' : '';
 	$expirymonth 			= $stripemode=='2' ? '12' : '';
 	$expiryyear 			= $stripemode=='2' ? '2027' : '';
+
 ?>
 <section class="maxWidth">
   <div class="pageInfo">
@@ -85,7 +86,7 @@
         <input type="hidden" name="email" value="<?php echo $userdetail['email']; ?>" >
         <input type="hidden" name="checkin" value="<?php echo formatdate($cartdetail['check_in']); ?>" >
         <input type="hidden" name="checkout" value="<?php echo formatdate($cartdetail['check_out']); ?>" >
-        <input type="hidden" name="price" value="<?php echo $cartdetail['price']+$settings['transactionfee']; ?>" >
+        <input type="hidden" name="price" value="<?php echo $cartdetail['price']+$transactionfee; ?>" >
         <input type="hidden" name="eventid" value="<?php echo $cartdetail['event_id']; ?>" >
         <input type="hidden" name="type" value="<?php echo $cartdetail['type']; ?>" >
         <input type="hidden" name="barnstall" value='<?php echo json_encode($barnstall); ?>'>
@@ -160,7 +161,7 @@
               Transaction Fees
             </div>
             <div class="col-lg-4">
-              <?php echo $currencysymbol.$settings['transactionfee']; ?>
+              <?php echo $currencysymbol.$transactionfee; ?>
             </div>
           </div> 
           <div class="row mb-2 border-top mt-3 mb-3 pt-3">
@@ -168,7 +169,7 @@
               Total Due
             </div>
             <div class="col-lg-4 fw-bold">
-              <?php echo $currencysymbol.($cartdetail['price']+$settings['transactionfee']); ?>
+              <?php echo $currencysymbol.($cartdetail['price']+$transactionfee); ?>
             </div>  
           </div>
         </div>
