@@ -89,13 +89,13 @@
 					</form>
 					<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+							<?php foreach($banners as $key => $banner){?>
+								<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $key; ?>" class="<?php echo $key=='0' ? 'active' : ''; ?>"></button>
+							<?php } ?>
 						</div>
 						<div class="carousel-inner">
-							<?php foreach($banners as $banner){?>
-								<div class="carousel-item active" data-bs-interval="10000">
+							<?php foreach($banners as $key => $banner){?>
+								<div class="carousel-item <?php echo $key=='0' ? 'active' : ''; ?>" data-bs-interval="10000">
 									<img src="<?php echo base_url()?>/assets/uploads/banner/<?php echo $banner['image'];?>" class="d-block w-100" alt="...">
 									<div class="carousel-caption"><p class="sliderCaption">Welcome to EZStall</p><h1 class="sliderTitle">Find a stall for your horses</h1>
 										<a class="text-decoration-none" href="<?php echo base_url();?>/login"><button type="button" class="sliderButton btn btn-primary">Reserve your stall</button></a></div>
