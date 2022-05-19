@@ -277,7 +277,7 @@
 			$('#phone').inputmask("(999) 999-9999");
 		});
 
-	jQuery.validator.addMethod("phoneUS", function(mobile, element) {
+	jQuery.validator.addMethod("phoneUS", function(phone, element) {
 	    mobile = mobile.replace(/\s+/g, "");
 	    return this.optional(element) || mobile.length > 9 && 
 	    mobile.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);

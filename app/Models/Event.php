@@ -115,6 +115,9 @@ class Event extends BaseModel
 							if(count($barndatas) > 0){
 								foreach($barndatas as $barnkey => $barndata){
 									$stalldatas = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();	
+
+									if(isset($requestdata['fenddate'])) $query->where('s.end_date <=', date('Y-m-d', strtotime($requestdata['fenddate'])));
+
 									$result['barn'][$barnkey]['stall'] = $stalldatas;
 									
 									if(in_array('bookedstall', $querydata)){

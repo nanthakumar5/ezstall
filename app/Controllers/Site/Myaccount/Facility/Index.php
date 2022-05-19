@@ -132,31 +132,40 @@ class Index extends BaseController
 	
     public function export($id)
     {	
-    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall'],['id' => $id, 'type' => '2']);
-		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$occupied 	= getOccupied($id); 
+    	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall', 'bookedstall'],['id' => $id, 'type' => '2']); 
 
 		$spreadsheet = new Spreadsheet();
 		$sheet 		 = $spreadsheet->getActiveSheet();
 
 		$sheet->setCellValue('A1', 'Event Name');
+		$sheet->setCellValue('B1', 'Description');
 
      	$rows = 2;
 		$sheet->setCellValue('A' . $rows, $data['name']);
+		$sheet->setCellValue('B' . $rows, $data['description']);
         
-         $row = 4;
-         $col = 1;
-         foreach ($data['barn'] as $barn) {  
-				$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
+        $row = 4;
+        $col = 1;
+        foreach ($data['barn'] as $barn) { 
+			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
 
-			foreach($barn['stall'] as $key=> $stall){   
-				$stallname = $stall['name'];
-				$status = in_array($stall['id'], $occupied)? 'Occupied' : 'Available'; 
-				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname. '- ' .$status);
+			foreach($barn['stall'] as $key=> $stall){  
+				$stallname 	= $stall['name'];
+				$status 	= 'Available';
+				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname.'-'.$status);
+				foreach($stall['bookedstall'] as $keys=> $booking){
+					$bookingname 	=   $booking['name'];
+					$checkin 		=   $booking['check_in'];
+					$checkout 		=   $booking['check_out'];
+
+					$sheet->setCellValueByColumnAndRow($col, $keys+$row+1, $stallname."\n".$keys.'Name : '.$bookingname."\n"."Date  : ".$checkin."-".$checkout);
+					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getAlignment()->setWrapText(true);
+					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getFont()->setBold(true);
+				}
 			}
 			$col++;
+			
 		}
-
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename="'.$data['name'].'.xlsx"');
 		header('Cache-Control: max-age=0');

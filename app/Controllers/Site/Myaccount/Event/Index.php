@@ -147,8 +147,8 @@ class Index extends BaseController
     public function export($id)
     {	
     	$data 		= $this->event->getEvent('row', ['event', 'barn', 'stall', 'bookedstall'],['id' => $id, 'type' => '1']);
-		$booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
-		$occupied 	= getOccupied($id);
+		// $booking 	= $this->booking->getBooking('all', ['booking'],['eventid' => $id]);
+		// $occupied 	= getOccupied($id);
 
 		$spreadsheet = new Spreadsheet();
 		$sheet 		 = $spreadsheet->getActiveSheet();
@@ -178,21 +178,24 @@ class Index extends BaseController
         
         $row = 4;
         $col = 1;
-        foreach ($data['barn'] as $barn) {  
+        foreach ($data['barn'] as $barn) { 
 			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
 
-			foreach($barn['stall'] as $key=> $stall){   
+			foreach($barn['stall'] as $key=> $stall){
 				$stallname 	= $stall['name'];
-				$status 	= in_array($stall['id'], $occupied)? 'Occupied' : 'Available'; 
+				$status 	= 'Available';
+				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname.'-'.$status);
 				foreach($stall['bookedstall'] as $keys=> $booking){
-					$bookingname 	=   $booking['name'];
+					$bookingname[] 	=   $booking['name'];
 					$checkin 		=   $booking['check_in'];
-					$checkout 	=   $booking['check_out'];
-					$data = ($booking!='') ? $stallname. '- ' .$bookingname.'--'.$checkin.'--'.$checkout : $stallname. '- ' .$status;
-					$sheet->setCellValueByColumnAndRow($col, $keys+$row+1, $data);
+					$checkout 		=   $booking['check_out'];
+					$sheet->setCellValueByColumnAndRow(1, $keys+$row+1, $stallname."\n".'Name : '.$bookingname."\n"."Date  : ".$checkin."-".$checkout);
+					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getAlignment()->setWrapText(true);
+					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getFont()->setBold(true);
 				}
 			}
 			$col++;
+			
 		}
 
 		header('Content-Type: application/vnd.ms-excel');
