@@ -15,7 +15,7 @@ class Stall extends BaseModel
 			$select[] 	= 	implode(',', $data);
 		}
 		if(in_array('event', $querydata)){
-			$data		= 	['e.description'];							
+			$data		= 	['e.description','e.user_id','e.name'];							
 			$select[] 	= 	implode(',', $data);
 		}
 
@@ -29,17 +29,11 @@ class Stall extends BaseModel
 		if(isset($requestdata['name'])) 				$query->where('s.name', $requestdata['name']);
 		if(isset($requestdata['event_id'])) 			$query->where('s.event_id', $requestdata['event_id']);
 		if(isset($requestdata['barn_id'])) 			    $query->where('s.barn_id', $requestdata['barn_id']);
+		if(isset($requestdata['e.id'])) 				$query->where('e.id', $requestdata['e.id']);
 		if(isset($requestdata['start_date'])) 			$query->where('e.start_date', $requestdata['start_date']);
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date', $requestdata['end_date']);
 		if(isset($requestdata['type'])) 				$query->where('e.type', $requestdata['type']);
 		if(isset($requestdata['status'])) 				$query->whereIn('s.status', $requestdata['status']);
-		if(isset($requestdata['stallname'])) 			$query->like('s.name', $requestdata['stallname']);
-        if(isset($requestdata['btw_start_date']) && !isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN s.start_date AND s.end_date")->orWhere('s.start_date >=', $requestdata['btw_start_date'])->groupEnd();
-		if(!isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_end_date']."' BETWEEN s.start_date AND s.end_date")->orWhere('s.end_date <=', $requestdata['btw_end_date'])->groupEnd();
-		if(isset($requestdata['btw_start_date']) && isset($requestdata['btw_end_date'])) $query->groupStart()->where("'".$requestdata['btw_start_date']."' BETWEEN s.start_date AND s.end_date")->orWhere("'".$requestdata['btw_end_date']."' BETWEEN s.start_date AND s.end_date")->groupEnd();
-		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
-			$query->limit($requestdata['length'], $requestdata['start']);
-		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='stalls'){
 				$column = ['s.name', 's.image'];
@@ -52,10 +46,6 @@ class Stall extends BaseModel
 			if(isset($requestdata['page'])){ 
 				$page = $requestdata['page'];
 				$query->groupStart();
-					// if($page=='stalls'){ 		
-					// 	$query->like('s.name', $searchvalue);
-					// 	$query->orLike('s.price', $searchvalue);
-					// }
 					if($page=='facility'){				
 						$query->like('s.name', $searchvalue);
 					}
@@ -72,6 +62,47 @@ class Stall extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
+
+			/*if($type=='all'){
+				$result = $query->getResultArray();
+
+				if(count($result) > 0){
+					echo "<pre>";print_r($result);die;
+						foreach ($result as $key => $eventdata) {
+							if(in_array('barn', $querydata)){
+								$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
+								$result[$key]['barn'] = $barndatas;
+								
+								if(in_array('event', $querydata)){ 
+									if(count($barndatas) > 0){
+										foreach($barndatas as $barnkey => $barndata){
+											$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
+											$result[$key]['barn'][$barnkey]['stall'] = $stalldata;
+										}
+									}
+								}
+							}
+						}
+					}
+				}elseif($type=='row'){
+					$result = $query->getRowArray();
+					
+					if($result){
+						if(in_array('barn', $querydata)){
+							$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $result['id'])->get()->getResultArray();
+							$result['barn'] = $barndatas;
+							
+							if(in_array('stall', $querydata)){ 
+								if(count($barndatas) > 0){
+									foreach($barndatas as $barnkey => $barndata){
+										$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
+										$result['barn'][$barnkey]['stall'] = $stalldata;
+									}
+								}
+							}
+						}
+					}
+				}*/
 			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
