@@ -63,7 +63,7 @@
                 				<h5><?php echo ucfirst($row['name']);?></h5>
                 			</span>
                 			<div class="wi-50-2 justify-content-between">
-                				<span class="m-left">
+                				<span class="m-left upevent">
                 					<p><img class="eventFirstIcon" src="<?php echo base_url();?>/assets/site/img/horseShoe.svg">Stalls</p>
                 					<h6>from $<?php echo $row['stalls_price'];?> / night</h6>
                 				</span>

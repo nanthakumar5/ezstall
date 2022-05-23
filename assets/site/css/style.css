@@ -3499,7 +3499,8 @@ td {
         padding: 1.2rem;
     }
     h3.newsTitle {
-        width: 30%;
+        width: 40%;
+        font-size: 30px;
     }
     .subscriptionArea {
         margin: 0;
@@ -3511,7 +3512,7 @@ td {
         width: 53%;
     }
     button.subscriptionBtn {
-        margin: 0;
+        margin-left: 10px;
     }
     .footerBottom {
         padding: 0;
@@ -3736,6 +3737,9 @@ td {
         justify-content: center;
         display: flex;
     }
+    .panel4 p a {
+    font-size: 15px;
+}
 }
 
 #sidebar-nav ul li a p {
@@ -4086,7 +4090,14 @@ input.subscriptionInput::placeholder {
 p.mb-0.text-sm.fs-7.fw-600.w-100 {
     width: 48% !important;
 }
-
+span.m-left.upevent {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.upevent h6{
+    padding:  0 10px;
+}
 }
 @media only screen and (max-width: 992px){
 .navbar-header+nav#sidebar-nav {
@@ -4103,7 +4114,7 @@ p.mb-0.text-sm.fs-7.fw-600.w-100 {
     padding:  1.2rem 0 0 2rem;
 }
 .panel4{
-       padding: 1.2rem 0 0 1.5rem;
+       padding: 1.2rem 0 0 0rem;
 }
 button.signInSubmitBtn {
     width: 50%;
@@ -4125,6 +4136,9 @@ button.signInSubmitBtn {
     flex: 0 0 auto;
     width: 89.333333% !important;
 }*/
+.subscriptionPanel{
+    justify-content:  space-around;
+}
 
 }
 
