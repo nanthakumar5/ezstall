@@ -2,7 +2,7 @@ function baseurl(){
 	var base = window.location;
 
 	if(base.host=='localhost'){
-		return base.protocol + "//" + base.host + "/ezstall/";
+		return base.protocol + "//" + base.host + "/nantha/ezstall/";
 	}else{
 		return base.protocol + "//" + base.host + "/ezstall/";
 	}

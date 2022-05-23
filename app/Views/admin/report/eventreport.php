@@ -1,7 +1,6 @@
 <?= $this->extend("admin/common/layout/layout2") ?>
 
 <?php $this->section('content') ?>
-<?php //echo "<pre>"; print_r($event);die;?>
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
@@ -30,9 +29,8 @@
 							<div class="col-md-12 my-2">
 						  		<div class="form-group">
 
-							       <label>Facility Users</label>
-								    <select class="form-select exportevent" id="export" aria-label="Default select example">
-	  									<option selected>Select Export Event</option>
+							       <label>Events</label>
+								    <select class="form-select" name="eventid">
 	  									<option value="all">All Event</option>
 	  									<?php foreach ($event  as $export) {
 	  										echo '<option value="'.$export['id'].'">'.$export['name'].'</option>';
@@ -41,7 +39,7 @@
 								</div>
 							</div>
 							<div class="col-md-12 exportup">
-								<a class="btn btn-primary element" href="#">Export</a>
+								<input type="submit" value="Export" class="btn btn-success">
 							</div>
 						</div>
 					</div>
@@ -49,15 +47,4 @@
 			</div>
 		</div>
 	</section>
-<?php $this->endSection(); ?>
-
-<?php $this->section('js') ?>
-	<script>		
-		$(function(){
-			$('.exportevent').change(function(){ 
-				var id = $( "#export" ).val();
-				$('.element').attr('href', '<?php echo getAdminUrl();?>/exportevent/'+id);
-			});			
-		});
-	</script>
 <?php $this->endSection(); ?>

@@ -163,14 +163,9 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     // Privacy Policy
     $routes->match(['get', 'post'], 'privacypolicy', 'Admin\Privacypolicy\Index::index');
 
-
      //Contactus
     $routes->match(['get', 'post'], 'contactus', 'Admin\Contactus\Index::index');
     $routes->match(['get', 'post'], 'contactus/DTcontactus', 'Admin\Contactus\Index::DTcontactus');
-
-    // Export Event
-    $routes->match(['get','post'],'exportevent/(:any)', 'Admin\Report\Index::exportevent/$1');
-    $routes->get('report', 'Admin\Report\Index::index/$1');
 
     // Plan
     $routes->match(['get', 'post'], 'plan', 'Admin\Plan\Index::index');
@@ -191,6 +186,9 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     //Newsletter
     $routes->get('newsletter', 'Admin\Newsletter\Index::index');
     $routes->post('newsletter/DTnewsletter', 'Admin\Newsletter\Index::DTnewsletter');
+
+    // Report
+    $routes->match(['get','post'],'eventreport', 'Admin\Report\Index::eventreport');
 
 	// Settings
     $routes->match(['get', 'post'], 'settings', 'Admin\Settings\Index::index');

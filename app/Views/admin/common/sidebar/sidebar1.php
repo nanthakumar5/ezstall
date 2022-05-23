@@ -103,7 +103,7 @@
 	</a>
 	<ul class="nav nav-treeview" style="display: none;">
 		<li class="nav-item">
-			<a href="<?php echo getAdminUrl().'/report'; ?>" class="nav-link nav-hov">
+			<a href="<?php echo getAdminUrl().'/eventreport'; ?>" class="nav-link nav-hov">
 				<i class="far fa-circle nav-icon"></i>
 				<p>Export Event</p>
 			</a>

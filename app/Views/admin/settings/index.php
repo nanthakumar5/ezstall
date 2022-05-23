@@ -173,8 +173,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Transaction Fee</label>
-									<input type="text" class="form-control" name="transactionfee" placeholder="Transaction Fee" value="<?php echo $transactionfee.'%'; ?>">
+									<label>Transaction Fee (Percentage)</label>
+									<input type="number" class="form-control" name="transactionfee" placeholder="Transaction Fee" value="<?php echo $transactionfee; ?>" min="0" max="100">
 								</div>
 							</div>
 							<div class="col-md-12">
