@@ -14,13 +14,13 @@
 	<p class="mb-0 fs-7"><?php echo $paymentstatus[$data['status']];?></p>
 	</div>
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-3">
 	<div>
-	<p class="mb-0 text-sm fs-7 fw-600">Transaction ID</p>
+	<p class="mb-0 text-sm fs-7 fw-600 w-100">Transaction ID</p>
 	<p class="mb-0 fs-7"><?php echo $data['id'];?></p>
 	</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-4">
 	<div>
 	<p class="mb-0 text-sm fs-7 fw-600">Name</p>
 	<p class="mb-0 fs-7"><?php echo $data['name'];?></p>

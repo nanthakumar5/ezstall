@@ -446,6 +446,8 @@ button.ucEventBtn.closeBtn:hover {
     width: 45px;
     height: 45px;
     border-radius: 50vw;
+    position: relative;
+    
 }
 
 span.searchResult_ svg {
@@ -2309,7 +2311,7 @@ ul.CTAs .side-nav-a {
     margin: 10rem 0 0 1.5rem;
     position: absolute;
     top: -50px;
-    display: none;
+    /*display: none;*/
 }
 
 .btn-info:hover {
@@ -2488,6 +2490,7 @@ li.side-nav-active {
 ul.pagination {
     width: max-content;
     border-radius: 7px;
+    margin:  auto;
 }
 
 ul.pagination li {
@@ -2977,7 +2980,7 @@ button.View:hover {
     font-weight: 600;
     padding: 12px 15px !important;
     text-align: left;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .welcome-content .tablesec .col-md-6 .table-responsive.mt-3 table tbody th,
@@ -3500,12 +3503,12 @@ td {
     }
     .subscriptionArea {
         margin: 0;
-        width: 70%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
     }
     input.subscriptionInput {
-        width: 60%;
+        width: 53%;
     }
     button.subscriptionBtn {
         margin: 0;
@@ -3726,7 +3729,7 @@ td {
     }
     .searchResult {
         width: 100% !important;
-        border-radius: 7px;
+        border-radius:22px;
         margin: 10px 0px;
         background-color: #e00000;
         cursor: pointer;
@@ -4060,4 +4063,111 @@ a.ui-button:active,
     top: 0;
     right: 0;
     bottom: 0;
+}
+
+
+/*Edited on 20-05-2022*/
+
+@media  only screen and (max-width: 767px){
+input.subscriptionInput::placeholder {
+    text-align: center ;
+}
+.marFive.dFlexComBetween.eventTP {
+    align-items: center;
+}
+.wi-1200 {
+    padding: 20px;
+}
+.second p, .first p {
+    color: #595959;
+    font-size: 14px;
+}
+
+p.mb-0.text-sm.fs-7.fw-600.w-100 {
+    width: 48% !important;
+}
+
+}
+@media only screen and (max-width: 992px){
+.navbar-header+nav#sidebar-nav {
+    left: -260px;
+    }
+
+}
+
+@media only screen and (min-width:  768px) and (max-width: 1024px){
+.panel2{
+    padding:  1.2rem 0 0 3rem;
+}
+.panel3{
+    padding:  1.2rem 0 0 2rem;
+}
+.panel4{
+       padding: 1.2rem 0 0 1.5rem;
+}
+button.signInSubmitBtn {
+    width: 50%;
+}
+.second p, .first p {
+    color: #595959;
+    font-size: 12px;
+}
+.searchResult_button{
+    position: relative;
+    top: 1px;
+    width: 39px;
+    height: 38px;
+}
+.row.mt-3.contact-info{
+    font-size:  13px;
+}
+/*.col-md-10 {
+    flex: 0 0 auto;
+    width: 89.333333% !important;
+}*/
+
+}
+
+@media only screen and (min-width:  997px) and (max-width: 1024px){
+.navbar-header{
+    display:  none ;
+}
+}
+@media only screen and (min-width: 896px) and (max-width: 1024px){
+    .panel3 {
+    padding: 1.2rem 0 0 0rem;
+}
+.second p, .first p {
+    color: #595959;
+    font-size: 13px;
+}
+}
+.alert{
+    top:  65px;
+}
+
+@media only screen and (min-width:  414px) and (max-width:  767px){
+.searchResult_ button{
+    bottom: 6px;
+}
+.paymentflex {
+    flex: 100%;
+}
+}
+
+@media only screen and (min-width:  1025px){
+    .row.mt-3.contact-info{
+        font-size: 16px;
+    }
+    .second p, .first p {
+    color: #595959;
+    font-size: 18px;
+}
+.navbar-header{
+    display: none;
+}
+}
+
+.modal-dialog {
+    top: 20px;
 }

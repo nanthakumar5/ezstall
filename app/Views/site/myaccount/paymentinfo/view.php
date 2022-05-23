@@ -20,48 +20,48 @@
   </div>
 </div>
 <section class="maxWidth eventPagePanel">
-    <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+    <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Transaction ID</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $transactionid;?></p>
     </div>
   </div> 
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Name</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $username;?></p>
     </div>
   </div>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Name On Card</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $name;?></p>
     </div>
   </div>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Email</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $email;?></p>
     </div>
   </div>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Payment Type</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $type;?></p>
     </div>
   </div>  
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Amount</p>
     </div>
     <div class="col" align="left">
@@ -69,16 +69,16 @@
     </div>
   </div>  
   <?php if($type == 2 ){?>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Plan Date</p>
     </div>
     <div class="col" align="left">
       <p class="my-2"><?php echo $plan_start;?></p>
     </div>
   </div>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Plan End</p>
     </div>
     <div class="col" align="left">
@@ -86,8 +86,8 @@
     </div>
   </div>
 <?php }else{ ?>
-  <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+  <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Payed Date</p>
     </div>
     <div class="col" align="left">
@@ -98,8 +98,8 @@
     </div>
   </div>
 <?php } ?>
-   <div class="row col-md-10 base-style">
-    <div class="col fw-600">
+   <div class="row col-md-12 base-style">
+    <div class="col fw-600 paymentflex">
       <p class="my-2">Paid By</p>
     </div>
     <div class="col" align="left">

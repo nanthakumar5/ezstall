@@ -14,7 +14,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2><?php echo $countcurrentstall;?></h2>
@@ -29,7 +29,7 @@
 							<div class="col-md-3">
 								<img
 								src="<?php echo base_url()?>/assets/site/img/currently_available.png"
-								class="rounded mx-auto d-block"
+								class="rounded d-block"
 								/>
 							</div>
 							<div class="col-md-9"> 
@@ -45,7 +45,7 @@
 							<div class="col-md-3">
 								<img
 								src="<?php echo base_url()?>/assets/site/img/currently_booked.png"
-								class="rounded mx-auto d-block"
+								class="rounded d-block"
 								/>
 							</div>
 							<div class="col-md-9">
@@ -64,7 +64,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/rented_stalls.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/rented_stalls.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2><?php echo $countpaststall ?></h2>
@@ -77,7 +77,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/total_revenue.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/total_revenue.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2>$<?php echo $countpastamount ?></h2>
@@ -90,7 +90,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/total_events.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/total_events.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2><?php echo $pastevent;?></h2>
@@ -111,7 +111,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2><?php echo $totalstall;?></h2>
@@ -124,7 +124,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/total_revenue.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/total_revenue.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9"> 
 								<h2><?php echo $totalamount;?></h2>
@@ -137,7 +137,7 @@
 					<div class="card">
 						<div class="row mt-4 p-3">
 							<div class="col-md-3">
-								<img src="<?php echo base_url()?>/assets/site/img/total_events.png" class="rounded mx-auto d-block" />
+								<img src="<?php echo base_url()?>/assets/site/img/total_events.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
 								<h2><?php echo $totalevent;?></h2>

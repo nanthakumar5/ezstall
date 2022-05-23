@@ -10,7 +10,7 @@
 	<section>
 		<div class="my-5 maxWidth marFive">
 			<div class="row mx-auto">
-				<div class="p-0 col-md-6">
+				<div class="p-0 col-md-4">
 					<p class="h2 fw-bold mb-4">Get In Touch</p>
 					<form method="post" action="" autocomplete="off">
 						<div class="mb-4 col-md-8">
@@ -35,7 +35,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<p class="h2 fw-bold mb-4">Contact Information</p>
 					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15719.342430819235!2d78.16783275!3d9.9476323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1647852032607!5m2!1sen!2sin" width="100%" height="300px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 					<div class="row mt-3 contact-info">
