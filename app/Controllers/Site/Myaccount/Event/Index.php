@@ -238,4 +238,17 @@ class Index extends BaseController
 		$array = array_values($array);
 		echo json_encode($array);
     }
+
+   	public function dayreport($id)
+   	{
+   		
+		$mpdf 						= new \Mpdf\Mpdf();
+		$currentdate 				= date("Y-m-d");
+    	$data['arriving'] 			=  $this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkin'=> $currentdate]);
+		$data['outgoing'] 			=  $this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkout'=> $currentdate]);
+		$html =  view('site/common/pdf/dayreport', $data);
+		$mpdf->WriteHTML($html);
+		$this->response->setHeader('Content-Type', 'application/pdf');
+		$mpdf->Output('dayreport.pdf','D');
+    }
 }

@@ -82,6 +82,7 @@ $routes->group('myaccount', ['filter' => 'siteauthentication2'], function($route
     $routes->match(['get','post'], 'events/edit/(:num)', 'Site\Myaccount\Event\Index::action/$1');
     $routes->get('events/view/(:num)', 'Site\Myaccount\Event\Index::view/$1');
     $routes->get('events/export/(:num)', 'Site\Myaccount\Event\Index::export/$1');
+    $routes->get('events/dayreport/(:num)', 'Site\Myaccount\Event\Index::dayreport/$1');
     $routes->post('events/importbarnstall', 'Site\Myaccount\Event\Index::importbarnstall');
 
     $routes->match(['get','post'], 'facility', 'Site\Myaccount\Facility\Index::index');

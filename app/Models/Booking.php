@@ -40,7 +40,9 @@ class Booking extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);		
-		
+		if(isset($requestdata['checkin'])) 				$query->where('b.check_in', $requestdata['checkin']);		
+		if(isset($requestdata['checkout'])) 		    $query->where('b.check_out', $requestdata['checkout']);		
+
 		if(isset($requestdata['userid'])) 				
 		{
 			$query->groupStart();
