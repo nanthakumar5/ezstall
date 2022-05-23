@@ -37,51 +37,6 @@
 					</div>
 				</div>
 				<?php echo ucfirst($description);?>
-				
-			
-			<!-- <div class="col-lg-4">
-				<div class="stall-right">
-					<div class="stall-price">
-						<b><?php //echo $currencysymbol.$price; ?></b> per day
-					</div>
-					<div class="section1">
-						<div class="col-md-12 px-3 mt-3">
-							<div class="mb-3">
-								<label>Check In</label>
-								<input type="text" name="startdate" id="startdate" class="form-control" autocomplete = "off" placeholder = "Check-In"/>                                   
-							</div>
-							<div class="mb-3">
-								<label>Check Out</label>
-								<input type="text" name="enddate" id="enddate" class="form-control" autocomplete = "off" placeholder = "Check-Out"/>                       
-							</div>
-						</div>
-						<div class="stall-btn">
-							<button class="stalldetail-btn" id="checkavailability">Check Availability</button>
-						</div>
-						<div class="tagline displaynone notavailable text-center">Stall is not available on the selected dates.</div>
-					</div>
-					<div class="section2 displaynone">
-						<div class="stall-date">
-							<p class="fw-bold">Dates</p>                                 
-							<p class="float-left" id="startdatetxt" ></p> - <p class="float-end" id="enddatetxt"></p>
-						</div>
-						<div class="stall-total">
-							<p class="float-start fw-bold tot">Total</p>
-							<p class="float-end  fw-bold"><span id="stallamount"></span><span class="redcolor">Fees</span></p>
-						</div>
-						<div class="stall-points">
-							<ul>
-								<li>You can cancel at any point of time.</li>
-								<li>You will not be charged without your approval.</li>
-							</ul>
-						</div> 
-						<div class="stall-btn">
-							<button class="stalldetail-btn" id="booknow">Book Now</button>
-							<button class="stalldetail-btn mt-1" id="remove">Remove</button>
-						</div>
-					</div>
-				</div>
-			</div> -->
 			</div>
 			<div class="row m-0 p-0">
 				<div class="col-md-9">
@@ -154,6 +109,7 @@
 
 <?php $this->section('js') ?>
 <script>
+	var transactionfee 		= '<?php echo $settings['transactionfee']?>';
 	var currencysymbol 		= '<?php echo $currencysymbol; ?>';
 	var eventid 			= '<?php echo $detail["id"]; ?>';
 	var stallid 			= '<?php echo $stalldata["id"]; ?>';
@@ -303,8 +259,7 @@
 						});
 
 						$('#stallcount').val(result.barnstall.length);
-						var transactionfee = (3 / 100) * result.price;
-						var total = (parseFloat(result.price)+parseFloat(transactionfee));
+						var total = (parseFloat(result.price)+parseFloat((transactionfee / 100) * result.price));
 						var result ='\
 						<div class="w-100">\
 						<div class="border rounded pt-4 ps-3 pe-3 mb-5">\
@@ -319,7 +274,7 @@
 						</div>\
 						<div class="row mb-2">\
 						<div class="col-8 ">Transaction Fees</div>\
-						<div class="col-4">'+currencysymbol+transactionfee+'\</div>\
+						<div class="col-4">'+currencysymbol+((transactionfee/100) * result.price)+'\</div>\
 						</div>\
 						<div class="row mb-2 border-top mt-3 mb-3 pt-3">\
 						<div class="col-8 fw-bold ">Total Due</div>\

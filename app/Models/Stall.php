@@ -34,6 +34,10 @@ class Stall extends BaseModel
 		if(isset($requestdata['end_date'])) 			$query->where('e.end_date', $requestdata['end_date']);
 		if(isset($requestdata['type'])) 				$query->where('e.type', $requestdata['type']);
 		if(isset($requestdata['status'])) 				$query->whereIn('s.status', $requestdata['status']);
+		
+		if($type!=='count' && isset($requestdata['start']) && isset($requestdata['length'])){
+			$query->limit($requestdata['length'], $requestdata['start']);
+		}
 		if(isset($requestdata['order']['0']['column']) && isset($requestdata['order']['0']['dir'])){
 			if(isset($requestdata['page']) && $requestdata['page']=='stalls'){
 				$column = ['s.name', 's.image'];
@@ -62,48 +66,6 @@ class Stall extends BaseModel
 			$result = $query->countAllResults();
 		}else{
 			$query = $query->get();
-
-			/*if($type=='all'){
-				$result = $query->getResultArray();
-
-				if(count($result) > 0){
-					echo "<pre>";print_r($result);die;
-						foreach ($result as $key => $eventdata) {
-							if(in_array('barn', $querydata)){
-								$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
-								$result[$key]['barn'] = $barndatas;
-								
-								if(in_array('event', $querydata)){ 
-									if(count($barndatas) > 0){
-										foreach($barndatas as $barnkey => $barndata){
-											$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
-											$result[$key]['barn'][$barnkey]['stall'] = $stalldata;
-										}
-									}
-								}
-							}
-						}
-					}
-				}elseif($type=='row'){
-					$result = $query->getRowArray();
-					
-					if($result){
-						if(in_array('barn', $querydata)){
-							$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $result['id'])->get()->getResultArray();
-							$result['barn'] = $barndatas;
-							
-							if(in_array('stall', $querydata)){ 
-								if(count($barndatas) > 0){
-									foreach($barndatas as $barnkey => $barndata){
-										$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
-										$result['barn'][$barnkey]['stall'] = $stalldata;
-									}
-								}
-							}
-						}
-					}
-				}*/
-			
 			if($type=='all') 		$result = $query->getResultArray();
 			elseif($type=='row') 	$result = $query->getRowArray();
 		}

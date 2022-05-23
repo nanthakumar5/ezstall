@@ -177,6 +177,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 
 <?php $this->section('js') ?>
 <script> 
+	var transactionfee		= '<?php echo  $settings['transactionfee'];?>';  
 	var currencysymbol 		= '<?php echo $currencysymbol; ?>';
 	var eventid 			= '<?php echo $detail["id"]; ?>';
 	var cartevent 			= '<?php echo $cartevent; ?>';
@@ -318,8 +319,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 						});
 
 						$('#stallcount').val(result.barnstall.length);
-						var transactionfee 		= ((3 / 100) * result.price);
-						var total = (parseFloat(result.price)+parseFloat(transactionfee));
+						var total = (parseFloat(result.price)+parseFloat((transactionfee/100) * result.price));
 						var result ='\
 						<div class="w-100">\
 						<div class="border rounded pt-4 ps-3 pe-3 mb-5">\
@@ -334,7 +334,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 						</div>\
 						<div class="row mb-2">\
 						<div class="col-8 ">Transaction Fees</div>\
-						<div class="col-4">'+currencysymbol+transactionfee+'\</div>\
+						<div class="col-4">'+currencysymbol+((transactionfee/100) * result.price)+'\</div>\
 						</div>\
 						<div class="row mb-2 border-top mt-3 mb-3 pt-3">\
 						<div class="col-8 fw-bold ">Total Due</div>\

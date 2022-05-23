@@ -13,31 +13,7 @@
 </style>
 
 <?php $this->section('content') ?>
-<?php
-$searchname = isset($searchdata['name']) ? $searchdata['name'] : '';
-$searchstartdate = isset($searchdata['btw_start_date']) ? formatdate($searchdata['btw_start_date'], 1) : '';
-$searchenddate = isset($searchdata['btw_end_date']) ? formatdate($searchdata['btw_end_date'], 1) : '';
-$searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stalls'] : '';
-?>
 <div class="infoPanel stallform container-lg">
-	<form action="<?php echo base_url();?>/facility" method="get" autocomplete="off" class="w-100 listeventsearch">
-		<span class="row facility_info align-items-center">
-			<span class="col-md-6 iconProperty">
-				<input type="text" name="name" placeholder="Event Name" value="<?php echo $searchname; ?>">
-				<img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace_" alt="Map Icon">
-			</span>
-			<span class="col-md-5 iconProperty">
-				<input class="nb-right" type="text" placeholder="No.of stalls" name="no_of_stalls" value="<?php echo $searchnoofstalls; ?>"/>
-			</span>
-			<span class="col-md-1 searchResult_ text-end">
-				<button type="submit">
-					<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-						<path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z"></path>
-					</svg>
-				</button>
-			</span>
-		</span>
-	</form>
 </div>
 <section class="maxWidth">
 		<!-- <div class="pageInfo">
@@ -100,7 +76,6 @@ $searchnoofstalls = isset($searchdata['no_of_stalls']) ? $searchdata['no_of_stal
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 <script>
-	uidatepicker(".event_search_start_date, .event_search_end_date");
 	var baseurl = "<?php echo base_url(); ?>";
 
 	$(function() {

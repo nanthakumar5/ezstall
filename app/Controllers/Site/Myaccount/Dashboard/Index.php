@@ -21,23 +21,25 @@ class Index extends BaseController
       	$countpaststall 		= 0;
       	$countpastamount 		= 0;
 		
-     	$datetime			= date('Y-m-d H:i:s');
      	$date				= date('Y-m-d');
     	$userdetail 		= getSiteUserDetails();
     	$usertype 			= $userdetail['type'];
+    	$parentid 			= $userdetail['parent_id'];
+		$parentdetails 		= getSiteUserDetails($parentid);
+		$parenttype   		= $parentdetails ? $parentdetails['type'] : '';
     	$data['usertype'] 	= $this->config->usertype;
-    	$userid 			= $userdetail['id'];
-		$allids 			= getStallManagerIDS($userid);
+    	$userid 			= ($usertype=='4') ? $parentdetails['id'] : $userdetail['id'];
+		$allids 			= getStallManagerIDS($userid); 
 		array_push($allids, $userid);
 		
-      	if($usertype=='3'){
+      	if($usertype=='3' || ($usertype=='4' && $parenttype == '3')){ 
       		$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'type' => '1', 'gtenddate' => $date]);
       	}
-      	if($usertype=='2'){
+      	if($usertype=='2' || ($usertype=='4' && $parenttype == '2')){
       		$currentreservation = $this->event->getEvent('all', ['event', 'barn', 'stall'],['status' => ['1'], 'userids' => $allids, 'type' => '2', 'fenddate' => $date]);
       	}
       	
-      	if($usertype=='2' || $usertype =='3'){
+      	if($usertype=='2' || $usertype =='3' || ($usertype=='4' && $parenttype == '2') || ($usertype=='4' && $parenttype == '3')){
 	  		foreach ($currentreservation as $event) { 
 	  			foreach ($event['barn'] as $barn) {
 					$countcurrentstall += count(array_column($barn['stall'], 'id'));
@@ -66,10 +68,10 @@ class Index extends BaseController
 		$data['monthlyincome'] = $this->booking->getBooking('all', ['booking', 'event', 'payment'],['userid'=> $allids], ['groupby' => 'DATE_FORMAT(b.created_at, "%M %Y")', 'select' => 'SUM(p.amount) as paymentamount, DATE_FORMAT(b.created_at, "%M %Y") AS month']);
 
 
-		if($usertype=='2'){
+		if($usertype=='2' || ($usertype=='4' && $parenttype == '2')){
 			$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userids' => $allids, 'fenddate'=> $date, 'status' => ['1'], 'type' => '2']);
 		}
-		if($usertype=='3'){
+		if($usertype=='3' || ($usertype=='4' && $parenttype == '3')){
 			$data['upcomingevents'] = $this->event->getEvent('all', ['event'],['userids' => $allids, 'start_date' => $date, 'status' => ['1'], 'type' => '1']);
 		}
     	

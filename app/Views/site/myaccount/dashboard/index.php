@@ -199,11 +199,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
-							if(isset($upcomingevents)> 0){
-								foreach ($upcomingevents as $value){ $date = ($value['type']!='1') ? date('m-d-Y') : date('m-d-Y',strtotime($value['start_date'])); ?>
+							<?php foreach ($upcomingevents as $value){ ?>
 								<tr class="upcoming">
-									<td><?php echo $date; ?></td>
+									<td><?php echo  date('m-d-Y',strtotime($value['start_date'])); ?></td>
 									<td><?php echo $value['name']; ?></td>
 									<td>
 										<button class="View">
@@ -212,7 +210,7 @@
 											
 									</td>
 								</tr>
-							<?php } } ?>
+							<?php } ?>
 							<tr>
 								<td colspan="3" class="text-center">
 									<a href="<?php echo base_url().'/myaccount/events'; ?>" id="loadMore" class="dash-view">VIEW ALL</a>
