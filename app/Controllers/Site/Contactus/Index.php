@@ -4,6 +4,7 @@ namespace App\Controllers\Site\Contactus;
 
 use App\Controllers\BaseController;
 use App\Models\Contactus;
+use App\Models\Settings;
 
 
 class Index extends BaseController
@@ -11,6 +12,7 @@ class Index extends BaseController
 	public function __construct()
 	{
 		$this->contactus = new Contactus;
+		$this->settings  = new Settings; 
 	}
     
     public function index()
@@ -20,7 +22,9 @@ class Index extends BaseController
 			$this->session->setFlashdata('success', 'You have successfully contacted.');
 			return redirect()->to(base_url().'/contactus'); 
     	}
-		
-		return view('site/contactus/index');
+
+		$data['contactus'] = $this->settings->getSettings('row',['settings']);
+
+		return view('site/contactus/index',$data);
     }
 }

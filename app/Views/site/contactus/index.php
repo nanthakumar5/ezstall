@@ -42,19 +42,19 @@
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Mobile Number</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-phone-alt"></i> +91 7092012886
+							<i class="pr-2 fas fa-phone-alt"></i><?php echo $contactus['phone'];?>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Email</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-envelope"></i>	ezstall@info.com
+							<i class="pr-2 fas fa-envelope"></i><?php echo $contactus['email'];?>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Address</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-map-marker-alt"></i> 102, Newyork, 2712
+							<i class="pr-2 fas fa-map-marker-alt"></i> <?php echo $contactus['address'];?>
 							</div>
 						</div>
 					</div>
