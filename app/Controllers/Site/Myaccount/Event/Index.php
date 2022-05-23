@@ -162,47 +162,37 @@ class Index extends BaseController
 		$sheet->setCellValue('I1', 'stalls_price');
 		$sheet->setCellValue('J1', 'rvspots_price');
 
-     	$rows = 2;
-		$sheet->setCellValue('A' . $rows, $data['name']);
-		$sheet->setCellValue('B' . $rows, $data['description']);
-		$sheet->setCellValue('C' . $rows, $data['location']);
-		$sheet->setCellValue('D' . $rows, $data['mobile']);
-		$sheet->setCellValue('E' . $rows, $data['start_date']);
-		$sheet->setCellValue('F' . $rows, $data['end_date']);
-		$sheet->setCellValue('G' . $rows, formattime($data['start_time']));
-		$sheet->setCellValue('H' . $rows, formattime($data['end_time']));
-		$sheet->setCellValue('I' . $rows, $data['stalls_price']);
-		$sheet->setCellValue('J' . $rows, $data['rvspots_price']);
-        
-        $row = 4;
-        $col = 1;
-        foreach ($data['barn'] as $barn) { 
-			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
-
-			foreach($barn['stall'] as $key=> $stall){
-				$stallname 	= $stall['name'];
-				$status 	= 'Available';
-				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname.'-'.$status);
-				$bookingname = [];
-				$checkin 	 = [];
-				$checkout    = [];
-				foreach($stall['bookedstall'] as $keys=> $booking){
-					$bookingname[] 	=   $booking['name'];
-					$checkin[] 		=   $booking['check_in'];
-					$checkout[] 	=   $booking['check_out'];
-				}
-				$bookingname= implode(' ',$bookingname);
-				$checkin= implode(' ',$checkin);
-				$checkout= implode(' ',$checkout);
-				
-				$sheet->setCellValueByColumnAndRow(1, $key+$row+1, $stallname."\n".'Name : '.$bookingname."\n"."Date  : ".$checkin."-".$checkout);
-
-				$sheet->getCellByColumnAndRow($col, $key+$row+1)->getStyle()->getAlignment()->setWrapText(true);
-				$sheet->getCellByColumnAndRow($col, $key+$row+1)->getStyle()->getFont()->setBold(true);
-			}
-			$col++;
+     	$row = 2;
+		$sheet->setCellValue('A' . $row, $data['name']);
+		$sheet->setCellValue('B' . $row, $data['description']);
+		$sheet->setCellValue('C' . $row, $data['location']);
+		$sheet->setCellValue('D' . $row, $data['mobile']);
+		$sheet->setCellValue('E' . $row, formatdate($data['start_date']));
+		$sheet->setCellValue('F' . $row, formatdate($data['end_date']));
+		$sheet->setCellValue('G' . $row, formattime($data['start_time']));
+		$sheet->setCellValue('H' . $row, formattime($data['end_time']));
+		$sheet->setCellValue('I' . $row, $data['stalls_price']);
+		
+		foreach ($data['barn'] as $key => $barn) { 
+			$sheet->setCellValue('A'.$row, $barn['name']);
+			$row++;
 			
+			foreach($barn['stall'] as $key=> $stall){  
+				$stallname  = $stall['name'];
+				
+				$bookedstall = '';
+				foreach($stall['bookedstall'] as $keys=> $booking){
+					$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out']);
+				}
+				
+				$sheet->setCellValue('A'.$row, $stallname.$bookedstall);
+				$sheet->getCell('A'.$row)->getStyle()->getAlignment()->setWrapText(true);
+				$sheet->getCell('A'.$row)->getStyle()->getFont()->setBold(true);
+				$row++;
+			} 
 		}
+		
+		$row++;
 
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename="'.$data['name'].'.xlsx"');

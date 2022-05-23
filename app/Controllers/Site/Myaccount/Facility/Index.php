@@ -140,38 +140,40 @@ class Index extends BaseController
 		$sheet->setCellValue('A1', 'Event Name');
 		$sheet->setCellValue('B1', 'Description');
 
-     	$rows = 2;
-		$sheet->setCellValue('A' . $rows, $data['name']);
-		$sheet->setCellValue('B' . $rows, $data['description']);
-        
-        $row = 4;
-        $col = 1;
-        foreach ($data['barn'] as $barn) { 
-			$sheet->setCellValueByColumnAndRow($col, $row, $barn['name']);
+        $row = 2;
 
-			foreach($barn['stall'] as $key=> $stall){  
-				$stallname 	= $stall['name'];
-				$status 	= 'Available';
-				$sheet->setCellValueByColumnAndRow($col, $key+$row+1, $stallname.'-'.$status);
-				foreach($stall['bookedstall'] as $keys=> $booking){
-					$bookingname 	=   $booking['name'];
-					$checkin 		=   $booking['check_in'];
-					$checkout 		=   $booking['check_out'];
-
-					$sheet->setCellValueByColumnAndRow($col, $keys+$row+1, $stallname."\n".$keys.'Name : '.$bookingname."\n"."Date  : ".$checkin."-".$checkout);
-					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getAlignment()->setWrapText(true);
-					$sheet->getCellByColumnAndRow($col, $keys+$row+1)->getStyle()->getFont()->setBold(true);
-				}
-			}
-			$col++;
+			$sheet->setCellValue('A' . $row, $data['name']);
+			$sheet->setCellValue('B' . $row, strip_tags($data['description']));
 			
-		}
+			foreach ($data['barn'] as $key => $barn) { 
+				$sheet->setCellValue('A'.$row, $barn['name']);
+				$row++;
+				
+				foreach($barn['stall'] as $key=> $stall){  
+					$stallname  = $stall['name'];
+					
+					$bookedstall = '';
+					foreach($stall['bookedstall'] as $keys=> $booking){
+						$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out']);
+					}
+					
+					$sheet->setCellValue('A'.$row, $stallname.$bookedstall);
+					$sheet->getCell('A'.$row)->getStyle()->getAlignment()->setWrapText(true);
+					$sheet->getCell('A'.$row)->getStyle()->getFont()->setBold(true);
+					$row++;
+				} 
+			}
+			
+			$row++;
+
+
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename="'.$data['name'].'.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
+		die;
     }
 	
 	public function importbarnstall()
