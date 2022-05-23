@@ -33,8 +33,8 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 	<section class="container-lg">
 		<div class="row" style="display: initial !important;">
 			<div class="col-md-12">
-				<div class="border rounded pt-5 ps-3 pe-3">
-					<div class="row">
+				<div class="border rounded pt-5 ps-3 pe-3 myaccupevent">
+					<div class="row myaccupevent1">
 						<div class="col-6">
 							<span class="edimg">
 								<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $detail['image']?>" width="350px" height="auto">
@@ -102,11 +102,11 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 				</div>
 			</div>
 			<div class="row m-0 p-0">
-				<div class="col-md-9">
-					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5">
+				<div class="col-md-12">
+					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5 ">
 						<h3 class="fw-bold mb-4">Book Your Stalls</h3>
 						<div class="infoPanel form_check">
-							<span class="infoSection">
+							<span class="infoSection bookborder">
 								<span class="iconProperty">
 									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls">
 									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>

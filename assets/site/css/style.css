@@ -414,7 +414,7 @@ button.ucEventBtn.closeBtn:hover {
     background-color: white;
     padding: 7px;
     border-radius: 50vw;
-    width: 1000px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -475,7 +475,7 @@ span.searchResult_ svg {
 
 .infoPanel span input:nth-child(1) {
     border: none;
-    border-right: 1px solid #dfdfdf;
+    border-right: 1px solid #dfdfdf ;
 }
 
 .infoPanel span input:nth-child(2) {
@@ -1435,10 +1435,10 @@ input.subscriptionInput:focus {
 }
 
 @media (max-width: 1023px) {
-    .infoSection {
+    /*.infoSection {
         display: block !important;
         border-radius: 7px !important;
-    }
+    }*/
     .infoPanel {
         margin: 1.5rem;
     }
@@ -1614,7 +1614,8 @@ span.eventHead a {
 
 span.edimg img {
     display: inline-block;
-    max-width: 350px;
+    /*max-width: 350px;*/
+    width: 100%;
     height: auto;
     border-radius: 5px;
 }
@@ -1677,10 +1678,10 @@ span.num_btn button {
 }
 
 .num_btn {
-    position: absolute;
-    right: 3px;
+    position:relative;
+    right: 33px;
     display: inline-block;
-    border-left: 1px solid #dfdfdf;
+    /*border-left: 1px solid #dfdfdf;*/
     line-height: 1;
     padding: 0 10px;
     text-align: center;
@@ -1692,10 +1693,11 @@ span.num_btn button {
 
 .infoPanel.form_check span.infoSection span.iconProperty {
     margin-left: 0px;
+    margin:  10px;
 }
 
 .barn-nav .nav-tabs {
-    border-bottom: 1px solid #dee2e6 !important;
+    /*border-bottom: 1px solid #dee2e6 !important;*/
 }
 
 .barn-nav .nav-tabs .nav-link {
@@ -3528,10 +3530,10 @@ td {
     span.iconProperty.soInput-panel {
         border: none !important;
     }
-    .infoSection {
+    /*.infoSection {
         display: block !important;
         border-radius: 7px !important;
-    }
+    }*/
     .infoPanel {
         margin: 1.5rem;
     }
@@ -4102,6 +4104,33 @@ span.m-left.upevent {
 .eventdate .col-3 {
     width: 50%;
 }
+.num_btn {
+    right: 8px;
+}
+.about-banner.text-center.my-5 {
+    margin-bottom: 0 !important;
+}
+.border .rounded .pt-5 .ps-3 .pe-3{
+padding-top:  0;
+}
+.myaccupevent {
+    padding-top: 10px !important;
+    }
+.myaccupevent1{
+    display: block;
+}
+.myaccupevent .col-6 {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: 10px;
+}
+  .infoPanel span input:nth-child(1) {
+    border-right: 1px solid #dfdfdf !important;
+}
+.infoPanel .infoSection{
+    flex-wrap:  wrap;
+}
+
 }
 @media only screen and (max-width: 992px){
 .navbar-header+nav#sidebar-nav {
@@ -4143,6 +4172,16 @@ button.signInSubmitBtn {
 .subscriptionPanel{
     justify-content:  space-around;
 }
+.num_btn {
+    position: relative;
+    right: 0px;
+    }
+    .infoPanel span input:nth-child(1) {
+    border-right: 1px solid #dfdfdf !important;
+}
+.infoPanel .infoSection{
+    flex-wrap:  wrap;
+}
 
 }
 
@@ -4170,6 +4209,9 @@ button.signInSubmitBtn {
 }
 .paymentflex {
     flex: 100%;
+}
+.num_btn {
+    right: 30px;
 }
 }
 
