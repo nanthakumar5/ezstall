@@ -168,6 +168,10 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->match(['get', 'post'], 'contactus', 'Admin\Contactus\Index::index');
     $routes->match(['get', 'post'], 'contactus/DTcontactus', 'Admin\Contactus\Index::DTcontactus');
 
+    // Export Event
+    $routes->match(['get','post'],'exportevent/(:any)', 'Admin\Report\Index::exportevent/$1');
+    $routes->get('report', 'Admin\Report\Index::index/$1');
+
     // Plan
     $routes->match(['get', 'post'], 'plan', 'Admin\Plan\Index::index');
     $routes->match(['get', 'post'], 'plan/action', 'Admin\Plan\Index::action');

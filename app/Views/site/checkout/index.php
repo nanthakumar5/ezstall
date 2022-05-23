@@ -2,7 +2,7 @@
 <?php $this->section('content') ?>
 <?php
 	$barnstall				= $cartdetail['barnstall'];
-	$transactionfee 	= (3 / 100) * $cartdetail['price'];
+	$transactionfee 	= (($settings['transactionfee'] / 100) * $cartdetail['price']);
 	$stripemode 			= $settings['stripemode'];
 	$stripepublickey 	= $settings['stripepublickey'];
 	$firstname 				= $stripemode=='2' ? 'First Name Test' : '';
