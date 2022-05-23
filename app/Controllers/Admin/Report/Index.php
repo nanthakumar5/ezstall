@@ -21,10 +21,10 @@ class Index extends BaseController
     {	
 		if ($this->request->getMethod()=='post')
         {
-			$requestdata = $this->request->getPost();
-			$condition = ($requestdata['eventid']=='all') ? [] : ['id' => $event['id']]; 
-			$data	= $this->event->getEvent('all', ['event', 'barn', 'stall', 'bookedstall'], $condition); 
-			
+			$requestdata 	= $this->request->getPost();
+			$condition 		= ($requestdata['eventid']=='all') ? [] : ['id' => $requestdata['eventid']]; 
+			$data			= $this->event->getEvent('all', ['event', 'barn', 'stall', 'bookedstall'], $condition);
+
 			$spreadsheet 	= new Spreadsheet();
 			$sheet 		 	= $spreadsheet->getActiveSheet();
 
@@ -40,20 +40,19 @@ class Index extends BaseController
 			$sheet->setCellValue('J1', 'rvspots_price');
 
 			$row = 2;
-			$col = 1;$col2 = 2;$col3 = 3;$col4 = 4;$col5 = 5;$col6 = 6;$col7 = 7;$col8 = 8;$col9 = 9;$col0 = 10;
-			
 
 			foreach($data as $data){
-				$sheet->setCellValueByColumnAndRow($col, $row, $data['name']);
+					$sheet->setCellValue('A' . $row, $data['name']);
 				if($data['type']=='1'){
-					$sheet->setCellValueByColumnAndRow($col2, $row, $data['description']);
-					$sheet->setCellValueByColumnAndRow($col3, $row, $data['location']);
-					$sheet->setCellValueByColumnAndRow($col4, $row, $data['mobile']);
-					$sheet->setCellValueByColumnAndRow($col5, $row, $data['start_date']);
-					$sheet->setCellValueByColumnAndRow($col6, $row, $data['end_date']);
-					$sheet->setCellValueByColumnAndRow($col7, $row, formattime($data['start_time']));
-					$sheet->setCellValueByColumnAndRow($col9, $row, $data['stalls_price']);
-					$sheet->setCellValueByColumnAndRow($col0, $row, $data['rvspots_price']);
+					$sheet->setCellValue('B' . $row, $data['description']);
+					$sheet->setCellValue('C' . $row, $data['location']);
+					$sheet->setCellValue('D' . $row, $data['mobile']);
+					$sheet->setCellValue('E' . $row, $data['start_date']);
+					$sheet->setCellValue('F' . $row, $data['end_date']);
+					$sheet->setCellValue('G' . $row, formattime($data['start_time']));
+					$sheet->setCellValue('H' . $row, formattime($data['end_time']));
+					$sheet->setCellValue('I' . $row, $data['stalls_price']);
+					$sheet->setCellValue('J' . $row, $data['rvspots_price']);
 				}
 				
 				$cols = 1;

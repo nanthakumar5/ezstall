@@ -89,18 +89,36 @@ class Event extends BaseModel
 				if(count($result) > 0){
 					foreach ($result as $key => $eventdata) {
 						if(in_array('barn', $querydata)){
-							$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
-							$result[$key]['barn'] = $barndatas;
-							
-							if(in_array('stall', $querydata)){ 
-								if(count($barndatas) > 0){
-									foreach($barndatas as $barnkey => $barndata){
-										$stalldata = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
-										$result[$key]['barn'][$barnkey]['stall'] = $stalldata;
+						$barndatas = $this->db->table('barn b')->where('b.status', '1')->where('b.event_id', $eventdata['id'])->get()->getResultArray();
+						
+						$result[$key]['barn'] = $barndatas;
+
+						if(in_array('stall', $querydata)){ 
+							if(count($barndatas) > 0){
+								foreach($barndatas as $barnkey => $barndata){
+									$stalldatas = $this->db->table('stall s')->where('s.status', '1')->where('s.barn_id', $barndata['id'])->get()->getResultArray();
+
+									$result[$key]['barn'][$barnkey]['stall'] = $stalldatas;
+									
+									if(in_array('bookedstall', $querydata)){
+										foreach($stalldatas as $stallkey => $stalldata){
+											if(in_array('bookedstall', $querydata)){ 
+												$bookedstall = 	$this->db->table('booking_details bd')
+																->join('booking bk', 'bd.booking_id = bk.id', 'left')
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out')
+																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $eventdata['id']])
+																->get()
+																->getResultArray();
+
+												$result[$key]['barn'][$barnkey]['stall'][$stallkey]['bookedstall'] = $bookedstall;
+											}
+										}
 									}
 								}
 							}
 						}
+						
+					}
 					}
 				}
 			}elseif($type=='row'){
