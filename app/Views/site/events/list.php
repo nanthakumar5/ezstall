@@ -93,7 +93,7 @@
 							</div>
 						</span>
 						<div class="wi-50-2 justify-content-between">
-							<span class="m-left">
+							<span class="m-left upevent">
 								<p><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
 								<h6 class="ucprice"> from $<?php echo $data['stalls_price'] ?> / night</h6>
 							</span>

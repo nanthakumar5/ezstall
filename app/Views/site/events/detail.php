@@ -80,7 +80,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 						<?php } ?>
 					</div>
 				</div>
-				<div class="row row border-top pt-4 pb-4">
+				<div class="row row border-top pt-4 pb-4 eventdate">
 					<span class="col-3">
 						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> Start Date: </p>
 						<p class="ucDAte mb-0">

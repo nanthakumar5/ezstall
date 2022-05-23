@@ -4099,6 +4099,9 @@ span.m-left.upevent {
 .upevent h6{
     padding:  0 10px;
 }
+.eventdate .col-3 {
+    width: 50%;
+}
 }
 @media only screen and (max-width: 992px){
 .navbar-header+nav#sidebar-nav {
