@@ -599,6 +599,7 @@ a.carousel-control-next {
     top: 25% !important;
     left: 48% !important;
     text-align: left !important;
+    text-shadow: 6px 6px black;
 }
 
 
