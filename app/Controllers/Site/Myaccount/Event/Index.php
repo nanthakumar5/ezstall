@@ -240,12 +240,12 @@ class Index extends BaseController
     }
 
    	public function dayreport($id)
-   	{
-   		
-		$mpdf 						= new \Mpdf\Mpdf();
-		$currentdate 				= date("Y-m-d");
-    	$data['arriving'] 			=  $this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkin'=> $currentdate]);
-		$data['outgoing'] 			=  $this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkout'=> $currentdate]);
+   	{   		
+		$mpdf 						= 	new \Mpdf\Mpdf();
+		$currentdate 				= 	date("Y-m-d");
+    	$data['arriving'] 			=  	$this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkin'=> $currentdate]);
+		$data['outgoing'] 			=  	$this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkout'=> $currentdate]);
+		
 		$html =  view('site/common/pdf/dayreport', $data);
 		$mpdf->WriteHTML($html);
 		$this->response->setHeader('Content-Type', 'application/pdf');
