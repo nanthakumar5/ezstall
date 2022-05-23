@@ -414,7 +414,7 @@ button.ucEventBtn.closeBtn:hover {
     background-color: white;
     padding: 7px;
     border-radius: 50vw;
-    width: 100%;
+    width:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -475,7 +475,7 @@ span.searchResult_ svg {
 
 .infoPanel span input:nth-child(1) {
     border: none;
-    border-right: 1px solid #dfdfdf ;
+    border-right: 1px solid #dfdfdf !important ;
 }
 
 .infoPanel span input:nth-child(2) {
@@ -1435,10 +1435,10 @@ input.subscriptionInput:focus {
 }
 
 @media (max-width: 1023px) {
-    /*.infoSection {
+    .infoSection {
         display: block !important;
         border-radius: 7px !important;
-    }*/
+    }
     .infoPanel {
         margin: 1.5rem;
     }
@@ -3536,6 +3536,7 @@ td {
     }*/
     .infoPanel {
         margin: 1.5rem;
+        width:  100%;
     }
     .searchResult {
         width: 100% !important;
@@ -3729,7 +3730,7 @@ td {
 
 @media (min-width: 767px) and (max-width:1200px) {
     .EventFlex span.wi-50 {
-        margin-right: 20px;
+        margin: 0 20px;
     }
     .searchResult {
         width: 100% !important;
@@ -4127,9 +4128,7 @@ padding-top:  0;
   .infoPanel span input:nth-child(1) {
     border-right: 1px solid #dfdfdf !important;
 }
-.infoPanel .infoSection{
-    flex-wrap:  wrap;
-}
+
 
 }
 @media only screen and (max-width: 992px){
@@ -4137,7 +4136,14 @@ padding-top:  0;
     left: -260px;
     }
 
+    .infoPanel span input:nth-child(1) {
+    border-right: none !important;
 }
+}
+
+ /*form.homeeventsearch .infoPanel span input:nth-child(1) {
+    border-right: none !important;
+}*/
 
 @media only screen and (min-width:  768px) and (max-width: 1024px){
 .panel2{
@@ -4176,13 +4182,14 @@ button.signInSubmitBtn {
     position: relative;
     right: 0px;
     }
-    .infoPanel span input:nth-child(1) {
+     .infoPanel span input:nth-child(1) {
     border-right: 1px solid #dfdfdf !important;
 }
-.infoPanel .infoSection{
-    flex-wrap:  wrap;
-}
 
+   .bannerItems  .infoPanel span input:nth-child(1) {
+    border-right: none !important;
+}
+   
 }
 
 @media only screen and (min-width:  997px) and (max-width: 1024px){
@@ -4197,6 +4204,9 @@ button.signInSubmitBtn {
 .second p, .first p {
     color: #595959;
     font-size: 13px;
+}
+  .infoPanel span input:nth-child(1) {
+    border-right: none !important;
 }
 }
 .alert{
@@ -4213,6 +4223,8 @@ button.signInSubmitBtn {
 .num_btn {
     right: 30px;
 }
+
+
 }
 
 @media only screen and (min-width:  1025px){
@@ -4230,4 +4242,15 @@ button.signInSubmitBtn {
 
 .modal-dialog {
     top: 20px;
+}
+form.homeeventsearch {
+    display: flex;
+    margin: 0 auto;
+}
+p.sliderCaption
+{
+    text-shadow: 2px 0px 2px black;
+}
+ h1.sliderTitle {
+    text-shadow: 6px 6px black;
 }
