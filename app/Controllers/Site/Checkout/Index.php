@@ -6,14 +6,16 @@ use App\Controllers\BaseController;
 use App\Models\Booking;
 use App\Models\Stripe;
 use App\Models\Cart;
+use App\Models\Paymentmethod;
 
 class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->booking 		= new Booking();	
-		$this->stripe  		= new Stripe();
-        $this->cart    		= new Cart(); 
+		$this->booking 			= new Booking();	
+		$this->stripe  			= new Stripe();
+        $this->cart    			= new Cart(); 
+        $this->paymentmethod    = new Paymentmethod(); 
 	}
     
     public function index()
@@ -25,20 +27,21 @@ class Index extends BaseController
         $userdetail  	= getSiteUserDetails();
 		$cartdetail  	= getCart();		
 		$settings		= getSettings();
-		$paymentid		= getPaymentid();
+		$paymentmethod	= $this->paymentmethod->getPaymentmethod('all', ['paymentmethod']);
 		
     	if ($this->request->getMethod()=='post')
     	{    
-            $requestData 				= $this->request->getPost(); 
+            $requestData 				= $this->request->getPost(); echo '<pre>';print_r($requestData);die;
             $userid             		= $userdetail['id'];
-
-            $payment 					= $this->stripe->action(['id' => $requestData['stripepayid']]);			
+			$paymentmethodid			= $requestData['paymentmethodid'];
+			
+			if($paymentmethodid!='1') $payment = $this->stripe->action(['id' => $requestData['stripepayid']]);
+			else $payment = 1;
+			
 			if($payment){
-
-				$requestData['paymentid'] 	= $payment;	
+				$requestData['paymentid'] 	= ($paymentmethodid!='1') ? $payment : 0;	
 		
 				$booking = $this->booking->action($requestData);
-				
 				if($booking){
 					$this->cart->delete(['user_id' => $userid, 'type' => $requestData['type']]);
 					return redirect()->to(base_url().'/paymentsuccess'); 
@@ -53,12 +56,12 @@ class Index extends BaseController
         }
        
         return view('site/checkout/index', [
-			'currencysymbol' => $this->config->currencysymbol, 
-			'settings' 		=> $settings, 
-			'userdetail' => $userdetail, 
-			'cartdetail' => $cartdetail,
-			'paymentid' => $paymentid,
-			'stripe'	=>  view('site/common/stripe/stripe1')
+			'currencysymbol' 	=> $this->config->currencysymbol, 
+			'settings' 			=> $settings, 
+			'userdetail' 		=> $userdetail, 
+			'cartdetail' 		=> $cartdetail,
+			'paymentmethod' 	=> $paymentmethod,
+			'stripe'			=> view('site/common/stripe/stripe1')
 		]);
     }
 
