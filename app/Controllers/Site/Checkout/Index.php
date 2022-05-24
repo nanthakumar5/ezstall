@@ -11,9 +11,9 @@ class Index extends BaseController
 {
 	public function __construct()
 	{
-		$this->booking = new Booking();	
-		$this->stripe  = new Stripe();
-        $this->cart    = new Cart();   
+		$this->booking 		= new Booking();	
+		$this->stripe  		= new Stripe();
+        $this->cart    		= new Cart(); 
 	}
     
     public function index()
@@ -25,15 +25,18 @@ class Index extends BaseController
         $userdetail  	= getSiteUserDetails();
 		$cartdetail  	= getCart();		
 		$settings		= getSettings();
+		$paymentid		= getPaymentid();
 		
     	if ($this->request->getMethod()=='post')
-    	{  
-            $requestData 				= $this->request->getPost();
+    	{    
+            $requestData 				= $this->request->getPost(); 
             $userid             		= $userdetail['id'];
-			
+
             $payment 					= $this->stripe->action(['id' => $requestData['stripepayid']]);			
 			if($payment){
-				$requestData['paymentid'] 	= $payment;			
+
+				$requestData['paymentid'] 	= $payment;	
+		
 				$booking = $this->booking->action($requestData);
 				
 				if($booking){
@@ -48,12 +51,14 @@ class Index extends BaseController
 				return redirect()->to(base_url().'/checkout'); 
 			}
         }
-
+       
         return view('site/checkout/index', [
 			'currencysymbol' => $this->config->currencysymbol, 
-			'settings' => $settings, 
+			'settings' 		=> $settings, 
 			'userdetail' => $userdetail, 
-			'cartdetail' => $cartdetail
+			'cartdetail' => $cartdetail,
+			'paymentid' => $paymentid,
+			'stripe'	=>  view('site/common/stripe/stripe1')
 		]);
     }
 

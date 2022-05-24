@@ -61,27 +61,25 @@
             </div>
           </div> 
 
-          <div class="checkout-payment border rounded pt-4 ps-4 pe-4 mb-5">
+           <div class="checkout-payment border rounded pt-4 ps-4 pe-4 mb-5">
             <h2 class="checkout-fw-6 mb-4">Payment Details</h2>
-            <p class="fw-bold">Card Details</p>
-            <div class="row checkout-payment-frist">
+            <div class="row ">
               <div class="col-lg-6 mb-4">
-               <input type='text' placeholder='Name on Card' name='name' class='name' autocomplete='off'  value="<?php echo $name; ?>">
-             </div>
-             <div class="col-lg-6 mb-4">
-              <input  type='text' placeholder='Your Card Number' name='card_number' class='card-number' autocomplete='off' value="<?php echo $cardno; ?>">
+                  <div class="d-flex">
+                    <?php foreach ($paymentid as $key => $pay){?>
+                      <div class="px-3">
+                        <input type="radio" id="paymentname" name="paymentname[]" value="<?php echo $pay['name'];?>" style="display: inline;
+                       width: auto; margin-right: 10px;"><?php echo $pay['name']; ?>
+                      </div>
+                    <?php } ?>
+                </div>
             </div>
+
           </div>
 
-          <div class="row">
-            <div class="col-lg-12  mb-4">
-              <input type='text' class='card-expiry-month' placeholder='MM'  name='card_exp_month' autocomplete='off' value="<?php echo $expirymonth; ?>">
-              <input type='text' class='card-expiry-year' placeholder='YYYY'  name='card_exp_year' autocomplete='off'  value="<?php echo $expiryyear; ?>">
-              <input type='text' class='card-cvc' placeholder='ex. 311' type='text' name='card_cvc' autocomplete='off'  value="<?php echo $cvc; ?>">
-            </div>
-          </div>
-		  <div class='error hide'><div class='alert' style="color: red;"></div></div> 
-        </div> 
+
+          <div class='error hide'><div class='alert' style="color: red;"></div></div> 
+        </div>
         <input type="hidden" name="userid" value="<?php echo $userdetail['id']; ?>">
         <input type="hidden" name="email" value="<?php echo $userdetail['email']; ?>" >
         <input type="hidden" name="checkin" value="<?php echo formatdate($cartdetail['check_in']); ?>" >
@@ -140,7 +138,8 @@
             <span>
               <input class="form-check-input me-1" type="checkbox" name="tc" data-error="firstparent">I have read and accepted the <span class="redcolor">Terms and Conditions.</span></span>
               <input type="hidden" name="stripepayid" class="stripepayid">
-              <button class="payment-btn " type="submit">Complete Payment</button>
+              <button class="payment-btn checkoutpayment" type="button">Complete Payment</button>
+
             </div>
           </form>
         </div>
@@ -174,8 +173,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </section>
 	
@@ -184,9 +181,11 @@
 	</div>
   <?php $this->endSection(); ?>
   <?php $this->section('js') ?>
+  <?php echo $stripe; ?>
   <script>
+
     $(function(){
-		validation(
+		validation( 
 		'.stripeform',
 		{
 		firstname      : {
@@ -198,21 +197,9 @@
 		mobile      : {
 		required  :   true
 		},
-		payer_name      : {
-		required  :   true
-		},
-		card_number     : { 
-		required  :   true
-		},
-		card_cvc      : {
-		required  :   true
-		},          
-		card_exp_month  : {
-		required  :   true
-		},
-		card_exp_year   : {
-		required  :   true
-		},
+    'paymentname[]' : {
+       required:true 
+    },
 		tc   : {
 		required  :   true
 		}
@@ -226,84 +213,33 @@
 		},
 		mobile      : {
 		required    : "Please Enter Mobile Number."
-		},  
-		payer_name      : {
-		required    : "Name field is required."
 		},
-		card_number     : {
-		required    : "Card number field is required."
-		},
-		card_cvc        : {
-		required    : "Card CVC field is required."
-		},
-		card_exp_month  : {
-		required    : "Card Expiry Month field is required."
-		},
-		card_exp_year   : {
-		required    : "Card Expiry Year field is required."
-		},
+    'paymentname[]' : {
+      required    : "Please select one."
+    },
 		tc   : {
 		required    : "Please check the checkbox."
 		},
 		}
 		);
 	});
-	
-		var $form = $(".stripeform");
-		$form.bind('submit', function(e) {
-			if(!$form.valid()){
-				return false;
-			}
-			
-			if($('.stripepayid').val()!=''){
-				return true;
-			}
-			
-			e.preventDefault();
-			Stripe.setPublishableKey('<?php echo $stripepublickey; ?>');
-			Stripe.createToken({
-				number: $('.card-number').val(),
-				cvc: $('.card-cvc').val(),
-				exp_month: $('.card-expiry-month').val(),
-				exp_year: $('.card-expiry-year').val()
-			}, stripeResponseHandler);
-		});
 
-		function stripeResponseHandler(status, response) {
-			if (response.error) {
-				$('.error').removeClass('hide').find('.alert').text(response.error.message);
-			} else {
-				$('.paymentloader').remove();
-				
-				ajax('<?php echo base_url()."/ajax/ajaxstripepayment"; ?>', $form.serializeArray(), {
-					beforesend: function() {
-						$('body').append('<div class="paymentloader"><div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.svg"; ?>"></div></div>');
-					},
-					success: function(data){
-						if(data.success.status=='1'){
-							$('.stripepayid').val(data.success.id);
-							if(data.success.url==''){
-								$('.paymentloader').remove();
-								$(".stripeform").submit();
-							}else{
-								$('.stripeiframe').removeClass('displaynone');
-								$('.stripeiframe div').html('<iframe src="'+data.success.url+'" width="400" height="400"></iframe>');
-								$('.paymentloader').remove();
-							}
-						}else{
-							$('.paymentloader').remove();
-							$('.stripeiframe').find('iframe').remove();
-							$('.stripeiframe').addClass('displaynone');
-						}
-					},
-					error: function(data){
-						$('.paymentloader').remove();
-						$('.error').removeClass('hide').find('.alert').text(data.responseJSON.message);
-					}
-				});
-			}
-		}
-		
+      $('.checkoutpayment').click(function(){
+        var paymentmethod = $('input[type=radio]:checked').val();
+        if(paymentmethod=='Cash on delivery'){
+
+         $('body').append('<div class="paymentloader"><div class="loader_wrapper"><img src="<?php echo base_url()."/assets/site/img/loading.svg"; ?>"></div></div>');
+        $('.stripeiframe').removeClass('displaynone');
+                $('.stripeiframe div').html('<iframe src="'+data.success.url+'" width="400" height="400"></iframe>');
+                $('.paymentloader').remove();
+                $(".stripeform").submit();
+
+      }else{
+
+        $('#stripeFormModal').modal('show');
+      }
+      });
+
 		window.addEventListener('message', function(ev) {
 			if (ev.data === '3DS-authentication-complete') {
 				$(".stripeform").submit();
