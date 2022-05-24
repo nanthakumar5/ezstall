@@ -324,3 +324,9 @@ function getSettings()
 	$settings = new \App\Models\Settings;
     return $settings->getSettings('row', ['settings'], ['id' => '1']);
 }
+
+function getBooking($condition=[])
+{
+	$booking = new \App\Models\Booking;
+	return $booking->getBooking('all', ['booking','users','barnstall'], $condition);
+}
