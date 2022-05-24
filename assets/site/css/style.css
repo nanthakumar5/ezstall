@@ -4238,8 +4238,15 @@ button.signInSubmitBtn {
 .num_btn {
     right: 30px;
 }
+.infoPanel span input:nth-child(1) {
+    border-right: none !important;
+}
 
 
+}
+
+.resp_bnone{
+    border:  none !important;
 }
 
 @media only screen and (min-width:  1025px){
@@ -4265,7 +4272,7 @@ form.homeeventsearch {
 }
 p.sliderCaption
 {
-    text-shadow: 2px 0px 2px black;
+    text-shadow: 4px 0px 2px black;
 }
  h1.sliderTitle {
     text-shadow: 6px 6px black;
@@ -4278,18 +4285,25 @@ p.sliderCaption
   .tabook{
     width:  65%;
   } 
+  .infoPanel span input:nth-child(1) {
+    border-right: none !important;
+}
 
 
 }
 @media only screen and (max-width:  1024px){
     .infoPanel span.iconProperty:nth-child(1) input {
     width: auto;
+    border: none !important;
 }
 .homeeventsearch .infoPanel {
     width: 95%;
     margin: 0 auto;
 }
-
+.stallform img.iconPlace {
+    position: relative;
+    right: 30px;
+}
 }
 
 @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
@@ -4304,6 +4318,10 @@ p.sliderCaption
 .land_widtht {
     width: 100%;
 }
+.infoPanel span.iconProperty:nth-child(1) input {
+    border-right: 1px solid #dfdfdf !important ;
+    }
+
 }
 
 img.iconPlace {
@@ -4313,4 +4331,8 @@ img.iconPlace {
 .homeeventsearch img.iconPlace {
     position: absolute;
     right: 4px;
+}
+.stallform img.iconPlace {
+    position: relative;
+    right: 30px;
 }

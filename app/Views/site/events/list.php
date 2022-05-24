@@ -22,16 +22,16 @@
 	<div class="infoPanel stallform container-lg">
 	    <form action="<?php echo base_url();?>/events" method="get" autocomplete="off" class="w-100 listeventsearch">
 	        <span class="infoSection">
-	            <span class="iconProperty">
+	            <span class="iconProperty justify-content-between resp_bnone">
 	                <input type="text" name="location" placeholder="Location" value="<?php echo $searchlocation; ?>">
 	                <img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 	            </span>
-	            <span class="iconProperty">
+	            <span class="iconProperty resp_bnone">
 	                <input type="text" name="start_date" class="event_search_start_date" placeholder="Check-In" value="<?php echo $searchstartdate; ?>">
 					<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 	                
 	            </span>
-	            <span class="iconProperty">
+	            <span class="iconProperty resp_bnone">
 	                <input type="text" name="end_date"  class="event_search_end_date" placeholder="Check-Out" value="<?php echo $searchenddate; ?>">
 					<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 	            </span>
