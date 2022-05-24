@@ -102,20 +102,20 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 				</div>
 			</div>
 			<div class="row m-0 p-0">
-				<div class="col-md-12">
+				<div class="col-md-9 tabook">
 					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5 ">
 						<h3 class="fw-bold mb-4">Book Your Stalls</h3>
-						<div class="infoPanel form_check">
+						<div class="infoPanel form_check bookyourstalls">
 							<span class="infoSection bookborder">
 								<span class="iconProperty">
 									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls">
 									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 								</span>
 								<span class="iconProperty">			
-									<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/> 						
+									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin" autocomplete="off" placeholder="Check-In"/><img src="http://localhost/ezstall/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon"> 						
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
+									<input type="text" name="enddate" id="enddate" class="land_width checkdate checkout" autocomplete="off"placeholder="Check-Out"/><img src="http://localhost/ezstall/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 							</span>
 						</div>

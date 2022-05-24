@@ -61,7 +61,7 @@
 			</div>
 			<?php if($segment1==''){ ?>
 				<div class="bannerItems">
-					<form method="get" autocomplete="off" action="<?php echo base_url();?>/events" class="homeeventsearch">
+					<form method="get" autocomplete="off" action="<?php echo base_url();?>/events" class="homeeventsearch eventsearch">
 						<div class="infoPanel">
 							<span class="mx-auto infoSection">
 								<span class="iconProperty">

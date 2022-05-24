@@ -3535,7 +3535,7 @@ td {
         border-radius: 7px !important;
     }*/
     .infoPanel {
-        margin: 1.5rem;
+        margin: 1.5rem 0;
         width:  100%;
     }
     .searchResult {
@@ -3653,7 +3653,7 @@ td {
         padding: 5px !important;
     }
     div#responsive-navbar-nav {
-        margin-top: 10px;
+        /*margin-top: 10px;*/
         padding-bottom: 10px;
     }
     a.navbar-brand {
@@ -3733,7 +3733,7 @@ td {
         margin: 0 20px;
     }
     .searchResult {
-        width: 100% !important;
+        /*width: 100% !important;*/
         border-radius:22px;
         margin: 10px 0px;
         background-color: #e00000;
@@ -4073,6 +4073,7 @@ a.ui-button:active,
     bottom: 0;
 }
 
+/*---------------------------------------------------------------------------------*/
 
 /*Edited on 20-05-2022*/
 
@@ -4128,7 +4129,12 @@ padding-top:  0;
   .infoPanel span input:nth-child(1) {
     border-right: 1px solid #dfdfdf !important;
 }
-
+span.infoSection.bookborder {
+    width: auto;
+}
+.homeeventsearch.eventsearch .infoPanel span input {
+    border-right: none !important;
+}
 
 }
 @media only screen and (max-width: 992px){
@@ -4136,9 +4142,10 @@ padding-top:  0;
     left: -260px;
     }
 
-    .infoPanel span input:nth-child(1) {
+    /*.infoPanel span input:nth-child(1) {
     border-right: none !important;
-}
+}*/
+
 }
 
  /*form.homeeventsearch .infoPanel span input:nth-child(1) {
@@ -4180,7 +4187,7 @@ button.signInSubmitBtn {
 }
 .num_btn {
     position: relative;
-    right: 0px;
+    right: 33px;
     }
      .infoPanel span input:nth-child(1) {
     border-right: 1px solid #dfdfdf !important;
@@ -4189,7 +4196,11 @@ button.signInSubmitBtn {
    .bannerItems  .infoPanel span input:nth-child(1) {
     border-right: none !important;
 }
-   
+  .infoPanel span.iconProperty:nth-child(1) input {
+    width: 100%;
+}
+.infoPanel span.iconProperty:nth-child(1) input {width: 58%;}
+
 }
 
 @media only screen and (min-width:  997px) and (max-width: 1024px){
@@ -4206,8 +4217,12 @@ button.signInSubmitBtn {
     font-size: 13px;
 }
   .infoPanel span input:nth-child(1) {
-    border-right: none !important;
+    /*border-right: none !important;*/
 }
+.infoPanel span.iconProperty:nth-child(1) input {
+    width: auto;
+}
+
 }
 .alert{
     top:  65px;
@@ -4238,6 +4253,7 @@ button.signInSubmitBtn {
 .navbar-header{
     display: none;
 }
+
 }
 
 .modal-dialog {
@@ -4253,4 +4269,48 @@ p.sliderCaption
 }
  h1.sliderTitle {
     text-shadow: 6px 6px black;
+}
+
+@media only screen and (min-width:  768px) and (max-width:  1023px){
+    .sticky-top.checkout.col-md-3.mt-4.h-100{
+    width: 35%;
+  } 
+  .tabook{
+    width:  65%;
+  } 
+
+
+}
+@media only screen and (max-width:  1024px){
+    .infoPanel span.iconProperty:nth-child(1) input {
+    width: auto;
+}
+.homeeventsearch .infoPanel {
+    width: 95%;
+    margin: 0 auto;
+}
+
+}
+
+@media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+  .infoPanel span.iconProperty:nth-child(1) input {
+    width: 100%;
+}
+.num_btn {
+    position: relative;
+    right: 0;
+}
+
+.land_widtht {
+    width: 100%;
+}
+}
+
+img.iconPlace {
+    position: relative;
+    right: 30px;
+}
+.homeeventsearch img.iconPlace {
+    position: absolute;
+    right: 4px;
 }
