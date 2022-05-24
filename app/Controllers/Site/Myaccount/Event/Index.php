@@ -229,16 +229,15 @@ class Index extends BaseController
 		echo json_encode($array);
     }
 
-   	public function dayreport($id)
+   	public function eventreport($id)
    	{   		
 		$mpdf 						= 	new \Mpdf\Mpdf();
 		$currentdate 				= 	date("Y-m-d");
-    	$data['arriving'] 			=  	$this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkin'=> $currentdate]);
-		$data['outgoing'] 			=  	$this->booking->getBooking('all', ['booking','users','barnstall'],['eventid' => $id,'checkout'=> $currentdate]);
+    	$data['result'] 			=  	$this->event->getEvent('row', ['event','barn','stall','bookedstall'], ['id' => $id]);
 		
-		$html =  view('site/common/pdf/dayreport', $data);
+		$html =  view('site/common/pdf/eventreport', $data);
 		$mpdf->WriteHTML($html);
 		$this->response->setHeader('Content-Type', 'application/pdf');
-		$mpdf->Output('dayreport.pdf','D');
+		$mpdf->Output('Eventreport.pdf','D');
     }
 }

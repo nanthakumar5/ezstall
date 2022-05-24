@@ -36,9 +36,9 @@ $currentdate 	= date("Y-m-d");
 					</div>
 				</div>
 				<div class="dash-event">
-					<a href="<?php echo base_url().'/myaccount/events/dayreport/'.$data['id']; ?>" 
+					<a href="<?php echo base_url().'/myaccount/events/eventreport/'.$data['id']; ?>" 
 						class="dash-export-event fs-7 mx-2">
-						Day Report <i class="fas fa-file-export i-white-icon"></i>
+						Report <i class="fas fa-file-export i-white-icon"></i>
 					</a>
 				<?php if($usertype !='4'){ ?>
 					<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>" 
