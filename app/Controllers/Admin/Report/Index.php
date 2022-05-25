@@ -60,7 +60,7 @@ class Index extends BaseController
 						
 						$bookedstall = '';
 						foreach($stall['bookedstall'] as $keys=> $booking){ 
-							$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out'])."\nPayment Method  : ".$booking['paymentmethod'];
+							$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out'])."\nPayment_Method : ".$booking['paymentmethod'];
 						}
 						
 						$sheet->setCellValue('A'.$row, $stallname.$bookedstall);
