@@ -4226,7 +4226,8 @@ button.signInSubmitBtn {
     width: 100%;
 }
 .infoPanel span.iconProperty:nth-child(1) input {
-   /* width: 58%;*/
+    /*width: auto;*/
+    width:  100%;
 }
 
 
@@ -4249,7 +4250,8 @@ button.signInSubmitBtn {
     /*border-right: none !important;*/
 }
 .infoPanel span.iconProperty:nth-child(1) input {
-    width: auto;
+    /*width: auto;*/
+    width:  100%;
 }
 
 }
@@ -4331,7 +4333,9 @@ p.sliderCaption
 @media only screen and (max-width:  1024px){
     /*.infoPanel span.iconProperty:nth-child(1) input {*/
         .infoPanel span.iconProperty input {
-    width: auto;
+    /*width: auto;*/
+    width: 100%;
+
     /*border: none !important;*/
     /*border-right: 1px solid #dfdfdf;*/
 }
