@@ -25,7 +25,7 @@ class Booking extends BaseModel
 		}
 
 		if(in_array('payment', $querydata)){
-			$data		= 	['p.id paymentid', 'p.amount', 'p.stripe_paymentintent_id'];							
+			$data		= 	['p.id paymentid', 'p.stripe_paymentintent_id'];							
 			$select[] 	= 	implode(',', $data);
 		}
 		if(in_array('paymentmethod', $querydata)){
