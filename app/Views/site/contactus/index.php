@@ -12,14 +12,14 @@
 			<div class="row mx-auto">
 				<div class="p-0 col-md-4">
 					<p class="h2 fw-bold mb-4">Get In Touch</p>
-					<form method="post" action="" autocomplete="off">
+					<form method="post" action="" id="form" autocomplete="off">
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Enter Name</label>
 							<input type="text" name="name" class="form-control col-md-4 contact-input" placeholder="Enter name"/>
 						</div>
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Enter Email</label>
-							<input type="text" name="email" class="form-control col-md-4 contact-input" placeholder="Enter Email"/>
+							<input type="email" name="email" class="form-control col-md-4 contact-input" placeholder="Enter Email"/>
 						</div>
 						<div class="mb-4 col-md-8">
 							<label class="form-label">Enter Subject</label>
@@ -63,4 +63,32 @@
 		</div>
 	</section>
 </section>
+<?php $this->endSection(); ?>
+<?php $this->section('js') ?>
+<script>
+	$(function(){
+		validation(
+			'#form',
+			{
+				name 	     : {
+					required	: 	true
+				},
+				email  		: {	
+					required	: 	true,
+					email     	: true   
+				},
+				subject   	: {
+					required	: 	true
+				},
+				message 	 : {
+					required	: 	true
+				}
+			},
+			{},
+			{
+				ignore : []
+			}
+		);
+	});
+</script>
 <?php $this->endSection(); ?>
