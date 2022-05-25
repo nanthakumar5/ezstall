@@ -35,8 +35,8 @@ table tr td {
 	        <h1><?php echo $eventname.' ('.date("m-d-y", strtotime($startdate)).' to '.date("m-d-y", strtotime($enddate)).')';?></h1>
          	<?php 
         	while (strtotime($startdate) <= strtotime($enddate)) {
-	        	$arriving = getBooking(['eventid' => $result['id'],'checkin'=> $startdate]);
-	        	$outgoing = getBooking(['eventid' => $result['id'],'checkout'=> $startdate]);
+	        	$arriving = getBooking(['eventid' => $result['id'],'check_in'=> $startdate]);
+	        	$outgoing = getBooking(['eventid' => $result['id'],'check_out'=> $startdate]);
      		?>
 		        <div>	        	
 					<h4 class="sub_heading">Arriving (<?php echo date("m-d-y", strtotime($startdate));?>)</h4>

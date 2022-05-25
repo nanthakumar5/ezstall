@@ -66,10 +66,12 @@
             <div class="row ">
               <div class="col-lg-6 mb-4">
                 <div>
-					<?php foreach ($paymentmethod as $key => $method){?>
-						<div class="px-3">
-							<input type="radio" id="paymentmethod<?php echo $key; ?>" data-error="firstparent" name="paymentmethodid" value="<?php echo $method['id'];?>" style="display: inline;width: auto; margin-right: 10px;"><label for="paymentmethod<?php echo $key; ?>"><?php echo $method['name']; ?></label>
-						</div>
+					<?php foreach ($paymentmethod as $key => $method){ ?>
+						<?php if(in_array($userdetail['type'], explode(',', $method['type']))){ ?>
+							<div class="px-3">
+								<input type="radio" id="paymentmethod<?php echo $key; ?>" data-error="firstparent" name="paymentmethodid" value="<?php echo $method['id'];?>" style="display: inline;width: auto; margin-right: 10px;"><label for="paymentmethod<?php echo $key; ?>"><?php echo $method['name']; ?></label>
+							</div>
+						<?php } ?>
 					<?php } ?>
                 </div>
             </div>
@@ -232,8 +234,10 @@
 		$('#stripeFormModal').on('shown.bs.modal', function () { 
 			var result = [];
 			var formdata = $('.checkoutform').serializeArray();
+			console.log(formdata);
 			$.each(formdata, function(i, field){
-				result.push('<input type="hidden" name="'+field.name+'" value='+field.value+'>')
+				if(field.name=='barnstall') result.push('<textarea style="display:none;" name="'+field.name+'">'+field.value+'</textarea>')
+				else result.push('<input type="hidden" name="'+field.name+'" value="'+field.value+'">')
 			});
 			
 			$('.stripeextra').remove();

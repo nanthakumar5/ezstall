@@ -40,8 +40,8 @@ class Booking extends BaseModel
 		
 		if(isset($requestdata['id'])) 					$query->where('b.id', $requestdata['id']);
 		if(isset($requestdata['eventid'])) 				$query->where('b.event_id', $requestdata['eventid']);		
-		if(isset($requestdata['checkin'])) 				$query->where('b.check_in', $requestdata['checkin']);		
-		if(isset($requestdata['checkout'])) 		    $query->where('b.check_out', $requestdata['checkout']);		
+		if(isset($requestdata['check_in'])) 			$query->where('b.check_in', $requestdata['check_in']);		
+		if(isset($requestdata['check_out'])) 		    $query->where('b.check_out', $requestdata['check_out']);		
 
 		if(isset($requestdata['userid'])) 				
 		{
@@ -166,6 +166,7 @@ class Booking extends BaseModel
 		if(isset($data['paymentmethodid']) && $data['paymentmethodid']!='')     $request['paymentmethod_id'] 	= $data['paymentmethodid'];
 		if(isset($data['userid']) && $data['userid']!='')      	           		$request['user_id'] 	  		= $data['userid'];
 		if(isset($data['type']) && $data['type']!='')      	           	 		$request['type'] 	      		= $data['type'];
+		if(isset($data['amount']) && $data['amount']!='')      	           	 	$request['amount'] 	      		= $data['amount'];
  		$request['status'] 	      = '1';
 
 		if(isset($request)){				

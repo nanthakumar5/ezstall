@@ -31,7 +31,7 @@ class Index extends BaseController
 		
     	if ($this->request->getMethod()=='post')
     	{    
-            $requestData 				= $this->request->getPost(); echo '<pre>';print_r($requestData);die;
+            $requestData 				= $this->request->getPost();
             $userid             		= $userdetail['id'];
 			$paymentmethodid			= $requestData['paymentmethodid'];
 			
@@ -40,6 +40,7 @@ class Index extends BaseController
 			
 			if($payment){
 				$requestData['paymentid'] 	= ($paymentmethodid!='1') ? $payment : 0;	
+				$requestData['amount'] 		= $requestData['price'];	
 		
 				$booking = $this->booking->action($requestData);
 				if($booking){
