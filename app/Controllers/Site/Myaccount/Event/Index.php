@@ -182,7 +182,7 @@ class Index extends BaseController
 				
 				$bookedstall = '';
 				foreach($stall['bookedstall'] as $keys=> $booking){
-					$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out']);
+					$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out'])."\nPayment Method  : ".$booking['paymentmethod'];
 				}
 				
 				$sheet->setCellValue('A'.$row, $stallname.$bookedstall);
@@ -234,7 +234,7 @@ class Index extends BaseController
 		$mpdf 						= 	new \Mpdf\Mpdf();
 		$currentdate 				= 	date("Y-m-d");
     	$data['result'] 			=  	$this->event->getEvent('row', ['event','barn','stall','bookedstall'], ['id' => $id]);
-		
+    	
 		$html =  view('site/common/pdf/eventreport', $data);
 		$mpdf->WriteHTML($html);
 		$this->response->setHeader('Content-Type', 'application/pdf');

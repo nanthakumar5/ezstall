@@ -50,7 +50,6 @@ class Index extends BaseController
 				$sheet->setCellValue('H' . $row, formattime($data['end_time']));
 				$sheet->setCellValue('I' . $row, $data['stalls_price']);
 				
-				$cols = 1;
 				$row++;
 				foreach ($data['barn'] as $key => $barn) { 
 					$sheet->setCellValue('A'.$row, $barn['name']);
@@ -60,8 +59,8 @@ class Index extends BaseController
 						$stallname  = $stall['name'];
 						
 						$bookedstall = '';
-						foreach($stall['bookedstall'] as $keys=> $booking){
-							$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out']);
+						foreach($stall['bookedstall'] as $keys=> $booking){ 
+							$bookedstall	.=   "\nName : ".$booking['name']."\nDate  : ".formatdate($booking['check_in'])." to ".formatdate($booking['check_out'])."\nPayment Method  : ".$booking['paymentmethod'];
 						}
 						
 						$sheet->setCellValue('A'.$row, $stallname.$bookedstall);
