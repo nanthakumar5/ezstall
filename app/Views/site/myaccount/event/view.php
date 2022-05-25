@@ -86,6 +86,10 @@
 								<td class="p-0"><p class="fs-7 mb-0 text-bold px-2">Date</p></td>
 								<td class="p-0"><p class="mb-0 fs-7 fw-normal">'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</p></td>
 								</tr>
+								<tr>
+								<td class="p-0"><p class="fs-7 mb-0 text-bold px-2">Payment Method</p></td>
+								<td class="p-0"><p class="mb-0 fs-7 fw-normal">'.$bookedstall['paymentmethod'].'</p></td>
+								</tr>
 								</table>
 								</div>
 								';

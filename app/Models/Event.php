@@ -105,7 +105,8 @@ class Event extends BaseModel
 											if(in_array('bookedstall', $querydata)){ 
 												$bookedstall = 	$this->db->table('booking_details bd')
 																->join('booking bk', 'bd.booking_id = bk.id', 'left')
-																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out')
+																->join('payment_method pm','bk.paymentmethod_id = pm.id' )
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out, bk.paymentmethod_id, (pm.name) paymentmethod')
 																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $eventdata['id']])
 																->get()
 																->getResultArray();
@@ -143,7 +144,8 @@ class Event extends BaseModel
 											if(in_array('bookedstall', $querydata)){ 
 												$bookedstall = 	$this->db->table('booking_details bd')
 																->join('booking bk', 'bd.booking_id = bk.id', 'left')
-																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out')
+																->join('payment_method pm','bk.paymentmethod_id = pm.id' )
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out, (pm.name) paymentmethod')
 																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $result['id']])
 																->get()
 																->getResultArray();
