@@ -22,8 +22,8 @@ class Index extends BaseController
 	{		
 		$post 			= $this->request->getPost();
 		$totalcount 	= $this->payments->getBooking('count', ['booking'], $post);
-		$results 		= $this->payments->getBooking('all', ['booking', 'event','stall'], $post);
-	
+		$results 		= $this->payments->getBooking('all', ['booking', 'event','stall','paymentmethod'], $post);
+
 		$totalrecord 	= [];
 				
 		if(count($results) > 0){
@@ -33,6 +33,7 @@ class Index extends BaseController
 				
 				$totalrecord[] = 	[
 										'id' 			=> 	$result['id'],
+										'paymentmethod' => 	$result['paymentmethod_name'],
 										'firstname' 	=> 	$result['firstname'],
 										'lastname'  	=>  $result['lastname'],
 										'mobile'  		=>  $result['mobile'],
@@ -55,7 +56,7 @@ class Index extends BaseController
 	
 	public function view($id)
 	{
-		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall','users'], ['id' => $id]);
+		$result = $this->payments->getBooking('row', ['booking', 'event','barnstall','users','paymentmethod'], ['id' => $id]);
 		if($result){
 			$data['result'] = $result;
 		}else{

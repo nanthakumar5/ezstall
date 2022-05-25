@@ -11,6 +11,8 @@
       $checkout           = isset($result['check_out']) ? formatdate($result['check_out'], 1) : '';
       $createdat       	  = isset($result['created_at']) ? formatdate($result['created_at'], 2) : '';
       $barnstalls         = isset($result['barnstall']) ? $result['barnstall'] : '';
+      $paymentmethod      = isset($result['paymentmethod_name']) ? $result['paymentmethod_name'] : '';
+
   ?>
     <div class="row">
       <div class="col">
@@ -21,6 +23,14 @@
       </div>
     </div>
     <section class="maxWidp eventPagePanel">
+<!--       <div class="row col-md-10 base-style">
+        <div class="col fw-600">
+          <p class="my-2">Status</p>
+        </div>
+        <div class="col" align="left">
+          <p class="my-2"><?php //echo $bookingstatus[$data['status']];?></p>
+        </div>
+      </div> -->
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
           <p class="my-2">Booking ID</p>
@@ -29,7 +39,6 @@
           <p class="my-2"><?php echo $bookingid;?></p>
         </div>
       </div>
-     
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
           <p class="my-2">First Name</p>
@@ -101,6 +110,14 @@
         </div>
         <div class="col" align="left">
           <p class="my-2"><?php echo $usertype[$result['usertype']];?></p>
+        </div>
+      </div>
+      <div class="row col-md-10 base-style">
+        <div class="col fw-600">
+          <p class="my-2">Payment Method</p>
+        </div>
+        <div class="col" align="left">
+          <p class="my-2"><?php echo $paymentmethod;?></p>
         </div>
       </div>
     </section>

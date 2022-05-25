@@ -11,12 +11,12 @@
       <div class="EventFlex leftdata">
         <div class="wi-30 row w-100 align-items-center">
           <div class="row row m-0 p-0 dash-booking">
-            <div class="col-md-2 mb-2">
+<!--             <div class="col-md-2 mb-2">
               <div>
                 <p class="mb-0 text-sm fs-7 fw-600">Status</p>
-                <p class="mb-0 fs-7"><?php echo $bookingstatus[$data['status']];?></p>
+                <p class="mb-0 fs-7"><?php //echo $bookingstatus[$data['status']];?></p>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-3 mb-2">
               <div>
                 <p class="mb-0 text-sm fs-7 fw-600">Booking ID</p>
@@ -68,6 +68,12 @@
               <p class="mb-0 fs-7 fw-600">Cost</p>
               <p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
             </div>
+          </div>
+          <div class="col-md-3 mb-2">
+              <div>
+                <p class="mb-0 text-sm fs-7 fw-600">Payment Method</p>
+                <p class="mb-0 fs-7"><?php echo $data['paymentmethod_name'];?></p>
+              </div>
           </div>
           <div class="col-md-1">
             <div class="d-flex justify-content-end">

@@ -19,8 +19,8 @@
 						<div class="row row m-0 p-0 dash-booking">
 							<div class="col-md-2 mb-2">
 								<div>
-									<p class="mb-0 text-sm fs-7 fw-600">Status</p>
-									<p class="mb-0 fs-7"><?php echo $bookingstatus[$data['status']];?></p>
+									<p class="mb-0 text-sm fs-7 fw-600">Payment Method</p>
+									<p class="mb-0 fs-7"><?php echo $data['paymentmethod_name'];?></p>
 								</div>
 							</div>
 							<div class="col-md-3 mb-2">

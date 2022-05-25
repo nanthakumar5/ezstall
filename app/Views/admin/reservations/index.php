@@ -24,6 +24,7 @@
 					<table class="table table-striped table-hover datatables">
 						<thead>
 							<th>Booking ID</th>
+							<th>Payment Method</th>
 							<th>Firstname</th>
 							<th>Lastname</th>
 							<th>Mobile</th>	
@@ -43,6 +44,7 @@
 				data		:	{ 'page' : 'adminreservations' },				
 				columns 	: 	[
 									{ 'data' : 'id' },
+									{ 'data' : 'paymentmethod' },
     				                { 'data' : 'firstname' },
                     				{ 'data' : 'lastname' },
                     				{ 'data' : 'mobile' },					

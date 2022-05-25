@@ -3,6 +3,7 @@
 <?php $this->section('content') ?>
 	<?php
 		$id 					    = isset($result['id']) ? $result['id'] : '';
+      	$paymentmethod      		= isset($result['paymentmethod_name']) ? $result['paymentmethod_name'] : '';
 		$firstname 					= isset($result['firstname']) ? $result['firstname'] : '';
 		$lastname 					= isset($result['lastname']) ? $result['lastname'] : '';
 		$mobile 					= isset($result['mobile']) ? $result['mobile'] : '';
@@ -42,7 +43,7 @@
 			<div class="card-body">
 				<table class="table">
 				  <tbody>
-				  <tr>
+				  	<tr>
 				      <th>Booking ID</th>
 				      <td><?php echo $id;?></td>
 				    </tr>
@@ -84,6 +85,10 @@
 						<th>Booked By</th>
 						<td><?php echo $usertype[$result['usertype']];?></td>
 					</tr>
+				  	<tr>
+				      <th>Payment Method</th>
+				      <td><?php echo $paymentmethod;?></td>
+				    </tr>
 				  </tbody>
 				</table>
 			</div>

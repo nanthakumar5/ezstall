@@ -28,13 +28,18 @@ class Booking extends BaseModel
 			$data		= 	['p.id paymentid', 'p.amount', 'p.stripe_paymentintent_id'];							
 			$select[] 	= 	implode(',', $data);
 		}
+		if(in_array('paymentmethod', $querydata)){
+			$data		= 	['pm.name paymentmethod_name'];							
+			$select[] 	= 	implode(',', $data);
+		}
 
 		$query = $this->db->table('booking b');
 
-		if(in_array('event', $querydata)) 	$query->join('event e', 'e.id=b.event_id', 'left');
-		if(in_array('users', $querydata)) 	$query->join('users u', 'u.id=b.user_id', 'left');		
-		if(in_array('payment',$querydata))	$query->join('payment p', 'p.id=b.payment_id', 'left');
-		
+		if(in_array('event', $querydata)) 				$query->join('event e', 'e.id=b.event_id', 'left');
+		if(in_array('users', $querydata)) 				$query->join('users u', 'u.id=b.user_id', 'left');		
+		if(in_array('payment',$querydata))				$query->join('payment p', 'p.id=b.payment_id', 'left');
+		if(in_array('paymentmethod',$querydata))		$query->join('payment_method pm', 'pm.id=b.paymentmethod_id', 'left');
+
 		if(isset($extras['select'])) 					$query->select($extras['select']);
 		else											$query->select(implode(',', $select));
 		
