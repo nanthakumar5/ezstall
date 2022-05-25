@@ -10,11 +10,11 @@ body {
 }
 
 .displaynone{
-	display:none;
+    display:none;
 }
 .tagline{
-	color : red;
-	font-size:14px;
+    color : red;
+    font-size:14px;
 }
 /*Top navbar Styles start*/
 
@@ -910,7 +910,7 @@ li.nav-item {
 
 .horseOwners {
     text-align: center;
-    margin: 0 10% 0 0;
+    margin: 0 20% 0 0;
 }
 
 .facilities {
@@ -1136,6 +1136,8 @@ input.subscriptionInput:focus {
     width: 42%;
     display: inline-block;
     margin: 6px 0;
+    font-size: 11px;
+    text-align: center;
 }
 
 .maxWidth.eventPagePanel .dashboard-box .col-md-5.d-flex {
@@ -2493,7 +2495,8 @@ li.side-nav-active {
 ul.pagination {
     width: max-content;
     border-radius: 7px;
-    margin:  auto;
+    /*margin:  auto;*/
+    float: right;
 }
 
 ul.pagination li {
@@ -2909,7 +2912,7 @@ a.btn.back-btn:hover {
 
 button.View {
     color: #fff;
-    background-color: #6b6b6b;
+    /*background-color: #6b6b6b;*/
     border: none;
     border-radius: 5px;
     height: 30px;
@@ -2949,7 +2952,7 @@ button.View:hover {
 }
 
 .tablesec table td a:hover {
-    color: #000 !important;
+    color: #fff !important;
 }
 
 .table> :not(:first-child) {
@@ -3055,6 +3058,7 @@ td {
     color: #fff;
     padding: 7px 15px;
     border-radius: 7px;
+    margin:  5px;
 }
 
 .t-right {
@@ -3062,7 +3066,7 @@ td {
 }
 
 .nav-link.active .barnametext{
-	color : white;
+    color : white;
 }
 
 .dash-barn-style {
@@ -3917,7 +3921,8 @@ a.ui-button:active,
 }
 
 .dash-event-image{
-    width: 120px;
+    /*width: 120px;*/
+    width: 95px;
     height: 80px;
     object-fit: cover;
     border-radius: 5px;
@@ -3968,47 +3973,47 @@ a.ui-button:active,
 }
 
 .barntab li a p{
-	color : white;
+    color : white;
 }
 
 .stripeiframe{
-	position: fixed;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     background: rgba(0,0,0,0.5);
-	z-index: 9999;
+    z-index: 9999;
 }
 
 .stripeiframe a{
-	position: absolute;
+    position: absolute;
     left: 50%;
     color: white;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-	top: 100px;
+    top: 100px;
 }
 
 .stripeiframe iframe{
-	position: absolute;
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-200px, -200px);
 }
 
 .loader_wrapper{
-	position: absolute;
+    position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-	background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.5);
 }
 
 .loader_wrapper img{
-	width: 120px;
+    width: 120px;
     position: relative;
     top: 50%;
     left: 50%;
@@ -4066,7 +4071,7 @@ a.ui-button:active,
 }
 
 .paymentloader{
-	position: fixed;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;
@@ -4107,7 +4112,7 @@ span.m-left.upevent {
     width: 50%;
 }
 .num_btn {
-    right: 8px;
+    right: 33px;
 }
 .about-banner.text-center.my-5 {
     margin-bottom: 0 !important;
@@ -4135,6 +4140,15 @@ span.infoSection.bookborder {
 .homeeventsearch.eventsearch .infoPanel span input {
     border-right: none !important;
 }
+.infoPanel span:nth-child(1) .borderyt {
+    border-right: 1px solid #dfdfdf !important;
+}
+.addevent {
+    font-size: 12px;
+}
+button.paynow {
+    font-size: 14px;
+}
 
 }
 @media only screen and (max-width: 992px){
@@ -4145,7 +4159,19 @@ span.infoSection.bookborder {
     /*.infoPanel span input:nth-child(1) {
     border-right: none !important;
 }*/
+.border-end {
+    border-right: none !important;
+}
+div#content {
+    margin-right: 0;
+}
 
+}
+.addevent {
+    font-size: 12px;
+}
+button.paynow {
+    font-size: 14px;
 }
 
  /*form.homeeventsearch .infoPanel span input:nth-child(1) {
@@ -4199,7 +4225,10 @@ button.signInSubmitBtn {
   .infoPanel span.iconProperty:nth-child(1) input {
     width: 100%;
 }
-.infoPanel span.iconProperty:nth-child(1) input {width: 58%;}
+.infoPanel span.iconProperty:nth-child(1) input {
+   /* width: 58%;*/
+}
+
 
 }
 
@@ -4285,16 +4314,26 @@ p.sliderCaption
   .tabook{
     width:  65%;
   } 
-  .infoPanel span input:nth-child(1) {
+  /*.infoPanel span input:nth-child(1) {
+    border-right: none !important;
+}*/
+.myaccevent1 {width: 20%;}
+
+.myaccevent2 {width: 40%;}
+
+.myaccevent3 {width: 40%;}
+
+.listeventsearch span.iconProperty.resp_bnone input {
     border-right: none !important;
 }
 
-
 }
 @media only screen and (max-width:  1024px){
-    .infoPanel span.iconProperty:nth-child(1) input {
+    /*.infoPanel span.iconProperty:nth-child(1) input {*/
+        .infoPanel span.iconProperty input {
     width: auto;
-    border: none !important;
+    /*border: none !important;*/
+    /*border-right: 1px solid #dfdfdf;*/
 }
 .homeeventsearch .infoPanel {
     width: 95%;
@@ -4303,6 +4342,24 @@ p.sliderCaption
 .stallform img.iconPlace {
     position: relative;
     right: 30px;
+}
+input#stallcount{
+    border: 1px solid #dfdfdf;
+}
+input#startdate{
+    border: 1px solid #dfdfdf;
+}
+input#enddate{
+border: 1px solid #dfdfdf;
+}
+.dash-event {
+    text-align: left;
+    }
+input#dp1653475899690 {
+    border-right: none !important;
+}
+input#dp1653475899691 {
+    border-right: none !important;
 }
 }
 
@@ -4320,8 +4377,13 @@ p.sliderCaption
 }
 .infoPanel span.iconProperty:nth-child(1) input {
     border-right: 1px solid #dfdfdf !important ;
+    padding-left:  6px;
     }
+    .myaccevent1 {width: 24%;}
 
+.myaccevent2 {width: 40%;}
+
+.myaccevent3 {width: 36%;}
 }
 
 img.iconPlace {
@@ -4333,6 +4395,28 @@ img.iconPlace {
     right: 4px;
 }
 .stallform img.iconPlace {
-    position: relative;
+    /*position: relative;*/
+    position: absolute;
     right: 30px;
+}
+
+@media only screen and (max-width: 450px){
+     .dash-event a {
+    width: 138px;
+    display: inline-block;
+  /*  margin: 6px auto !important;*/
+}
+}
+.image_file {
+    margin-top: 4px;
+}
+
+@media only screen and (min-width:  320px) and (max-width:  767px){
+    input#dp1653475899690 {
+    border-right: none !important;
+}
+input#dp1653475899691 {
+    border-right: none !important;
+}
+
 }

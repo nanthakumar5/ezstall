@@ -82,20 +82,20 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 				</div>
 				<div class="row row border-top pt-4 pb-4 eventdate">
 					<span class="col-3">
-						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url(); ?>/assets/site/img/date.png"> Start Date: </p>
+						<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> Start Date: </p>
 						<p class="ucDAte mb-0">
 							<?php echo formatdate($detail['start_date'], 1);?></p>
 						</span>
 						<span class="col-3 border-end">
-							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url(); ?>/assets/site/img/date.png"> End Date: </p>
+							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/date.png"> End Date: </p>
 							<p class="ucDAte mb-0"><?php echo formatdate($detail['end_date'], 1); ?></p>
 						</span>
 						<span class="col-3">
-							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url(); ?>/assets/site/img/time.png"> Start Time: </p>
+							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> Start Time: </p>
 							<p class="ucDAte mb-0"> after <?php echo formattime($detail['start_time']) ?></p>
 						</span>
 						<span class="col-3">
-							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url(); ?>/assets/site/img/time.png"> End Time:</p>
+							<p class="mb-1 fw-bold"><img class="eventDIcon" src="<?php echo base_url() ?>/assets/site/img/time.png"> End Time:</p>
 							<p class="ucDAte mb-0">by <?php echo formattime($detail['end_time']) ?></p>
 						</span>
 					</div> 
@@ -108,16 +108,17 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 						<div class="infoPanel form_check bookyourstalls">
 							<span class="infoSection bookborder">
 								<span class="iconProperty">
-									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls">
+									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls" class="borderyt">
 									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 								</span>
 								<span class="iconProperty">			
-									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin" autocomplete="off" placeholder="Check-In"/>
-									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">				
+									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin borderyt" autocomplete="off" placeholder="Check-In"/>
+									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
+
 								</span>
 								<span class="iconProperty">
-									<input type="text" name="enddate" id="enddate" class="land_width checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
-									<img src="<?php echo base_url()?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
+									<input type="text" name="enddate" id="enddate" class="land_width checkdate checkout borderyt" autocomplete="off"placeholder="Check-Out"/>
+									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 							</span>
 						</div>

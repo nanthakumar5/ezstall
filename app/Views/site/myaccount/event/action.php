@@ -326,7 +326,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 		
 		var stalltab = '\
 			<div id="barnstall'+barnIndex+'" class="container tab-pane p-0 mb-3 barn_wrapper_'+barnIndex+' '+activeclass+'">\
-				<div class="col-md-10 p-0 my-3 stallbtns">\
+				<div class="col-md-11 p-0 my-3 stallbtns">\
 					<input type="hidden" value="" name="stallvalidation'+barnIndex+'" id="stallvalidation'+barnIndex+'">\
 					<button class="btn-stall stallbtn" data-barnIndex="'+barnIndex+'" >Add Stall</button>\
 					<button class="btn-stall" data-barnIndex="'+barnIndex+'" data-bs-toggle="modal" data-bs-target="#myModal" id="addbulkstallbtn">Add Bulk Stall</button>\

@@ -8,23 +8,23 @@ $currentdate 	= date("Y-m-d");
 ?>
 <section class="maxWidth eventPagePanel mt-2">
 	<?php if($usertype !='4'){ ?>
-		<a class="btn-custom-black" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
+		<a class="btn-custom-black addevent" href="<?php echo base_url().'/myaccount/events/add'; ?>">Add Event</a>
 	<?php } ?>
 	<?php  if($checksubscriptiontype=='3' && $checksubscriptionproducer <= $eventcount){ ?>
-		<button class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
+		<button class="btn btn-primary paynow"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stripeFormModal" data-bs-whatever="@getbootstrap">Pay Now to Add Event</button>
 	<?php } ?>
 	<?php if(count($list) > 0){ ?>
 		<?php foreach ($list as $data) {  ?>
 			<div class="dashboard-box mt-4">
 				<div class="row align-items-center px-2">
-					<div class="col-md-2">
+					<div class="col-md-2 myaccevent1">
 						<img src="<?php echo base_url() ?>/assets/uploads/event/<?php echo $data['image']?>" class="dash-event-image">
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-5 myaccevent2">
 						<p class="topdate fs-7 mb-2"> <?php echo date('m-d-Y', strtotime($data['start_date'])); ?> - <?php echo date('m-d-Y', strtotime($data['end_date'])); ?> -  <?php echo $data['location']; ?></p>
 						<a class="text-decoration-none" href="<?php echo base_url() ?>/events/detail/<?php echo $data['id']?>"><p class="fs-6 fw-bold"><?php echo $data['name']; ?><p></a></p>
 					</div>
-					<div class="col-md-5 d-flex">
+					<div class="col-md-5 d-flex myaccevent3">
 						<div class="m-left w-100 md-left">
 							<p class="fs-7 mb-2"><img class="eventFirstIcon" src="<?php echo base_url()?>/assets/site/img/horseShoe.svg">Stalls</p>
 							<p class="ucprice fs-7 fw-bold"> from $<?php echo $data['stalls_price'] ?> / night</p>
@@ -36,9 +36,9 @@ $currentdate 	= date("Y-m-d");
 					</div>
 				</div>
 				<div class="dash-event">
-					<a href="<?php echo base_url().'/myaccount/events/eventreport/'.$data['id']; ?>" 
+					<a href="<?php echo base_url().'/myaccount/events/dayreport/'.$data['id']; ?>" 
 						class="dash-export-event fs-7 mx-2">
-						Report <i class="fas fa-file-export i-white-icon"></i>
+						Day Report <i class="fas fa-file-export i-white-icon"></i>
 					</a>
 				<?php if($usertype !='4'){ ?>
 					<a href="<?php echo base_url().'/myaccount/events/export/'.$data['id']; ?>" 

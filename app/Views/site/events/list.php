@@ -23,7 +23,7 @@
 	    <form action="<?php echo base_url();?>/events" method="get" autocomplete="off" class="w-100 listeventsearch">
 	        <span class="infoSection">
 	            <span class="iconProperty justify-content-between resp_bnone">
-	                <input type="text" name="location" placeholder="Location" value="<?php echo $searchlocation; ?>">
+	                <input type="text" name="location" class="responbr" placeholder="Location" value="<?php echo $searchlocation; ?>">
 	                <img src="<?php echo base_url()?>/assets/site/img/location.svg" class="iconPlace" alt="Map Icon">
 	            </span>
 	            <span class="iconProperty resp_bnone">
@@ -77,7 +77,7 @@
 				?>
 				<div class="ucEventInfo">
 					<div class="EventFlex">
-						<span class="wi-50">
+						<span class="wi-50 m-0">
 							<div class="EventFlex leftdata">
 								<span class="wi-30">
 									<span class="ucimg">
