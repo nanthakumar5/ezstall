@@ -81,8 +81,8 @@ class Cart extends BaseModel
 		if(isset($data['type'])&& $data['type']!='')             		$request['type'] 	    	= $data['type'];
 
 		if($data['actionid']==""){
-			$this->db->table('cart')->delete(['ip' => $ip, 'type' => '2']);
-			if($request['type']=='2') $this->db->table('cart')->delete(['ip' => $ip, 'type' => '1']);
+			if($request['type']=='1')	$this->db->table('cart')->delete(['ip' => $ip, 'type' => '2']);
+			if($request['type']=='2') 	$this->db->table('cart')->delete(['ip' => $ip, 'type' => '1']);
 			
 			$request['datetime'] = date('Y-m-d H:i:s');
 			$cart = $this->db->table('cart')->insert($request);
