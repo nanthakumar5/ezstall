@@ -23,7 +23,7 @@ class Index extends BaseController
 			return redirect()->to(base_url().'/contactus'); 
     	}
 
-		$data['contactus'] = $this->settings->getSettings('row',['settings']);
+		$data['settings'] = $this->settings->getSettings('row', ['settings']);
 
 		return view('site/contactus/index',$data);
     }

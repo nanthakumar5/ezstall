@@ -49,19 +49,19 @@
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Mobile Number</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-phone-alt"></i><?php echo $contactus['phone'];?>
+							<i class="pr-2 fas fa-phone-alt"></i><?php echo $settings['phone'];?>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Email</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-envelope"></i><?php echo $contactus['email'];?>
+							<i class="pr-2 fas fa-envelope"></i><?php echo $settings['email'];?>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Address</label>
 							<div class="d-flex align-items-center">
-							<i class="pr-2 fas fa-map-marker-alt"></i> <?php echo $contactus['address'];?>
+							<i class="pr-2 fas fa-map-marker-alt"></i> <?php echo $settings['address'];?>
 							</div>
 						</div>
 					</div>
@@ -72,10 +72,11 @@
 </section>
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvTJ00O76SJefErQP2FFz4IDmCigbS6w&callback=initMap"></script>
 <script>
  	var geocoder;
   	var map;
-  	var address = "<?php echo $contactus['address'];?>";
+  	var address = "<?php echo $settings['address'];?>";
 		$(function(){
 			validation(
 				'#form',
@@ -93,10 +94,6 @@
 					message 	 : {
 						required	: 	true
 					}
-				},
-				{},
-				{
-					ignore : []
 				}
 			);
 		});
