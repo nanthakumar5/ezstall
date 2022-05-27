@@ -4557,7 +4557,7 @@ svg.searchiconreserve {
     right: 30px;
 }
 .width100{
-    width:  100%;
+    width:  100% !important;
 }
 .viewstart {
     justify-content: start !important;
