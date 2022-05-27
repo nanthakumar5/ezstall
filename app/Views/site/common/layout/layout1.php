@@ -207,6 +207,7 @@
     	<script src="<?php echo base_url();?>/assets/plugins/tinymce/tinymce.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/plugins/inputmask/inputmask.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
+ 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvTJ00O76SJefErQP2FFz4IDmCigbS6w&callback=initMap"></script>
 		<?php $this->renderSection('js') ?>
 		<script>
 			uidatepicker(".event_search_start_date, .event_search_end_date");

@@ -1,5 +1,11 @@
 <?= $this->extend("site/common/layout/layout1") ?>
 <?php $this->section('content') ?>
+<style>
+      #map {
+        height: 300px;
+        width: 100%;
+      }
+</style>
 <section class="maxWidth">
 	<div class="pageInfo">
 		<span class="marFive">
@@ -37,7 +43,8 @@
 				</div>
 				<div class="col-md-8">
 					<p class="h2 fw-bold mb-4">Contact Information</p>
-					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15719.342430819235!2d78.16783275!3d9.9476323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1647852032607!5m2!1sen!2sin" width="100%" height="300px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				<!-- 	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15719.342430819235!2d78.16783275!3d9.9476323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1647852032607!5m2!1sen!2sin" width="100%" height="300px" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+				    <div id="map" class="contact_map"></div>
 					<div class="row mt-3 contact-info">
 						<div class="col-md-4">
 							<label class="font-w-600 form-label">Mobile Number</label>
@@ -66,29 +73,54 @@
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
 <script>
-	$(function(){
-		validation(
-			'#form',
-			{
-				name 	     : {
-					required	: 	true
+ 	var geocoder;
+  	var map;
+  	var address = "<?php echo $contactus['address'];?>";
+		$(function(){
+			validation(
+				'#form',
+				{
+					name 	     : {
+						required	: 	true
+					},
+					email  		: {	
+						required	: 	true,
+						email     	: true   
+					},
+					subject   	: {
+						required	: 	true
+					},
+					message 	 : {
+						required	: 	true
+					}
 				},
-				email  		: {	
-					required	: 	true,
-					email     	: true   
-				},
-				subject   	: {
-					required	: 	true
-				},
-				message 	 : {
-					required	: 	true
+				{},
+				{
+					ignore : []
 				}
-			},
-			{},
-			{
-				ignore : []
-			}
-		);
-	});
+			);
+		});
+
+	  	function initMap() {
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 15,
+	        });
+	        geocoder = new google.maps.Geocoder();
+	        codeAddress(geocoder, map);
+	  	}
+
+	  	function codeAddress(geocoder, map) {
+	        geocoder.geocode({'address': address}, function(results, status) {
+	          if (status === 'OK') {
+	            map.setCenter(results[0].geometry.location);
+	            var marker = new google.maps.Marker({
+	              map: map,
+	              position: results[0].geometry.location
+	            });
+	          } else {
+	            alert('Geocode was not successful for the following reason: ' + status);
+	          }
+	        });
+	  	}
 </script>
 <?php $this->endSection(); ?>
