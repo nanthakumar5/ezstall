@@ -4282,6 +4282,10 @@ button.signInSubmitBtn {
 .infoPanel span input:nth-child(1) {
     border-right: none !important;
 }
+.viewstart {
+    justify-content: start !important;
+    margin-top:  20px;
+}
 
 }
 /*-------------------------------*/
@@ -4355,6 +4359,10 @@ svg.searchiconreserve {
     background: white;
     position: relative;
     right: 30px;
+}
+.viewstart {
+    justify-content: start !important;
+    margin-top:  20px;
 }
 
 }
@@ -4454,6 +4462,7 @@ display: block;
     font-size: 13px;
     display: contents;
 }
+
 }
 /*-------------------------*/
 img.iconPlace {
