@@ -4523,10 +4523,16 @@ button.btn-stall.barnbtn {
 }
 svg.searchiconreserve {
     position: relative;
-    left: 206px;
+    left: 318px;
     bottom: 36px;
 }
-
+.flex-row-reverse.bd-highlight {
+    width: 95%;
+}
+.viewstart {
+    justify-content: start !important;
+    margin-top: 30px;
+}
 }
 
 
@@ -4540,4 +4546,16 @@ svg.searchiconreserve {
     background: white;
     position: relative;
     right: 30px;
+}
+.width100{
+    width:  100%;
+}
+.viewstart {
+    justify-content: start !important;
+}
+.view-res {
+    margin: 0 !important;
+}
+i.fas.fa-times-circle {
+    margin-left: 10px;
 }

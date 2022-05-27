@@ -20,42 +20,42 @@
 				<div class="EventFlex leftdata">
 					<div class="wi-30 row w-100 align-items-center">
 						<div class="row row m-0 p-0 dash-booking">
-							<div class="col-md-2 mb-2">
+							<div class="col-md-3 col-lg-3 mb-2">
 								<div>
-									<p class="mb-0 text-sm fs-7 fw-600">Payment Method</p>
-									<p class="mb-0 fs-7"><?php echo $data['paymentmethod_name'];?></p>
+									<p class="mb-0 text-sm fs-7 fw-600 width100">Payment Method</p>
+									<p class="mb-0 fs-7 width100"><?php echo $data['paymentmethod_name'];?></p>
 								</div>
 							</div>
-							<div class="col-md-3 mb-2">
+							<div class="col-md-3 col-lg-2 mb-2">
 								<div>
-									<p class="mb-0 text-sm fs-7 fw-600">Booking ID</p>
-									<p class="mb-0 fs-7"><?php echo $data['id'];?></p>
+									<p class="mb-0 text-sm fs-7 fw-600 width100">Booking ID</p>
+									<p class="mb-0 fs-7 width100"><?php echo $data['id'];?></p>
 								</div>
 							</div>
-							<div class="col-md-3 mb-2">
+							<div class="col-md-3 col-lg-3 mb-2">
 								<div>
-									<p class="mb-0 fs-7 fw-600">Booked By</p>
-									<p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
+									<p class="mb-0 fs-7 fw-600 width100">Booked By</p>
+									<p class="mb-0 fs-7 width100"><?php echo $usertype[$data['usertype']]; ?></p>
 								</div>
 							</div>
-							<div class="col-md-2 mb-2">
+							<div class="col-md-3 col-lg-3 mb-2">
 								<div>
-									<p class="mb-0 fs-7 fw-600">Date of booking</p>
-									<p class="mb-0 fs-7"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
+									<p class="mb-0 fs-7 fw-600 width100">Date of booking</p>
+									<p class="mb-0 fs-7 width100"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
 								</div>
 
 							</div>
-						</div>
-						<div class="col-md-2">
+					
+						<div class="col-md-3 col-lg-3">
 							<div>
-								<p class="mb-0 text-sm fs-7 fw-600">Name</p>
-								<p class="mb-0 fs-7"><?php echo $data['firstname'].$data['lastname'];?></p>
+								<p class="mb-0 text-sm fs-7 fw-600 width100">Name</p>
+								<p class="mb-0 fs-7 width100"><?php echo $data['firstname'].$data['lastname'];?></p>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-3 col-lg-2">
 								<div>
-									<p class="mb-0 fs-7 fw-600">Booked Event</p>
-									<p class="mb-0 fs-7"><?php echo $data['eventname'];?> (
+									<p class="mb-0 fs-7 fw-600 width100">Booked Event</p>
+									<p class="mb-0 fs-7 width100"><?php echo $data['eventname'];?> (
 										<?php 
 										$stallname = [];
 										foreach ($data['barnstall'] as $stalls) {
@@ -66,20 +66,20 @@
 								</p>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-3 col-lg-3">
 							<div>
-								<p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
-								<p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
+								<p class="mb-0 fs-7 fw-600 width100">CheckIn - CheckOut</p>
+								<p class="mb-0 fs-7 width100"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-3 col-lg-2">
 							<div>
-								<p class="mb-0 fs-7 fw-600">Cost</p>
-								<p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
+								<p class="mb-0 fs-7 fw-600 width100">Cost</p>
+								<p class="mb-0 fs-7 width100"><?php echo $currencysymbol.$data['amount'];?></p>
 							</div>
 						</div>
-						<div class="col-md-1">
-							<div class="d-flex justify-content-end align-items-center">
+						<div class="col-md-3 col-lg-2">
+							<div class="d-flex justify-content-end align-items-center viewstart">
 								<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="mt-0 mx-3 view-res">View</a>
 								<?php if($data['status']=='1'){ ?>
 									<?php $amount = $data['amount']-($data['amount'] * 10/100); ?>
@@ -88,6 +88,7 @@
 									</a>
 								<?php } ?>
 							</div>
+								</div>
 						</div>
 					</div>
 				</div>
