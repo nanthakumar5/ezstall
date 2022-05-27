@@ -142,11 +142,11 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 						</div>	
 					</div>
 					<div class="container row mt-5 dash-barn-style mx-auto">
-						<div class="row align-items-center mb-4 p-0">
-							<div class="col-md-2">
-								<p class="fs-2 fw-bold mb-0">Barn</p>
+						<div class="row align-items-center mb-4 p-0 addbarn">
+							<div class="col-md-3">
+								<p class="fs-2 fw-bold mb-0 barntfont">Barn</p>
 							</div>
-							<div class="col-md-10 t-right p-0">
+							<div class="col-md-9 t-right p-0 respsm">
 								<input type="hidden" value="" name="barnvalidation" id="barnvalidation">
 								<a href="javascript:void(0);" class="btn btn-info addbulkbarnbtn">Add Bulk Barn</a>
 								<input type="file" class="bulkbarnfile" style="display:none;">
@@ -394,7 +394,7 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 				<span class="stall_image_msg'+stallIndex+'"></span>\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][image]" class="stall_image_input'+stallIndex+'" value="'+stallImage+'">\
 			</div>\
-			<div class="col-md-1 mb-3">\
+			<div class="col-md-1 mb-3 delete">\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][id]" value="'+stallId+'">\
 				<input type="hidden" name="barn['+barnIndex+'][stall]['+stallIndex+'][status]" value="1">\
 				'+availability+'\

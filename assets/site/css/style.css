@@ -1530,7 +1530,7 @@ input.subscriptionInput:focus {
 /*Event.js Start*/
 
 .ucimg img {
-    width: 130px;
+    width: 120px;
     height: 90px;
     border-radius: 5px;
     display: inline-block;
@@ -2952,7 +2952,7 @@ button.View:hover {
 }
 
 .tablesec table td a:hover {
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .table> :not(:first-child) {
@@ -3556,7 +3556,8 @@ td {
     }
     .navbar-collapse {
         background-color: #000000d4;
-        z-index: 1;
+        /*z-index: 1;*/
+        z-index:  999;
     }
     .profileIcon {
         display: none;
@@ -4151,6 +4152,7 @@ button.paynow {
 }
 
 }
+/*-----------------------------*/
 @media only screen and (max-width: 992px){
 .navbar-header+nav#sidebar-nav {
     left: -260px;
@@ -4167,6 +4169,7 @@ div#content {
 }
 
 }
+/*-----------------------------*/
 .addevent {
     font-size: 12px;
 }
@@ -4229,9 +4232,13 @@ button.signInSubmitBtn {
     /*width: auto;*/
     width:  100%;
 }
-
+.stallbtns {
+    font-size: 13px;
+    display: contents;
+}
 
 }
+/*---------------------------------*/
 
 @media only screen and (min-width:  997px) and (max-width: 1024px){
 .navbar-header{
@@ -4244,7 +4251,7 @@ button.signInSubmitBtn {
 }
 .second p, .first p {
     color: #595959;
-    font-size: 13px;
+    font-size: 14px;
 }
   .infoPanel span input:nth-child(1) {
     /*border-right: none !important;*/
@@ -4253,8 +4260,11 @@ button.signInSubmitBtn {
     /*width: auto;*/
     width:  100%;
 }
-
+.stalltab .stallbtns {
+    font-size: 13px;
 }
+}
+/*-------------------------------------*/
 .alert{
     top:  65px;
 }
@@ -4273,9 +4283,8 @@ button.signInSubmitBtn {
     border-right: none !important;
 }
 
-
 }
-
+/*-------------------------------*/
 .resp_bnone{
     border:  none !important;
 }
@@ -4293,7 +4302,7 @@ button.signInSubmitBtn {
 }
 
 }
-
+/*---------------------------------------*/
 .modal-dialog {
     top: 20px;
 }
@@ -4308,6 +4317,7 @@ p.sliderCaption
  h1.sliderTitle {
     text-shadow: 6px 6px black;
 }
+/*--------------------------*/
 
 @media only screen and (min-width:  768px) and (max-width:  1023px){
     .sticky-top.checkout.col-md-3.mt-4.h-100{
@@ -4329,7 +4339,23 @@ p.sliderCaption
     border-right: none !important;
 }
 
+.dash-export-event{
+    padding: 6px 10px !important;
+} 
+.dash-view-event {
+    padding: 6px 10px !important;
 }
+.dash-edit-event {
+    padding: 6px 10px !important;
+}
+.dash-delete-event{
+    padding: 6px 10px !important;
+}
+
+
+}
+/*---------------------------------*/
+
 @media only screen and (max-width:  1024px){
     /*.infoPanel span.iconProperty:nth-child(1) input {*/
         .infoPanel span.iconProperty input {
@@ -4366,7 +4392,7 @@ input#dp1653475899691 {
     border-right: none !important;
 }
 }
-
+/*--------------------------*/
 @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
   .infoPanel span.iconProperty:nth-child(1) input {
     width: 100%;
@@ -4388,8 +4414,39 @@ input#dp1653475899691 {
 .myaccevent2 {width: 40%;}
 
 .myaccevent3 {width: 36%;}
+
+.dash-event{
+    /*display: flex;*/
+    display: inline-block;
+}
+nav#sidebar-nav{
+    margin-left: 30px;
+}
+.dash-delete-event{
+display: block;
+    width: fit-content;
+    margin: 10px;
 }
 
+.addbarn {
+    margin-bottom: 0 !important;
+}
+.form-group .image_file {
+    width: 100%;
+}
+
+.form-group .eventflyer_file {
+    width: 100%;
+}
+.stallmap_file {
+    width: 100%;
+}
+.stallbtns {
+    font-size: 13px;
+    display: contents;
+}
+}
+/*-------------------------*/
 img.iconPlace {
     position: relative;
     right: 30px;
@@ -4422,5 +4479,49 @@ img.iconPlace {
 input#dp1653475899691 {
     border-right: none !important;
 }
+.EventFlex .leftdata{
+    margin: 0;
+}
+.ucEventBtn {
+    width: 140px;
+    font-size: 13px;
+}
+button.btn-stall.barnbtn {
+    margin: 0;
+     border-radius: 0.25rem; 
+    font-size: 16px;
 
 }
+.addbarn {
+    margin-bottom: 0 !important;
+}
+
+.row.mb-2.dash-stall-base {
+    position: relative;
+}
+.dash-stall-base .delete {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.respsm {
+    display: block;
+    text-align: center;
+    width: auto;
+}
+button.btn-stall.barnbtn {
+    margin-top: 10px;
+}
+
+}
+
+
+
+
+.addbarn {
+    margin-bottom: 0 !important;
+}
+
+/*<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="searchIcon searchiconreserve" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z"></path>
+                                        </svg>*/
