@@ -61,7 +61,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Address</label>
-									<textarea class="form-control" id="address" name="address" placeholder="Enter Address" rows="3"><?php echo $address;?></textarea>
+									<input type="text" name="address" class="form-control" id="address" placeholder="Enter Address" value="<?php echo $address; ?>">
 								</div>
 							</div>
 							<div class="col-md-12">
