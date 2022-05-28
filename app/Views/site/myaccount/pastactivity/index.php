@@ -17,36 +17,43 @@
                 <p class="mb-0 fs-7"><?php //echo $bookingstatus[$data['status']];?></p>
               </div>
             </div> -->
-            <div class="col-md-3 mb-2">
+
+            <div class="col-md-3 col-lg-3 mb-2">
               <div>
-                <p class="mb-0 text-sm fs-7 fw-600">Booking ID</p>
-                <p class="mb-0 fs-7"><?php echo $data['id'];?></p>
+                <p class="mb-0 text-sm fs-7 fw-600 w-100">Payment Method</p>
+                <p class="mb-0 fs-7 w-100"><?php echo $data['paymentmethod_name'];?></p>
+              </div>
+           </div>
+            <div class="col-md-3 col-lg-2 mb-2">
+              <div>
+                <p class="mb-0 text-sm fs-7 fw-600 w-100">Booking ID</p>
+                <p class="mb-0 fs-7 w-100"><?php echo $data['id'];?></p>
               </div>
             </div>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-3 col-lg-3 mb-2">
               <div>
-                <p class="mb-0 fs-7 fw-600">Booked By</p>
-                <p class="mb-0 fs-7"><?php echo $usertype[$data['usertype']]; ?></p>
+                <p class="mb-0 fs-7 fw-600 w-100">Booked By</p>
+                <p class="mb-0 fs-7 w-100"><?php echo $usertype[$data['usertype']]; ?></p>
               </div>
             </div>
-            <div class="col-md-2 mb-2">
+            <div class="col-md-3 col-lg-3 mb-2">
                 <div>
-                  <p class="mb-0 fs-7 fw-600">Date of booking</p>
-                  <p class="mb-0 fs-7"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
+                  <p class="mb-0 fs-7 fw-600 w-100">Date of booking</p>
+                  <p class="mb-0 fs-7 w-100"><?php echo date("m-d-Y h:i A", strtotime($data['created_at']));?></p>
                 </div>
 
               </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3 col-lg-3">
             <div>
-              <p class="mb-0 text-sm fs-7 fw-600">Name</p>
-              <p class="mb-0 fs-7"><?php echo $data['firstname'].$data['lastname'];?></p>
+              <p class="mb-0 text-sm fs-7 fw-600 w-100">Name</p>
+              <p class="mb-0 fs-7 w-100"><?php echo $data['firstname'].$data['lastname'];?></p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-lg-2">
             <div>
-              <p class="mb-0 fs-7 fw-600">Booked Event</p>
-              <p class="mb-0 fs-7"><?php echo $data['eventname'];?> (
+              <p class="mb-0 fs-7 fw-600 w-100">Booked Event</p>
+              <p class="mb-0 fs-7 w-100"><?php echo $data['eventname'];?> (
                 <?php 
                 $stallname = [];
                 foreach ($data['barnstall'] as $stalls) {
@@ -57,25 +64,19 @@
               </p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-lg-3">
             <div>
-              <p class="mb-0 fs-7 fw-600">CheckIn - CheckOut</p>
-              <p class="mb-0 fs-7"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
+              <p class="mb-0 fs-7 fw-600 w-100">CheckIn - CheckOut</p>
+              <p class="mb-0 fs-7 w-100"><?php echo formatdate($data['check_in'], 1);?> - <?php echo formatdate($data['check_out'], 1);?></p>
+            </div> 
+          </div>
+          <div class="col-md-3 col-lg-2">
+            <div>
+              <p class="mb-0 fs-7 fw-600 w-100">Cost</p>
+              <p class="mb-0 fs-7 w-100"><?php echo $currencysymbol.$data['amount'];?></p>
             </div>
           </div>
-          <div class="col-md-3">
-            <div>
-              <p class="mb-0 fs-7 fw-600">Cost</p>
-              <p class="mb-0 fs-7"><?php echo $currencysymbol.$data['amount'];?></p>
-            </div>
-          </div>
-          <div class="col-md-3 mb-2">
-              <div>
-                <p class="mb-0 text-sm fs-7 fw-600">Payment Method</p>
-                <p class="mb-0 fs-7"><?php echo $data['paymentmethod_name'];?></p>
-              </div>
-          </div>
-          <div class="col-md-1">
+          <div class="col-md-1 col-lg-2 viewpast">
             <div class="d-flex justify-content-end">
              <a href="<?php echo base_url().'/myaccount/pastactivity/view/'.$data['id']; ?>" class="view-res">View</a>
            </div>

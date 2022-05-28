@@ -4326,6 +4326,10 @@ p.sliderCaption
 /*--------------------------*/
 
 @media only screen and (min-width:  768px) and (max-width:  1023px){
+    .viewpast {
+    margin-top: 20px;
+    margin-left: 58px;
+}
     .pad_100 {
     width: 100% !important;
 }
@@ -4411,6 +4415,10 @@ input#dp1653475899691 {
 }
 /*--------------------------*/
 @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+      .viewpast {
+    margin-top: 20px;
+    margin-left: 8px;
+}
     .pad_100 {
     width: 100% !important;
 }
