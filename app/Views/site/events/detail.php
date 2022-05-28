@@ -114,7 +114,6 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 								<span class="iconProperty">			
 									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin borderyt" autocomplete="off" placeholder="Check-In"/>
 									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
-
 								</span>
 								<span class="iconProperty">
 									<input type="text" name="enddate" id="enddate" class="land_width checkdate checkout borderyt" autocomplete="off"placeholder="Check-Out"/>

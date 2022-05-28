@@ -49,10 +49,12 @@
 									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 								</span>
 								<span class="iconProperty">			
-									<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/> 						
+									<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/>
+									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 								<span class="iconProperty">
 									<input type="text" name="enddate" id="enddate" class = "checkdate checkout" autocomplete="off"placeholder="Check-Out"/>
+									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
 							</span>
 						</div>
