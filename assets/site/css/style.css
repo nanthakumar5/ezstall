@@ -4113,7 +4113,8 @@ span.m-left.upevent {
     width: 50%;
 }
 .num_btn {
-    right: 33px;
+    position: absolute;
+    right: 7px;
 }
 .about-banner.text-center.my-5 {
     margin-bottom: 0 !important;
@@ -4136,7 +4137,8 @@ padding-top:  0;
     border-right: 1px solid #dfdfdf !important;
 }
 span.infoSection.bookborder {
-    width: auto;
+    /*width: auto;*/
+    width: 100%;
 }
 .homeeventsearch.eventsearch .infoPanel span input {
     border-right: none !important;
@@ -4215,8 +4217,8 @@ button.signInSubmitBtn {
     justify-content:  space-around;
 }
 .num_btn {
-    position: relative;
-    right: 33px;
+    position: absolute;
+    right: 7px;
     }
      .infoPanel span input:nth-child(1) {
     border-right: 1px solid #dfdfdf !important;
@@ -4277,7 +4279,7 @@ button.signInSubmitBtn {
     flex: 100%;
 }
 .num_btn {
-    right: 30px;
+    right: 7px;
 }
 .infoPanel span input:nth-child(1) {
     border-right: none !important;
@@ -4324,6 +4326,9 @@ p.sliderCaption
 /*--------------------------*/
 
 @media only screen and (min-width:  768px) and (max-width:  1023px){
+    .pad_100 {
+    width: 100% !important;
+}
     .sticky-top.checkout.col-md-3.mt-4.h-100{
     width: 35%;
   } 
@@ -4406,12 +4411,15 @@ input#dp1653475899691 {
 }
 /*--------------------------*/
 @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+    .pad_100 {
+    width: 100% !important;
+}
   .infoPanel span.iconProperty:nth-child(1) input {
     width: 100%;
 }
 .num_btn {
-    position: relative;
-    right: 0;
+    position: absolute;
+    right: 7px;
 }
 svg.searchiconreserve {
     background: white;
@@ -4466,8 +4474,8 @@ display: block;
 }
 /*-------------------------*/
 img.iconPlace {
-    position: relative;
-    right: 30px;
+    position: absolute;
+    right: 7px;
 }
 .homeeventsearch img.iconPlace {
     position: absolute;

@@ -106,16 +106,16 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 					<div class="border rounded pt-4 ps-3 pe-3 mt-4 mb-5 ">
 						<h3 class="fw-bold mb-4">Book Your Stalls</h3>
 						<div class="infoPanel form_check bookyourstalls">
-							<span class="infoSection bookborder">
-								<span class="iconProperty">
+							<span class="infoSection bookborder flex-wrap">
+								<span class="iconProperty col-md-12 w-auto pad_100">
 									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls" class="borderyt">
 									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
 								</span>
-								<span class="iconProperty">			
+								<span class="iconProperty col-md-12 w-auto pad_100">			
 									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin borderyt" autocomplete="off" placeholder="Check-In"/>
 									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
-								<span class="iconProperty">
+								<span class="iconProperty col-md-12 w-auto pad_100">
 									<input type="text" name="enddate" id="enddate" class="land_width checkdate checkout borderyt" autocomplete="off"placeholder="Check-Out"/>
 									<img src="<?php echo base_url() ?>/assets/site/img/calendar.svg" class="iconPlace" alt="Calender Icon">
 								</span>
