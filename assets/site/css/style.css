@@ -4584,3 +4584,18 @@ svg.searchiconreserve {
 i.fas.fa-times-circle {
     margin-left: 10px;
 }
+
+@media screen and (min-width: 1024px) and (max-width: 1199px){
+.pad_100 {
+    width: 100% !important;
+}
+
+.pad_100 input {
+    width: 100%;
+}
+
+span.num_btn.stallcount {
+    position: absolute;
+    right: 7px;
+}
+}
