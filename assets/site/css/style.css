@@ -4599,3 +4599,11 @@ span.num_btn.stallcount {
     right: 7px;
 }
 }
+
+.bookyourstalls .stallcount{
+    position: absolute;
+}
+.num_btn {
+    position: absolute;
+    right: 4px;
+}
