@@ -20,6 +20,9 @@ class Index extends BaseController
       	$countpastevent 		= [];
       	$countpaststall 		= 0;
       	$countpastamount 		= 0;
+      	$countpayedamount		= 0;
+      	$countcurrentstall 		= 0;
+      	$countcurrentevent  	= [];
 		
      	$date				= date('Y-m-d');
     	$userdetail 		= getSiteUserDetails();
@@ -77,21 +80,26 @@ class Index extends BaseController
     	
     	if($usertype=='5'){
 
-    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids]);
+    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'end_check' => $date]);
 
-    		$eventid 	= [];
-    		$amount 	= 0;
-    		$bookingid 	= [];
-    		foreach ($horseevent as  $event) {
-    			$eventid[] = $event['id'];
-    			$amount += $event['amount'];
-    			foreach($event['barnstall'] as $stall){
-    				$bookingid[] = $stall['booking_id'];
-    			}
-    		}
-    		$data['totalevent']  			= count($eventid);
-			$data['totalamount'] 			= $amount;
-			$data['totalstall']  			= count($bookingid);
+    		foreach ($horseevent as $event) {  
+	  			$countpastevent[] = $event['event_id'];
+	  			$barnstall = $event['barnstall'];
+	  			if(count($barnstall) > 0) $countpaststall += count(array_column($barnstall, 'stall_id'));
+	  			$countpastamount += $event['amount'];
+	      	}
+
+    		$currentreservation = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'start_check' => $date]);
+    		foreach ($currentreservation as $event) {  
+	  			$countcurrentevent[] = $event['event_id'];
+	  			$barnstall = $event['barnstall'];
+	  			if(count($barnstall) > 0) $countcurrentstall += count(array_column($barnstall, 'stall_id'));
+	  			$countpayedamount += $event['amount'];
+	      	}
+
+      		$data['countcurrentevent'] 	= count(array_unique($countcurrentevent));
+    		$data['countpayedamount'] 	= $countpayedamount;
+    		$data['countcurrentstall'] 	= $countcurrentstall;
     	}
       	
       	$data['userdetail'] 			= $userdetail;

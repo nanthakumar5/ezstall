@@ -46,7 +46,7 @@
 							<span class="infoSection flex-wrap">
 								<span class="iconProperty col-md-12 w-auto pad_100 ">
 									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls">
-									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
+									<span class="num_btn stallcount"></span>
 								</span>
 								<span class="iconProperty col-md-12 w-auto pad_100">			
 									<input type="text" name="startdate" id="startdate" class ="checkdate checkin" autocomplete="off" placeholder="Check-In"/>

@@ -50,11 +50,22 @@
                     				{ 'data' : 'mobile' },					
                     				{ 'data' : 'action' }								
                 				],
-				columndefs	:	[{"sortable": false, "targets": [4]}]											
+				columndefs	:	[{"sortable": false, "targets": [5]}]											
 			};				
 			
 			ajaxdatatables('.datatables', options);		
 		});
+
+		$('body').on('click','.striperefunds', function(){
+		var action 	= 	'<?php echo getAdminUrl()."/reservations"; ?>';
+		var data   = '\
+		<input type="hidden" name="id" value="'+$(this).attr("data-id")+'">\
+		<input type="hidden" name="paymentid" value="'+$(this).attr("data-paymentid")+'">\
+		<input type="hidden" name="paymentintentid" value="'+$(this).attr("data-paymentintentid")+'">\
+		<input type="hidden" name="amount" value="'+$(this).attr("data-amount")+'">\
+		';
+		sweetalert2(action,data);
+	});	
 	</script>
 <?php $this->endSection(); ?>
 

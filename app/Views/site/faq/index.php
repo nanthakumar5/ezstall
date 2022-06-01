@@ -23,8 +23,7 @@
 		</div>
 	<?php } ?>
 	<div class="container px-5 my-5 col-md-6 text-center">
-		<p class="h3 fw-bold">Still have questions ?</p>
-		<p>If you still have any enquries, please contact us and write a message with us. We will clarify your valuable questions and we will upload here to help others.</p>
+		<p>If you still have questions, please contact us. Send us a message and we will answer your valuable questions.</p>
 		<a class="faq-c-link" href="<?php echo base_url() ?>/contactus">Contact Us</a>
 	</div>
 

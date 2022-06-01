@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
 <?php
-	$userdetail 	= getSiteUserDetails();
-	$role 			= $userdetail['type']; 
-	$parentid 		= $userdetail['parent_id']; 
+	$userdetail 		= getSiteUserDetails();
+	$role 					= $userdetail['type']; 
+	$parentid 			= $userdetail['parent_id'];
 	$parentdetails 	= getSiteUserDetails($parentid);
 	$parenttype   	= $parentdetails ? $parentdetails['type'] : '';
 ?>
@@ -14,7 +14,7 @@
 <nav id="sidebar-nav" class="ml-5">
 	<ul class="list-unstyled components">
 		<li class="side-nav-active">
-			<a href="<?php echo base_url();?>/myaccount/dashboard" class="side-nav-a" data-toggle="collapse" aria-expanded="false">
+			<a class="side-nav-a" href="<?php echo base_url();?>/myaccount/dashboard">
 				<i class="side-nav-i bi bi-speedometer"></i>
 				<p>Dashboard</p>
 			</a>

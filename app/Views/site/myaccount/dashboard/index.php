@@ -102,10 +102,9 @@
 			</div>
 		</div>
 	<?php } ?>
-
 	<?php if($userdetail['type']=='5') { ?>
 		<div class="col-md-12 mt-4 p-4 bg-white rounded-sm">
-			<h5 class="font-w-600">Horse Owner Booking Detail</h5>
+			<h5 class="font-w-600">Current Reservation</h5>
 			<div class="row mt-4 first">
 				<div class="col-md-4 mb-3">
 					<div class="card">
@@ -114,8 +113,58 @@
 								<img src="<?php echo base_url()?>/assets/site/img/stall.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
-								<h2><?php echo $totalstall;?></h2>
-								<p>Total no of Stalls</p>
+								<h2><?php echo $countcurrentstall;?></h2>
+								<p>Total no of. Stalls</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="card">
+						<div class="row mt-4 p-3">
+							<div class="col-md-3">
+								<img
+								src="<?php echo base_url()?>/assets/site/img/currently_available.png"
+								class="rounded d-block"
+								/>
+							</div>
+							<div class="col-md-9"> 
+								<h2><?php echo $countpayedamount;?></h2>
+								<p>Total Payed</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="card">
+						<div class="row mt-4 p-3">
+							<div class="col-md-3">
+								<img
+								src="<?php echo base_url()?>/assets/site/img/currently_booked.png"
+								class="rounded d-block"
+								/>
+							</div>
+							<div class="col-md-9">
+								<h2><?php echo $countcurrentevent;?></h2>
+								<p>Total Events</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 p-4 mt-5 bg-white rounded-sm">
+			<h5 class="font-w-600">Past Month Activity</h5>
+			<div class="row mt-4 second">
+				<div class="col-md-4 mb-3">
+					<div class="card">
+						<div class="row mt-4 p-3">
+							<div class="col-md-3">
+								<img src="<?php echo base_url()?>/assets/site/img/rented_stalls.png" class="rounded d-block" />
+							</div>
+							<div class="col-md-9">
+								<h2><?php echo $countpaststall ?></h2>
+								<p>Total no of. Stalls</p>
 							</div>
 						</div>
 					</div>
@@ -126,9 +175,9 @@
 							<div class="col-md-3">
 								<img src="<?php echo base_url()?>/assets/site/img/total_revenue.png" class="rounded d-block" />
 							</div>
-							<div class="col-md-9"> 
-								<h2><?php echo $totalamount;?></h2>
-								<p>Total price</p>
+							<div class="col-md-9">
+								<h2>$<?php echo $countpastamount ?></h2>
+								<p>Total Payed</p>
 							</div>
 						</div>
 					</div>
@@ -140,8 +189,8 @@
 								<img src="<?php echo base_url()?>/assets/site/img/total_events.png" class="rounded d-block" />
 							</div>
 							<div class="col-md-9">
-								<h2><?php echo $totalevent;?></h2>
-								<p>Total no of event</p>
+								<h2><?php echo $pastevent;?></h2>
+								<p>Total Events</p>
 							</div>
 						</div>
 					</div>
@@ -149,9 +198,10 @@
 			</div>
 		</div>
 	<?php } ?>
+	<?php if($userdetail['type']=='2' || $userdetail['type']=='3' || $userdetail['type']=='4'){ ?>
 	<div class="row tablesec mt-5 mb-5">
 		<div class="col-md-6">
-			<h5 class="font-w-600">Monthly Accured Income</h5>
+			<h5 class="font-w-600">Monthly Accrued Income</h5>
 			<div class="table-responsive mt-3">
 				<table class="table m-0" id="monthlyincome">
 					<thead>
@@ -186,7 +236,7 @@
 				</table>
 			</div>
 		</div>
-		<?php if($userdetail['type']=='2' || $userdetail['type']=='3' || $userdetail['type']=='4'){ ?>
+		
 			<div class="col-md-6">
 				<h5 class="font-w-600">Upcoming events</h5>
 				<div class="table-responsive mt-3">
@@ -200,7 +250,7 @@
 						</thead>
 						<tbody>
 							<?php foreach ($upcomingevents as $value){ ?>
-								<tr class="upcoming">
+								<tr class="upcoming"> 
 									<td><?php echo  date('m-d-Y',strtotime($value['start_date'])); ?></td>
 									<td><?php echo $value['name']; ?></td>
 									<td>

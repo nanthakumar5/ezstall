@@ -180,7 +180,7 @@ $routes->group('administrator', ['filter' => 'adminauthentication2'], function($
     $routes->get('payments/view/(:num)', 'Admin\Payments\Index::view/$1');
 
     //Reservations
-    $routes->get('reservations', 'Admin\Reservations\Index::index');
+    $routes->match(['get','post'],'reservations', 'Admin\Reservations\Index::index');
     $routes->post('reservations/DTreservations', 'Admin\Reservations\Index::DTreservations');
     $routes->get('reservations/view/(:num)', 'Admin\Reservations\Index::view/$1');
 

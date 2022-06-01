@@ -5,14 +5,17 @@ use App\Models\BaseModel;
 class Stripe extends BaseModel
 {	
 	public function action($data)
-	{
+	{ 
 		$this->db->transStart();
 		
 		$id = $data['id'];
 		
 		$payment = $this->db->table('payment')->where('id', $id)->get()->getRowArray();
+
+
 		if($payment['type']=='1'){
 			$data = $this->retrievePaymentIntents($payment['stripe_paymentintent_id']);
+
 			if($data->status=='succeeded'){
 				$this->db->table('payment')->update(['status' => '1'], ['id' => $id]);
 				$insertid = $id;
@@ -163,18 +166,8 @@ class Stripe extends BaseModel
 	}
 
 	function striperefunds($data){
-
-        $settings = getSettings();
-        $stripe = new \Stripe\StripeClient($settings['stripeprivatekey']);
-		
-		$refunds = $this->createRefunds($data['paymentintentid'], ($data['amount']*100));
-		if($refunds)
-		{
-			$this->db->table('booking')->update(['status' => '2'], ['id' => $data['id']]);
-			$this->db->table('payment')->update(['status' => '2', 'refund_amount' => $data['amount']], ['id' => $data['paymentid']]);
-		}
-		
-		return false;
+		$this->db->table('booking')->update(['status' => '2'], ['id' => $data['id']]);
+		return true;
 	}
 	
 	function createPaymentMethods($cardno, $cardexpmonth, $cardexpyear, $cardcvc)

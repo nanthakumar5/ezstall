@@ -71,6 +71,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 									<h6 class="ucprice">from $<?php //echo $detail['rvspots_price'] ?> / night</h6>
 								</span> -->
 							</div>
+							<?php echo $detail['description'] ?>
 						</ul>
 					</div>
 					<div class="col-12 mb-5 mt-2">
@@ -109,7 +110,7 @@ $cartevent 	= ($getcart && $getcart['event_id'] != $detail['id']) ? 1 : 0;
 							<span class="infoSection bookborder flex-wrap">
 								<span class="iconProperty col-md-12 w-auto pad_100">
 									<input type="text" readonly id="stallcount"  value="0" placeholder="Number of Stalls" class="borderyt">
-									<span class="num_btn stallcount"><button>+</button><br><button>-</button></span>
+									<span class="num_btn stallcount"></span>
 								</span>
 								<span class="iconProperty col-md-12 w-auto pad_100">			
 									<input type="text" name="startdate" id="startdate" class="land_width checkdate checkin borderyt" autocomplete="off" placeholder="Check-In"/>

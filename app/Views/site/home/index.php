@@ -164,8 +164,8 @@
 <?php $this->endSection(); ?>
 <?php $this->section('js') ?>
     <script>
-        $('.footsearchbtn').click(function (e) {
-			$('input[name="llocation"]').focus();
+        $('.footsearchbtn').click(function (e) { 
+			$('input[name="location"]').focus();
         });
     </script>
 <?php $this->endSection(); ?>

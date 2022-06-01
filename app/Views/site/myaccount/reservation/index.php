@@ -81,12 +81,12 @@
 						<div class="col-md-3 col-lg-2">
 							<div class="d-flex justify-content-end align-items-center viewstart">
 								<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="mt-0 mx-3 view-res">View</a>
-								<?php /*if($data['status']=='1'){ ?>
+								<?php if($data['status']=='1'){ ?>
 									<?php $amount = $data['amount']-($data['amount'] * 10/100); ?>
 									<a href="javascript:void(0);" style='align: right;' data-id='<?php echo $data['id']; ?>' data-paymentid='<?php echo $data['paymentid']; ?>' data-paymentintentid='<?php echo $data['stripe_paymentintent_id']; ?>' data-amount='<?php echo $amount; ?>' class="striperefunds">
 										<i class="fas fa-times-circle" style="font-size: 30px;"></i> 
 									</a>
-								<?php } */?>
+								<?php } ?>
 							</div>
 								</div>
 						</div>
