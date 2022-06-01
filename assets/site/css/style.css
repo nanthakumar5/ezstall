@@ -4607,3 +4607,7 @@ span.num_btn.stallcount {
     position: absolute;
     right: 4px;
 }
+
+.alert {
+    position: static;
+}
