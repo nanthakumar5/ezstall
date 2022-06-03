@@ -48,7 +48,7 @@ class Index extends BaseController
 					$countcurrentstall += count(array_column($barn['stall'], 'id'));
 				}
 			
-				$bookedevents = $this->booking->getBooking('all', ['booking','event','barnstall'],['eventid'=> $event['id']]);
+				$bookedevents = $this->booking->getBooking('all', ['booking','event','barnstall'],['eventid'=> $event['id'], 'status' => '1']);
 				if(count($bookedevents) > 0){
 					foreach($bookedevents as $bookedevent){
 						$barnstall = $bookedevent['barnstall'];
@@ -57,7 +57,7 @@ class Index extends BaseController
 				}
 	      	}
       	
-	      	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids, 'ltenddate' => $date]);
+	      	$pastevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids, 'ltenddate' => $date, 'status' => '1']);
 
 			foreach ($pastevent as $event) {  
 	  			$countpastevent[] = $event['event_id'];
@@ -68,7 +68,7 @@ class Index extends BaseController
       	}
 		
 
-		$data['monthlyincome'] = $this->booking->getBooking('all', ['booking', 'event', 'payment'],['userid'=> $allids], ['groupby' => 'DATE_FORMAT(b.created_at, "%M %Y")', 'select' => 'SUM(p.amount) as paymentamount, DATE_FORMAT(b.created_at, "%M %Y") AS month']);
+		$data['monthlyincome'] = $this->booking->getBooking('all', ['booking', 'event', 'payment'],['userid'=> $allids, 'status' => '1'], ['groupby' => 'DATE_FORMAT(b.created_at, "%M %Y")', 'select' => 'SUM(p.amount) as paymentamount, DATE_FORMAT(b.created_at, "%M %Y") AS month']);
 
 
 		if($usertype=='2' || ($usertype=='4' && $parenttype == '2')){
@@ -80,7 +80,7 @@ class Index extends BaseController
     	
     	if($usertype=='5'){
 
-    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'ltcheck_out' => $date]);
+    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'ltcheck_out' => $date, 'status' => '1']);
 
     		foreach ($horseevent as $event) {  
 	  			$countpastevent[] = $event['event_id'];
@@ -89,7 +89,7 @@ class Index extends BaseController
 	  			$countpastamount += $event['amount'];
 	      	}
 
-    		$currentreservation = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'gtcheck_in' => $date]);
+    		$currentreservation = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'gtcheck_in' => $date, 'status' => '1']);
     		foreach ($currentreservation as $event) {  
 	  			$countcurrentevent[] = $event['event_id'];
 	  			$barnstall = $event['barnstall'];
