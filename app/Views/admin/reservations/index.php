@@ -27,7 +27,8 @@
 							<th>Payment Method</th>
 							<th>Firstname</th>
 							<th>Lastname</th>
-							<th>Mobile</th>	
+							<th>Mobile</th>
+							<th>Status</th>	
 							<th>Action</th>
 						</thead>
 					</table>
@@ -48,9 +49,10 @@
     				                { 'data' : 'firstname' },
                     				{ 'data' : 'lastname' },
                     				{ 'data' : 'mobile' },					
+                    				{ 'data' : 'status' },
                     				{ 'data' : 'action' }								
                 				],
-				columndefs	:	[{"sortable": false, "targets": [5]}]											
+				columndefs	:	[{"sortable": false, "targets": [6]}]											
 			};				
 			
 			ajaxdatatables('.datatables', options);		

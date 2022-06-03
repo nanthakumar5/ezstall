@@ -89,6 +89,13 @@
 				      <th>Payment Method</th>
 				      <td><?php echo $paymentmethod;?></td>
 				    </tr>
+				    <tr>
+				      <th>Status</th>
+				      <?php $status = $bookingstatus[$result['status']]; 
+			            $statuscolor = ($status=='Cancelled') ? "color:red;" : ""; ?>
+			            <td style=<?php echo  $statuscolor;?> ><?php echo $status;?></td>
+			          <?php ?>
+				    </tr>
 				  </tbody>
 				</table>
 			</div>

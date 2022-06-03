@@ -29,20 +29,22 @@ class Index extends BaseController
 		$post 			= $this->request->getPost();
 		$totalcount 	= $this->payments->getBooking('count', ['booking'], $post);
 		$results 		= $this->payments->getBooking('all', ['booking', 'event','stall','payment','paymentmethod'], $post);
-
+		$data 			= $this->config->bookingstatus;
 		$totalrecord 	= [];
 				
 		if(count($results) > 0){
 			$action = '';
 			
-			foreach($results as $key => $result){ 
+			foreach($results as $key => $result){
 
-			 if($result['status']=='1'){
+			$month 			= date('m',strtotime($result['check_out'])) == date('m');
+			$status 		= $data[$result['status']];
+			$statuscolor 	= ($status=='Cancelled') ? "color:red" : "";
+			$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>';
+			if($result['status']=='1' && $month){
 			 	$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a><a href="javascript:void(0);" data-id="'.$result['id'].'"" data-paymentid="'.$result['payment_id'].'" data-paymentintentid="'.$result['stripe_paymentintent_id'].'" data-amount="'.$result['amount'].'" class="striperefunds">
 					<i class="fas fa-times-circle" style="font-size: 30px;"></i></a>';
-			 }else{
-			 	$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>';
-			 }
+			}
 				
 				
 				$totalrecord[] = 	[
@@ -51,6 +53,7 @@ class Index extends BaseController
 										'firstname' 	=> 	$result['firstname'],
 										'lastname'  	=>  $result['lastname'],
 										'mobile'  		=>  $result['mobile'],
+										'status'  		=>  '<div style='.$statuscolor.'>'.$status.'</div>',
 										'action'		=> 	'<div class="table-action">
 																'.$action.
 															'</div>'
@@ -77,15 +80,9 @@ class Index extends BaseController
 			$this->session->setFlashdata('danger', 'No Record Found.');
 			return redirect()->to(getAdminUrl().'/reservations'); 
 		}
-		$data['usertype'] = $this->config->usertype;
+		$data['usertype'] 			= $this->config->usertype;
+		$data['bookingstatus'] 		= $this->config->bookingstatus;
 
 		return view('admin/reservations/view', $data);
 	}
-	public function refound()
-	{
-		if($this->request->getMethod()=='post'){ echo "fasd";die;
-			$this->stripe->striperefunds($this->request->getPost());
-			return redirect()->to(getAdminUrl().'/reservations'); 
-        }
-	}	
 }
