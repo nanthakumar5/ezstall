@@ -5,7 +5,7 @@ namespace App\Controllers\Admin\Reservations;
 use App\Controllers\BaseController;
 
 use App\Models\Booking;
-use App\Models\stripe;
+use App\Models\Stripe;
 
 class Index extends BaseController
 {
