@@ -49,7 +49,8 @@ class Booking extends BaseModel
 		if(isset($requestdata['check_out'])) 		    $query->where('b.check_out', $requestdata['check_out']);
 
 		if(isset($requestdata['start_check'])) 			$query->where('b.check_in >=', $requestdata['start_check']);
-		if(isset($requestdata['end_check'])) 		    $query->where('b.check_out <=', $requestdata['end_check']);		
+		if(isset($requestdata['end_check'])) 		    $query->where('b.check_out <=', $requestdata['end_check']);	
+		if(isset($requestdata['status'])) 				$query->where('b.status', $requestdata['status']);	
 
 		if(isset($requestdata['userid'])) 				
 		{

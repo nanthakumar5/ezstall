@@ -78,6 +78,14 @@
 								<p class="mb-0 fs-7 width100"><?php echo $currencysymbol.$data['amount'];?></p>
 							</div>
 						</div>
+						<div class="row col-md-10 base-style">
+					        <div class="col fw-600">
+					          <p class="my-2">Status</p>
+					        </div>
+					        <div class="col" align="left">
+					          <p class="my-2"><?php echo $bookingstatus[$data['status']];?></p>
+					        </div>
+					    </div>
 						<div class="col-md-3 col-lg-2">
 							<div class="d-flex justify-content-end align-items-center viewstart">
 								<a href="<?php echo base_url().'/myaccount/bookings/view/'.$data['id']; ?>" class="mt-0 mx-3 view-res">View</a>

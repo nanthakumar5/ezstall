@@ -23,14 +23,6 @@
       </div>
     </div>
     <section class="maxWidp eventPagePanel">
-<!--       <div class="row col-md-10 base-style">
-        <div class="col fw-600">
-          <p class="my-2">Status</p>
-        </div>
-        <div class="col" align="left">
-          <p class="my-2"><?php //echo $bookingstatus[$data['status']];?></p>
-        </div>
-      </div> -->
       <div class="row col-md-10 base-style">
         <div class="col fw-600">
           <p class="my-2">Booking ID</p>
@@ -118,6 +110,14 @@
         </div>
         <div class="col" align="left">
           <p class="my-2"><?php echo $paymentmethod;?></p>
+        </div>
+      </div>
+      <div class="row col-md-10 base-style">
+        <div class="col fw-600">
+          <p class="my-2">Status</p>
+        </div>
+        <div class="col" align="left">
+          <p class="my-2"><?php echo $bookingstatus[$result['status']];?></p>
         </div>
       </div>
     </section>

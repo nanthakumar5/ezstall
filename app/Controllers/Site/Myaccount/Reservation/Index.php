@@ -54,7 +54,8 @@ class Index extends BaseController
 			return redirect()->to(base_url().'/myaccount/bookings'); 
 		}
 		
-		$data['usertype'] = $this->config->usertype;
+		$data['usertype'] 		= $this->config->usertype;
+		$data['bookingstatus'] 	= $this->config->bookingstatus;
 		return view('site/myaccount/reservation/view', $data);
 	}	
 
