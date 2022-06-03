@@ -18,7 +18,14 @@ p.error_class_1{
 	font-size: 12px;
 }
 
-
+.cancelcolor{
+    color: red;
+    font-weight: 600;
+}
+.activecolor{
+    color: #14c514;
+    font-weight: 600;
+}
 
 a.btn.btn-info.stallbtn.mb-3{
 	float: right;

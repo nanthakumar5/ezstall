@@ -12,6 +12,14 @@ body {
 .displaynone{
     display:none;
 }
+.cancelcolor{
+    color: red;
+    font-weight: 600;
+}
+.activecolor{
+    color: #14c514;
+    font-weight: 600;
+}
 .tagline{
     color : red;
     font-size:14px;
@@ -2926,6 +2934,10 @@ button.View:hover {
     transition: all 0.3s ease;
 }
 
+button.View:hover a {
+    color: #fff !important;
+}
+
 .tablesec tr {
     text-align: left;
 }
@@ -2949,10 +2961,6 @@ button.View:hover {
     text-decoration: none;
     cursor: pointer;
     font-weight: 600;
-}
-
-.tablesec table td a:hover {
-    color: #000 !important;
 }
 
 .table> :not(:first-child) {

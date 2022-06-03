@@ -38,9 +38,10 @@ class Index extends BaseController
 			foreach($results as $key => $result){
 
 			$month 			= date('m',strtotime($result['check_out'])) == date('m');
-			$status 		= $data[$result['status']];
-			$statuscolor 	= ($status=='Cancelled') ? "color:red" : "";
+			$statuscolor 	= ($result['status']=='2') ? "cancelcolor" : "activecolor"; 
+
 			$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a>';
+
 			if($result['status']=='1' && $month){
 			 	$action = 	'<a href="'.getAdminUrl().'/reservations/view/'.$result['id'].'" data-id="'.$result['id'].'" class="view">View</a><a href="javascript:void(0);" data-id="'.$result['id'].'"" data-paymentid="'.$result['payment_id'].'" data-paymentintentid="'.$result['stripe_paymentintent_id'].'" data-amount="'.$result['amount'].'" class="striperefunds">
 					<i class="fas fa-times-circle" style="font-size: 30px;"></i></a>';
@@ -53,7 +54,7 @@ class Index extends BaseController
 										'firstname' 	=> 	$result['firstname'],
 										'lastname'  	=>  $result['lastname'],
 										'mobile'  		=>  $result['mobile'],
-										'status'  		=>  '<div style='.$statuscolor.'>'.$status.'</div>',
+										'status'  		=>  '<div class='.$statuscolor.'>'.$data[$result['status']].'</div>',
 										'action'		=> 	'<div class="table-action">
 																'.$action.
 															'</div>'

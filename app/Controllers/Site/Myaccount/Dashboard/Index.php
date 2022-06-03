@@ -80,7 +80,7 @@ class Index extends BaseController
     	
     	if($usertype=='5'){
 
-    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'end_check' => $date]);
+    		$horseevent = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'ltcheck_out' => $date]);
 
     		foreach ($horseevent as $event) {  
 	  			$countpastevent[] = $event['event_id'];
@@ -89,7 +89,7 @@ class Index extends BaseController
 	  			$countpastamount += $event['amount'];
 	      	}
 
-    		$currentreservation = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'start_check' => $date]);
+    		$currentreservation = $this->booking->getBooking('all', ['booking','event','payment','barnstall'],['userid'=> $allids,'gtcheck_in' => $date]);
     		foreach ($currentreservation as $event) {  
 	  			$countcurrentevent[] = $event['event_id'];
 	  			$barnstall = $event['barnstall'];

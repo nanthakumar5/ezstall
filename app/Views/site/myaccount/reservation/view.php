@@ -117,10 +117,8 @@
           <p class="my-2">Status</p>
         </div>
         <div class="col" align="left">
-          <?php $status = $bookingstatus[$result['status']]; 
-            $statuscolor = ($status=='Cancelled') ? "color:red;" : ""; ?>
-              <p class="my-2" style=<?php echo  $statuscolor;?> ><?php echo $status;?></p>
-          <?php ?>
+          <?php $statuscolor = ($result['status']=='2') ? "cancelcolor" : "activecolor"; ?>
+              <p class="my-2 <?php echo  $statuscolor;?>"><?php echo $bookingstatus[$result['status']];?></p>
         </div>
       </div>
     </section>

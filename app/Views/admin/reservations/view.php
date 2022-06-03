@@ -91,10 +91,9 @@
 				    </tr>
 				    <tr>
 				      <th>Status</th>
-				      <?php $status = $bookingstatus[$result['status']]; 
-			            $statuscolor = ($status=='Cancelled') ? "color:red;" : ""; ?>
-			            <td style=<?php echo  $statuscolor;?> ><?php echo $status;?></td>
-			          <?php ?>
+
+				      <?php $statuscolor = ($result['status']=='2') ? "cancelcolor" : "activecolor"; ?>
+			            <td class="<?php echo $statuscolor;?>" ><?php echo $bookingstatus[$result['status']];?></td>
 				    </tr>
 				  </tbody>
 				</table>
