@@ -4619,3 +4619,12 @@ span.num_btn.stallcount {
 .alert {
     position: static;
 }
+
+
+
+.profile_pic{
+    border-radius: 50vw;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
