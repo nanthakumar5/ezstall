@@ -65,19 +65,21 @@
 							$bookedstalldata = [];
 							if (!empty($stalldata['bookedstall'])) {
 								foreach($stalldata['bookedstall'] as $bookedstall){
-									$bookedstalldata[] = 	'<div class="col-custom-3 p-2 border rounded ad-stall-base">
-																	<table>
-																		<tr>
-																			<td><p class="mb-0 text-bold px-2">Name</p></td>
-																			<td>'.$bookedstall['name'].'</td>
-																		</tr>
-																		<tr>
-																			<td><p class="mb-0 text-bold px-2">Date</p></td>
-																			<td>'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</td>
-																		</tr>
-																	</table>
-																</div>
-															';
+									if($bookedstall['status']=='1'){
+										$bookedstalldata[] = 	'<div class="col-custom-3 p-2 border rounded ad-stall-base">
+																		<table>
+																			<tr>
+																				<td><p class="mb-0 text-bold px-2">Name</p></td>
+																				<td>'.$bookedstall['name'].'</td>
+																			</tr>
+																			<tr>
+																				<td><p class="mb-0 text-bold px-2">Date</p></td>
+																				<td>'.formatdate($bookedstall['check_in'], 1).' to '.formatdate($bookedstall['check_out'], 1).'</td>
+																			</tr>
+																		</table>
+																	</div>
+																';
+									}
 								}
 							}
 								$tabcontent .= 	'<li class="list-group-item px-4 py-3">

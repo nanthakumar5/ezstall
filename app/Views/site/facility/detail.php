@@ -8,6 +8,7 @@
 		$name 		 	= $detail['name'];
 		$description 	= $detail['description'];
 		$image 		 	= base_url().'/assets/uploads/event/'.$detail['image'];
+		$profileimage 	= base_url().'/assets/uploads/profile/'.$detail['profile_image'];
 	?>
 	
 	<?php if($cartevent==1){?>
@@ -30,7 +31,7 @@
 			<div class="col-lg-8">
 				<div class="stall-head">
 					<div class="float-start">
-						<img src="<?php echo base_url() ?>/assets/site/img/stallhead.png">
+						<img class="profile_pic" src="<?php echo $profileimage; ?>">
 					</div>
 					<div class="float-next">
 						<h4 class="fw-bold"><?php echo $name; ?></h4>

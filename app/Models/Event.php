@@ -106,7 +106,7 @@ class Event extends BaseModel
 												$bookedstall = 	$this->db->table('booking_details bd')
 																->join('booking bk', 'bd.booking_id = bk.id', 'left')
 																->join('payment_method pm','bk.paymentmethod_id = pm.id' )
-																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out, bk.paymentmethod_id, (pm.name) paymentmethod')
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out, bk.status, (pm.name) paymentmethod')
 																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $eventdata['id']])
 																->get()
 																->getResultArray();
@@ -145,7 +145,7 @@ class Event extends BaseModel
 												$bookedstall = 	$this->db->table('booking_details bd')
 																->join('booking bk', 'bd.booking_id = bk.id', 'left')
 																->join('payment_method pm','bk.paymentmethod_id = pm.id' )
-																->select('concat(bk.firstname, " ", bk.lastname) name, bk.check_in, bk.check_out, (pm.name) paymentmethod')
+																->select('concat(bk.firstname, " ", bk.lastname) name, bk.status, bk.check_in, bk.check_out, (pm.name) paymentmethod')
 																->where(['bd.stall_id' => $stalldata['id'], 'bd.barn_id' => $barndata['id'], 'bk.event_id' => $result['id']])
 																->get()
 																->getResultArray();
@@ -168,7 +168,7 @@ class Event extends BaseModel
     }
 	
 	public function action($data)
-	{ 	
+	{ 	//echo "<pre>";print_r($data);die;
 		$this->db->transStart();
 
 		$datetime			= date('Y-m-d H:i:s');
@@ -198,6 +198,11 @@ class Event extends BaseModel
 		if(isset($data['eventflyer']) && $data['eventflyer']!=''){
  			$request['eventflyer'] = $data['eventflyer'];		
 			filemove($data['eventflyer'], './assets/uploads/eventflyer');		
+		}
+
+		if(isset($data['profile_image']) && $data['profile_image']!=''){
+ 			$request['profile_image'] = $data['profile_image'];		
+			filemove($data['profile_image'], './assets/uploads/profile');		
 		}
 		
 		if(isset($data['stallmap']) && $data['stallmap']!=''){

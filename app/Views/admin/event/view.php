@@ -82,11 +82,11 @@
 							</div>
 						</div>
 					</div>
-					<h3 class="text-bold mt-3"> Barn and stalls </h3>
+					<h3 class="text-bold mt-3"> Barn and stalls </h3>  
 					<?php 
 					$tabbtn = '';
 					$tabcontent = '';
-					foreach ($barn as $barnkey => $barndata) {
+					foreach ($barn as $barnkey => $barndata) { 
 						$barnid = $barndata['id'];
 						$barnname = $barndata['name'];
 						$barnactive = $barnkey=='0' ? ' show active' : '';
@@ -99,7 +99,8 @@
 							$bookedstalldata = [];
 							if (!empty($stalldata['bookedstall'])) {
 								foreach($stalldata['bookedstall'] as $bookedstall){
-									$bookedstalldata[] = 	'<div class="col-custom-3 p-2 border rounded ad-stall-base">
+									if($bookedstall['status']=='1'){
+										$bookedstalldata[] = 	'<div class="col-custom-3 p-2 border rounded ad-stall-base">
 																	<table>
 																		<tr>
 																			<td><p class="mb-0 text-bold px-2">Name</p></td>
@@ -116,7 +117,9 @@
 																	</table>
 																</div>
 															';
-								}
+									}
+
+								} 
 							}
 							
 							$tabcontent .= 	'<li class="list-group-item px-4 py-3">

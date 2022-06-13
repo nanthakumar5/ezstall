@@ -8,6 +8,10 @@ $name 					= isset($result['name']) ? $result['name'] : '';
 $description 		    = isset($result['description']) ? $result['description'] : '';
 $barn        			= isset($result['barn']) ? $result['barn'] : [];
 $image      			= isset($result['image']) ? $result['image'] : '';
+$profileimage      		= isset($result['profile_image']) ? $result['profile_image'] : '';
+$profileimage 			= filedata($profileimage, base_url().'/assets/uploads/profile/');
+$stallmap      			= isset($result['stallmap']) ? $result['stallmap'] : '';
+$stallmap 				= filedata($stallmap, base_url().'/assets/uploads/stallmap/');
 $image 				    = filedata($image, base_url().'/assets/uploads/event/');
 $pageaction 			= $id=='' ? 'Add' : 'Update';
 
@@ -60,18 +64,44 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 							</div>
 						</div>
 						<div class="col-md-4">
-								<div class="form-group">
-									<label>Upload Facility Image</label>			
-									<div>
-										<a href="<?php echo $image[1];?>" target="_blank">
-											<img src="<?php echo $image[1];?>" class="image_source" width="100">
-										</a>
-									</div>
-									<input type="file" class="image_file">
-									<span class="image_msg messagenotify"></span>
-									<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+							<div class="form-group">
+								<label>Upload Facility Image</label>			
+								<div>
+									<a href="<?php echo $image[1];?>" target="_blank">
+										<img src="<?php echo $image[1];?>" class="image_source" width="100">
+									</a>
 								</div>
-							</div>	
+								<input type="file" class="image_file">
+								<span class="image_msg messagenotify"></span>
+								<input type="hidden" id="image" name="image" class="image_input" value="<?php echo $image[0];?>">
+							</div>
+						</div>
+						<div class="col-md-4 my-2">
+							<div class="form-group">
+								<label>Profile Image</label>			
+								<div>
+									<a href="<?php echo $profileimage[1];?>" target="_blank">
+										<img src="<?php echo $profileimage[1];?>" class="profileimage_source" width="100">
+									</a>
+								</div>
+								<input type="file" id="" name="" class="profileimage_file">
+								<span class="profileimage_msg messagenotify"></span>
+								<input type="hidden" id="profile_image" name="profile_image" class="profileimage_input" value="<?php echo $profileimage[0];?>">
+							</div>
+						</div>
+						<div class="col-md-4 my-2">
+							<div class="form-group">
+								<label>Stall Map (optional)</label>			
+								<div>
+									<a href="<?php echo $stallmap[1];?>" target="_blank">
+										<img src="<?php echo $stallmap[1];?>" class="stallmap_source" width="100">
+									</a>
+								</div>
+								<input type="file" class="stallmap_file">
+								<span class="stallmap_msg messagenotify"></span>
+								<input type="hidden" id="stallmap" name="stallmap" class="stallmap_input" value="<?php echo $stallmap[0];?>">
+							</div>
+						</div>		
 					</div>
 					<div class="container row mt-5 dash-barn-style mx-auto">
 						<div class="row align-items-center mb-4 p-0">
@@ -170,6 +200,8 @@ $pageaction 			= $id=='' ? 'Add' : 'Update';
 	$(function(){ 
 		editor('#description');
 		fileupload([".image_file"], ['.image_input', '.image_source','.image_msg']);
+		fileupload([".profileimage_file"], ['.profileimage_input', '.profileimage_source','.profileimage_msg']);
+		fileupload([".stallmap_file", ['jpg','jpeg','png','gif','tiff','tif','pdf']], ['.stallmap_input', '.stallmap_source','.stallmap_msg']);
 		fileupload([".stall_file"], ['.stall_input', '.stall_source','.stall_msg']);
 
 		validation(
